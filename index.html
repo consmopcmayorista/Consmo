@@ -1,0 +1,236 @@
+<!DOCTYPE html> <html lang="en">
+    
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Consmo - Tienda de Tecnologia">
+  
+    <title>   Consmo PC</title>
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+
+    <!-- all css -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/jquery-ui.css">
+    <link rel="stylesheet" href="/assets/css/slick.css">
+    <link rel="stylesheet" href="/assets/css/line-awesome.css">
+    <link rel="stylesheet" href="/assets/css/nice-select.css">
+    <link rel="stylesheet" href="/assets/css/style.css?v=0.0.29">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <link rel="stylesheet" href="/assets/js/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/assets/js/dist/assets/owl.theme.default.min.css">
+    <script src="assets/js/jquery-3.5.1.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+ <style>
+.format_titulo {
+    display: inline-block;
+    height: 3em; /* Altura total para 2 líneas */
+    line-height: 1.1em; /* Ajusta la altura de línea */
+    overflow: hidden; /* Evita el desbordamiento */
+}
+
+.format_titulo p {
+    margin: 0; /* Elimina el espacio extra */
+    white-space: pre; /* Preserva los espacios y evita el colapso */
+    font-size: 0.9em; /* Tamaño de texto más pequeño */
+    color: #0066cc; /* Color similar a un enlace */
+}
+.format_titulo2 span{
+ font-size: 0.8em; /* Tamaño de texto más pequeño */
+  color: red;
+}
+
+.format_titulo p a {
+    text-decoration: none; /* Elimina el subrayado predeterminado */
+    color: inherit; /* Mantiene el color de texto */
+    cursor: pointer; /* Cambia el cursor al de un enlace */
+}
+
+.format_titulo p:hover {
+    color: #004d99; /* Color al pasar el mouse por encima (opcional) */
+}
+	 
+/* Estilo general */
+.view-more-link {
+    font-size: 0.875rem; /* Tamaño pequeño */
+    color: #007bff; /* Azul tipo MercadoLibre */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.view-more-link:hover {
+    text-decoration: underline;
+}
+.smartphone-container {
+    display: none;
+}
+
+.desktop-container {
+    display: block;
+}
+
+/* Para pantallas pequeñas */
+@media (max-width: 768px) {
+    .smartphone-container {
+        display: block; /* Muestra el contenedor para smartphones */
+    }
+
+    .desktop-container {
+        display: none; /* Oculta el contenedor para pantallas grandes */
+    }
+
+    .smartphone-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+        gap: 10px; /* Espaciado entre productos */
+    }
+
+    .smartphone-item {
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 8px;
+        background-color: #fff;
+    }
+}
+
+.swiper-pagination {
+    background-color: rgb(0, 0, 241); /* Fondo gris transparente */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 2px; /* Espaciado interno */
+   margin-top:5px;
+}
+
+.swiper-pagination-bullet {
+    width: 12px; /* Aumenta el tamaño de los puntos */
+    height: 12px;
+    background-color: white; /* Cambia el color de los puntos */
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: blue; /* Cambia el color del punto activo */
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .swiper-slide {
+        max-width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+    }
+}
+
+@media (max-width: 576px) {
+    .swiper-slide {
+        max-width: 100%; /* Ocupa todo el ancho en smartphones */
+    }
+}
+.recfor_you {
+    overflow-x: auto; /* Permite desplazamiento horizontal */
+    overflow-y: hidden; /* Evita el desbordamiento vertical */
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 28px; /* Ajusta el tamaño del ícono */
+}
+.swiper-container {
+  position: relative; 
+   width: 100%;
+   overflow: hidden; /* Evita el desbordamiento */
+}
+.swiper-slide {
+    display: flex;
+    justify-content: center; /* Centra el contenido de la diapositiva */
+}
+
+
+
+
+.swiper-button-next {
+    right: 10px; /* Ajusta la distancia al borde derecho */
+}
+
+.swiper-button-prev {
+    left: 10px; /* Ajusta la distancia al borde izquierdo */
+}
+    .tiktok {
+  content: url('/assets/tik-tok_6422207.svg');
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  cursor:pointer;
+}
+
+    .hero_area {
+  height: 100%; /* Define un tamaño fijo si es necesario */
+  background-size: cover;
+  background-position: center;
+}
+
+.hero_area[style*="display: none"] {
+  display: none !important;
+}
+ .glow-text {
+    color: #fff; /* Cambia el color del texto a blanco */
+   background-color: rgba(0, 0, 0, 0);
+    text-shadow: 0 0 15px rgba(0, 0, 0, 1); /* Aumenta la intensidad de la sombra negra */
+}
+.glow-titulo {
+  color: #ffffff;
+  
+    text-shadow: 0 0 15px rgba(255, 255, 255, 1); /* Aumenta la intensidad de la sombra negra */
+}
+
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11458027588">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-11458027588');
+</script>
+
+<!-- Event snippet for Consmo conversion page -->
+<script>
+    gtag('event', 'conversion', {
+        'send_to': 'AW-11458027588/4z26CK6-m4MZEMTAztcq',
+        'transaction_id': ''
+    });
+  </script>
+  
+</head>
+
+
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+
+  
+
+    <!-- all js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+  <script src="/assets/js/vue.min.js"></script>
+ 
+  <script src="../js/components/tarjeta_contacto.js?v=0.0.50"></script>
+  <script src="/assets/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/js/jquery-ui.min.js"></script>
+  <script src="/assets/js/slick.min.js"></script>
+  <script src="/assets/js/jquery.nice-select.min.js"></script>
+
+  <script src="/assets/js/app.js?v=0.1.82"></script>
+  <script src="/assets/js/main.js?v=0.1.73"></script>
+  <script src="../js/script.js"></script> 
+<!-- Importar la biblioteca de Swiper -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+
+
+</script>  
+  </body>
+</html>

@@ -1,0 +1,346 @@
+[
+{
+    "id": 1,
+    "title": "Guía de instalación de impresoras POS DigitalPos",
+    "description": "Guía paso a paso para instalar las impresoras POS DigitalPos.",
+    "thumbnail": "/images2/foro/1/miniatura.png",
+    "content": [
+      {
+        "type": "text",
+        "value": "Bienvenido a la guía de instalación de las impresoras POS DigitalPos. A continuación, encontrarás los pasos para instalar dos modelos: la DIG-ISH58 y la DIG-E200I."
+      },
+      {
+        "type": "image",
+        "src": "/images2/foro/1/inicio.png",
+        "alt": "Imagen de la impresora DIG-ISH58"
+      },
+      {
+        "type": "text",
+        "value": "Índice:"
+      },
+      {
+        "type": "text",
+        "value": "1. Instalación de la DIG-ISH58 58 MM"
+      },
+      {
+        "type": "text",
+        "value": "2. Instalación de la DIG-E200I 80 MM"
+      },
+      {
+        "type": "text",
+        "value": "Comencemos con la instalación de la impresora DIG-ISH58."
+      },
+      {
+        "type": "text",
+        "value": "### 1. Instalación de la DIG-ISH58 58 MM"
+      },
+      {
+        "type": "image",
+        "src": "/images2/foro/1/DIG-ISH58.png",
+        "alt": "Imagen de la impresora DIG-ISH58"
+      },
+      {
+        "type": "file",
+        "src": "/drivers/digitalpos/2424/controlador.exe",
+        "text": "Descargar drivers DIG-ISH58"
+      },
+      {
+        "type": "text",
+        "value": "Sigue los pasos a continuación para instalar la impresora DIG-ISH58."
+      },
+      {
+        "type": "text",
+        "value": "Paso 1: Conectar el cable USB de la impresora al equipo."
+      },
+      {
+        "type": "image",
+        "src": "/images2/foro/1/2424.png",
+        "alt": "Paso 1 para DIG-ISH58"
+      },
+      {
+        "type": "text",
+        "value": "Paso 2: Instalar los drivers de la impresora."
+      },
+      {
+        "type": "text",
+        "value": "Recuerda señalar POS-58 y elegir tu sistema operativo."
+      },
+      {
+        "type": "image",
+        "src": "/images2/foro/1/instalacion2424.png",
+        "alt": "Paso 2 para DIG-ISH58"
+      },
+      {
+        "type": "text",
+        "value": "Paso 3: Realizar pruebas de impresión para asegurar la configuración correcta."
+      },
+      {
+        "type": "image",
+        "src": "/images2/foro/1/comprobacion2424.png",
+        "alt": "Paso 3 para DIG-ISH58"
+      },
+      {
+        "type": "text",
+        "value": "###."
+      },
+      {
+        "type": "text",
+        "value": "###."
+      },
+      {
+        "type": "text",
+        "value": "### 2. Instalación de la DIG-E200I 80 MM"
+      },
+      {
+        "type": "image",
+        "src": "/images2/foro/1/DIG-E200I.png",
+        "alt": "Imagen de la impresora DIG-E200I"
+      },
+      {
+        "type": "file",
+        "src": "/drivers/digitalpos/2610/Controladores.zip",
+        "text": "Descargar drivers DIG-E200I"
+      },
+      {
+        "type": "text",
+        "value": "Sigue los pasos a continuación para instalar la impresora DIG-E200I."
+      },
+      {
+        "type": "text",
+        "value": "Paso 1: Conectar el cable USB de la impresora al equipo."
+      },
+      {
+        "type": "image",
+        "src": "/images2/foro/1/2610.png",
+        "alt": "Paso 1 para DIG-E200I"
+      },
+      {
+        "type": "text",
+        "value": "Paso 2: Instalar los drivers de la impresora."
+      },
+      {
+        "type": "image",
+        "src": "/images2/foro/1/instalacion2610.png",
+        "alt": "Paso 2 para DIG-E200I"
+      },
+      {
+        "type": "text",
+        "value": "Paso 3: Realizar pruebas de impresión para asegurar la configuración correcta."
+      },
+      {
+        "type": "image",
+        "src": "/images2/foro/1/comprobacion2610.png",
+        "alt": "Paso 3 para DIG-E200I"
+      }
+    ],
+    "date": "2025-01-16"
+  },
+      
+  {
+    "id": 2,
+    "title": "¿Qué fuente de poder necesitas?",
+    "description": "Guía para elegir la fuente de poder adecuada para tu equipo.",
+    "thumbnail": "/images2/foro/2/miniatura.png",
+    "content": [
+      {
+        "type": "text",
+        "value": "Elegir la fuente de poder adecuada es esencial para el buen funcionamiento de tu equipo. Esta guía te ayudará a identificar la mejor opción según tus necesidades."
+      },
+      {
+        "type": "image",
+        "src": "/images2/foro/2/miniatura.png",
+        "alt": "Imagen de fuentes"
+      },
+      {
+        "type": "text",
+        "value": "## Factores a considerar"
+      },
+      {
+        "type": "text",
+        "value": "### 1. Potencia requerida"
+      },
+      {
+        "type": "text",
+        "value": "Utiliza una calculadora de potencia para determinar el consumo total de tu sistema. Esto incluye componentes como procesador, tarjeta gráfica, discos duros, entre otros."
+      },
+      {
+        "type": "image",
+        "src": "/images2/foro/2/calculadora.png",
+        "alt": "Ejemplo de calculadora de potencia"
+      },
+      {
+        "type": "text",
+        "value": "### 2. Eficiencia energética"
+      },
+      {
+        "type": "text",
+        "value": "Opta por fuentes de poder certificadas con 80 Plus para garantizar menor consumo de energía y mayor durabilidad. Estas se clasifican en niveles como Bronze, Silver, Gold, y Platinum."
+      },
+      {
+        "type": "image",
+        "src": "/images2/foro/2/certificaciones.png",
+        "alt": "Certificaciones 80 Plus"
+      },
+      {
+        "type": "text",
+        "value": "### 3. Conectores y compatibilidad"
+      },
+      {
+        "type": "text",
+        "value": "Los conectores son fundamentales al elegir una fuente de poder, ya que aseguran la compatibilidad con los componentes de tu equipo. Aquí tienes una descripción detallada:"
+      },
+      {
+        "type": "text",
+        "value": "##### Conectores para la CPU"
+      },
+      {
+        "type": "text",
+        "value": "La mayoría de las fuentes de poder económicas incluyen conectores EPS de 4+4 pines para alimentar el procesador. Esto es suficiente para placas base de gama baja o media con procesadores que no consumen demasiada energía."
+      },
+      {
+        "type": "text",
+        "value": "Sin embargo, las placas base de gama alta, especialmente aquellas diseñadas para overclocking o con procesadores de alto rendimiento, requieren conectores EPS adicionales (por ejemplo, un conector de 8 pines extra). Asegúrate de que la fuente tenga estos conectores si tu placa lo necesita."
+      },
+      {
+        "type": "text",
+        "value": "### Conectores PCIe"
+      },
+      {
+        "type": "text",
+        "value": "Si planeas usar una tarjeta gráfica dedicada, necesitarás conectores PCIe. Las tarjetas de gama baja suelen requerir un conector PCIe de 6 pines, mientras que las de gama media y alta pueden necesitar 8 pines o incluso múltiples conectores (6+8 o 8+8 pines). Verifica los requisitos de tu tarjeta gráfica antes de elegir una fuente."
+      },
+      {
+        "type": "text",
+        "value": "### Conectores SATA y Molex"
+      },
+      {
+        "type": "text",
+        "value": "Estos conectores alimentan discos duros, SSDs, y otros periféricos como ventiladores adicionales o controladores RGB. Asegúrate de que la fuente tenga suficientes conectores SATA para todos tus dispositivos. El Molex es menos común hoy en día, pero sigue siendo útil para algunos componentes más antiguos."
+      },
+      {
+        "type": "text",
+        "value": "### Conectores de 24 pines"
+      },
+      {
+        "type": "text",
+        "value": "El conector principal de 24 pines es estándar para todas las placas base modernas y se utiliza para alimentar la placa base. Todas las fuentes de poder actuales incluyen este conector, por lo que no deberías preocuparte por su ausencia."
+      },
+      {
+        "type": "text",
+        "value": "## Herramientas recomendadas"
+      },
+      {
+        "type": "file",
+        "src": "/files/calculadora-potencia.pdf",
+        "text": "Descargar calculadora de potencia en PDF"
+      },
+      {
+        "type": "text",
+        "value": "Puedes también utilizar estas herramientas en línea:"
+      },
+      {
+        "type": "text",
+        "value": "- [OuterVision Power Supply Calculator](https://outervision.com/power-supply-calculator)"
+      },
+      {
+        "type": "text",
+        "value": "- [Newegg Power Supply Calculator](https://www.newegg.com/tools/power-supply-calculator/)"
+      }
+    ],
+    "date": "2025-01-16"
+  },
+  
+  
+  {
+    "id": 3,
+    "title": "Cómo configurar tu Roku Premiere",
+    "description": "Guía paso a paso para configurar el Roku Premiere de manera sencilla.",
+    "thumbnail": "/images2/foro/3/miniatura.png",
+    "content": [
+      {
+        "type": "text",
+        "value": "El Roku Premiere es una excelente opción para convertir tu TV en un centro de entretenimiento. En esta guía te mostramos cómo configurarlo fácilmente."
+      },
+      {
+        "type": "text",
+        "value": "### Pasos para configurar el Roku Premiere"
+      },
+      {
+        "type": "text",
+        "value": "1. Conecta el Roku Premiere a tu televisor utilizando el cable HDMI incluido."
+      },
+      {
+        "type": "text",
+        "value": "2. Conecta el adaptador de corriente del Roku a una toma eléctrica cercana."
+      },
+      {
+        "type": "text",
+        "value": "3. Selecciona la entrada HDMI correspondiente en tu televisor."
+      },
+      {
+        "type": "text",
+        "value": "4. Sigue las instrucciones en pantalla para conectarte a tu red WiFi."
+      },
+      {
+        "type": "text",
+        "value": "5. Crea o inicia sesión en tu cuenta Roku."
+      },
+      {
+        "type": "text",
+        "value": "6. Configura tus aplicaciones favoritas para empezar a disfrutar del contenido."
+      },
+      {
+        "type": "text",
+        "value": "Estos pasos están explicados en detalle en el siguiente video:"
+      },
+      {
+        "type": "video",
+        "src": "https://www.youtube.com/embed/tu_video_id",
+        "alt": "Guía para configurar el Roku Premiere"
+      },
+      {
+        "type": "text",
+        "value": "Si tienes alguna duda, puedes consultar el video o dejarnos un comentario en este foro."
+      }
+    ],
+    "date": "2025-01-16"
+  },
+  
+      {
+        "id": 4,
+        "title": "Segunda publicación",
+        "description": "Descripción breve para la miniatura.",
+        "thumbnail": "/images/thumbnails/post2.jpg",
+        "content": [
+          { "type": "text", "value": "Este es el contenido principal de la segunda publicación." },
+          { "type": "image", "src": "/images2/psu.jpg", "alt": "Imagen de ejemplo." },
+          { "type": "video", "src": "https://www.youtube.com/embed/example2" }
+        ],
+        "date": "2025-01-16"
+      },
+      {
+        "id": 5,
+        "title": "Segunda publicación",
+        "description": "Descripción breve para la miniatura.",
+        "thumbnail": "/images/thumbnails/post2.jpg",
+        "content": [
+          { "type": "text", "value": "Este es el contenido principal de la segunda publicación." },
+          { "type": "image", "src": "/images2/psu.jpg", "alt": "Imagen de ejemplo." },
+          { "type": "video", "src": "https://www.youtube.com/embed/example2" }
+        ],
+        "date": "2025-01-16"
+      },
+      {
+        "id": 6,
+        "title": "Segunda publicación",
+        "description": "Descripción breve para la miniatura.",
+        "thumbnail": "/images/thumbnails/post2.jpg",
+        "content": [
+          { "type": "text", "value": "Este es el contenido principal de la segunda publicación." },
+          { "type": "image", "src": "/images2/psu.jpg", "alt": "Imagen de ejemplo." },
+          { "type": "video", "src": "https://www.youtube.com/embed/example2" }
+        ],
+        "date": "2025-01-16"
+      }
+    ]
+  
