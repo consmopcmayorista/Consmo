@@ -245,37 +245,45 @@ async function filtrarProductos() {
 
   try {
     cargando.value = true
-    // Debug de la URL
+    // Armar la URL con la búsqueda y el id_empresa
     const url = `https://whatsapp-nube.com/api_web/api_web_catalogo_new_producto_varios.php?texto=${busqueda.value}&id=${id_empresa}`
     console.log("Consultando:", url)
 
     // Petición a la API
     const response = await axios.get(url)
-    // Suponemos que la API retorna { productos: [...] }
+    // Se asume que la API retorna { productos: [...] }
     const productos = response.data.productos || []
     console.log("Productos recibidos:", productos)
 
-    // Separar las palabras de la búsqueda
+    // Convertir la búsqueda a minúsculas
     const busquedaMinus = busqueda.value.toLowerCase()
-    const palabrasClave = busquedaMinus.split(" ").filter(Boolean) 
-    // (ej: "casa nueva" => ["casa","nueva"])
+    // Separar las palabras de la búsqueda (ej: "casa nueva" => ["casa", "nueva"])
+    const palabrasClave = busquedaMinus.split(" ").filter(Boolean)
 
-    // Coincidencias EXACTAS: si título incluye toda la frase
-    const coincidenciasExactas = productos.filter(p =>
-      p.titulo?.toLowerCase().includes(busquedaMinus)
-    )
+    // Coincidencias EXACTAS: si en título o en idpro se incluye la frase completa
+    const coincidenciasExactas = productos.filter(p => {
+      const tituloLower = p.titulo ? p.titulo.toLowerCase() : ""
+      const idproLower = p.idpro ? p.idpro.toLowerCase() : ""
+      return (
+        tituloLower.includes(busquedaMinus) ||
+        idproLower.includes(busquedaMinus)
+      )
+    })
 
-    // Coincidencias PARCIALES: si cada palabra aparece en el título,
+    // Coincidencias PARCIALES: cada palabra debe aparecer en alguno de los dos campos,
     // pero NO es coincidencia exacta de la frase completa
     const coincidenciasParciales = productos.filter(p => {
-      const tituloLower = p.titulo?.toLowerCase() || ""
-      // Checar cada palabra
-      const todasAparecen = palabrasClave.every(pal => tituloLower.includes(pal))
-      // Excluir si ya está en coincidenciasExactas
+      const tituloLower = p.titulo ? p.titulo.toLowerCase() : ""
+      const idproLower = p.idpro ? p.idpro.toLowerCase() : ""
+      // Cada palabra debe aparecer en titulo o en idpro
+      const todasAparecen = palabrasClave.every(pal =>
+        tituloLower.includes(pal) || idproLower.includes(pal)
+      )
+      // Se excluyen los que ya están en exactas
       return todasAparecen && !coincidenciasExactas.includes(p)
     })
 
-    // Combinar resultados, con "separator" en medio
+    // Combinar resultados, insertando un separador si hay ambas coincidencias
     let combinado
     if (coincidenciasParciales.length > 0 && coincidenciasExactas.length > 0) {
       combinado = [
@@ -284,11 +292,10 @@ async function filtrarProductos() {
         ...coincidenciasParciales
       ]
     } else {
-      // Si no hay parciales o no hay exactas, no insertamos separator
       combinado = [...coincidenciasExactas, ...coincidenciasParciales]
     }
 
-    // Elimina duplicados por id
+    // Elimina duplicados por id (función que debes tener implementada)
     producto_buscado.value = removeDuplicatesById(combinado)
 
   } catch (error) {
@@ -384,68 +391,77 @@ provide('categorias_alfabetica', categorias_alfabetica);
                 </option>
               </select>
             </div>
-            <div class="search_input">
-              <input
-                type="text"
-                placeholder="Buscar"
-                id="show_suggest"
-                v-model="busqueda"
-                @input="filtrarProductos"
-                @keyup.enter="redirigirAListaDeProductos(busqueda)"
-                autocomplete="off"
-              />
-            </div>
-            <div class="search_subimt">
-              <button @click="redirigirAListaDeProductos(busqueda)">
-                <span class="icon">
-                  <span class="d-none d-sm-inline-block">Buscar</span>
-                  <i class="las la-search"></i>
-                </span>
-              </button>
-            </div>
+                <div class="search_input">
+                <input
+                    type="text"
+                    placeholder="Buscar"
+                    id="show_suggest"
+                    v-model="busqueda"
+                    @input="filtrarProductos"
+                   
+                    autocomplete="off"
+                    @blur="ocultarSugerencias"
+                />
+                </div>
+                <div class="search_subimt">
+                    <RouterLink
+                        :to="{
+                        name: 'catalogo_cat',
+                        query: { categoria: categoria, busqueda: busqueda }
+                        }"
+                        @click="ocultarSugerencias"
+                    >
+                        <button>
+                        <span class="icon">
+                            <span class="d-none d-sm-inline-block">Buscar</span>
+                            <i class="las la-search"></i>
+                        </span>
+                        </button>
+                    </RouterLink>
+                </div>
 
-            <!-- search suggest -->
-            <div  :class="['search_suggest', { active: producto_buscado.length > 0 }]">
-              <div class="search_result_product">
-                <template v-for="(dato, index) in producto_buscado" :key="index">
-              
-                <div 
-    v-if="dato.separator" 
-    class="separator"
-    style="font-weight: bold; color: #aaa; text-align: center; margin: 5px 0;"
-  >
-   
-  </div>
+                <!-- search suggest -->
+                <div  :class="['search_suggest', { active: producto_buscado.length > 0 }]">
+                <div class="search_result_product">
+                    <template v-for="(dato, index) in producto_buscado" :key="index">
+                
+                    <div 
+                    v-if="dato.separator" 
+                    class="separator"
+                    style="font-weight: bold; color: #aaa; text-align: center; margin: 5px 0;"
+                    >
+    
+                    </div>
 
-  <!-- Si es un producto normal -->
-  <RouterLink
-    v-else
-    :to="{ name: 'producto', query: { producto: dato.id } }"
-    class="single_sresult_product"
-     @click="ocultarSugerencias"
-  >
-    <div class="sresult_img">
-      <img :src=dato.imagen>
-    </div>
-    <div class="sresult_content">
-      <h4>{{ dato.titulo }}</h4>
-      <div class="price">
-        <span class="org_price">
-          ${{ Math.round(parseFloat(dato.pt1)).toLocaleString() }}
-        </span>
-      </div>
-    </div>
-  </RouterLink>
-</template>
+                    <!-- Si es un producto normal -->
+                    <RouterLink
+                        v-else
+                        :to="{ name: 'producto', query: { producto: dato.id } }"
+                        class="single_sresult_product"
+                        @click="ocultarSugerencias"
+                    >
+                        <div class="sresult_img">
+                        <img :src=dato.imagen>
+                        </div>
+                        <div class="sresult_content">
+                        <h4>{{ dato.titulo }}</h4>
+                        <div class="price">
+                            <span class="org_price">
+                            ${{ Math.round(parseFloat(dato.pt1)).toLocaleString() }}
+                            </span>
+                        </div>
+                        </div>
+                    </RouterLink>
+                    </template>
 
-              </div>
-            </div>
+                </div>
+                </div>
 
             
             <!-- FIN search_suggest -->
 
           </div> <!-- FIN .search.d-flex -->
-        </div> <!-- FIN .search_wrap -->
+        </div> 
 
         <!-- shop cart wrapper  -->
         <div class="shopcart">
@@ -635,11 +651,11 @@ provide('categorias_alfabetica', categorias_alfabetica);
           placeholder="Buscar productos..."
           v-model="busqueda"
           @input="filtrarProductos"
-          @keyup.enter="redirigirAListaDeProductos(busqueda)"
+          @keyup.enter="redirigirAListaDeProductos(busqueda, '')"
           autocomplete="off"
         />
         <button>
-          <i class="icon-search-left" @click="redirigirAListaDeProductos(busqueda)"></i>
+          <i class="icon-search-left" @click="redirigirAListaDeProductos(busqueda, busqueda_categoria)"></i>
         </button>
       </form>
 

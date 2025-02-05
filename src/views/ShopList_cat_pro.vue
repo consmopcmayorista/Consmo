@@ -27,9 +27,8 @@ const selectedIndex = ref(null)            // Índice de la categoría seleccion
 
 // Props (por ejemplo, si la vista recibe una categoría desde la ruta)
 const props = defineProps({
-  categoria: String, busqueda : String
+  categoria: String,
 });
-
 
 
 
@@ -89,91 +88,89 @@ function shuffleArray(array) {
     .map(({ value }) => value)
 }
 
+// Carga de productos "recomendados" desde la API
 async function fetchProductos() {
   try {
-    const url = `https://whatsapp-nube.com/api_web/api_web_catalogo_new2.php?dominio=${dominio}&id=${id_empresa}`;
-    console.log("Consultando API:", url);
-    const response = await axios.get(url);
+    const url = `https://whatsapp-nube.com/api_web/api_web_catalogo_new2.php?dominio=${dominio}&id=${id_empresa}`
+    console.log("Consultando API:", url)
+    const response = await axios.get(url)
+    todas_las_categorias.value =response.data.categorias
 
-    // Asignamos las categorías recibidas
-    todas_las_categorias.value = response.data.categorias;
-    console.log("Todas las categorías:", todas_las_categorias.value);
 
-    // Buscar la categoría padre por nombre, según props.categoria
-    const categoria_padre = todas_las_categorias.value.filter(e => {
-      return e.categoria?.trim().toLowerCase() === props.categoria?.trim().toLowerCase();
-    });
-    let idPadre = '';
-    if (!categoria_padre.length) {
-      console.warn("No se encontró una categoría padre con el nombre:", props.categoria);
-    } else {
-      console.log("Categoría padre encontrada:", categoria_padre[0]);
-      console.log("ID de la categoría padre (debería ser numérico):", categoria_padre[0].id);
-      idPadre = categoria_padre[0].id.toString();
-      
-      console.log("Filtrando categorías hijo...");
-      // Filtrar las categorías hijas que tengan como cat_padre el idPadre
-      categorias_hijo.value = todas_las_categorias.value.filter(e => {
-        const catPadreNormalizado = e.cat_padre?.toString();
-        return catPadreNormalizado === idPadre;
-      });
-    }
+console.log("Todas las categorías:", todas_las_categorias.value);
 
-    // Obtener la lista de subcategorías (nombres) de la categoría padre
-    const lista_hijas = todas_las_categorias.value
-      .filter(e => e.cat_padre?.toString() === idPadre.toString())
-      .map(e => e.categoria);
-    console.log("Lista de subcategorías encontradas:", lista_hijas);
+// Buscar la categoría padre por nombre
+const categoria_padre = todas_las_categorias.value.filter(e => {
+  return e.categoria?.trim().toLowerCase() === props.categoria?.trim().toLowerCase();
+});
+let idPadre =''
+if (!categoria_padre.length) {
+  console.warn("No se encontró una categoría padre con el nombre:", props.categoria);
+} else {
+  console.log("Categoría padre encontrada:", categoria_padre[0]);
+  console.log("ID de la categoría padre (debería ser numérico):", categoria_padre[0].id);
 
-    // Verificar que la API devuelve un array de productos
-    if (!response.data || !Array.isArray(response.data.productos)) {
-      console.warn("La API no devolvió productos válidos:", response.data);
-      productos_alea.value = [];
-      return;
-    }
-    console.log("Productos obtenidos:", response.data.productos);
-    
-    // Guardar el total de productos para futuros filtros
-    productos_totales.value = response.data.productos;
+  // Aseguramos que `idPadre` sea una cadena para la comparación
+   idPadre = categoria_padre[0].id.toString();
 
-    // Filtrar por categoría si props.categoria está definido
-    if (props.categoria) {
-      console.log("Filtrando por categoría y sus subcategorías:", props.categoria, lista_hijas);
-      productos_alea.value = response.data.productos.filter(producto => {
-        const linea = producto.linea?.trim().toLowerCase();
-        return (
-          linea === props.categoria.trim().toLowerCase() ||
-          lista_hijas.includes(producto.linea?.trim())
-        );
-      });
-    } else {
-      productos_alea.value = response.data.productos;
-    }
- console.log('busquedad' , props.busqueda)
-    // Filtrado adicional: si props.busqueda tiene contenido, filtrar en "titulo" o "ref_producto"
-    if (props.busqueda && props.busqueda.trim() !== "") {
-      const searchText = props.busqueda.trim().toLowerCase();
-      console.log("Filtrando por búsqueda adicional:", searchText);
-      productos_alea.value = productos_alea.value.filter(producto => {
-        return (
-          (producto.titulo && producto.titulo.toLowerCase().includes(searchText)) ||
-          (producto.ref_producto && producto.ref_producto.toLowerCase().includes(searchText))
-        );
-      });
-    }
+  console.log("Filtrando categorías hijo...");
 
-    console.log("Productos filtrados:", productos_alea.value);
-  } catch (error) {
-    console.error('Error al obtener productos:', error);
-  } finally {
-    cargando.value = false;
-  }
+  // Iteramos todas las categorías para ver qué contiene `cat_padre`
+  
+
+  // Aplicamos el filtro asegurando que `cat_padre` sea tratado como string
+  categorias_hijo.value = todas_las_categorias.value.filter(e => {
+    const catPadreNormalizado = e.cat_padre?.toString(); // Normalizamos el dato
+   
+    return catPadreNormalizado === idPadre;
+  });
+
+  
 }
 
 
+ // Obtener las subcategorías de la categoría seleccionada
+const lista_hijas = todas_las_categorias.value
+  .filter(e => e.cat_padre?.toString() === idPadre.toString())
+  .map(e => e.categoria);
 
+console.log("Lista de subcategorías encontradas:", lista_hijas);
 
+// Verificar que la API devuelve un array de productos
+if (!response.data || !Array.isArray(response.data.productos)) {
+  console.warn("La API no devolvió productos válidos:", response.data);
+  productos_alea.value = [];
+  return;
+}
 
+console.log("Productos obtenidos:", response.data.productos);
+
+// Guardar el total de productos para futuros filtros
+productos_totales.value = response.data.productos;
+
+// Si hay una categoría en props, filtrar tanto por ella como por sus subcategorías
+if (props.categoria) {
+  console.log("Filtrando por categoría y sus subcategorías:", props.categoria, lista_hijas);
+
+  productos_alea.value = response.data.productos.filter(producto => {
+    return (
+      producto.linea?.trim().toLowerCase() === props.categoria.trim().toLowerCase() ||
+      lista_hijas.includes(producto.linea?.trim())
+    );
+  });
+} else {
+  productos_alea.value = response.data.productos;
+}
+
+console.log("Productos filtrados:", productos_alea.value);
+
+    
+  } catch (error) {
+    console.error('Error al obtener productos:', error)
+  } finally {
+    cargando.value = false
+  }
+}
 
 onMounted(() => {
   fetchProductos()
@@ -259,7 +256,7 @@ async function filtrarProductos() {
     console.log("Consultando:", url)
     const response = await axios.get(url)
     const productos = response.data.productos || []
-    console.log("si hay escrito", props.busqueda);
+    console.log("Productos recibidos:", productos)
 
     const busquedaMinus = busqueda.value.toLowerCase()
     const palabrasClave = busquedaMinus.split(" ").filter(Boolean)

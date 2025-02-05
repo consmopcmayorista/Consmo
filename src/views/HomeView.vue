@@ -297,7 +297,7 @@ function cambiarImagen(url) {
 }
 
 function incrementar() {
-  if(cantidades < maximo){
+  if(cantidades.value < maximo){
   cantidades.value++
   }
 }

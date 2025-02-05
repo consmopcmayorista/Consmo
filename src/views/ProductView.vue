@@ -126,7 +126,9 @@ function cambiarImagen(url) {
 }
 
 function incrementar() {
-  if(cantidades < maximo){
+  console.log(cantidades.value)
+
+  if(cantidades.value < maximo){
   cantidades.value++
   }
 }
@@ -145,7 +147,7 @@ function sumarExistencias(existenciaStr) {
   return existenciaStr.split(',').reduce((total, item) => {
     const parts = item.split(':');
     const cantidad = parseInt(parts[1]) || 0;
-    console.log(cantidad)
+    
     return total + cantidad;
   }, 0);
 }
@@ -163,10 +165,12 @@ async function fetchProducto() {
     
     if (response.data.producto && response.data.producto.length > 0) {
       producto_mostrar.value = response.data.producto[0]
-      console.log(producto_mostrar.value)
+
+      
+      console.log(sumarExistencias(producto_mostrar.value.existencia))
       imagenMostrada.value = producto_mostrar.value.imagen
       maximo = sumarExistencias(producto_mostrar.value.existencia);
-
+      console.log('maximo', maximo)
     } else {
       console.warn('Producto no encontrado en la API.')
     }

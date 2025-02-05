@@ -19,7 +19,7 @@ const router = createRouter({
       path: '/catalogo_cat',
       name: 'catalogo_cat',
       component: ProductView_cat,
-      props: (route) => ({ categoria: route.query.categoria }) // Pasar el parámetro como prop
+      props: (route) => ({ categoria: route.query.categoria, busqueda: route.query.busqueda }) // Pasar el parámetro como prop
     },
     {
       path: '/carrito',
