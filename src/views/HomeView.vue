@@ -6,6 +6,9 @@ import ProductQuickview from '@/components/product_indv.vue' // Importamos el mo
 import { ref, onMounted, inject } from 'vue'
 import axios from 'axios'
 
+import Destacados from '@/components/Destacados.vue'
+
+
 // Configuración
 const dominio = 'consmopcmayorista.com'
 const id_empresa = '24'
@@ -416,6 +419,8 @@ $(document).ready(function() {
   </div>
 
   <services />
+  
+  <Destacados />
 
   <!-- Sección Categorías -->
   <div class="shop_bycat section_padding_b">

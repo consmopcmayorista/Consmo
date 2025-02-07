@@ -9,6 +9,7 @@ import axios from 'axios'
 import TopHeader from './components/TopHeader.vue'
 import RedesComp from './components/RedesComp.vue'
 import FooterInteractivo from "./components/footer.vue"
+import MenuMobile from './components/MenuMobile.vue'
 
 /* ===============================
    VARIABLES REACTIVAS
@@ -105,7 +106,13 @@ function mensaje_add_car(descripcion, id , operacion, cant){
   }, 3000);
 }
 
-
+function eliminar_item_Carrito(id) {
+  const arreglo_car = JSON.parse(localStorage.getItem('ticket'));
+  if (arreglo_car && Array.isArray(arreglo_car.productos)) {
+    arreglo_car.productos = arreglo_car.productos.filter(item => item.id !== id);
+    localStorage.setItem('ticket', JSON.stringify(arreglo_car));
+  }
+}
 
 function cargar_arreglo_car() {
   if (localStorage.getItem("ticket") != null) {
@@ -357,10 +364,8 @@ provide('categorias_alfabetica', categorias_alfabetica);
 </script>
 
 <template>
-  <div class="anuncio">
-    <TopHeader />
-  </div>
   <header>
+
     <div class="container">
       <div class="d-flex align-items-center justify-content-sm-between">
         <!-- logo  -->
@@ -369,6 +374,9 @@ provide('categorias_alfabetica', categorias_alfabetica);
             <img loading="lazy8" src="/assets/images/120x24.png" alt="logo" />
           </a>
         </div>
+
+
+        
         <!-- search wrapper  -->
         <div class="search_wrap d-none d-lg-block">
           <!-- search input box  -->
@@ -457,37 +465,39 @@ provide('categorias_alfabetica', categorias_alfabetica);
           </div> <!-- FIN .search.d-flex -->
         </div> 
 
-        <!-- shop cart wrapper  -->
-        <div class="shopcart">
-          <a href="/carrito" class="icon_wrp text-center d-none d-lg-block">
-            <span class="icon">
-              <i class="icon-cart"></i>
-            </span>
-            <span class="icon_text">Carrito</span>
-            <span class="pops2">{{ cant_en_carrito }}</span>
-          </a>
-          <div class="shopcart_dropdown">
-            <div class="cart_droptitle">
-              <h4 class="text_lg">{{ cant_en_carrito }} Productos</h4>
+                   <!-- shop cart wrapper  -->
+                   <div class="shopcart">
+                        <a href="carrito" class="icon_wrp text-center d-none d-lg-block">
+                            <span class="icon">
+                                <i class="icon-cart"></i>
+                            </span>
+                            <span class="icon_text">Carrito</span>
+                            <span class="pops2">{{cant_en_carrito}}</span>
+                        </a>
+                        <div class="shopcart_dropdown">
+                            <div class="cart_droptitle">
+                                <h4 class="text_lg">{{cant_en_carrito}} Productos</h4>
+                            </div>
+                            <div class="cartsdrop_wrap" if="lista_productos">
+                                
+                                  <div class="muestra" id="muestra"></div>      
+                              
+                   
+                            </div>
+                            <div class="total_cartdrop">
+                                <h4 class="text_lg text-uppercase mb-0">Sub Total:</h4>
+                                <h4 class="text_lg mb-0 ms-2" id="total_ticket"></h4>
+                            </div>
+                           <!-- mobile cart button  -->
+                            <div class="cartdrop_footer d-flex mt-3">
+                                <a href="carrito" class="default_btn w-50 text_xs px-1">Ver Carro</a>
+                                 <a href="confirmacion" class="default_btn second ms-3 w-50 text_xs px-1">Pagar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="cartsdrop_wrap" if="lista_productos">
-              <div class="muestra" id="muestra"></div>
-            </div>
-            <div class="total_cartdrop">
-              <h4 class="text_lg text-uppercase mb-0">Sub Total:</h4>
-              <h4 class="text_lg mb-0 ms-2" id="total_ticket"></h4>
-            </div>
-            <!-- mobile cart button  -->
-            <div class="cartdrop_footer d-flex mt-3">
-              <a href="/carrito" class="default_btn w-50 text_xs px-1">Ver Carro</a>
-              <a href="/confirmacion" class="default_btn second ms-3 w-50 text_xs px-1"
-                >Pagar</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
 
     <!-- navbar -->
     <nav class="d-none d-lg-block">
@@ -500,18 +510,18 @@ provide('categorias_alfabetica', categorias_alfabetica);
             </div>
             <!-- sub categories wrapper  -->
             <div class="sub_categories_wrp">
-              <div class="sub_categories">
+              <div class="sub_categories scrollable-categories">
                 <h5 class="d-block position-relative d-lg-none subcats_title">
                   Categorias
                 </h5>
 
                 <RouterLink
-                v-for="(dato, index) in categorias_alfabetica"
-                :key="index"
-                :to="{ name: 'catalogo_cat', query: { categoria: dato.categoria } }"
-                class="singlecats"
+                  v-for="(dato, index) in categorias_alfabetica"
+                  :key="index"
+                  :to="{ name: 'catalogo_cat', query: { categoria: dato.categoria } }"
+                  class="singlecats"
                 >
-                <span class="txt">{{ dato.categoria }}</span>
+                  <span class="txt">{{ dato.categoria }}</span>
                 </RouterLink>   
               </div>
             </div>
@@ -544,60 +554,10 @@ provide('categorias_alfabetica', categorias_alfabetica);
       </div>
     </nav>
 
-    <!-- mobile bottombar -->
-    <div class="mobile_bottombar d-block d-lg-none">
-      <div class="header_icon">
-        <a href="javascript:void(0)" class="icon_wrp text-center open_menu">
-          <span class="icon">
-            <i class="las la-bars"></i>
-          </span>
-          <span class="icon_text">Menu</span>
-        </a>
-        <a href="/catalogo" class="icon_wrp text-center">
-          <span class="icon">
-            <i class="las la-store"></i>
-          </span>
-          <span class="icon_text">Productos</span>
-        </a>
-        <a href="javascript:void(0)" class="icon_wrp text-center" id="src_icon">
-          <span class="icon">
-            <i class="icon-search-left"></i>
-          </span>
-          <span class="icon_text">Buscar</span>
-        </a>
-        <a href="javascript:void(0)" class="icon_wrp crt text-center" id="openCart">
-          <span class="icon">
-            <i class="las la-shopping-cart"></i>
-          </span>
-          <span class="icon_text">Carrito</span>
-          <span class="pops2">{{ cant_en_carrito }}</span>
-        </a>
-      </div>
-    </div>
 
-    <!-- mobile menu -->
-    <div class="mobile_menwrap d-lg-none" id="mobile_menwrap">
-      <div class="mobile_menu_2">
-        <h5 class="mobile_title">
-          Menu
-          <span class="sidebarclose" id="menuclose">
-            <i class="las la-times"></i>
-          </span>
-        </h5>
-        <ul>
-          <li class="withsub">
-            <a href="/">Inicio</a>
-          </li>
-          <li class="withsub">
-            <a href="">Categorías</a>
-          </li>
-          <li class="withsub">
-            <a href="/conocenos">Conocenos</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+   
 
+   
     <!--  mobile cart -->
     <div class="mobile_menwrap d-lg-none" id="mobileCart">
       <div class="mobile_cart_wrap d-flex flex-column">
@@ -631,72 +591,9 @@ provide('categorias_alfabetica', categorias_alfabetica);
       </div>
     </div>
 
-    <!-- mobile searchbar -->
-    <div class="mobile_search_bar">
-      <div class="mobile_search_text">
-        <p>Que Deseas Buscar?</p>
-        <span class="close_mbsearch" id="close_mbsearch">
-          <i class="las la-times"></i>
-        </span>
-      </div>
-      <form @submit.prevent>
-        <input
-          type="text"
-          placeholder="Buscar productos..."
-          v-model="busqueda"
-          @input="filtrarProductos"
-          @keyup.enter="redirigirAListaDeProductos(busqueda, '')"
-          autocomplete="off"
-        />
-        <button>
-          <i class="icon-search-left" @click="redirigirAListaDeProductos(busqueda, busqueda_categoria)"></i>
-        </button>
-      </form>
+ <MenuMobile />
 
-      <div class="search_result_product">
-        <a
-          v-for="(dato, index) in producto_buscado"
-          :key="index"
-          :href="'product-view.html?producto=' + dato.id"
-          class="single_sresult_product"
-        >
-          <div class="sresult_img">
-            <!--  <img loading="lazy"  :src=dato.imagen alt="product">-->
-          </div>
-          <div class="sresult_content">
-            <h4>{{ dato.titulo }}</h4>
-            <div class="price">
-              <span class="org_price">
-                ${{ new Intl.NumberFormat('es-ES', { maximumSignificantDigits: 3 }).format(dato.pt1) }}
-              </span>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
 
-    <!-- mobile category -->
-    <div class="mobile_menwrap d-lg-none" id="mobile_catwrap">
-      <div class="sub_categories">
-        <h5 class="mobile_title">
-          Categorias
-          <span class="sidebarclose" id="catclose">
-            <i class="las la-times"></i>
-          </span>
-        </h5>
-
-        <!-- single categories  -->
-        <template v-for="(dato, index) in categorias_alea" :key="index">
-          <a
-            v-if="dato.cat_padre === '0'"
-            class="singlecats"
-            :href="'shop-list.html?Pag=' + dato.categoria + '&criterio=categoria'"
-          >
-            <span class="txt">{{ dato.categoria }}</span>
-          </a>
-        </template>
-      </div>
-    </div>
   </header>
 
   <!-- Vista principal -->
@@ -711,7 +608,6 @@ provide('categorias_alfabetica', categorias_alfabetica);
       class="whatsapp-link"
     >
       <i class="fab fa-whatsapp"></i>
-      <span class="whatsapp-text">Chatea con nosotros</span>
     </a>
   </div>
 
@@ -728,6 +624,7 @@ provide('categorias_alfabetica', categorias_alfabetica);
   right: 30px;
   z-index: 1000;
 }
+
 
 
 .search_suggest {
@@ -751,6 +648,7 @@ provide('categorias_alfabetica', categorias_alfabetica);
 }
 
 
+/* 🎨 Estilos del botón de WhatsApp */
 .whatsapp-link {
   display: flex;
   align-items: center;
@@ -765,6 +663,7 @@ provide('categorias_alfabetica', categorias_alfabetica);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   animation: pulse 2s infinite;
+  position: relative;
 }
 
 .whatsapp-link:hover {
@@ -772,42 +671,21 @@ provide('categorias_alfabetica', categorias_alfabetica);
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
-.whatsapp-text {
-  position: absolute;
-  right: 70px;
-  background-color: #075E54;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 14px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  white-space: nowrap;
-}
-
-.whatsapp-link:hover .whatsapp-text {
-  opacity: 1;
-}
-
+/* 📱 En celulares, ajustar el tamaño */
 @media (max-width: 768px) {
   .whatsapp-button {
-    bottom: 70px;
-    right: 10px;
+    bottom: 15px;
+    right: 5px;
   }
 
   .whatsapp-link {
-    padding: 8px 12px;
-  }
-
-  .whatsapp-link i {
-    font-size: 20px;
-  }
-
-  .whatsapp-text {
-    font-size: 12px;
+    width: 55px;
+    height: 55px;
+    font-size: 30px;
   }
 }
 
+/* ✨ Efecto de pulso */
 @keyframes pulse {
   0% {
     box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
@@ -820,50 +698,33 @@ provide('categorias_alfabetica', categorias_alfabetica);
   }
 }
 
-.whatsapp-link::before,
-.whatsapp-link::after {
-  content: '';
-  position: absolute;
-  border: 3px solid #25D366;
-  left: -20px;
-  right: -20px;
-  top: -20px;
-  bottom: -20px;
-  border-radius: 50%;
-  animation: waves 2.5s linear infinite;
-  opacity: 0;
+
+.scrollable-categories {
+  max-height: 400px; /* Ajusta esta altura según tus necesidades */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
 }
 
-.whatsapp-link::after {
-  animation-delay: 1.25s;
+.scrollable-categories::-webkit-scrollbar {
+  width: 6px;
 }
 
-@keyframes waves {
-  0% {
-    transform: scale(0.5);
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    transform: scale(1.2);
-    opacity: 0;
-  }
+.scrollable-categories::-webkit-scrollbar-track {
+  background: #f1f1f1;
 }
 
-.anuncio {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  background-color: #f5f5f5;
-  padding: 10px 0;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
+.scrollable-categories::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
 }
 
-header {
-  margin-top: 50px;
+.scrollable-categories::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Asegúrate de que el contenedor padre tenga una posición relativa */
+.sub_categories_wrp {
+  position: relative;
 }
 </style>
