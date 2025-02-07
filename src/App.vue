@@ -105,13 +105,7 @@ function mensaje_add_car(descripcion, id , operacion, cant){
   }, 3000);
 }
 
-function eliminar_item_Carrito(id) {
-  const arreglo_car = JSON.parse(localStorage.getItem('ticket'));
-  if (arreglo_car && Array.isArray(arreglo_car.productos)) {
-    arreglo_car.productos = arreglo_car.productos.filter(item => item.id !== id);
-    localStorage.setItem('ticket', JSON.stringify(arreglo_car));
-  }
-}
+
 
 function cargar_arreglo_car() {
   if (localStorage.getItem("ticket") != null) {
