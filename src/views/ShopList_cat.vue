@@ -71,8 +71,9 @@ function buscar_productos(id) {
   console.log('Abriendo modal, id=', id, 'mostrarQuickview=', mostrarQuickview.value)
 }
 
-function cerrarQuickview() {
-  mostrarQuickview.value = false
+function closeQuickview() {
+  document.querySelector('.product_quickview').classList.remove('active');
+document.body.style.overflowY = 'auto'; 
 }
 
 // Función para cortar línea de texto (para títulos, etc.)
@@ -435,12 +436,13 @@ const categorias_alfabetica = inject('categorias_alfabetica', ref([]))
                         </div>
   
                         <div class="product_list_btns">
-                          <a
-                            style="cursor: pointer;"
+                          <RouterLink
+                            :to="{ name: 'producto', query: { producto: dato.id } }"
                             class="default_btn me-sm-3 me-2 px-2 px-lg-4"
                             @click="buscar_productos(dato.id)"
-                            ><i class="icon-cart me-2"></i> Al Carrito
-                          </a>
+                            >
+                            <i class="icon-cart me-2"></i> Al Carrito
+                            </RouterLink>
                           <a
                             style="cursor: pointer;"
                             class="default_btn second px-3 px-ms-4"
@@ -480,7 +482,7 @@ const categorias_alfabetica = inject('categorias_alfabetica', ref([]))
     <!-- footer area -->
 
         <!-- product quick view -->
-        <div class="product_quickview">
+        <div class="close_quickview" @click="closeQuickview">
         <div class="prodquick_wrap position-relative">
             <div class="close_quickview">
                 <i class="las la-times"></i>

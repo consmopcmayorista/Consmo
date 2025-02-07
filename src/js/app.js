@@ -30,7 +30,7 @@ const app = new Vue({
          email_contacto:null,
          whatsapp:null,
          menu:null,
-	key:'pub_prod_9wIwn1BalWuArwEFMlC6YucoX2TBK0Nf',
+        	key:'pub_prod_9wIwn1BalWuArwEFMlC6YucoX2TBK0Nf',
          info_factura:new Object(),
          info_imprimir:new Object(),
          producto_imprimir:[],
@@ -163,6 +163,7 @@ const app = new Vue({
         
          if(this.datos_ticket!== null){
            //this.buscar_matriz()
+         
          this.ticket=this.datos_ticket.productos
          
          this.cargar_detalles()
@@ -769,6 +770,10 @@ filtrarProductos() {
                 alert("Llene los campos obligatorios");
             }
         },
+
+
+
+
         
         recogerEnPuntoDeVenta: async function() {
             if (this.nombre_cliente !== "" && this.apellido_cliente !== "" && this.email_cliente !== "" && this.tel_cliente !== "" && (parseFloat(this.total) > 0)) {
@@ -1259,7 +1264,7 @@ cantidad_productos: function(categorias) {
         },    
         
         
-                facturar_pedido: async function (id) {
+         facturar_pedido: async function (id) {
             try {
                 this.info_imprimir = JSON.parse(localStorage.getItem('facturacion_web')) || {};
                 if (!this.info_imprimir || Object.keys(this.info_imprimir).length === 0) {

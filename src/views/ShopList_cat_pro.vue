@@ -51,6 +51,10 @@ const productosPaginados = computed(() => {
   return productos_alea.value.slice(start, end)
 })
 
+function closeQuickview() {
+  document.querySelector('.product_quickview').classList.remove('active');
+document.body.style.overflowY = 'auto'; 
+}
 // Función para cambiar de página (y hacer scroll al inicio)
 function paginar(nuevaPagina) {
   pagina.value = nuevaPagina
@@ -69,10 +73,11 @@ function buscar_productos(id) {
   mostrarQuickview.value = true
   console.log('Abriendo modal, id=', id, 'mostrarQuickview=', mostrarQuickview.value)
 }
-
-function cerrarQuickview() {
-  mostrarQuickview.value = false
+function closeQuickview() {
+  document.querySelector('.product_quickview').classList.remove('active');
+document.body.style.overflowY = 'auto'; 
 }
+
 
 // Función para cortar línea de texto (para títulos, etc.)
 function formatLine(str, start, length) {
@@ -432,12 +437,13 @@ const categorias_alfabetica = inject('categorias_alfabetica', ref([]))
                         </div>
   
                         <div class="product_list_btns">
-                          <a
-                            style="cursor: pointer;"
+                          <RouterLink
+                            :to="{ name: 'producto', query: { producto: dato.id } }"
                             class="default_btn me-sm-3 me-2 px-2 px-lg-4"
                             @click="buscar_productos(dato.id)"
-                            ><i class="icon-cart me-2"></i> Al Carrito
-                          </a>
+                            >
+                            <i class="icon-cart me-2"></i> Al Carrito
+                            </RouterLink>
                           <a
                             style="cursor: pointer;"
                             class="default_btn second px-3 px-ms-4"
@@ -479,7 +485,7 @@ const categorias_alfabetica = inject('categorias_alfabetica', ref([]))
         <!-- product quick view -->
         <div class="product_quickview">
         <div class="prodquick_wrap position-relative">
-            <div class="close_quickview">
+          <div class="close_quickview" @click="closeQuickview">
                 <i class="las la-times"></i>
             </div>
             <div class="row">

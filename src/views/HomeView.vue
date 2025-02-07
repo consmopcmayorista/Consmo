@@ -282,8 +282,9 @@ document.getElementById("muestra").innerHTML=valores;
 /* -----------------------------------------     */
 
 
-function cerrarQuickview() {
-  mostrarQuickview.value = false
+function closeQuickview() {
+  document.querySelector('.product_quickview').classList.remove('active');
+document.body.style.overflowY = 'auto'; 
 }
 
 // Función para cortar línea de texto
@@ -567,7 +568,7 @@ $(document).ready(function() {
                     >
                     <p>{{ formatLine(dato.titulo, 0, 22) }}</p>
                     <p>{{ formatLine(dato.titulo, 22, 22) }}</p>
-                    </RouterLink>
+                </RouterLink>
                 <div class="format_titulo2">
                   <span>SKU: {{ dato.idpro }}</span>
                 </div>
@@ -614,11 +615,7 @@ $(document).ready(function() {
   </div>
 
   <!-- Modal Quickview -->
-  <ProductQuickview
-    v-if="mostrarQuickview"
-    :id_producto="productoSeleccionado"
-    @cerrar="cerrarQuickview"
-  />
+  
 
 
 
@@ -626,7 +623,7 @@ $(document).ready(function() {
 
   <div class="product_quickview">
 <div class="prodquick_wrap position-relative">
-<div class="close_quickview">
+  <div class="close_quickview" @click="closeQuickview">
 <i class="las la-times"></i>
 </div>
 <div class="row">
@@ -658,9 +655,13 @@ $(document).ready(function() {
 <div class="col-lg-6">
     <div class="product_info_wrapper">
         <div class="product_base_info">
-                  <a :href="'product-view.html?producto=' + producto_mostrar.id">
-              <h1>{{ producto_mostrar.titulo }}</h1>
-            </a>
+          <router-link
+  :to="{ name: 'producto', query: { producto: producto_mostrar.id } }"
+  class="format_titulo"
+>
+  <h5>{{ formatLine(producto_mostrar.titulo, 0, 22) }}</h5>
+  <h5>{{ formatLine(producto_mostrar.titulo, 22, 22) }}</h5>
+</router-link>
 
              <!-- rating  -->
                 <div class="rating">

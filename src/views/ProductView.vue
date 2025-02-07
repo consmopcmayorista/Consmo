@@ -126,8 +126,6 @@ function cambiarImagen(url) {
 }
 
 function incrementar() {
-  console.log(cantidades.value)
-
   if(cantidades.value < maximo){
   cantidades.value++
   }
@@ -493,6 +491,13 @@ onMounted(() => {
                 <p><span>Categoría:</span> {{ producto_mostrar.linea }}</p>
                 <p><span>SKU:</span> {{ producto_mostrar.idpro }}</p>
               </div>
+              <input type="hidden" id='item_producto'  :value=producto_mostrar.id>
+
+<input type="hidden" id='detalle' :value=producto_mostrar.titulo>
+<input type="hidden" id='precio'  :value=producto_mostrar.pt1>
+<input type="hidden" id='foto'  :value=producto_mostrar.imagen>
+<input type="hidden" id='tags'  :value=producto_mostrar.idpro>
+ <input type="hidden" id='cantidadesx' :value=producto_mostrar.existencia>
 
               <!-- product price -->
               <div class="price mt-3 mb-3 d-flex align-items-center">
@@ -508,7 +513,7 @@ onMounted(() => {
                   <div class="cart_qnty_btn" @click="decrementar">
                     <i class="las la-minus"></i>
                   </div>
-                  <div class="cart_count">{{ cantidades }}</div>
+                  <div class="cart_count"  id="cantidades_producto" :value="cantidades">{{ cantidades }}</div>
                   <div class="cart_qnty_btn" @click="incrementar">
                     <i class="las la-plus"></i>
                   </div>
@@ -518,16 +523,18 @@ onMounted(() => {
 
             <!-- Botones -->
             <div class="product_buttons">
-              <button class="default_btn me-sm-3 me-2 px-2 px-lg-4"  nclick="agregar_producto_car();">
+              <button class="default_btn me-sm-3 me-2 px-2 px-lg-4"  onclick="agregar_producto_car();">
                 <i class="icon-cart me-2"></i> Al Carrito
               </button>
             </div>
           </div>
-
+          
           <!-- Mensaje "No se encontró" -->
           <div v-else-if="!cargando && !producto_mostrar">
             <p>No se encontró el producto</p>
           </div>
+
+          <div id='container_success'></div>
         </div>
       </div>
 

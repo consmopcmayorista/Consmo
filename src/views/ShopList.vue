@@ -62,8 +62,10 @@ function buscar_productos(id) {
   console.log('Abriendo modal, id=', id, 'mostrarQuickview=', mostrarQuickview.value)
 }
 
-function cerrarQuickview() {
-  mostrarQuickview.value = false
+
+function closeQuickview() {
+  document.querySelector('.product_quickview').classList.remove('active');
+document.body.style.overflowY = 'auto'; 
 }
 
 // Función para cortar línea de texto
@@ -333,7 +335,7 @@ function seleccionarCategoria(dato, index) {
         <!-- product quick view -->
         <div class="product_quickview">
         <div class="prodquick_wrap position-relative">
-            <div class="close_quickview">
+            <div class="close_quickview" @click="closeQuickview">
                 <i class="las la-times"></i>
             </div>
             <div class="row">
