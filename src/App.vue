@@ -530,24 +530,24 @@ provide('categorias_alfabetica', categorias_alfabetica);
           <ul class="nav_bar d-flex list-unstyled mb-0">
             <!-- with sub menu  -->
             <li class="withsubs">
-              <a href="/">Inicio <span><i></i></span></a>
+              <RouterLink to="/">Inicio</RouterLink>
             </li>
             <!-- with sub menu  -->
             <li class="withsubs">
-              <a href="/catalogo">Productos <span><i></i></span></a>
+              <RouterLink to="/catalogo">Catalogo</RouterLink>
             </li>
             <!-- with sub menu  -->
             <li class="withsubs">
-              <a href="/conocenos">Conocenos <span><i></i></span></a>
+              <RouterLink to="/conocenos">Conocenos</RouterLink>
             </li>
             <li class="withsubs">
-              <a href="/encuentranos">Encuentranos <span><i></i></span></a>
+              <RouterLink to="/encuentranos">Encuentranos</RouterLink>
             </li>
             <li class="withsubs">
-              <a href="/calificanos">Calificanos <span><i></i></span></a>
+              <RouterLink to="/calificanos">Calificanos</RouterLink>
             </li>
             <li class="withsubs">
-              <a href="/foro">Foro <span><i></i></span></a>
+              <RouterLink to="/Foro">Foro</RouterLink>
             </li>
           </ul>
         </div>

@@ -21,5 +21,9 @@ export default defineConfig({
     commonjsOptions: {
       include: [/@vue-leaflet\/vue-leaflet/, /node_modules/]
     }
-  }
+  },
+  base: '/',
+  server: {
+    historyApiFallback: true, // Permite que Vite maneje rutas SPA
+  },
 })
