@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import ProductView from '../views/ProductView.vue';
 import ProductView_cat from '../views/ShopList_cat.vue'
+import ShopList from '../views/ShopList.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -13,7 +14,7 @@ const router = createRouter({
     {
       path: '/catalogo',
       name: 'catalogo',
-      component: () => import('../views/ShopList.vue'),
+      component: ShopList,
     },
     {
       path: '/catalogo_cat',
@@ -75,6 +76,8 @@ const router = createRouter({
       props: true, // Permite pasar el parámetro `id` como propiedad al componente
     },
   ],
+  strict: true,
+  debug: true,
 });
 
 export default router;
