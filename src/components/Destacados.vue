@@ -65,19 +65,19 @@ import "swiper/css/pagination";
           {
             nombre: "Nombre del Producto 1",
             descripcion: "Breve descripción del producto",
-            imagen: "/images2/destacados/destacado1.jpg",
+            imagen: "/images2/destacados/destacado1.png",
             link: "/producto/1"
           },
           {
-            nombre: "Nombre del Producto 2",
-            descripcion: "Breve descripción del producto",
-            imagen: "/images2/destacados/destacado1.jpg",
+            nombre: "CHASIS GAMER ARGB",
+            descripcion: "CHASIS PARA PC GAMER TIPO PECERA ARGB NEGRO 3 COOLER ORIGAMI ORI-GW045",
+            imagen: "/images2/destacados/destacado2.png",
             link: "/producto/2"
           },
           {
             nombre: "Nombre del Producto 3",
             descripcion: "Breve descripción del producto",
-            imagen: "/images2/destacados/destacado1.jpg",
+            imagen: "/images2/destacados/destacado3.png",
             link: "/producto/3"
           }
         ]
