@@ -12,7 +12,7 @@
               <div class="banner-content">
                 <h3>GENIUS SPEEDMASTER</h3>
                 <p>TIMON Y PEDAL PARA PC/PS3/PS4</p>
-                <a href="/producto/principal" class="btn btn-primary">Ver Producto</a>
+                <a href="/producto?producto=41579" class="btn btn-primary">Ver Producto</a>
               </div>
             </div>
           </div>
