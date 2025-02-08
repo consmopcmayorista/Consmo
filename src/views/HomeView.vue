@@ -399,6 +399,12 @@ $(document).ready(function() {
           <img src="/images2/banner_impresoras.jpg" class="d-block w-100" alt="Impresoras" />
         </a>
       </div>
+      <!-- Slide 3 -->
+      <div class="carousel-item">
+        <a href="pdfs/CatalogoGamer.pdf" target="_blank">
+          <img src="/images2/catalogo-gamer.jpg" class="d-block w-100" alt="Gamer" />
+        </a>
+      </div>
     </div>
 
     <!-- Controles del Carrusel -->
@@ -415,6 +421,7 @@ $(document).ready(function() {
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="0" class="active"></button>
       <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="2"></button>
     </div>
   </div>
 
