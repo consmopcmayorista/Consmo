@@ -35,7 +35,6 @@
               <input
                 type="text"
                 placeholder="Buscar"
-                id="show_suggest"
                 v-model="busqueda"
                 @input="filtrarProductos"
                 autocomplete="off"
@@ -43,7 +42,7 @@
               />
             </div>
             <div class="search_submit">
-              <button>
+              <button @click="buscarProductos">
                 <span class="icon">
                   <i class="las la-search"></i>
                 </span>
@@ -88,7 +87,6 @@
 
 <script>
 import { ref } from 'vue'
-import { useRouter } from "vue-router"
 import axios from 'axios'
 
 export default {
@@ -195,6 +193,11 @@ export default {
           return true
         }
       })
+    },
+    buscarProductos() {
+      if (this.busqueda.length > 2) {
+        this.filtrarProductos();
+      }
     }
   }
 };
