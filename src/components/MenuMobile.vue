@@ -13,7 +13,7 @@
       <ul>
         <li><a href="/">🏠 Inicio</a></li>
         <li>
-          <button @click="toggleBuscarModal">🔍 Buscar</button>
+          <button @click="toggleBuscarModal" class="centered-button">🔍 Buscar</button>
         </li>
         <li><a href="/catalogo">📦 Catalogo</a></li>
         <li><a href="/calificanos">⭐ Califícanos</a></li>
@@ -25,7 +25,7 @@
 
     <!-- Modal de búsqueda -->
     <div v-if="isBuscarModalOpen" class="buscar-modal">
-      <div class="buscar-modal-content">
+      <div :class="['buscar-modal-content', { 'expanded': busqueda.length > 0 }]">
         <button class="close-button" @click="toggleBuscarModal">✖️</button>
         <!-- search wrapper  -->
         <div class="search_wrap">
@@ -93,7 +93,7 @@
 </template>
 
 <script>
-import { ref, onMounted, provide, computed } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from "vue-router"
 import axios from 'axios'
 
@@ -303,6 +303,12 @@ export default {
   color: #0056b3;
 }
 
+.centered-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* modal de búsqueda */
 .buscar-modal {
   position: fixed;
@@ -326,6 +332,11 @@ export default {
   max-height: 80%; /* Evita que el modal sobresalga de la pantalla */
   overflow-y: auto; /* Permite el scroll si el contenido es muy grande */
   position: relative;
+  transition: max-height 0.4s ease-in-out;
+}
+
+.buscar-modal-content.expanded {
+  max-height: 80%; /* Ajusta el tamaño del contenedor expandido */
 }
 
 /* Botón para cerrar el modal */
