@@ -2,7 +2,7 @@
 /* ===============================
    IMPORTS
 =============================== */
-import { ref, onMounted, provide, computed } from 'vue'
+import { ref, onMounted, provide, computed, watch } from 'vue'
 import { useRouter } from "vue-router"
 import axios from 'axios'
 
@@ -354,6 +354,13 @@ onMounted(() => {
 // Proveer variables si las necesitas en componentes hijos
 provide('categorias_alea', categorias_alea);
 provide('categorias_alfabetica', categorias_alfabetica);
+
+// Watch para actualizar el carrito cuando se abre el modal
+watch(mostrarModal, (newVal) => {
+  if (newVal) {
+    cargar_arreglo_car();
+  }
+});
 </script>
 
 <template>
@@ -501,30 +508,30 @@ provide('categorias_alfabetica', categorias_alfabetica);
     <span class="pops2">{{cant_en_carrito}}</span>
   </div>
 
-  <!-- Modal para el carrito -->
-  <div v-if="mostrarModal" class="modal-overlay" @click.self="mostrarModal = false">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Carrito</h5>
-        <button type="button" class="close" @click="mostrarModal = false">
-          <span>&times;</span>
-        </button>
+<!-- Modal para el carrito -->
+<div v-if="mostrarModal" class="modal-overlay" @click.self="mostrarModal = false">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Carrito</h5>
+      <button type="button" class="close" @click="mostrarModal = false">
+        <span>&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="muestra" id="muestra2"></div>
+    </div>
+    <div class="modal-footer">
+      <div class="total_cartdrop">
+        <h4 class="text_lg text-uppercase mb-0">Sub Total:</h4>
+        <h4 class="text_lg mb-0 ms-2" id="total_ticket2"></h4>
       </div>
-      <div class="modal-body">
-        <div class="muestra" id="muestra2"></div>
-      </div>
-      <div class="modal-footer">
-        <div class="total_cartdrop">
-          <h4 class="text_lg text-uppercase mb-0">Sub Total:</h4>
-          <h4 class="text_lg mb-0 ms-2" id="total_ticket2"></h4>
-        </div>
-        <div class="cartdrop_footer mt-3 d-flex">
-          <a href="/carrito" class="default_btn w-50 text_xs px-1">Ver Carro</a>
-          <a href="confirmacion" class="default_btn second ms-3 w-50 text_xs px-1">Pagar</a>
-        </div>
+      <div class="cartdrop_footer mt-3 d-flex">
+        <a href="/carrito" class="default_btn w-50 text_xs px-1">Ver Carro</a>
+        <a href="confirmacion" class="default_btn second ms-3 w-50 text_xs px-1">Pagar</a>
       </div>
     </div>
   </div>
+</div>
 
 
     <!-- navbar -->
