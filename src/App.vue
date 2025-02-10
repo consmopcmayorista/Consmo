@@ -839,4 +839,9 @@ provide('categorias_alfabetica', categorias_alfabetica);
   justify-content: space-between;
   align-items: center;
 }
+
+/* Espaciado para evitar que el TopHeader tape el contenido */
+body {
+  padding-top: 60px; /* Ajusta según la altura del TopHeader */
+}
 </style>
