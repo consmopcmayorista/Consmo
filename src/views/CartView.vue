@@ -116,7 +116,6 @@ const subtotal =ref()
 const iva = ref()
 
 
-
 onMounted(() => {
     datos_ticket.value = JSON.parse(localStorage.getItem('ticket'))
     ticket.value = datos_ticket.value.productos
