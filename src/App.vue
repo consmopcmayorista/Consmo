@@ -10,7 +10,6 @@ import TopHeader from './components/TopHeader.vue'
 import RedesComp from './components/RedesComp.vue'
 import FooterInteractivo from "./components/footer.vue"
 import MenuMobile from './components/MenuMobile.vue'
-import CarritoMobile from './components/CarritoMobile.vue'
 
 /* ===============================
    VARIABLES REACTIVAS
@@ -493,6 +492,39 @@ provide('categorias_alfabetica', categorias_alfabetica);
                 </div>
             </div>
 
+              <!-- Botón de carrito para versión móvil -->
+  <div class="mobile-cart-icon d-lg-none" @click="mostrarModal = true">
+    <span class="icon">
+      <i class="icon-cart"></i>
+    </span>
+    <span class="pops2">{{cant_en_carrito}}</span>
+  </div>
+
+  <!-- Modal para el carrito -->
+  <div v-if="mostrarModal" class="modal-overlay" @click.self="mostrarModal = false">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Carrito</h5>
+        <button type="button" class="close" @click="mostrarModal = false">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="muestra" id="muestra2"></div>
+      </div>
+      <div class="modal-footer">
+        <div class="total_cartdrop">
+          <h4 class="text_lg text-uppercase mb-0">Sub Total:</h4>
+          <h4 class="text_lg mb-0 ms-2" id="total_ticket2"></h4>
+        </div>
+        <div class="cartdrop_footer mt-3 d-flex">
+          <a href="/carrito" class="default_btn w-50 text_xs px-1">Ver Carro</a>
+          <a href="confirmacion" class="default_btn second ms-3 w-50 text_xs px-1">Pagar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
     <!-- navbar -->
     <nav class="d-none d-lg-block">
@@ -585,8 +617,6 @@ provide('categorias_alfabetica', categorias_alfabetica);
         </div>
       </div>
     </div>
-
-    <CarritoMobile />
 
  <MenuMobile />
 
@@ -723,5 +753,90 @@ provide('categorias_alfabetica', categorias_alfabetica);
 /* Asegúrate de que el contenedor padre tenga una posición relativa */
 .sub_categories_wrp {
   position: relative;
+}
+
+
+/* Estilo del ícono de carrito para versión móvil */
+.mobile-cart-icon {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+.mobile-cart-icon .icon {
+  font-size: 24px;
+  color: #333;
+}
+
+.mobile-cart-icon .pops2 {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red;
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+
+/* Estilo del modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+
+.modal-content {
+  width: 90%;
+  max-width: 500px;
+  background: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.modal-header, .modal-footer {
+  padding: 15px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header .close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 15px;
+}
+
+.modal-footer {
+  border-top: 1px solid #e9ecef;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>
