@@ -31,6 +31,18 @@
         <div class="search_wrap">
           <!-- search input box  -->
           <div class="search d-flex">
+            <div class="search_category">
+              <select v-model="categoria">
+                <option disabled value="">Categorias</option>
+                <option
+                  v-for="dato in categorias_alfabetica"
+                  :key="dato.categoria"
+                  :value="dato.categoria"
+                >
+                  {{ dato.categoria }}
+                </option>
+              </select>
+            </div>
             <div class="search_input">
               <input
                 type="text"
@@ -44,41 +56,42 @@
             <div class="search_submit">
               <button @click="buscarProductos">
                 <span class="icon">
+                  <span class="d-none d-sm-inline-block">Buscar</span>
                   <i class="las la-search"></i>
                 </span>
               </button>
             </div>
+          </div>
 
-            <!-- search suggest -->
-            <div :class="['search_suggest', { active: producto_buscado.length > 0 }]">
-              <div class="search_result_product">
-                <template v-for="(dato, index) in producto_buscado" :key="index">
-                  <div v-if="dato.separator" class="separator" style="font-weight: bold; color: #aaa; text-align: center; margin: 5px 0;"></div>
+          <!-- search suggest -->
+          <div :class="['search_suggest', { active: producto_buscado.length > 0 }]">
+            <div class="search_result_product">
+              <template v-for="(dato, index) in producto_buscado" :key="index">
+                <div v-if="dato.separator" class="separator" style="font-weight: bold; color: #aaa; text-align: center; margin: 5px 0;"></div>
 
-                  <!-- Si es un producto normal -->
-                  <RouterLink
-                    v-else
-                    :to="{ name: 'producto', query: { producto: dato.id } }"
-                    class="single_sresult_product"
-                    @click="ocultarSugerencias"
-                  >
-                    <div class="sresult_img">
-                      <img :src="dato.imagen" />
+                <!-- Si es un producto normal -->
+                <RouterLink
+                  v-else
+                  :to="{ name: 'producto', query: { producto: dato.id } }"
+                  class="single_sresult_product"
+                  @click="ocultarSugerencias"
+                >
+                  <div class="sresult_img">
+                    <img :src="dato.imagen" />
+                  </div>
+                  <div class="sresult_content">
+                    <h4>{{ dato.titulo }}</h4>
+                    <div class="price">
+                      <span class="org_price">
+                        ${{ Math.round(parseFloat(dato.pt1)).toLocaleString() }}
+                      </span>
                     </div>
-                    <div class="sresult_content">
-                      <h4>{{ dato.titulo }}</h4>
-                      <div class="price">
-                        <span class="org_price">
-                          ${{ Math.round(parseFloat(dato.pt1)).toLocaleString() }}
-                        </span>
-                      </div>
-                    </div>
-                  </RouterLink>
-                </template>
-              </div>
+                  </div>
+                </RouterLink>
+              </template>
             </div>
-            <!-- FIN search_suggest -->
-          </div> <!-- FIN .search.d-flex -->
+          </div>
+          <!-- FIN search_suggest -->
         </div>
       </div>
     </div>
@@ -90,11 +103,18 @@ import { ref } from 'vue'
 import axios from 'axios'
 
 export default {
+  props: {
+    categorias_alfabetica: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
       isMenuOpen: false,
       isBuscarModalOpen: false,
       busqueda: '',
+      categoria: '',
       producto_buscado: [] // Suponiendo que tienes esta data
     };
   },
@@ -197,6 +217,7 @@ export default {
     buscarProductos() {
       if (this.busqueda.length > 2) {
         this.filtrarProductos();
+        this.toggleBuscarModal();
       }
     }
   }
