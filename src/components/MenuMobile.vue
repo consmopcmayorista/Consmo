@@ -252,18 +252,23 @@ export default {
   bottom: -100%;
   left: 0;
   width: 100%;
-  height: 60%;
-  background: white;
+  height: 50%;
+  background: linear-gradient(135deg, #007bff, #6610f2);
   box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
   transition: bottom 0.4s ease-in-out;
   z-index: 1000;
   border-radius: 20px 20px 0 0;
   padding-top: 20px;
-  overflow-y: auto; /* habilitacion de scroll si hay varias */
+  overflow-y: auto; /* habilitacion de scrol si hay varias */
+  max-height: 50%;
 }
 
 .mobile-menu.open {
   bottom: 0;
+}
+/* estilos para scroll */
+.mobile-menu::-webkit-scrollbar {
+  width: 6px;
 }
 
 .mobile-menu ul {
