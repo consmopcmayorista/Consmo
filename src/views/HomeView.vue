@@ -429,6 +429,25 @@ $(document).ready(function() {
   
   <Destacados />
 
+  <div class="ad_banner_area section_padding_b">
+    <div class="container">
+      <a href="/promociones">
+        <picture>
+          <source
+            media="(min-width: 768px)"
+            srcset="/images2/banner_promo.jpg"
+          />
+          <img
+            loading="lazy8"
+            class="w-100"
+            src="/images2/banner_promo.jpg"
+            alt="ad"
+          />
+        </picture>
+      </a>
+    </div>
+  </div>
+
   <!-- Sección Categorías -->
   <div class="shop_bycat section_padding_b">
     <div class="container">
@@ -779,5 +798,12 @@ $(document).ready(function() {
   padding: 10px;
   background: rgba(0, 0, 0, 0.5);
   color: #fff;
+}
+/* estilos de banners principales */
+@media (max-width: 768px) { 
+  #bannerCarousel img {
+    height: 160px; /* Ajusta la altura según necesites */
+    object-fit: cover; /* Asegura que la imagen se expanda correctamente */
+  }
 }
 </style>

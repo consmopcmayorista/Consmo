@@ -56,6 +56,20 @@ function togglePagination() {
   showAllPages.value = !showAllPages.value
 }
 
+// Computada para obtener las páginas visibles
+const visiblePages = computed(() => {
+  const isMobile = window.innerWidth <= 768;
+  const pagesToShow = isMobile ? 7 : 13;
+
+  if (showAllPages.value) {
+    return Array.from({ length: cant_pagina.value }, (_, i) => i + 1)
+  } else {
+    const start = Math.floor((pagina.value - 1) / pagesToShow) * pagesToShow + 1
+    const end = Math.min(start + pagesToShow - 1, cant_pagina.value)
+    return Array.from({ length: end - start + 1 }, (_, i) => start + i)
+  }
+})
+
 const mostrarQuickview = ref(false)
 const productoSeleccionado = ref(null)
 
@@ -310,11 +324,11 @@ function seleccionarCategoria(dato, index) {
                 &lt;
               </button>
 
-              <!-- Genera elementos de paginación desde 1 hasta cant_pagina -->
+              <!-- Genera elementos de paginación -->
               <div
                 class="single_paginat"
                 :class="{ active: i === pagina }"
-                v-for="i in (showAllPages ? cant_pagina : Math.min(10, cant_pagina))"
+                v-for="i in visiblePages"
                 :key="i"
                 @click="paginar(i)"
               >
@@ -332,7 +346,7 @@ function seleccionarCategoria(dato, index) {
               <!-- Botón para ver todas las páginas -->
               <button 
                 class="pagination_button" 
-                v-if="!showAllPages && cant_pagina > 10" 
+                v-if="!showAllPages && cant_pagina > visiblePages.length" 
                 @click="showAllPages = true">
                 >>
               </button>
@@ -399,7 +413,7 @@ function seleccionarCategoria(dato, index) {
   flex-wrap: wrap;
   justify-content: center;
   overflow: hidden;
-  max-height: 40px; /* Muestra solo una fila de botones (aproximadamente 10) */
+  max-height: 40px; /* Muestra solo una fila de botones (aproximadamente 13) */
   transition: max-height 0.3s ease-in-out;
 }
 

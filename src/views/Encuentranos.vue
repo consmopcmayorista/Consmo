@@ -32,7 +32,7 @@ const branches = ref([
 <template>
     <!-- Banner -->
     <div class="banner">
-    <img src="/images2/banner_encuentranos.png" alt="Encuéntranos Banner" class="banner-image">
+    <img src="/images2/banner_encuentranos.jpg" alt="Encuéntranos Banner" class="banner-image">
     <div class="banner-content">
     </div>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <!-- Banner -->
   <div class="banner">
-    <img src="/images2/banner_calificanos.png" alt="Encuéntranos Banner" class="banner-image">
+    <img src="/images2/banner_calificanos.jpg" alt="Encuéntranos Banner" class="banner-image">
   </div>
   <div class="rating-page section_padding_b">
     <div class="container">

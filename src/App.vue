@@ -744,8 +744,8 @@ provide('categorias_alfabetica', categorias_alfabetica);
 /* Estilo del ícono de carrito para versión móvil */
 .mobile-cart-icon {
   position: fixed;
-  top: 15px;
-  right: 15px;
+  top: 35px;
+  right: 1px;
   z-index: 1000;
   display: flex;
   align-items: center;

@@ -75,6 +75,11 @@ const router = createRouter({
       component: () => import('../components/Publicacion.vue'), // Vista para el detalle de la publicación
       props: true, // Permite pasar el parámetro `id` como propiedad al componente
     },
+    {
+      path: '/promociones',
+      name: 'promociones',
+      component: () => import('../views/Promos.vue'),
+    }
   ],
   strict: true,
   debug: true,
