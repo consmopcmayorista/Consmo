@@ -44,21 +44,21 @@ const showModal = ref(false);
 const selectedPromo = ref({});
 
 const promos = ref([
-  { title: 'Promoción 1', image: '1530.jpg' },
-  { title: 'Promoción 2', image: '1836.jpg' },
-  { title: 'Promoción 3', image: '1870.jpg' },
-  { title: 'Promoción 4', image: '1934.jpg' },
-  { title: 'Promoción 5', image: '2601.jpg' },
-  { title: 'Promoción 6', image: '3519.jpg' },
-  { title: 'Promoción 7', image: '9555 - 9556 - 1001 - 9558.jpg' },
-  { title: 'Promoción 8', image: '9703.jpg' },
-  { title: 'Promoción 9', image: 'C2565.jpg' },
-  { title: 'Promoción 10', image: 'C9105.jpg' },
-  { title: 'Promoción 11', image: 'C9119.jpg' },
-  { title: 'Promoción 12', image: 'C9120.jpg' },
-  { title: 'Promoción 13', image: 'C9121.jpg' },
-  { title: 'Promoción 14', image: 'C9122.jpg' },
-  { title: 'Promoción 15', image: 'C9675.jpg' }
+  { title: 'FUENTE DE PODER ATX', image: '1530.jpg' },
+  { title: 'CARRETA CABLE UTP 6E', image: '1836.jpg' },
+  { title: 'CARRETA CABLE UTP 5E', image: '1870.jpg' },
+  { title: 'CAMARA IP 2K TENDA', image: '1934.jpg' },
+  { title: 'BOARD DDR4 8VA Y 9NA', image: '2601.jpg' },
+  { title: 'LECTOR HUELLAS DACTILARES', image: '3519.jpg' },
+  { title: 'MOUSE ALAMBRICO GENIUS', image: '9555 - 9556 - 1001 - 9558.jpg' },
+  { title: 'LECTOR OMNIDIRECCIONAL 2D', image: '9703.jpg' },
+  { title: 'ROUTER INALAMBRICO XPON', image: 'C2565.jpg' },
+  { title: 'TV BOX 4GB+32GB 8K', image: 'C9105.jpg' },
+  { title: 'SWITCH DE RED 5 PUERTOS', image: 'C9119.jpg' },
+  { title: 'SWITCH DE RED 8 PUERTOS', image: 'C9120.jpg' },
+  { title: 'SWITCH DE RED 5 PUERTOS', image: 'C9121.jpg' },
+  { title: 'SWITCH DE RED 8 PUERTOS', image: 'C9122.jpg' },
+  { title: 'KIT DESTORNILLADORES', image: 'C9675.jpg' }
 ]);
 
 const closePopup = () => {
