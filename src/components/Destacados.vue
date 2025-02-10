@@ -63,22 +63,22 @@ import "swiper/css/pagination";
       return {
         productos: [
           {
-            nombre: "Nombre del Producto 1",
-            descripcion: "Breve descripción del producto",
+            nombre: "CHASIS TIPO PECERA GAMER",
+            descripcion: "CHASIS PARA PC GAMER TIPO PECERA ARGB BLANCO 3 COOLER ORIGAMI ORI-GW046",
             imagen: "/images2/destacados/destacado1.png",
-            link: "/producto/1"
+            link: "/producto?producto=41569"
           },
           {
-            nombre: "CHASIS GAMER ARGB",
-            descripcion: "CHASIS PARA PC GAMER TIPO PECERA ARGB NEGRO 3 COOLER ORIGAMI ORI-GW045",
+            nombre: "MONITOR IPS 27 PULGADAS",
+            descripcion: "1920x1080 FULL HD CURVO 180HZ HDMI/VGA TEROS TE-2766G",
             imagen: "/images2/destacados/destacado2.png",
-            link: "/producto/2"
+            link: "/producto?producto=41558"
           },
           {
-            nombre: "Nombre del Producto 3",
-            descripcion: "Breve descripción del producto",
+            nombre: "TECLADO GAMER MECANICO",
+            descripcion: "USB ANTI-GHOSTING GAMER TECH GK987G 80382",
             imagen: "/images2/destacados/destacado3.png",
-            link: "/producto/3"
+            link: "/producto?producto=31117"
           }
         ]
       };
