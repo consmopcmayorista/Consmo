@@ -25,8 +25,8 @@
 
     <!-- Modal de búsqueda -->
     <div v-if="isBuscarModalOpen" class="buscar-modal">
-      <div :class="['buscar-modal-content', { 'expanded': busqueda.length > 0 }]">
-        <button class="close-button" @click="toggleBuscarModal">✖️</button>
+      <button class="close-button" @click="toggleBuscarModal">✖️</button>
+      <div class="buscar-modal-content">
         <!-- search wrapper  -->
         <div class="search_wrap">
           <!-- search input box  -->
@@ -43,17 +43,11 @@
               />
             </div>
             <div class="search_submit">
-              <RouterLink
-                :to="{ name: 'catalogo_cat', query: { busqueda: busqueda } }"
-                @click="ocultarSugerencias"
-              >
-                <button>
-                  <span class="icon">
-                    <span class="d-none d-sm-inline-block">Buscar</span>
-                    <i class="las la-search"></i>
-                  </span>
-                </button>
-              </RouterLink>
+              <button>
+                <span class="icon">
+                  <i class="las la-search"></i>
+                </span>
+              </button>
             </div>
 
             <!-- search suggest -->
@@ -345,8 +339,8 @@ export default {
   border: none;
   font-size: 24px;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 20px;
+  right: 20px;
   cursor: pointer;
   color: #007bff;
 }
@@ -365,14 +359,11 @@ export default {
 }
 
 .search_submit button {
-  width: 100%;
-  padding: 15px;
-  background-color: #007bff;
-  color: white;
+  background: none;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
-  font-size: 18px;
+  color: #007bff;
+  font-size: 24px;
 }
 
 .search_result_product {
