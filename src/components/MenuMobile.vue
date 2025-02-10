@@ -13,14 +13,13 @@
       <ul>
         <li><a href="/">🏠 Inicio</a></li>
         <li><a href="/catalogo">📦 Catalogo</a></li>
+        <li>
+          <button @click="toggleBuscarModal">🔍 Buscar</button>
+        </li>
         <li><a href="/calificanos">⭐ Califícanos</a></li>
         <li><a href="/foro">💬 Foro</a></li>
         <li><a href="/conocenos">ℹ️ Conócenos</a></li>
         <li><a href="/encuentranos">📍 Encuéntranos</a></li>
-        <!-- Nueva sección Buscar -->
-        <li>
-          <button @click="toggleBuscarModal">🔍 Buscar</button>
-        </li>
       </ul>
     </nav>
 
@@ -32,14 +31,6 @@
         <div class="search_wrap">
           <!-- search input box  -->
           <div class="search d-flex">
-            <div class="search_category">
-              <select v-model="categoria">
-                <option disabled value="">Categorias</option>
-                <option v-for="dato in categorias_alfabetica" :key="dato.categoria" :value="dato.categoria">
-                  {{ dato.categoria }}
-                </option>
-              </select>
-            </div>
             <div class="search_input">
               <input
                 type="text"
@@ -53,12 +44,12 @@
             </div>
             <div class="search_submit">
               <RouterLink
-                :to="{ name: 'catalogo_cat', query: { categoria: categoria, busqueda: busqueda } }"
+                :to="{ name: 'catalogo_cat', query: { busqueda: busqueda } }"
                 @click="ocultarSugerencias"
               >
                 <button>
                   <span class="icon">
-                    <span class="d-none d-sm-inline-block">Buscar</span>
+                    <span>Buscar</span>
                     <i class="las la-search"></i>
                   </span>
                 </button>
@@ -102,7 +93,7 @@
 </template>
 
 <script>
-import { ref, onMounted, provide, computed } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from "vue-router"
 import axios from 'axios'
 
@@ -111,7 +102,6 @@ export default {
     return {
       isMenuOpen: false,
       isBuscarModalOpen: false,
-      categoria: '',
       busqueda: '',
       categorias_alfabetica: [], // Suponiendo que tienes esta data
       producto_buscado: [] // Suponiendo que tienes esta data
@@ -269,55 +259,44 @@ export default {
   bottom: -100%;
   left: 0;
   width: 100%;
-  height: 50%;
-  background: linear-gradient(135deg, #007bff, #6610f2);
+  height: 60%;
+  background: white;
   box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
   transition: bottom 0.4s ease-in-out;
   z-index: 1000;
   border-radius: 20px 20px 0 0;
   padding-top: 20px;
   overflow-y: auto; /* habilitacion de scroll si hay varias */
-  max-height: 50%;
-}
-
-/* mostrar menu */
-.mobile-menu.open {
-  bottom: 0;
-}
-
-/* estilos para scroll */
-.mobile-menu::-webkit-scrollbar {
-  width: 6px;
-}
-
-.mobile-menu::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 10px;
 }
 
 .mobile-menu ul {
   list-style-type: none;
-  padding: 20px;
+  padding: 0;
   margin: 0;
   text-align: center;
 }
 
 .mobile-menu li {
   padding: 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.mobile-menu a {
+.mobile-menu a,
+.mobile-menu button {
   text-decoration: none;
-  color: white;
+  color: #007bff;
   font-size: 20px;
   font-weight: bold;
   display: block;
   transition: color 0.3s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-.mobile-menu a:hover {
-  color: #ffd700;
+.mobile-menu a:hover,
+.mobile-menu button:hover {
+  color: #0056b3;
 }
 
 /* modal de búsqueda */
@@ -338,10 +317,11 @@ export default {
   background: white;
   padding: 20px;
   border-radius: 10px;
-  width: 80%;
+  width: 90%;
   max-width: 500px;
   max-height: 80%; /* Evita que el modal sobresalga de la pantalla */
   overflow-y: auto; /* Permite el scroll si el contenido es muy grande */
+  position: relative;
 }
 
 /* Botón para cerrar el modal */
@@ -353,6 +333,7 @@ export default {
   top: 10px;
   right: 10px;
   cursor: pointer;
+  color: #007bff;
 }
 
 .search_wrap {
@@ -361,28 +342,22 @@ export default {
 
 .search_input input {
   width: 100%;
-  padding: 10px;
+  padding: 15px;
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 4px;
-}
-
-.search_category select {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  font-size: 18px;
 }
 
 .search_submit button {
   width: 100%;
-  padding: 10px;
+  padding: 15px;
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 18px;
 }
 
 .search_result_product {
