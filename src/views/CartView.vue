@@ -116,6 +116,29 @@ const subtotal =ref()
 const iva = ref()
 
 
+function quitar_item_Carrito(id){
+        if (this.ticket) {
+            // Crear un nuevo objeto nuevo_ticket
+            let nuevo_ticket = {
+              productos: []
+            };
+        
+            // Copiar los productos que no coinciden con el id
+            nuevo_ticket.productos = this.ticket.filter(item => item.id !== id);
+        
+        
+            localStorage.setItem('ticket', JSON.stringify(nuevo_ticket));
+             var arreglo_carrito = JSON.parse(localStorage.getItem('ticket'));
+              
+          this.ticket=arreglo_carrito.productos
+           this.actualizarTotales()
+          this.cargar_detalles()
+            // Asignar nuevo_ticket a this.ticket
+            
+          }
+    }
+
+
 onMounted(() => {
     datos_ticket.value = JSON.parse(localStorage.getItem('ticket'))
     ticket.value = datos_ticket.value.productos
@@ -171,16 +194,6 @@ onMounted(() => {
         }
     }
 
-    function eliminar_item_Carrito(id) {
-
-        console.log(id)
-        const arreglo_car = JSON.parse(localStorage.getItem('ticket'));
-        if (arreglo_car && Array.isArray(arreglo_car.productos)) {
-        arreglo_car.productos = arreglo_car.productos.filter(item => item.id !== id);
-        localStorage.setItem('ticket', JSON.stringify(arreglo_car));
-        }
-        }
-
     function actualizarTotales() {
      
      total.value = ticket.value.reduce((acumulador, actual) => acumulador + (actual.cant * parseFloat(actual.precio)), 0);
@@ -189,28 +202,6 @@ onMounted(() => {
      
      console.log(total.value)
    }
-
-   function quitar_item_Carrito(id){
-        if (this.ticket) {
-            // Crear un nuevo objeto nuevo_ticket
-            let nuevo_ticket = {
-              productos: []
-            };
-        
-            // Copiar los productos que no coinciden con el id
-            nuevo_ticket.productos = this.ticket.filter(item => item.id !== id);
-        
-        
-            localStorage.setItem('ticket', JSON.stringify(nuevo_ticket));
-             var arreglo_carrito = JSON.parse(localStorage.getItem('ticket'));
-              
-          this.ticket=arreglo_carrito.productos
-           this.actualizarTotales()
-          this.cargar_detalles()
-            // Asignar nuevo_ticket a this.ticket
-            
-          }
-    }
 
 function imprimir_carrito_checkout(arreglo_car, total){
     
