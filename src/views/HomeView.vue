@@ -45,7 +45,7 @@ function sumarExistencias(existenciaStr) {
 
 
 function buscar_productos(id) {
-  this.cantidades=1
+    cantidades=1
             
             let get={};
            
