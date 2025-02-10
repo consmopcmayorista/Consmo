@@ -11,15 +11,15 @@
     <!-- menu con scroll -->
     <nav :class="{'mobile-menu': true, 'open': isMenuOpen}">
       <ul>
-        <li><a href="/">🏠 Inicio</a></li>
+        <li><RouterLink to="/">🏠 Inicio</RouterLink></li>
         <li class="centered-list-item">
           <button @click="toggleBuscarModal">🔍 Buscar</button>
         </li>
-        <li><a href="/catalogo">📦 Catalogo</a></li>
-        <li><a href="/calificanos">⭐ Califícanos</a></li>
-        <li><a href="/foro">💬 Foro</a></li>
-        <li><a href="/conocenos">ℹ️ Conócenos</a></li>
-        <li><a href="/encuentranos">📍 Encuéntranos</a></li>
+        <li><RouterLink to="/catalogo">📦 Catalogo</RouterLink></li>
+        <li><RouterLink to="/calificanos">⭐ Califícanos</RouterLink></li>
+        <li><RouterLink to="/foro">💬 Foro</RouterLink></li>
+        <li><RouterLink to="/conocenos">ℹ️ Conócenos</RouterLink></li>
+        <li><RouterLink to="/encuentranos">📍 Encuéntranos</RouterLink></li>
       </ul>
     </nav>
 
@@ -31,18 +31,6 @@
         <div class="search_wrap">
           <!-- search input box  -->
           <div class="search d-flex">
-            <div class="search_category">
-              <select v-model="categoria">
-                <option disabled value="">Categorias</option>
-                <option
-                  v-for="dato in categorias_alfabetica"
-                  :key="dato.categoria"
-                  :value="dato.categoria"
-                >
-                  {{ dato.categoria }}
-                </option>
-              </select>
-            </div>
             <div class="search_input">
               <input
                 type="text"
@@ -54,12 +42,17 @@
               />
             </div>
             <div class="search_submit">
-              <button @click="buscarProductos">
-                <span class="icon">
-                  <span class="d-none d-sm-inline-block">Buscar</span>
-                  <i class="las la-search"></i>
-                </span>
-              </button>
+              <RouterLink
+                :to="{ name: 'catalogo_cat', query: { categoria: '', busqueda: busqueda } }"
+                @click="buscarProductos"
+              >
+                <button>
+                  <span class="icon">
+                    <span>Buscar</span>
+                    <i class="las la-search"></i>
+                  </span>
+                </button>
+              </RouterLink>
             </div>
           </div>
 
@@ -103,18 +96,11 @@ import { ref } from 'vue'
 import axios from 'axios'
 
 export default {
-  props: {
-    categorias_alfabetica: {
-      type: Array,
-      required: true
-    }
-  },
   data() {
     return {
       isMenuOpen: false,
       isBuscarModalOpen: false,
       busqueda: '',
-      categoria: '',
       producto_buscado: [] // Suponiendo que tienes esta data
     };
   },

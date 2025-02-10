@@ -21,12 +21,8 @@ const selectedIndex = ref(null)
  const categorias_alea = inject('categorias_alea', ref([])) 
  const categorias_alfabetica = inject('categorias_alfabetica', ref([])) 
 
-
-
-
 console.log(categorias_alfabetica.value)
 const cargando = ref(true)
-
 
 const pagina = ref(1)             // Página actual (1-based)
 const cant_maxima_pag = ref(10)   // Cantidad de ítems por página
@@ -45,13 +41,20 @@ const productosPaginados = computed(() => {
 
 // Función para cambiar de página
 function paginar(nuevaPagina) {
-  pagina.value = nuevaPagina
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth' // Hace que la transición sea suave
-  });
+  if (nuevaPagina >= 1 && nuevaPagina <= cant_pagina.value) {
+    pagina.value = nuevaPagina
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Hace que la transición sea suave
+    });
+  }
 }
 
+// Función para mostrar todas las páginas
+const showAllPages = ref(false)
+function togglePagination() {
+  showAllPages.value = !showAllPages.value
+}
 
 const mostrarQuickview = ref(false)
 const productoSeleccionado = ref(null)
@@ -62,10 +65,9 @@ function buscar_productos(id) {
   console.log('Abriendo modal, id=', id, 'mostrarQuickview=', mostrarQuickview.value)
 }
 
-
 function closeQuickview() {
   document.querySelector('.product_quickview').classList.remove('active');
-document.body.style.overflowY = 'auto'; 
+  document.body.style.overflowY = 'auto'; 
 }
 
 // Función para cortar línea de texto
@@ -85,14 +87,12 @@ function shuffleArray(array) {
 // Carga de productos "recomendados"
 async function fetchProductos() {
   try {
-    console.log( `https://whatsapp-nube.com/api_web/api_web_catalogo_new2.php?dominio=${dominio}&id=${id_empresa}`)
     const response = await axios.get(
       `https://whatsapp-nube.com/api_web/api_web_catalogo_new2.php?dominio=${dominio}&id=${id_empresa}`
     )
     // Asignamos array barajado
     productos_alea.value = shuffleArray(response.data.productos) || []
-     productos_totales.value =  productos_alea.value
-    console.log(productos_alea.value)
+    productos_totales.value = productos_alea.value
   } catch (error) {
     console.error('Error al obtener productos:', error)
   } finally {
@@ -144,8 +144,6 @@ $(document).ready(function() {
   }, 5000)
 })
 
-
-
 function buscar_categoria(categoria, nuevaPagina) {
   console.log('Filtrando por categoría:', categoria)
 
@@ -163,288 +161,297 @@ function buscar_categoria(categoria, nuevaPagina) {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
-
-
 function seleccionarCategoria(dato, index) {
   selectedIndex.value = index // Actualiza el índice seleccionado
   buscar_categoria(dato, 1) // Llama a la función de filtrado
 }
 </script>
 
-
 <template>
-    <!-- breadcrumbs -->
-    <div class="container">
-      <div class="breadcrumbs">
-        <a href="/"><i class="las la-home"></i></a>
-        <a href="#" class="active">Catalogo</a>
-      </div>
+  <!-- breadcrumbs -->
+  <div class="container">
+    <div class="breadcrumbs">
+      <a href="/"><i class="las la-home"></i></a>
+      <a href="#" class="active">Catalogo</a>
     </div>
-  
-    <!-- shop list view -->
-    <div class="shop_wrap section_padding_b">
-      <div class="container">
-        <div class="row">
-          <!-- Columna de filtros -->
-          <div class="col-xl-3 col-lg-4 position-relative">
-            <div class="filter_box py-3 px-3 shadow_sm">
-              <div class="close_filter d-block d-lg-none"><i class="las la-times"></i></div>
-              
-              <!-- Subcategorías (ejemplo) -->
-              <div id="columna_categorias" class="shop_filter">
-                <h4 class="filter_list">Categorias</h4>
-                <div class="filter_list">
-                  <!-- Ejemplo de v-for si manejas un array “categorias_hijo” -->
-                  <div
-                    class="d-flex align-items-center"
-                    v-for="(dato, index) in categorias_alfabetica"
-                   
-                   
-                  >
-                    <label
-                      style="cursor: pointer;"
-                      class="p-2"
-                      :class="{ 'selected': selectedIndex === index }"
-                      @click="seleccionarCategoria(dato, index)"
-                    >
-                      - {{ dato.categoria }}
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-  
-          <!-- Columna principal donde se listan los productos -->
-          <div class="col-xl-9 col-lg-8">
-            <div class="d-flex align-items-center">
-              <div class="view_filter d-flex align-items-center ms-auto">
-                <a href="shop-list.html">
-                  <div class="view_icon active"><i class="las la-list-ul"></i></div>
-                </a>
-              </div>
-            </div>
-  
-            <div class="shop_products">
-              <div class="list_view_products">
-                <!-- Itera SOLO los productosPaginados -->
+  </div>
+
+  <!-- shop list view -->
+  <div class="shop_wrap section_padding_b">
+    <div class="container">
+      <div class="row">
+        <!-- Columna de filtros -->
+        <div class="col-xl-3 col-lg-4 position-relative">
+          <div class="filter_box py-3 px-3 shadow_sm">
+            <div class="close_filter d-block d-lg-none"><i class="las la-times"></i></div>
+            
+            <!-- Subcategorías (ejemplo) -->
+            <div id="columna_categorias" class="shop_filter">
+              <h4 class="filter_list">Categorias</h4>
+              <div class="filter_list">
+                <!-- Ejemplo de v-for si manejas un array “categorias_hijo” -->
                 <div
-                  class="single_list_product"
-                  v-for="(dato, index) in productosPaginados"
+                  class="d-flex align-items-center"
+                  v-for="(dato, index) in categorias_alfabetica"
                   :key="index"
                 >
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="list_product_img">
-                        <div class="lp_img">
-                          <a >
-                            <img loading="lazy" :src="dato.imagen" alt="product" />
-                          </a>
-                        </div>
+                  <label
+                    style="cursor: pointer;"
+                    class="p-2"
+                    :class="{ 'selected': selectedIndex === index }"
+                    @click="seleccionarCategoria(dato, index)"
+                  >
+                    - {{ dato.categoria }}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna principal donde se listan los productos -->
+        <div class="col-xl-9 col-lg-8">
+          <div class="d-flex align-items-center">
+            <div class="view_filter d-flex align-items-center ms-auto">
+              <a href="shop-list.html">
+                <div class="view_icon active"><i class="las la-list-ul"></i></div>
+              </a>
+            </div>
+          </div>
+
+          <div class="shop_products">
+            <div class="list_view_products">
+              <!-- Itera SOLO los productosPaginados -->
+              <div
+                class="single_list_product"
+                v-for="(dato, index) in productosPaginados"
+                :key="index"
+              >
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="list_product_img">
+                      <div class="lp_img">
+                        <a>
+                          <img loading="lazy" :src="dato.imagen" alt="product" />
+                        </a>
                       </div>
                     </div>
-                    <div class="col-md-8">
-                      <div class="product_content">
-                     <RouterLink 
-                    :to="{ name: 'producto', query: { producto: dato.id } }" 
-                    class="format_titulo"
-                    >
-                    <h5>{{ dato.titulo }}</h5>
-                    </RouterLink>
-                        
-                        <div class="ratprice">
-                          <div class="price">
-                            <span class="org_price">
-                              $ {{
-                                Math.round(parseFloat(dato.pt1))
-                                  .toString()
-                                  .replace(/\./g, ',')
-                                  .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-                              }}
-                            </span>
-                          </div>
-                          <!-- rating  -->
-                          <div class="rating">
-                            <div class="d-flex align-items-center justify-content-start">
-                              <p>
-                                <span class="text-semibold">SKU:</span> {{ dato.idpro }}
-                              </p>
-                            </div>
-                          </div>
-                          <div class="rating">
-                            <div class="d-flex align-items-center justify-content-start">
-                              <p>
-                                <span class="text-semibold">
-                                  Disponibilidad en:
-                                 
-                                    <span class="text-green" > {{ dato.existencia }} </span>
-                                
-                                </span>
-                              </p>
-                            </div>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="product_content">
+                      <RouterLink 
+                        :to="{ name: 'producto', query: { producto: dato.id } }" 
+                        class="format_titulo"
+                      >
+                        <h5>{{ dato.titulo }}</h5>
+                      </RouterLink>
+                      
+                      <div class="ratprice">
+                        <div class="price">
+                          <span class="org_price">
+                            $ {{
+                              Math.round(parseFloat(dato.pt1))
+                                .toString()
+                                .replace(/\./g, ',')
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                            }}
+                          </span>
+                        </div>
+                        <!-- rating  -->
+                        <div class="rating">
+                          <div class="d-flex align-items-center justify-content-start">
+                            <p>
+                              <span class="text-semibold">SKU:</span> {{ dato.idpro }}
+                            </p>
                           </div>
                         </div>
-  
-                        <div class="product_list_btns">
-                           
-                            <RouterLink
-                            :to="{ name: 'producto', query: { producto: dato.id } }"
-                            class="default_btn me-sm-3 me-2 px-2 px-lg-4"
-                            @click="buscar_productos(dato.id)"
-                            >
-                            <i class="icon-cart me-2"></i> Al Carrito
-                            </RouterLink>
-                          <a
-                            style="cursor: pointer;"
-                            class="default_btn second px-3 px-ms-4"
-                            @click="cargar_me_gusta(dato.id, dato.titulo, dato.pt1, dato.imagen, 'Agregado_ppl', dato.idpro)"
-                            ><i class="icon-heart me-2"></i>Me Gusta
-                          </a>
+                        <div class="rating">
+                          <div class="d-flex align-items-center justify-content-start">
+                            <p>
+                              <span class="text-semibold">
+                                Disponibilidad en:
+                                <span class="text-green">{{ dato.existencia }}</span>
+                              </span>
+                            </p>
+                          </div>
                         </div>
+                      </div>
+
+                      <div class="product_list_btns">
+                        <RouterLink
+                          :to="{ name: 'producto', query: { producto: dato.id } }"
+                          class="default_btn me-sm-3 me-2 px-2 px-lg-4"
+                          @click="buscar_productos(dato.id)"
+                        >
+                          <i class="icon-cart me-2"></i> Al Carrito
+                        </RouterLink>
+                        <a
+                          style="cursor: pointer;"
+                          class="default_btn second px-3 px-ms-4"
+                          @click="cargar_me_gusta(dato.id, dato.titulo, dato.pt1, dato.imagen, 'Agregado_ppl', dato.idpro)"
+                        ><i class="icon-heart me-2"></i>Me Gusta</a>
                       </div>
                     </div>
                   </div>
                 </div>
-                <!-- fin v-for de productosPaginados -->
               </div>
+              <!-- fin v-for de productosPaginados -->
             </div>
-  
-            <!-- Paginación -->
-            <div class="pagination_container">
-              <div class="pagination_wrp collapsed">
-                <!-- Genera elementos de paginación desde 1 hasta cant_pagina -->
-                <div
-                  class="single_paginat"
-                  :class="{ active: i === pagina }"
-                  v-for="i in cant_pagina"
-                  :key="i"
-                  @click="paginar(i)"
-                >
-                  {{ i }}
-                </div>
+          </div>
+
+          <!-- Paginación -->
+          <div class="pagination_container">
+            <div class="pagination_wrp" :class="{ expanded: showAllPages }">
+              <!-- Botón para retroceder una página -->
+              <button 
+                class="pagination_button" 
+                :disabled="pagina === 1" 
+                @click="paginar(pagina - 1)">
+                &lt;
+              </button>
+
+              <!-- Genera elementos de paginación desde 1 hasta cant_pagina -->
+              <div
+                class="single_paginat"
+                :class="{ active: i === pagina }"
+                v-for="i in (showAllPages ? cant_pagina : Math.min(10, cant_pagina))"
+                :key="i"
+                @click="paginar(i)"
+              >
+                {{ i }}
               </div>
-              <!-- Botón para expandir / colapsar la paginación (opcional) -->
-              <button class="toggle_button" onclick="togglePagination()">Ver más</button>
+
+              <!-- Botón para avanzar una página -->
+              <button 
+                class="pagination_button" 
+                :disabled="pagina === cant_pagina" 
+                @click="paginar(pagina + 1)">
+                &gt;
+              </button>
+
+              <!-- Botón para ver todas las páginas -->
+              <button 
+                class="pagination_button" 
+                v-if="!showAllPages && cant_pagina > 10" 
+                @click="showAllPages = true">
+                >>
+              </button>
+            </div>
+            
+            <!-- Botón para expandir / colapsar la paginación (opcional) -->
+            <button class="toggle_button" @click="togglePagination">
+              {{ showAllPages ? 'Ver menos' : 'Ver más' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer area -->
+
+  <!-- product quick view -->
+  <div class="product_quickview">
+    <div class="prodquick_wrap position-relative">
+      <div class="close_quickview" @click="closeQuickview">
+        <i class="las la-times"></i>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <!-- product quick view slider image  -->
+          <div class="product_view_slider">
+            <div class="single_viewslider">
+              <img loading="lazy" :src="imagenMostrada" alt="product" />
+            </div>
+          </div>
+          
+          <!-- product quick view nav  -->
+          <div class="product_viewslid_nav" style="display: flex;">
+            <div class="single_viewslid_nav" v-if="producto_mostrar && producto_mostrar.lista_imagenes" style="display: flex;">
+              <img loading="lazy" :src="producto_mostrar.imagen" alt="product" @click="cambiarImagen(producto_mostrar.imagen)" />
+              <template v-for="(url, index) in (producto_mostrar.lista_imagenes || '').split(',')" :key="index">
+                <img loading="lazy" :src="url.trim()" alt="product" @click="cambiarImagen(url.trim())" />
+              </template>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- footer area -->
-
-        <!-- product quick view -->
-        <div class="product_quickview">
-        <div class="prodquick_wrap position-relative">
-            <div class="close_quickview" @click="closeQuickview">
-                <i class="las la-times"></i>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <!-- product quick view slider image  -->
-                     <div class="product_view_slider">
-                       <div class="single_viewslider">
-                            <img loading="lazy"  :src=imagenMostrada   alt="product">
-                        </div>
-                       
-                    </div>
-                    
-                    
-                     <!-- product quick view nav  -->
-                    <div class="product_viewslid_nav" style="display: flex;">
-                
-                         <div class="single_viewslid_nav" v-if="producto_mostrar && producto_mostrar.lista_imagenes" style="display: flex;">
-                              <img loading="lazy" :src="producto_mostrar.imagen" alt="product"   @click="cambiarImagen(producto_mostrar.imagen)"> 
-                          <template v-for="(url, index) in (producto_mostrar.lista_imagenes || '').split(',')" :key="index">
-                            <img loading="lazy" :src="url.trim()" alt="product"  @click="cambiarImagen(url.trim())">
-                          </template>
-                          
-                         
-                  </div>
-                        
-                   
-                </div>
-                </div>
-
-                
-            </div>
-            </div>
-        </div>
-
-        
-     
+  </div>
 </template>
 
-
-
-
-<style>
+<style scoped>
 .selected {
-background-color: #f0f0f0;
-border: 1px solid #007bff;
-border-radius: 4px;
-}
-   .tiktok {
-content: url('/assets/tik-tok_6422207.svg');
-display: inline-block;
-width: 4px;
-height: 4px;
-cursor:pointer;
+  background-color: #f0f0f0;
+  border: 1px solid #007bff;
+  border-radius: 4px;
 }
 .pagination_container {
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .pagination_wrp {
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-overflow: hidden;
-max-height: 40px; /* Muestra solo una fila de botones (aproximadamente 10) */
-transition: max-height 0.3s ease-in-out;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow: hidden;
+  max-height: 40px; /* Muestra solo una fila de botones (aproximadamente 10) */
+  transition: max-height 0.3s ease-in-out;
 }
 
 .pagination_wrp.collapsed {
-max-height: 40px; /* Altura inicial para la primera fila */
+  max-height: 40px; /* Altura inicial para la primera fila */
 }
 
 .pagination_wrp.expanded {
-max-height: 500px; /* Ajusta este valor según la cantidad de botones que quieres mostrar */
+  max-height: 500px; /* Ajusta este valor según la cantidad de botones que quieres mostrar */
 }
 
 .single_paginat {
-margin: 5px;
-padding: 5px 10px;
-border: 1px solid #000000;
-border-radius: 3px;
-cursor: pointer;
-text-align: center;
-background-color: #f8f9fa;
-transition: background-color 0.3s;
+  margin: 5px;
+  padding: 5px 10px;
+  border: 1px solid #000000;
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: center;
+  background-color: #f8f9fa;
+  transition: background-color 0.3s;
 }
 
 .single_paginat:hover {
-background-color: #c4daff;
-color: white;
+  background-color: #c4daff;
+  color: white;
+}
+
+.pagination_button {
+  padding: 5px 10px;
+  margin: 2px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+}
+
+.pagination_button:disabled {
+  cursor: not-allowed;
+  color: #ccc;
 }
 
 .toggle_button {
-margin-top: 10px;
-padding: 5px 15px;
-background-color: #000b74;
-color: white;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-transition: background-color 0.3s ease;
+  margin-top: 10px;
+  padding: 5px 15px;
+  background-color: #000b74;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .toggle_button:hover {
-background-color: #c4daff;
+  background-color: #c4daff;
 }
-
-
 </style>
