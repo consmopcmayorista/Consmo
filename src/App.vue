@@ -358,9 +358,8 @@ provide('categorias_alfabetica', categorias_alfabetica);
 
 <template>
   <TopHeader />
+  <div class="spacer"></div> <!-- Espacio en blanco debajo del header -->
   <header>
-
-    <main class="main-content">
 
     <div class="container">
       <div class="d-flex align-items-center justify-content-sm-between">
@@ -526,7 +525,6 @@ provide('categorias_alfabetica', categorias_alfabetica);
       </div>
     </div>
   </div>
-</main>
 
 
     <!-- navbar -->
@@ -842,10 +840,8 @@ provide('categorias_alfabetica', categorias_alfabetica);
   justify-content: space-between;
   align-items: center;
 }
-/* Ajusta este valor según la altura real del top-header */
-.main-content {
-  padding-top: 50px; /* Si el header es más alto, aumenta este valor */
+.spacer {
+  height: 50px; /* Ajusta según la altura de tu header */
 }
-
 
 </style>
