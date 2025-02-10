@@ -349,6 +349,11 @@ export default {
   width: 100%;
 }
 
+.search_input {
+  position: relative;
+  width: 100%;
+}
+
 .search_input input {
   width: 100%;
   padding: 15px;
@@ -358,17 +363,26 @@ export default {
   font-size: 18px;
 }
 
+.search_submit {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .search_submit button {
-  background: none;
+  background: #007bff;
   border: none;
   cursor: pointer;
-  color: #007bff;
-  font-size: 24px;
+  color: white;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 4px;
 }
 
 .search_result_product {
   margin-top: 20px;
-  max-height: 300px; /* Ajusta el tamaño del contenedor */
+  max-height: 500px; /* Ajusta el tamaño del contenedor */
   overflow-y: auto;
 }
 
