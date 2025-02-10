@@ -27,6 +27,7 @@
     <!-- Modal de búsqueda -->
     <div v-if="isBuscarModalOpen" class="buscar-modal">
       <div class="buscar-modal-content">
+        <button class="close-button" @click="toggleBuscarModal">✖️</button>
         <!-- search wrapper  -->
         <div class="search_wrap">
           <!-- search input box  -->
@@ -50,7 +51,7 @@
                 @blur="ocultarSugerencias"
               />
             </div>
-            <div class="search_subimt">
+            <div class="search_submit">
               <RouterLink
                 :to="{ name: 'catalogo_cat', query: { categoria: categoria, busqueda: busqueda } }"
                 @click="ocultarSugerencias"
@@ -101,6 +102,10 @@
 </template>
 
 <script>
+import { ref, onMounted, provide, computed } from 'vue'
+import { useRouter } from "vue-router"
+import axios from 'axios'
+
 export default {
   data() {
     return {
@@ -119,11 +124,94 @@ export default {
     toggleBuscarModal() {
       this.isBuscarModalOpen = !this.isBuscarModalOpen;
     },
-    filtrarProductos() {
-      // Implementa tu lógica de filtrado aquí
+    async filtrarProductos() {
+      // Si la búsqueda es de 2 caracteres o menos, vacía y retorna
+      if (this.busqueda.length <= 2) {
+        this.producto_buscado = []
+        return
+      }
+
+      try {
+        // Armar la URL con la búsqueda y el id_empresa
+        const url = `https://whatsapp-nube.com/api_web/api_web_catalogo_new_producto_varios.php?texto=${this.busqueda}&id=24`
+        console.log("Consultando:", url)
+
+        // Petición a la API
+        const response = await axios.get(url)
+        // Se asume que la API retorna { productos: [...] }
+        const productos = response.data.productos || []
+        console.log("Productos recibidos:", productos)
+
+        // Convertir la búsqueda a minúsculas
+        const busquedaMinus = this.busqueda.toLowerCase()
+        // Separar las palabras de la búsqueda (ej: "casa nueva" => ["casa", "nueva"])
+        const palabrasClave = busquedaMinus.split(" ").filter(Boolean)
+
+        // Coincidencias EXACTAS: si en título o en idpro se incluye la frase completa
+        const coincidenciasExactas = productos.filter(p => {
+          const tituloLower = p.titulo ? p.titulo.toLowerCase() : ""
+          const idproLower = p.idpro ? p.idpro.toLowerCase() : ""
+          return (
+            tituloLower.includes(busquedaMinus) ||
+            idproLower.includes(busquedaMinus)
+          )
+        })
+
+        // Coincidencias PARCIALES: cada palabra debe aparecer en alguno de los dos campos,
+        // pero NO es coincidencia exacta de la frase completa
+        const coincidenciasParciales = productos.filter(p => {
+          const tituloLower = p.titulo ? p.titulo.toLowerCase() : ""
+          const idproLower = p.idpro ? p.idpro.toLowerCase() : ""
+          // Cada palabra debe aparecer en titulo o en idpro
+          const todasAparecen = palabrasClave.every(pal =>
+            tituloLower.includes(pal) || idproLower.includes(pal)
+          )
+          // Se excluyen los que ya están en exactas
+          return todasAparecen && !coincidenciasExactas.includes(p)
+        })
+
+        // Combinar resultados, insertando un separador si hay ambas coincidencias
+        let combinado
+        if (coincidenciasParciales.length > 0 && coincidenciasExactas.length > 0) {
+          combinado = [
+            ...coincidenciasExactas,
+            { separator: true },
+            ...coincidenciasParciales
+          ]
+        } else {
+          combinado = [...coincidenciasExactas, ...coincidenciasParciales]
+        }
+
+        // Elimina duplicados por id (función que debes tener implementada)
+        this.producto_buscado = this.removeDuplicatesById(combinado)
+
+      } catch (error) {
+        console.error("Error al obtener productos:", error)
+      }
     },
     ocultarSugerencias() {
-      // Implementa tu lógica para ocultar sugerencias aquí
+      // Esperamos un micro-tick para ver si el usuario clicó en un resultado
+      // con un pequeño setTimeout
+      setTimeout(() => {
+        this.producto_buscado = []
+      }, 200)
+    },
+    removeDuplicatesById(list) {
+      const seen = new Set()
+      return list.filter(item => {
+        // Si es el separador especial `{ separator: true }`, déjalo
+        if (item.separator) return true
+
+        // Si no tiene `id`, lo dejamos pasar 
+        if (!item.id) return true
+
+        if (seen.has(item.id)) {
+          return false
+        } else {
+          seen.add(item.id)
+          return true
+        }
+      })
     }
   }
 };
@@ -252,5 +340,79 @@ export default {
   border-radius: 10px;
   width: 80%;
   max-width: 500px;
+  max-height: 80%; /* Evita que el modal sobresalga de la pantalla */
+  overflow-y: auto; /* Permite el scroll si el contenido es muy grande */
+}
+
+/* Botón para cerrar el modal */
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.search_wrap {
+  width: 100%;
+}
+
+.search_input input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search_category select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search_submit button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search_result_product {
+  margin-top: 20px;
+}
+
+.single_sresult_product {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  text-decoration: none;
+  color: black;
+}
+
+.single_sresult_product:hover {
+  background-color: #f1f1f1;
+}
+
+.sresult_img img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.sresult_content {
+  flex: 1;
+}
+
+.price {
+  color: #007bff;
 }
 </style>
