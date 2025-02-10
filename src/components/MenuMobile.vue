@@ -13,13 +13,14 @@
       <ul>
         <li><a href="/">🏠 Inicio</a></li>
         <li><a href="/catalogo">📦 Catalogo</a></li>
-        <li>
-          <button @click="toggleBuscarModal">🔍 Buscar</button>
-        </li>
         <li><a href="/calificanos">⭐ Califícanos</a></li>
         <li><a href="/foro">💬 Foro</a></li>
         <li><a href="/conocenos">ℹ️ Conócenos</a></li>
         <li><a href="/encuentranos">📍 Encuéntranos</a></li>
+        <!-- Nueva sección Buscar -->
+        <li>
+          <button @click="toggleBuscarModal">🔍 Buscar</button>
+        </li>
       </ul>
     </nav>
 
@@ -31,6 +32,14 @@
         <div class="search_wrap">
           <!-- search input box  -->
           <div class="search d-flex">
+            <div class="search_category">
+              <select v-model="categoria">
+                <option disabled value="">Categorias</option>
+                <option v-for="dato in categorias_alfabetica" :key="dato.categoria" :value="dato.categoria">
+                  {{ dato.categoria }}
+                </option>
+              </select>
+            </div>
             <div class="search_input">
               <input
                 type="text"
@@ -44,12 +53,12 @@
             </div>
             <div class="search_submit">
               <RouterLink
-                :to="{ name: 'catalogo_cat', query: { busqueda: busqueda } }"
+                :to="{ name: 'catalogo_cat', query: { categoria: categoria, busqueda: busqueda } }"
                 @click="ocultarSugerencias"
               >
                 <button>
                   <span class="icon">
-                    <span>Buscar</span>
+                    <span class="d-none d-sm-inline-block">Buscar</span>
                     <i class="las la-search"></i>
                   </span>
                 </button>
@@ -93,104 +102,117 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, onMounted, provide, computed } from 'vue'
 import { useRouter } from "vue-router"
 import axios from 'axios'
 
 export default {
-  setup() {
-    const isMenuOpen = ref(false);
-    const isBuscarModalOpen = ref(false);
-    const busqueda = ref('');
-    const producto_buscado = ref([]);
-
-    const toggleMenu = () => {
-      isMenuOpen.value = !isMenuOpen.value;
+  data() {
+    return {
+      isMenuOpen: false,
+      isBuscarModalOpen: false,
+      categoria: '',
+      busqueda: '',
+      categorias_alfabetica: [], // Suponiendo que tienes esta data
+      producto_buscado: [] // Suponiendo que tienes esta data
     };
-
-    const toggleBuscarModal = () => {
-      isBuscarModalOpen.value = !isBuscarModalOpen.value;
-    };
-
-    const filtrarProductos = async () => {
-      if (busqueda.value.length <= 2) {
-        producto_buscado.value = [];
-        return;
+  },
+  methods: {
+    toggleMenu() {
+      this.isMenuOpen = !this.isMenuOpen;
+    },
+    toggleBuscarModal() {
+      this.isBuscarModalOpen = !this.isBuscarModalOpen;
+    },
+    async filtrarProductos() {
+      // Si la búsqueda es de 2 caracteres o menos, vacía y retorna
+      if (this.busqueda.length <= 2) {
+        this.producto_buscado = []
+        return
       }
 
       try {
-        const url = `https://whatsapp-nube.com/api_web/api_web_catalogo_new_producto_varios.php?texto=${busqueda.value}&id=24`;
-        const response = await axios.get(url);
-        const productos = response.data.productos || [];
-        const busquedaMinus = busqueda.value.toLowerCase();
-        const palabrasClave = busquedaMinus.split(" ").filter(Boolean);
+        // Armar la URL con la búsqueda y el id_empresa
+        const url = `https://whatsapp-nube.com/api_web/api_web_catalogo_new_producto_varios.php?texto=${this.busqueda}&id=24`
+        console.log("Consultando:", url)
 
+        // Petición a la API
+        const response = await axios.get(url)
+        // Se asume que la API retorna { productos: [...] }
+        const productos = response.data.productos || []
+        console.log("Productos recibidos:", productos)
+
+        // Convertir la búsqueda a minúsculas
+        const busquedaMinus = this.busqueda.toLowerCase()
+        // Separar las palabras de la búsqueda (ej: "casa nueva" => ["casa", "nueva"])
+        const palabrasClave = busquedaMinus.split(" ").filter(Boolean)
+
+        // Coincidencias EXACTAS: si en título o en idpro se incluye la frase completa
         const coincidenciasExactas = productos.filter(p => {
-          const tituloLower = p.titulo ? p.titulo.toLowerCase() : "";
-          const idproLower = p.idpro ? p.idpro.toLowerCase() : "";
+          const tituloLower = p.titulo ? p.titulo.toLowerCase() : ""
+          const idproLower = p.idpro ? p.idpro.toLowerCase() : ""
           return (
             tituloLower.includes(busquedaMinus) ||
             idproLower.includes(busquedaMinus)
-          );
-        });
+          )
+        })
 
+        // Coincidencias PARCIALES: cada palabra debe aparecer en alguno de los dos campos,
+        // pero NO es coincidencia exacta de la frase completa
         const coincidenciasParciales = productos.filter(p => {
-          const tituloLower = p.titulo ? p.titulo.toLowerCase() : "";
-          const idproLower = p.idpro ? p.idpro.toLowerCase() : "";
+          const tituloLower = p.titulo ? p.titulo.toLowerCase() : ""
+          const idproLower = p.idpro ? p.idpro.toLowerCase() : ""
+          // Cada palabra debe aparecer en titulo o en idpro
           const todasAparecen = palabrasClave.every(pal =>
             tituloLower.includes(pal) || idproLower.includes(pal)
-          );
-          return todasAparecen && !coincidenciasExactas.includes(p);
-        });
+          )
+          // Se excluyen los que ya están en exactas
+          return todasAparecen && !coincidenciasExactas.includes(p)
+        })
 
-        let combinado;
+        // Combinar resultados, insertando un separador si hay ambas coincidencias
+        let combinado
         if (coincidenciasParciales.length > 0 && coincidenciasExactas.length > 0) {
           combinado = [
             ...coincidenciasExactas,
             { separator: true },
             ...coincidenciasParciales
-          ];
+          ]
         } else {
-          combinado = [...coincidenciasExactas, ...coincidenciasParciales];
+          combinado = [...coincidenciasExactas, ...coincidenciasParciales]
         }
 
-        producto_buscado.value = removeDuplicatesById(combinado);
+        // Elimina duplicados por id (función que debes tener implementada)
+        this.producto_buscado = this.removeDuplicatesById(combinado)
 
       } catch (error) {
-        console.error("Error al obtener productos:", error);
+        console.error("Error al obtener productos:", error)
       }
-    };
-
-    const ocultarSugerencias = () => {
+    },
+    ocultarSugerencias() {
+      // Esperamos un micro-tick para ver si el usuario clicó en un resultado
+      // con un pequeño setTimeout
       setTimeout(() => {
-        producto_buscado.value = [];
-      }, 200);
-    };
-
-    const removeDuplicatesById = (list) => {
-      const seen = new Set();
+        this.producto_buscado = []
+      }, 200)
+    },
+    removeDuplicatesById(list) {
+      const seen = new Set()
       return list.filter(item => {
-        if (item.separator) return true;
-        if (!item.id) return true;
-        if (seen.has(item.id)) {
-          return false;
-        } else {
-          seen.add(item.id);
-          return true;
-        }
-      });
-    };
+        // Si es el separador especial `{ separator: true }`, déjalo
+        if (item.separator) return true
 
-    return {
-      isMenuOpen,
-      isBuscarModalOpen,
-      busqueda,
-      producto_buscado,
-      toggleMenu,
-      toggleBuscarModal,
-      filtrarProductos,
-      ocultarSugerencias
-    };
+        // Si no tiene `id`, lo dejamos pasar 
+        if (!item.id) return true
+
+        if (seen.has(item.id)) {
+          return false
+        } else {
+          seen.add(item.id)
+          return true
+        }
+      })
+    }
   }
 };
 </script>
@@ -247,48 +269,55 @@ export default {
   bottom: -100%;
   left: 0;
   width: 100%;
-  height: 60%;
-  background: white;
+  height: 50%;
+  background: linear-gradient(135deg, #007bff, #6610f2);
   box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
   transition: bottom 0.4s ease-in-out;
   z-index: 1000;
   border-radius: 20px 20px 0 0;
   padding-top: 20px;
   overflow-y: auto; /* habilitacion de scroll si hay varias */
+  max-height: 50%;
 }
 
+/* mostrar menu */
 .mobile-menu.open {
   bottom: 0;
 }
 
+/* estilos para scroll */
+.mobile-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mobile-menu::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+}
+
 .mobile-menu ul {
   list-style-type: none;
-  padding: 0;
+  padding: 20px;
   margin: 0;
   text-align: center;
 }
 
 .mobile-menu li {
   padding: 15px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.mobile-menu a,
-.mobile-menu button {
+.mobile-menu a {
   text-decoration: none;
-  color: #007bff;
+  color: white;
   font-size: 20px;
   font-weight: bold;
   display: block;
   transition: color 0.3s ease;
-  background: none;
-  border: none;
-  cursor: pointer;
 }
 
-.mobile-menu a:hover,
-.mobile-menu button:hover {
-  color: #0056b3;
+.mobile-menu a:hover {
+  color: #ffd700;
 }
 
 /* modal de búsqueda */
@@ -309,11 +338,10 @@ export default {
   background: white;
   padding: 20px;
   border-radius: 10px;
-  width: 90%;
+  width: 80%;
   max-width: 500px;
   max-height: 80%; /* Evita que el modal sobresalga de la pantalla */
   overflow-y: auto; /* Permite el scroll si el contenido es muy grande */
-  position: relative;
 }
 
 /* Botón para cerrar el modal */
@@ -325,7 +353,6 @@ export default {
   top: 10px;
   right: 10px;
   cursor: pointer;
-  color: #007bff;
 }
 
 .search_wrap {
@@ -334,22 +361,28 @@ export default {
 
 .search_input input {
   width: 100%;
-  padding: 15px;
+  padding: 10px;
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 18px;
+}
+
+.search_category select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .search_submit button {
   width: 100%;
-  padding: 15px;
+  padding: 10px;
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 18px;
 }
 
 .search_result_product {
