@@ -12,8 +12,8 @@
     <nav :class="{'mobile-menu': true, 'open': isMenuOpen}">
       <ul>
         <li><a href="/">🏠 Inicio</a></li>
-        <li>
-          <button @click="toggleBuscarModal" class="centered-button">🔍 Buscar</button>
+        <li class="centered-list-item">
+          <button @click="toggleBuscarModal">🔍 Buscar</button>
         </li>
         <li><a href="/catalogo">📦 Catalogo</a></li>
         <li><a href="/calificanos">⭐ Califícanos</a></li>
@@ -303,7 +303,7 @@ export default {
   color: #0056b3;
 }
 
-.centered-button {
+.centered-list-item {
   display: flex;
   justify-content: center;
   align-items: center;
