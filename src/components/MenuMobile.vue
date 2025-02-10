@@ -98,111 +98,99 @@ import { useRouter } from "vue-router"
 import axios from 'axios'
 
 export default {
-  data() {
-    return {
-      isMenuOpen: false,
-      isBuscarModalOpen: false,
-      busqueda: '',
-      categorias_alfabetica: [], // Suponiendo que tienes esta data
-      producto_buscado: [] // Suponiendo que tienes esta data
+  setup() {
+    const isMenuOpen = ref(false);
+    const isBuscarModalOpen = ref(false);
+    const busqueda = ref('');
+    const producto_buscado = ref([]);
+
+    const toggleMenu = () => {
+      isMenuOpen.value = !isMenuOpen.value;
     };
-  },
-  methods: {
-    toggleMenu() {
-      this.isMenuOpen = !this.isMenuOpen;
-    },
-    toggleBuscarModal() {
-      this.isBuscarModalOpen = !this.isBuscarModalOpen;
-    },
-    async filtrarProductos() {
-      // Si la búsqueda es de 2 caracteres o menos, vacía y retorna
-      if (this.busqueda.length <= 2) {
-        this.producto_buscado = []
-        return
+
+    const toggleBuscarModal = () => {
+      isBuscarModalOpen.value = !isBuscarModalOpen.value;
+    };
+
+    const filtrarProductos = async () => {
+      if (busqueda.value.length <= 2) {
+        producto_buscado.value = [];
+        return;
       }
 
       try {
-        // Armar la URL con la búsqueda y el id_empresa
-        const url = `https://whatsapp-nube.com/api_web/api_web_catalogo_new_producto_varios.php?texto=${this.busqueda}&id=24`
-        console.log("Consultando:", url)
+        const url = `https://whatsapp-nube.com/api_web/api_web_catalogo_new_producto_varios.php?texto=${busqueda.value}&id=24`;
+        const response = await axios.get(url);
+        const productos = response.data.productos || [];
+        const busquedaMinus = busqueda.value.toLowerCase();
+        const palabrasClave = busquedaMinus.split(" ").filter(Boolean);
 
-        // Petición a la API
-        const response = await axios.get(url)
-        // Se asume que la API retorna { productos: [...] }
-        const productos = response.data.productos || []
-        console.log("Productos recibidos:", productos)
-
-        // Convertir la búsqueda a minúsculas
-        const busquedaMinus = this.busqueda.toLowerCase()
-        // Separar las palabras de la búsqueda (ej: "casa nueva" => ["casa", "nueva"])
-        const palabrasClave = busquedaMinus.split(" ").filter(Boolean)
-
-        // Coincidencias EXACTAS: si en título o en idpro se incluye la frase completa
         const coincidenciasExactas = productos.filter(p => {
-          const tituloLower = p.titulo ? p.titulo.toLowerCase() : ""
-          const idproLower = p.idpro ? p.idpro.toLowerCase() : ""
+          const tituloLower = p.titulo ? p.titulo.toLowerCase() : "";
+          const idproLower = p.idpro ? p.idpro.toLowerCase() : "";
           return (
             tituloLower.includes(busquedaMinus) ||
             idproLower.includes(busquedaMinus)
-          )
-        })
+          );
+        });
 
-        // Coincidencias PARCIALES: cada palabra debe aparecer en alguno de los dos campos,
-        // pero NO es coincidencia exacta de la frase completa
         const coincidenciasParciales = productos.filter(p => {
-          const tituloLower = p.titulo ? p.titulo.toLowerCase() : ""
-          const idproLower = p.idpro ? p.idpro.toLowerCase() : ""
-          // Cada palabra debe aparecer en titulo o en idpro
+          const tituloLower = p.titulo ? p.titulo.toLowerCase() : "";
+          const idproLower = p.idpro ? p.idpro.toLowerCase() : "";
           const todasAparecen = palabrasClave.every(pal =>
             tituloLower.includes(pal) || idproLower.includes(pal)
-          )
-          // Se excluyen los que ya están en exactas
-          return todasAparecen && !coincidenciasExactas.includes(p)
-        })
+          );
+          return todasAparecen && !coincidenciasExactas.includes(p);
+        });
 
-        // Combinar resultados, insertando un separador si hay ambas coincidencias
-        let combinado
+        let combinado;
         if (coincidenciasParciales.length > 0 && coincidenciasExactas.length > 0) {
           combinado = [
             ...coincidenciasExactas,
             { separator: true },
             ...coincidenciasParciales
-          ]
+          ];
         } else {
-          combinado = [...coincidenciasExactas, ...coincidenciasParciales]
+          combinado = [...coincidenciasExactas, ...coincidenciasParciales];
         }
 
-        // Elimina duplicados por id (función que debes tener implementada)
-        this.producto_buscado = this.removeDuplicatesById(combinado)
+        producto_buscado.value = removeDuplicatesById(combinado);
 
       } catch (error) {
-        console.error("Error al obtener productos:", error)
+        console.error("Error al obtener productos:", error);
       }
-    },
-    ocultarSugerencias() {
-      // Esperamos un micro-tick para ver si el usuario clicó en un resultado
-      // con un pequeño setTimeout
+    };
+
+    const ocultarSugerencias = () => {
       setTimeout(() => {
-        this.producto_buscado = []
-      }, 200)
-    },
-    removeDuplicatesById(list) {
-      const seen = new Set()
+        producto_buscado.value = [];
+      }, 200);
+    };
+
+    const removeDuplicatesById = (list) => {
+      const seen = new Set();
       return list.filter(item => {
-        // Si es el separador especial `{ separator: true }`, déjalo
-        if (item.separator) return true
-
-        // Si no tiene `id`, lo dejamos pasar 
-        if (!item.id) return true
-
+        if (item.separator) return true;
+        if (!item.id) return true;
         if (seen.has(item.id)) {
-          return false
+          return false;
         } else {
-          seen.add(item.id)
-          return true
+          seen.add(item.id);
+          return true;
         }
-      })
-    }
+      });
+    };
+
+    return {
+      isMenuOpen,
+      isBuscarModalOpen,
+      busqueda,
+      producto_buscado,
+      toggleMenu,
+      toggleBuscarModal,
+      filtrarProductos,
+      ocultarSugerencias
+    };
   }
 };
 </script>
@@ -267,6 +255,10 @@ export default {
   border-radius: 20px 20px 0 0;
   padding-top: 20px;
   overflow-y: auto; /* habilitacion de scroll si hay varias */
+}
+
+.mobile-menu.open {
+  bottom: 0;
 }
 
 .mobile-menu ul {
