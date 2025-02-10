@@ -287,7 +287,7 @@ export default {
 .mobile-menu a,
 .mobile-menu button {
   text-decoration: none;
-  color: #007bff;
+  color: #ffffff;
   font-size: 20px;
   font-weight: bold;
   display: block;

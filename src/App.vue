@@ -10,6 +10,7 @@ import TopHeader from './components/TopHeader.vue'
 import RedesComp from './components/RedesComp.vue'
 import FooterInteractivo from "./components/footer.vue"
 import MenuMobile from './components/MenuMobile.vue'
+import CarritoMobile from './components/CarritoMobile.vue'
 
 /* ===============================
    VARIABLES REACTIVAS
@@ -357,6 +358,7 @@ provide('categorias_alfabetica', categorias_alfabetica);
 </script>
 
 <template>
+  <TopHeader />
   <header>
 
     <div class="container">
@@ -583,6 +585,8 @@ provide('categorias_alfabetica', categorias_alfabetica);
         </div>
       </div>
     </div>
+
+    <CarritoMobile />
 
  <MenuMobile />
 
