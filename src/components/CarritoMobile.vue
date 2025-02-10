@@ -31,10 +31,7 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue'
-  import { useRouter } from 'vue-router'
-  
-  // Importar las variables y funciones necesarias de App.vue
+  import { ref, onMounted } from 'vue'
   import { cant_en_carrito, cargar_arreglo_car, ocultarSugerencias, imprimir_carrito } from '../App.vue'
   
   const isMobileCartOpen = ref(false)
