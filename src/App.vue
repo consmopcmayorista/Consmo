@@ -549,17 +549,23 @@ provide('categorias_alfabetica', categorias_alfabetica);
               <RouterLink to="/catalogo">Catalogo</RouterLink>
             </li>
             <!-- with sub menu  -->
-            <li class="withsubs">
-              <RouterLink to="/conocenos">Conocenos</RouterLink>
+            <li class="withsubs dropdown">
+              <RouterLink to="#" class="dropdown-toggle">
+                Nosotros <span></span>
+              </RouterLink>
+              <div class="dropdown-content">
+                <RouterLink to="/conocenos">Conócenos</RouterLink>
+                <RouterLink to="/encuentranos">Encuéntranos</RouterLink>
+              </div>
             </li>
             <li class="withsubs">
-              <RouterLink to="/encuentranos">Encuentranos</RouterLink>
+              <RouterLink to="/calificanos">Califícanos</RouterLink>
             </li>
             <li class="withsubs">
-              <RouterLink to="/calificanos">Calificanos</RouterLink>
+              <RouterLink to="/promociones">Promociones</RouterLink>
             </li>
             <li class="withsubs">
-              <RouterLink to="/Foro">Foro</RouterLink>
+              <RouterLink to="/foro">Foro</RouterLink>
             </li>
           </ul>
         </div>
@@ -828,4 +834,51 @@ provide('categorias_alfabetica', categorias_alfabetica);
   height: 50px; /* Ajusta según la altura de tu header */
 }
 
+/* Default style for nav links */
+.withsubs a {
+  display: block;
+  color: #e1e1e1;
+  text-transform: capitalize;
+  margin: 0 10px;
+  padding: 15px 10px;
+}
+
+/* Style for the dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dropdown-arrow {
+  margin-left: 5px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 </style>

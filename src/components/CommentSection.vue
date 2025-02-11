@@ -83,7 +83,6 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import axios from "axios";
 
 export default {
   components: { Swiper, SwiperSlide },
@@ -99,36 +98,48 @@ export default {
     };
   },
   mounted() {
-    // Cargar los comentarios desde la API
+    // Cargar los comentarios desde el archivo JSON
     this.fetchComments();
   },
   methods: {
-    async fetchComments() {
-      try {
-        const response = await axios.get("http://localhost:3000/comments");
-        this.comments = response.data;
-      } catch (error) {
-        console.error("Error al cargar los comentarios:", error);
-      }
+    fetchComments() {
+      fetch('/datos/comments.json')
+        .then(response => {
+          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+          return response.json();
+        })
+        .then(data => {
+          this.comments = data.comments;
+        })
+        .catch(error => {
+          console.error('Error al cargar los comentarios:', error);
+        });
     },
-    async addComment() {
+    addComment() {
       if (this.newComment.rating === 0) {
         alert("Por favor selecciona una calificación.");
         return;
       }
       const newEntry = {
         ...this.newComment,
-        date: new Date(),
+        date: new Date().toISOString(),
+        id: Date.now().toString(),
       };
 
-      try {
-        // Enviar el nuevo comentario a la API
-        const response = await axios.post("http://localhost:3000/comments", newEntry);
-        this.comments.push(response.data); // Agregar el comentario a la lista
-        this.newComment = { user: "", text: "", rating: 0 }; // Limpiar el formulario
-      } catch (error) {
-        console.error("Error al agregar el comentario:", error);
-      }
+      this.comments.push(newEntry);
+      this.newComment = { user: "", text: "", rating: 0 }; // Limpiar el formulario
+
+      // Guardar los comentarios actualizados en el archivo JSON
+      this.saveComments();
+    },
+    saveComments() {
+      const blob = new Blob([JSON.stringify({ comments: this.comments }, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'comments.json';
+      a.click();
+      URL.revokeObjectURL(url);
     },
     setRating(star) {
       this.newComment.rating = star;
