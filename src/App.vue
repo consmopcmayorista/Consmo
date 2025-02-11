@@ -620,7 +620,7 @@ provide('categorias_alfabetica', categorias_alfabetica);
   <!-- Botón de WhatsApp -->
   <div class="whatsapp-button">
     <a
-      href="https://wa.me/573016148080?text=Vengo%20desde%20la%20pagina%20web%20y%20quiero%20consultar%20sobre%20algo"
+      href="https://wa.me/573015537673?text=Vengo%20desde%20la%20pagina%20web%20y%20quiero%20consultar%20sobre%20algo"
       target="_blank"
       rel="noopener noreferrer"
       class="whatsapp-link"
