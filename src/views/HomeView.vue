@@ -449,6 +449,7 @@ $(document).ready(function() {
   </div>
 
   <!-- Sección Categorías -->
+   <!--
   <div class="shop_bycat section_padding_b">
     <div class="container">
       <h2 class="section_title_3">Todas las Categorias</h2>
@@ -473,7 +474,8 @@ $(document).ready(function() {
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+
 
   <!-- Sección "Mercado Libre" y "Comunidad WhatsApp" -->
   <div class="offer_wrp section_padding_b">

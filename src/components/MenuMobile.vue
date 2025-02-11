@@ -10,19 +10,19 @@
 
     <!-- menu con scroll -->
     <nav :class="{'mobile-menu': true, 'open': isMenuOpen}">
-      <ul>
-        <li><RouterLink to="/">🏠 Inicio</RouterLink></li>
-        <li class="centered-list-item">
-          <button @click="toggleBuscarModal">🔍 Buscar</button>
-        </li>
-        <li><RouterLink to="/catalogo">📦 Catalogo</RouterLink></li>
-        <li><RouterLink to="/calificanos">⭐ Califícanos</RouterLink></li>
-        <li><RouterLink to="/foro">💬 Foro</RouterLink></li>
-        <li><RouterLink to="/conocenos">ℹ️ Conócenos</RouterLink></li>
-        <li><RouterLink to="/encuentranos">📍 Encuéntranos</RouterLink></li>
-      </ul>
-    </nav>
-
+  <ul>
+    <li><RouterLink to="/">🏠 Inicio</RouterLink></li>
+    <li class="centered-list-item">
+      <button @click="toggleBuscarModal">🔍 Buscar</button>
+    </li>
+    <li><RouterLink to="/catalogo">📦 Catalogo</RouterLink></li>
+    <li><RouterLink to="/promociones">🏷️ Promociones</RouterLink></li>
+    <li><RouterLink to="/calificanos">⭐ Califícanos</RouterLink></li>
+    <li><RouterLink to="/foro">💬 Foro</RouterLink></li>
+    <li><RouterLink to="/conocenos">ℹ️ Conócenos</RouterLink></li>
+    <li><RouterLink to="/encuentranos">📍 Encuéntranos</RouterLink></li>
+  </ul>
+</nav>
     <!-- Modal de búsqueda -->
     <div v-if="isBuscarModalOpen" class="buscar-modal">
       <button class="close-button" @click="toggleBuscarModal">✖️</button>
