@@ -11,6 +11,7 @@ import TopHeader from './components/TopHeader.vue'
 import RedesComp from './components/RedesComp.vue'
 import FooterInteractivo from "./components/footer.vue"
 import MenuMobile from './components/MenuMobile.vue'
+import Up from './components/Up.vue'
 
 /* ===============================
    VARIABLES REACTIVAS
@@ -608,8 +609,10 @@ provide('categorias_alfabetica', categorias_alfabetica);
         </div>
       </div>
     </div>
-
+    
+    <Up />
  <MenuMobile />
+ 
 
 
   </header>
