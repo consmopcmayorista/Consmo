@@ -58,7 +58,8 @@ const promos = ref([
   { title: 'SWITCH DE RED 8 PUERTOS', image: 'C9120.jpg' },
   { title: 'SWITCH DE RED 5 PUERTOS', image: 'C9121.jpg' },
   { title: 'SWITCH DE RED 8 PUERTOS', image: 'C9122.jpg' },
-  { title: 'KIT DESTORNILLADORES', image: 'C9675.jpg' }
+  { title: 'KIT DESTORNILLADORES', image: 'C9675.jpg' },
+  { title: 'COMBO POS', image: '2211 - 4355 - 3619.jpg' },
 ]);
 
 const closePopup = () => {
