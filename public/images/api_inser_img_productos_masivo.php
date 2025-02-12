@@ -1,4 +1,4 @@
-<?php
+	<?php
 header('Content-Type: application/json; charset=utf-8');
 header("Access-Control-Allow-Origin: *");
 $upload_location = '/var/www/html/images/img/productos/ppl/'; // Ruta donde se guardarán los archivos
@@ -26,17 +26,17 @@ for ($i = 0; $i < $countfiles; $i++) {
     // Extensiones de archivo válidas
     $valid_ext = array("JPG","jpg", "jpeg", "png", "PNG", "gif", "GIF");
 
-    // Verifica si la extensión del archivo es válida
-    if (in_array($file_extension, $valid_ext)) {
+    
+   if (in_array($file_extension, $valid_ext)) {
         $name = $nom_productos . "-" . $i . "." . $file_extension;
 
-        // Mueve el archivo a la ubicación de destino
+        
         move_uploaded_file($_FILES['file']['tmp_name'][$i], $upload_location . $filename);
 
         // Genera la URL del archivo subido
         $fecha = time();
         $url[] = "https://consmopcmayorista.com/images/img/productos/ppl/" . $filename;
-    }
+   }
 }
 
 $respuesta = "ok";
