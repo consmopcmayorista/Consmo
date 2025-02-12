@@ -187,24 +187,24 @@ onMounted(() => {
    }
 
    function quitar_item_Carrito(id){
-        if (this.ticket) {
+        if (ticket.value) {
             // Crear un nuevo objeto nuevo_ticket
             let nuevo_ticket = {
               productos: []
             };
-        
+
             // Copiar los productos que no coinciden con el id
-            nuevo_ticket.productos = this.ticket.filter(item => item.id !== id);
-        
-        
+            nuevo_ticket.productos = ticket.value.filter(item => item.id !== id);
+
+
             localStorage.setItem('ticket', JSON.stringify(nuevo_ticket));
              var arreglo_carrito = JSON.parse(localStorage.getItem('ticket'));
-              
-          this.ticket=arreglo_carrito.productos
-           this.actualizarTotales()
-          this.cargar_detalles()
+
+         ticket.value=arreglo_carrito.productos
+          actualizarTotales()
+         cargar_detalles()
             // Asignar nuevo_ticket a this.ticket
-            
+
           }
     }
 
