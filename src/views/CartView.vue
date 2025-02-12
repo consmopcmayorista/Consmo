@@ -15,7 +15,7 @@
                     <!-- product head  -->
                     <h4 class="shop_cart_title sopcart_ttl d-none d-lg-flex">
                         <span>Producto</span>
-                        <span>Cantidad</span>
+                        <span>Cant</span>
                         <span>Total Precio</span>
                     </h4>
 
@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="cart_count" id="cantidades_producto2">{{ obtenerCantidad(dato.id) }}</div>
                                 <div class="cart_qnty_btn" id="mas" @click="incrementar2(dato.id, dato.existencia)">
-                                    <i class="las la-plus"></i>hols
+                                    <i class="las la-plus"></i>
                                 </div>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                             </div>
                            
                             <div class="cart_remove ms-auto">
-                                <i class="icon-trash" @click="quitar_item_Carrito2(dato.id)"></i>
+                                <i class="icon-trash" @click=quitar_item_Carrito(dato.id)></i>
                             </div>
                         </div>
 
@@ -144,7 +144,7 @@ onMounted(() => {
 
 
     function   decrementar2(id) {
-        if (ticket.value) {
+        if (ticke.value) {
             const producto = ticket.value.find(item => item.id === id);
             if (producto && producto.cant > 1) {
                 producto.cant--;
@@ -186,12 +186,7 @@ onMounted(() => {
      console.log(total.value)
    }
 
-<<<<<<< HEAD
    function quitar_item_Carrito(id){
-=======
-   function quitar_item_Carrito2(id){
-	console.log('prueba')
->>>>>>> 8cc14aec9546e3aca3cd19036dfbb6207c466450
         if (ticket.value) {
             // Crear un nuevo objeto nuevo_ticket
             let nuevo_ticket = {
@@ -200,7 +195,6 @@ onMounted(() => {
 
             // Copiar los productos que no coinciden con el id
             nuevo_ticket.productos = ticket.value.filter(item => item.id !== id);
-<<<<<<< HEAD
 
 
             localStorage.setItem('ticket', JSON.stringify(nuevo_ticket));
@@ -211,17 +205,6 @@ onMounted(() => {
          cargar_detalles()
             // Asignar nuevo_ticket a this.ticket
 
-=======
-        
-        
-            localStorage.setItem('ticket', JSON.stringify(nuevo_ticket));
-             var arreglo_carrito = JSON.parse(localStorage.getItem('ticket'));
-              
-         ticket.value=arreglo_carrito.productos
-          actualizarTotales()
-            // cargar_detalles()
-            
->>>>>>> 8cc14aec9546e3aca3cd19036dfbb6207c466450
           }
     }
 
@@ -253,7 +236,7 @@ function imprimir_carrito_checkout(arreglo_car, total){
                           
                           <div class="cart_cont">
                               <a href="#">
-                                  <h5>hola ${descripcion1}</h5>
+                                  <h5>${descripcion1}</h5>
                               </a>
                               <p class="price">${Math.round(parseFloat(precio1)).toString().replace(/\./g, ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</p>
                              
@@ -308,6 +291,9 @@ function imprimir_carrito_checkout(arreglo_car, total){
   
 
 }
+
+
+</script>
 
 
 </script>
