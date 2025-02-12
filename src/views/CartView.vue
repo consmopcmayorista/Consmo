@@ -292,8 +292,4 @@ function imprimir_carrito_checkout(arreglo_car, total){
 
 }
 
-
-</script>
-
-
 </script>
