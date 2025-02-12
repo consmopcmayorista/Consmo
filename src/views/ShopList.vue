@@ -25,7 +25,7 @@ console.log(categorias_alfabetica.value)
 const cargando = ref(true)
 
 const pagina = ref(1)             // Página actual (1-based)
-const cant_maxima_pag = ref(10)   // Cantidad de ítems por página
+const cant_maxima_pag = ref(17)   // Cantidad de ítems por página
 
 // Computada para obtener cuántas páginas hay en total
 const cant_pagina = computed(() => {
