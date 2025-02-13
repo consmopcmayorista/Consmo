@@ -98,24 +98,21 @@ export default {
     };
   },
   mounted() {
-    // Cargar los comentarios desde el archivo JSON
+    // Cargar los comentarios desde el servidor
     this.fetchComments();
   },
   methods: {
-    fetchComments() {
-      fetch('/datos/comments.json')
-        .then(response => {
-          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-          return response.json();
-        })
-        .then(data => {
-          this.comments = data.comments;
-        })
-        .catch(error => {
-          console.error('Error al cargar los comentarios:', error);
-        });
+    async fetchComments() {
+      try {
+        const response = await fetch("http://18.219.192.100:3000/api/comments");
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        this.comments = data.comments;
+      } catch (error) {
+        console.error("Error al cargar los comentarios:", error);
+      }
     },
-    addComment() {
+    async addComment() {
       if (this.newComment.rating === 0) {
         alert("Por favor selecciona una calificación.");
         return;
@@ -126,20 +123,21 @@ export default {
         id: Date.now().toString(),
       };
 
-      this.comments.push(newEntry);
-      this.newComment = { user: "", text: "", rating: 0 }; // Limpiar el formulario
+      try {
+        const response = await fetch("http://18.219.192.100:3000/api/comments", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newEntry),
+        });
 
-      // Guardar los comentarios actualizados en el archivo JSON
-      this.saveComments();
-    },
-    saveComments() {
-      const blob = new Blob([JSON.stringify({ comments: this.comments }, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'comments.json';
-      a.click();
-      URL.revokeObjectURL(url);
+        if (!response.ok) throw new Error("Error al guardar el comentario");
+
+        const data = await response.json();
+        this.comments.push(data);
+        this.newComment = { user: "", text: "", rating: 0 }; // Limpiar formulario
+      } catch (error) {
+        console.error("Error al guardar el comentario:", error);
+      }
     },
     setRating(star) {
       this.newComment.rating = star;
