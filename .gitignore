@@ -30,3 +30,5 @@ coverage
 *.tsbuildinfo
 dist/
 node_modules/
+server.js
+datos/
