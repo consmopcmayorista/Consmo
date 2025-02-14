@@ -105,7 +105,7 @@ export default {
   methods: {
     async fetchComments() {
       try {
-        const response = await axios.get("http://localhost:3000/comments");
+        const response = await axios.get("https://consmopcmayorista.com:3000/comments");
         this.comments = response.data;
       } catch (error) {
         console.error("Error al cargar los comentarios:", error);
