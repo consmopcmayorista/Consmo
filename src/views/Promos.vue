@@ -60,6 +60,7 @@ const promos = ref([
   { title: 'SWITCH DE RED 8 PUERTOS', image: 'C9122.jpg' },
   { title: 'KIT DESTORNILLADORES', image: 'C9675.jpg' },
   { title: 'COMBO POS', image: '2211 - 4355 - 3619.jpg' },
+  { title: 'CARGADORES GENERICOS', image: '4691-4694-4695-4696-4697-4698-4692.png' },
 ]);
 
 const closePopup = () => {
