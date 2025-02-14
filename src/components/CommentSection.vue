@@ -123,7 +123,7 @@ export default {
 
       try {
         // Enviar el nuevo comentario a la API
-        const response = await axios.post("http://localhost:3000/comments", newEntry);
+        const response = await axios.post("https://consmopcmayorista.com:3000/comments", newEntry);
         this.comments.push(response.data); // Agregar el comentario a la lista
         this.newComment = { user: "", text: "", rating: 0 }; // Limpiar el formulario
       } catch (error) {
