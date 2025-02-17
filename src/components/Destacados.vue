@@ -64,7 +64,7 @@ import "swiper/css/pagination";
         productos: [
           {
             nombre: "CHASIS TIPO PECERA GAMER",
-            descripcion: "CHASIS PARA PC GAMER TIPO PECERA ARGB BLANCO 3 COOLER ORIGAMI ORI-GW046",
+            descripcion: "CHASIS PARA PC GAMER TIPO PECERA ARGB BLANCO 3 COOLER ORIGAMI",
             imagen: "/images2/destacados/destacado1.png",
             link: "/producto?producto=41569"
           },
