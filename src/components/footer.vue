@@ -35,7 +35,7 @@
     </div>
     <div class="footer-bottom">
       <p>&copy; {{ new Date().getFullYear() }} Consmo PC Mayorista SAS - Derechos Reservados</p>
-      <p>Diseñado por <a href="https://www.colcodec.com" target="_blank">Colcodec</a></p>
+      <p>Diseñado por <a href="" target="_blank">Consmo PC</a></p>
     </div>
     <div class="waves">
       <div class="wave" id="wave1"></div>
