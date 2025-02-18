@@ -8,11 +8,11 @@
           <!-- Banner Principal (Largo) -->
           <div class="col-12 mb-4">
             <div class="featured-banner">
-              <img src="/images2/destacados/destacado_principal.jpg" alt="Producto Destacado Principal" class="img-fluid w-100">
+              <img src="/images2/destacados/destacado_principal.png" alt="Producto Destacado Principal" class="img-fluid w-100">
               <div class="banner-content">
-                <h3>GENIUS SPEEDMASTER</h3>
-                <p>TIMON Y PEDAL PARA PC/PS3/PS4</p>
-                <a href="/producto?producto=41579" class="btn btn-primary">Ver Producto</a>
+                <h3>GAFAS DE REALIDAD VIRTUAL 3D</h3>
+                <p>CONTROL BLUETOOTH VR SHINECON 4.0</p>
+                <a href="/producto?producto=6060" class="btn btn-primary">Ver Producto</a>
               </div>
             </div>
           </div>
