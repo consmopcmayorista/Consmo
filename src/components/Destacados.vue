@@ -8,7 +8,7 @@
           <!-- Banner Principal (Largo) -->
           <div class="col-12 mb-4">
             <div class="featured-banner">
-              <img src="/images2/destacados/destacado_principal.png" alt="Producto Destacado Principal" class="img-fluid w-100">
+              <img src="/images2/destacados/destacado_principal.jpg" alt="Producto Destacado Principal" class="img-fluid w-100">
               <div class="banner-content">
                 <h3>GAFAS DE REALIDAD VIRTUAL 3D</h3>
                 <p>CONTROL BLUETOOTH VR SHINECON 4.0</p>
