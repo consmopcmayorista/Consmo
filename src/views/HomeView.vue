@@ -560,93 +560,92 @@ $(document).ready(function() {
     </div>
   </div>
 
-  <!-- Sección Recomendados -->
-  <div class="recfor_you section_padding_b">
-    <p v-if="cargando">Cargando productos...</p>
+<!-- Sección Recomendados -->
+<div class="recfor_you section_padding_b">
+  <p v-if="cargando">Cargando productos...</p>
 
-    <div v-else-if="productos_alea.length > 0">
-      <div class="container">
-        <h2 class="section_title_3">Recomendados para ti</h2>
-        <div class="row gy-4">
-          <!-- Iterar sobre productos -->
-          <div
-            class="col-xl-3 col-lg-4 col-sm-6"
-            v-for="(dato, index) in productos_alea.slice(0,128)"
-            :key="index"
-          >
-            <div class="single_toparrival">
-              <div class="topariv_img">
-                <img
-                  loading="lazy"
-                  :src="dato.imagen"
-                  alt="product"
-                  style="width:260px; height:260px"
-                />
-                <div class="prod_soh">
-                  <div class="adto_wish">
-                    <i class="icon-heart"></i>
-                  </div>
-                  <!-- Quick View -->
-                  <div class="qk_view" @click="buscar_productos(dato.id)">
-                    <span><i class="las la-eye"></i></span>
-                    Ver
-                  </div>
+  <div v-else-if="productos_alea.length > 0">
+    <div class="container">
+      <h2 class="section_title_3">Recomendados para ti</h2>
+      <div class="row gy-4">
+        <!-- Iterar sobre productos -->
+        <div
+          class="col-xl-3 col-lg-4 col-sm-6"
+          v-for="(dato, index) in productos_alea.slice(0, 128)"
+          :key="index"
+        >
+          <div class="single_toparrival">
+            <div class="topariv_img">
+              <img
+                loading="lazy"
+                :src="dato.imagen"
+                alt="product"
+                style="width: 260px; height: 260px"
+              />
+              <div class="prod_soh">
+                <div class="adto_wish">
+                  <i class="icon-heart"></i>
                 </div>
-              </div>
-              <div class="topariv_cont">
-                <!-- Título cortado en 2 líneas -->
-                <RouterLink 
-                    :to="{ name: 'producto', query: { producto: dato.id } }" 
-                    class="format_titulo"
-                    >
-                    <p>{{ formatLine(dato.titulo, 0, 22) }}</p>
-                    <p>{{ formatLine(dato.titulo, 22, 22) }}</p>
-                </RouterLink>
-                <div class="format_titulo2">
-                  <span>SKU: {{ dato.idpro }}</span>
+                <!-- Quick View -->
+                <div class="qk_view" @click="buscar_productos(dato.id)">
+                  <span><i class="las la-eye"></i></span>
+                  Ver
                 </div>
-                <div class="price mb-1">
-                  <span class="org_price">
-                    $ {{
-                      Math.round(parseFloat(dato.pt1))
-                        .toString()
-                        .replace(/\./g, ',')
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-                    }}
-                  </span>
-                </div>
-                <!-- rating -->
-                <div class="rating">
-                  <div class="d-flex align-items-center justify-content-start">
-                    <div class="rating_star">
-                      <span><i class="las la-star"></i></span>
-                      <span><i class="las la-star"></i></span>
-                      <span><i class="las la-star"></i></span>
-                      <span><i class="las la-star"></i></span>
-                      <span><i class="las la-star"></i></span>
-                    </div>
-                    <p class="rating_count mb-0">(50)</p>
-                  </div>
-                </div>
-              </div>
-              <div class="full_atc_btn">
-                <button @click="buscar_productos(dato.id)">
-                  <span class="me-1"><i class="icon-cart"></i></span>
-                  Al Carrito
-                </button>
               </div>
             </div>
+            <div class="topariv_cont">
+              <!-- Título cortado en 2 líneas -->
+              <RouterLink
+                :to="{ name: 'producto', query: { producto: dato.id } }"
+                class="format_titulo"
+              >
+                <p>{{ formatLine(dato.titulo, 0, 22) }}</p>
+                <p>{{ formatLine(dato.titulo, 22, 22) }}</p>
+              </RouterLink>
+              <div class="format_titulo2">
+                <span>SKU: {{ dato.idpro }}</span>
+              </div>
+              <div class="price mb-1">
+                <span class="org_price">
+                  $ {{
+                    Math.round(parseFloat(dato.pt1))
+                      .toString()
+                      .replace(/\./g, ',')
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                  }}
+                </span>
+              </div>
+              <!-- rating -->
+              <div class="rating">
+                <div class="d-flex align-items-center justify-content-start">
+                  <div class="rating_star">
+                    <span><i class="las la-star"></i></span>
+                    <span><i class="las la-star"></i></span>
+                    <span><i class="las la-star"></i></span>
+                    <span><i class="las la-star"></i></span>
+                    <span><i class="las la-star"></i></span>
+                  </div>
+                  <p class="rating_count mb-0">(50)</p>
+                </div>
+              </div>
+            </div>
+            <div class="full_atc_btn">
+              <button @click="buscar_productos(dato.id)">
+                <span class="me-1"><i class="icon-cart"></i></span>
+                Al Carrito
+              </button>
+            </div>
           </div>
-          <!-- Fin v-for -->
         </div>
+        <!-- Fin v-for -->
       </div>
-    </div>
-
-    <div v-else>
-      <p>No hay productos recomendados en este momento.</p>
     </div>
   </div>
 
+  <div v-else>
+    <p>No hay productos recomendados en este momento.</p>
+  </div>
+</div>
   <!-- Modal Quickview -->
   
 
@@ -779,6 +778,128 @@ $(document).ready(function() {
 </template>
 
 <style scoped>
+.recfor_you {
+  padding-bottom: 20px;
+}
+
+.section_title_3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.single_toparrival {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background-color: #fff;
+}
+
+.single_toparrival:hover {
+  transform: translateY(-5px);
+}
+
+.topariv_img {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-bottom: 1px solid #eee;
+}
+
+.topariv_img img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.topariv_img:hover img {
+  transform: scale(1.1);
+}
+
+.prod_soh {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.adto_wish,
+.qk_view {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.adto_wish:hover,
+.qk_view:hover {
+  background: #000;
+}
+
+.topariv_cont {
+  padding: 15px;
+  text-align: center;
+}
+
+.format_titulo p {
+  margin: 0;
+  font-size: 16px; /* Tamaño de fuente más grande */
+  line-height: 1.4em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.format_titulo2 {
+  font-size: 14px; /* Tamaño de fuente más grande */
+  color: #888;
+  margin-top: 5px;
+}
+
+.price .org_price {
+  font-size: 18px;
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.rating_star {
+  color: #f1c40f;
+}
+
+.rating_count {
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+.full_atc_btn {
+  margin-top: 10px;
+}
+
+.full_atc_btn button {
+  background: #3498db; /* Color azul */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.full_atc_btn button:hover {
+  background: #2980b9;
+}
+
 .recfor_you {
   margin-top: 20px;
 }
