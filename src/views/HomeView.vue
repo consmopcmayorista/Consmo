@@ -44,6 +44,8 @@ function sumarExistencias(existenciaStr) {
 }
 
 
+
+
 function buscar_productos(id) {
     cantidades=1
             
@@ -291,9 +293,21 @@ document.body.style.overflowY = 'auto';
 }
 
 // Función para cortar línea de texto
-function formatLine(str, start, length) {
-  if (!str) return ''
-  return str.slice(start, start + length)
+function formatLine(str, maxLength) {
+  if (!str) return '';
+  const words = str.split(' ');
+  let line = '';
+  let result = [];
+  for (let word of words) {
+    if ((line + word).length <= maxLength) {
+      line += (line ? ' ' : '') + word;
+    } else {
+      result.push(line);
+      line = word;
+    }
+  }
+  if (line) result.push(line);
+  return result;
 }
 
 function cambiarImagen(url) {
@@ -594,13 +608,12 @@ $(document).ready(function() {
               </div>
             </div>
             <div class="topariv_cont">
-              <!-- Título cortado en 2 líneas -->
+              <!-- Título cortado en líneas sin cortar palabras -->
               <RouterLink
                 :to="{ name: 'producto', query: { producto: dato.id } }"
                 class="format_titulo"
               >
-                <p>{{ formatLine(dato.titulo, 0, 22) }}</p>
-                <p>{{ formatLine(dato.titulo, 22, 22) }}</p>
+                <p v-for="(line, index) in formatLine(dato.titulo, 22)" :key="index">{{ line }}</p>
               </RouterLink>
               <div class="format_titulo2">
                 <span>SKU: {{ dato.idpro }}</span>
@@ -843,13 +856,14 @@ $(document).ready(function() {
 .topariv_cont {
   padding: 15px;
   text-align: center;
+  height: 170px;
 }
 
 .format_titulo p {
   margin: 0;
-  font-size: 16px; /* Tamaño de fuente más grande */
-  line-height: 1.4em;
-  white-space: nowrap;
+  font-size: 14px; /* Tamaño de fuente más grande */
+  line-height: 1.3em;
+  white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -928,5 +942,14 @@ $(document).ready(function() {
     height: 160px; /* Ajusta la altura según necesites */
     object-fit: cover; /* Asegura que la imagen se expanda correctamente */
   }
+}
+
+.format_titulo p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.3em;
+  white-space: normal; /* Permite el ajuste de palabras */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
