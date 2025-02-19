@@ -543,7 +543,7 @@ $(document).ready(function() {
   <!-- Banner Tenda -->
   <div class="ad_banner_area section_padding_b">
     <div class="container">
-      <a href="catalogo?Pag=tenda&criterio=producto">
+      <a href="catalogo_cat?categoria=&busqueda=tenda">
         <picture>
           <source
             media="(min-width: 768px)"
