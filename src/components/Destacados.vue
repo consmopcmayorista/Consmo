@@ -75,10 +75,10 @@ export default {
           link: "/producto?producto=41558"
         },
         {
-          nombre: "TECLADO GAMER MECANICO",
-          descripcion: "USB ANTI-GHOSTING GAMER TECH GK987G 80382",
+          nombre: "TIMON GENIUS SPEEDMASTER",
+          descripcion: "TIMON Y PEDAL PARA PC/PS3/PS4 NEGRO ROJO GENIUS SPEEDMASTER",
           imagen: "/images2/destacados/destacado3.png",
-          link: "/producto?producto=31117"
+          link: "/producto?producto=41579"
         }
       ]
     };
