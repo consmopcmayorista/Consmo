@@ -223,60 +223,6 @@
               <p><em>¡Es fácil y rápido!</em></p>
               <a href="#" class="payment-policies-link">Políticas de Recogida en Punto de Venta</a>
             </div>
-
-            <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
-            <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
-
-            <!-- Opción 3: Pagos con Wompi -->
-            <div class="form-group">
-              <div class="option-label option-3">
-                <i class="fas fa-lock"></i> Opción 3 (Pagos con Wompi Pasarela)
-              </div>
-              <div class="custom-control custom-radio">
-                <p>Una vez se confirme el pago un asesor se contactará...</p>
-                <p>Wompi es una pasarela de pago muy reconocida en Colombia.</p>
-                <img style="width:100%;" src="https://antioquenadebasculas.com/images/pagos-wompi.png" />
-                <br /><br /><br />
-              </div>
-            </div>
-
-            <div class="checkorder_agree custom_check check_2">
-              <input type="checkbox" class="check_inp" hidden id="save-default" />
-              <label for="save-default">
-                Acepto <a href="#" class="text-color">Términos y Condiciones</a>
-              </label>
-            </div>
-            
-            <!-- Formulario Wompi -->
-            <div class="cart_sum_pros">
-              <form id="wompi" action="https://checkout.wompi.co/p/" method="get">
-                <!-- Campos ocultos Wompi -->
-                <input type="hidden" name="public-key" v-model="publicKey" />
-                <input type="hidden" name="currency" value="COP" />
-                <input type="hidden" name="amount-in-cents" v-model="amountInCents" />
-                <input type="hidden" name="reference" v-model="reference" />
-                <input type="hidden" name="redirect-url" value="https://www.consmopcmayorista.com/compra-exitosa" />
-
-                <input type="hidden" name="tax-in-cents:vat" v-model="vatInCents" />
-                <input type="hidden" name="customer-data:email" v-model="email_cliente" />
-                <input type="hidden" name="customer-data:full-name" v-model="nombre_cliente" />
-                <input type="hidden" name="customer-data:phone-number" v-model="tel_cliente" />
-                <input type="hidden" name="customer-data:legal-id" v-model="rut_cliente" />
-                <input type="hidden" name="customer-data:legal-id-type" v-model="tip_doc_cliente" />
-                <input type="hidden" name="shipping-address:address-line-1" v-model="direccion_cliente" />
-                <input type="hidden" name="shipping-address:country" value="CO" />
-                <input type="hidden" name="shipping-address:phone-number" v-model="tel_cliente" />
-                <input type="hidden" name="shipping-address:city" v-model="ciudad_cliente" />
-                <input type="hidden" name="shipping-address:region" v-model="departamento_cliente" />
-
-                <!-- Botón de Wompi -->
-                <button type="button" @click="actualizarDatos">
-                  Pagar con Wompi
-                </button>
-              </form>
-              
-              <div id="wompi-widget"></div>
-            </div>
           </div>
         </div>
       </div>
