@@ -223,7 +223,7 @@
                       <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
 
                       <!-- Botón Transferencia Bancaria -->
-                      <div class="form-group">
+ <!--                    <div class="form-group">
                           <div class="payment-info">
                               <div class="option-label option-3" @click="toggleCollapse('transferenciaBancaria')">
                                   <i class="fas fa-university"></i> Opción 3 (Transferencia Bancaria)
@@ -237,7 +237,8 @@
                                   <ul>
                                       <p><strong>Datos para la transferencia:</strong></p>
                                       <p>Banco: Bancolombia</p>
-                                      <p>Cuenta: 123456789</p>
+                                      <p>Cuenta: 95874544408</p>
+                                      <p>Tipo: Corriente</p>
                                       <p>Titular: Consmo PC Mayorista</p>
                                       <p>Total a transferir: ${{ Math.round(parseFloat(total)).toString().replace(/\./g, ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.') }}</p>
                                   </ul>
@@ -247,12 +248,12 @@
                                   <p><em>¡Es fácil y seguro!</em></p>
                               </v-collapse>
                           </div>
-                      </div>
+                      </div>--> 
                   </div>
               </div>
           </div>
       </div>
-  </div>
+  </div> 
 </template>
 <script setup>
 import { ref, onMounted, reactive } from 'vue'
