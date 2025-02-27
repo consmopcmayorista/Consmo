@@ -105,7 +105,7 @@ export default {
   methods: {
     async fetchComments() {
       try {
-        const response = await axios.get("http://localhost:3000/comments");
+        const response = await axios.get("https://consmopcmayorista.com:3000/comments");
         this.comments = response.data;
       } catch (error) {
         console.error("Error al cargar los comentarios:", error);
@@ -123,7 +123,7 @@ export default {
 
       try {
         // Enviar el nuevo comentario a la API
-        const response = await axios.post("http://localhost:3000/comments", newEntry);
+        const response = await axios.post("https://consmopcmayorista.com:3000/comments", newEntry);
         this.comments.push(response.data); // Agregar el comentario a la lista
         this.newComment = { user: "", text: "", rating: 0 }; // Limpiar el formulario
       } catch (error) {
