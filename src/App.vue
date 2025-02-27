@@ -305,7 +305,7 @@ async function filtrarProductos() {
 
 // Redirigir a la lista de productos
 function redirigirAListaDeProductos(termino) {
-  window.location.href = `/shop-list.html?Pag=${termino}`;
+  router.push({ name: 'catalogo_cat', query: { categoria: categoria.value, busqueda: termino } });
 }
 
 // Computed de ejemplo para el badge
@@ -397,7 +397,7 @@ provide('categorias_alfabetica', categorias_alfabetica);
                     id="show_suggest"
                     v-model="busqueda"
                     @input="filtrarProductos"
-                   
+                    @keydown.enter="redirigirAListaDeProductos(busqueda)"
                     autocomplete="off"
                     @blur="ocultarSugerencias"
                 />
