@@ -5,10 +5,9 @@
   "type": "commonjs",
   "scripts": {
     "dev": "vite",
-    "build": "vue-cli-service build && node update-comments.js",
+    "build": "vite build",
     "preview": "vite preview",
     "test:unit": "vitest",
-    "serve": "vue-cli-service serve",
     "start-server": "node server.js"
   },
   "dependencies": {
