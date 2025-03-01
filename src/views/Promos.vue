@@ -13,13 +13,16 @@
     <p class="promos-subtitle">Cada mes encontrarás nuevas promociones aquí.</p>
 
     <!-- Galería de promociones -->
-    <div class="promos-gallery">
+    <div v-if="promos.length > 0" class="promos-gallery">
       <div class="promo-item" v-for="(promo, index) in promos" :key="index" @click="openModal(promo, index)">
         <img :src="`/images2/promos/${promo.image}`" :alt="promo.title" class="promo-image" />
         <div class="promo-overlay">
           <span class="promo-title">{{ promo.title }}</span>
         </div>
       </div>
+    </div>
+    <div v-else class="no-promos">
+      <p>No hay promociones disponibles en este momento. Vuelve pronto para más ofertas</p>
     </div>
 
     <!-- Modal de promoción -->
@@ -44,23 +47,7 @@ const showModal = ref(false);
 const selectedPromo = ref({});
 
 const promos = ref([
-  { title: 'FUENTE DE PODER ATX', image: '1530.jpg' },
-  { title: 'CARRETA CABLE UTP 6E', image: '1836.jpg' },
-  { title: 'CARRETA CABLE UTP 5E', image: '1870.jpg' },
-  { title: 'CAMARA IP 2K TENDA', image: '1934.jpg' },
-  { title: 'BOARD DDR4 8VA Y 9NA', image: '2601.jpg' },
-  { title: 'LECTOR HUELLAS DACTILARES', image: '3519.jpg' },
-  { title: 'MOUSE ALAMBRICO GENIUS', image: '9555 - 9556 - 1001 - 9558.jpg' },
-  { title: 'LECTOR OMNIDIRECCIONAL 2D', image: '9703.jpg' },
-  { title: 'ROUTER INALAMBRICO XPON', image: 'C2565.jpg' },
-  { title: 'TV BOX 4GB+32GB 8K', image: 'C9105.jpg' },
-  { title: 'SWITCH DE RED 5 PUERTOS', image: 'C9119.jpg' },
-  { title: 'SWITCH DE RED 8 PUERTOS', image: 'C9120.jpg' },
-  { title: 'SWITCH DE RED 5 PUERTOS', image: 'C9121.jpg' },
-  { title: 'SWITCH DE RED 8 PUERTOS', image: 'C9122.jpg' },
-  { title: 'KIT DESTORNILLADORES', image: 'C9675.jpg' },
-  { title: 'COMBO POS', image: '2211 - 4355 - 3619.jpg' },
-  { title: 'CARGADORES GENERICOS', image: '4691-4694-4695-4696-4697-4698-4692.png' },
+
 ]);
 
 const closePopup = () => {
@@ -164,6 +151,13 @@ const closeModal = () => {
 
 .promo-item:hover .promo-image {
   transform: scale(1.1);
+}
+
+.no-promos {
+  text-align: center;
+  font-size: 1.5em;
+  color: #666;
+  margin-top: 20px;
 }
 
 .promo-overlay {
