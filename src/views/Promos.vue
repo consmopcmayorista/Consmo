@@ -22,7 +22,7 @@
       </div>
     </div>
     <div v-else class="no-promos">
-      <p>No hay promociones disponibles en este momento. Vuelve pronto para más ofertas.</p>
+      <p>No hay promociones disponibles en este momento. Vuelve pronto para más ofertas</p>
     </div>
 
     <!-- Modal de promoción -->
