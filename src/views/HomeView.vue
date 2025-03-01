@@ -442,7 +442,7 @@ $(document).ready(function() {
   <services />
   
   <Destacados />
-
+<!--
   <div class="ad_banner_area section_padding_b">
     <div class="container">
       <a href="/promociones">
@@ -460,7 +460,7 @@ $(document).ready(function() {
         </picture>
       </a>
     </div>
-  </div>
+  </div>-->
 
   <!-- Sección Categorías -->
    <!--
