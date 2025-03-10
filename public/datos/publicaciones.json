@@ -561,6 +561,31 @@
       }
     ],
     "date": "2025-02-03"
+  },
+  {
+    "id": 10,
+    "title": "MINI TECLADO RGB PARA TV",
+    "description": "¿Cansado de escribir con el control remoto?",
+    "thumbnail": "/images2/foro/10/miniatura.png",
+    "content": [
+      {
+        "type": "text",
+        "value": "¿Cansado de escribir con el control remoto? 🛑 Prueba esta solución increíble! MINI TECLADO RGB"
+      },
+      {
+        "type": "text",
+        "value": "### Video tutorial"
+      },
+      {
+        "type": "video",
+        "src": "https://www.youtube.com/embed/Qtf4JK5omkE"
+      },
+      {
+        "type": "text",
+        "value": "En este video aprenderás paso a paso cómo instalar y configurar tu TV Box para sacarle el máximo provecho."
+      }
+    ],
+    "date": "2025-02-03"
   }
   
   
