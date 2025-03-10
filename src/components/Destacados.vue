@@ -63,21 +63,21 @@ export default {
     return {
       productos: [
         {
-          nombre: "CHASIS TIPO PECERA GAMER",
-          descripcion: "CHASIS PARA PC GAMER TIPO PECERA ARGB BLANCO 3 COOLER ORIGAMI",
-          imagen: "/images2/destacados/destacado1.png",
+          nombre: "CHASIS GAMER TRIDIMENCIONAL",
+          descripcion: "CHASIS PARA PC GAMER TRIDIMENCIONAL RGB NEGRO 7 COOLER ORIGAMI",
+          imagen: "/images2/destacados/destacado1.jpg",
           link: "/producto?producto=41569"
         },
         {
           nombre: "MONITOR IPS 27 PULGADAS",
           descripcion: "1920x1080 FULL HD CURVO 180HZ HDMI/VGA TEROS TE-2766G",
-          imagen: "/images2/destacados/destacado2.png",
+          imagen: "/images2/destacados/destacado2.jpg",
           link: "/producto?producto=41558"
         },
         {
           nombre: "TIMON GENIUS SPEEDMASTER",
           descripcion: "TIMON Y PEDAL PARA PC/PS3/PS4 NEGRO ROJO GENIUS SPEEDMASTER",
-          imagen: "/images2/destacados/destacado3.png",
+          imagen: "/images2/destacados/destacado3.jpg",
           link: "/producto?producto=41579"
         }
       ]
