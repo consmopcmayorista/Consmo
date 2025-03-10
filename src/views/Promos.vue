@@ -9,7 +9,7 @@
     </div>
 
     <!-- Título principal -->
-    <h1 class="promos-title">Promociones de Febrero</h1>
+    <h1 class="promos-title">Promociones de Marzo</h1>
     <p class="promos-subtitle">Cada mes encontrarás nuevas promociones aquí.</p>
 
     <!-- Galería de promociones -->
@@ -47,8 +47,14 @@ const showModal = ref(false);
 const selectedPromo = ref({});
 
 const promos = ref([
-
-]);
+    { title: 'MONITOR IPS 23.8" 1920X1080 100HZ', image: '3431.png' },
+    { title: 'MONITOR IPS 27" 1920X1080 100HZ', image: '3432.png' },
+    { title: 'MONITOR IPS 23.8" 1920X1080 180HZ', image: '3433.png' },
+    { title: 'CHASIS PARA PC BASICK RGB LINEAL', image: '8898.png' },
+    { title: 'SOPORTE TV DE BRAZO AJUSTABLE', image: '2930.png' },
+    { title: 'IMPRESORA DE CODIGOS DE BARRA/ETIQUETA', image: '3512.png' },
+    { title: 'CONVERTIDOR USB TIPO C A RJ45 (LAN)', image: 'C9645.png' },
+  ]);
 
 const closePopup = () => {
   showPopup.value = false;

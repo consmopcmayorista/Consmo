@@ -6,6 +6,7 @@ import ProductQuickview from '@/components/product_indv.vue' // Importamos el mo
 import { ref, onMounted, inject } from 'vue'
 import axios from 'axios'
 
+import popup from '@/components/PopupPromociones.vue'
 import Destacados from '@/components/Destacados.vue'
 
 
@@ -442,7 +443,7 @@ $(document).ready(function() {
   <services />
   
   <Destacados />
-<!--
+
   <div class="ad_banner_area section_padding_b">
     <div class="container">
       <a href="/promociones">
@@ -460,7 +461,7 @@ $(document).ready(function() {
         </picture>
       </a>
     </div>
-  </div>-->
+  </div>
 
   <!-- Sección Categorías -->
    <!--
@@ -787,7 +788,7 @@ $(document).ready(function() {
           </div>
           </div>
 
-  
+  <popup/>
 </template>
 
 <style scoped>
