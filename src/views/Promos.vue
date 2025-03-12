@@ -54,6 +54,15 @@ const promos = ref([
     { title: 'SOPORTE TV DE BRAZO AJUSTABLE', image: '2930.png' },
     { title: 'IMPRESORA DE CODIGOS DE BARRA/ETIQUETA', image: '3512.png' },
     { title: 'CONVERTIDOR USB TIPO C A RJ45 (LAN)', image: 'C9645.png' },
+    { title: 'RADIO DE COMUNICACIÓN X2 BAOFENG', image: '1048.png' },
+    { title: 'LECTOR CODIGO DE BARRAS ALAMBRICO', image: '4355.png' },
+    { title: 'DECODIFICADOR TDT 1080P', image: '5006.png' },
+    { title: 'COMBO POS LECTOR/IMPRESORA/CAJON', image: 'C9100 - 3391 - 4355.png' },
+    { title: 'TODO EN UNO POS 11.6"', image: '2706.png' },
+    { title: 'CAMARA IP ROBOTICA 5 ANTENAS WIFI', image: 'C9663.png' },
+    { title: 'DISCO DURO PC PULL 500GB SEAGATE', image: '2309.png' },
+    { title: 'DISCO DURO PC PULL 3TB HITACHI', image: '2361.png' },
+    { title: 'DISCO DURO PC PULL 4TB SEAGATE', image: '2966.png' },
   ]);
 
 const closePopup = () => {
