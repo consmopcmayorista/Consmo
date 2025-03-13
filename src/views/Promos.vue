@@ -32,7 +32,13 @@
         <img :src="`/images2/promos/${selectedPromo.image}`" :alt="selectedPromo.title" class="modal-image" />
         <button class="close-modal" @click="closeModal">X</button>
         <div class="promo-sticker-modal">
-          <span>¡Pídelo ahora!</span>
+          <a
+            :href="`https://wa.me/573015537673?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20un%20producto%20en%20promoci%C3%B3n%20del%20mes.%20Producto%3A%20${selectedPromo.title}`"
+            target="_blank"
+            class="whatsapp-button"
+          >
+            ¡Pídelo ahora!
+          </a>
         </div>
       </div>
     </div>
@@ -242,17 +248,23 @@ const closeModal = () => {
 }
 
 .promo-sticker-modal {
-  position: absolute;
-  right: -300px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #ff5c5c;
+  margin-top: 15px;
+}
+
+.whatsapp-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #25d366; /* Color de fondo de WhatsApp */
   color: white;
-  padding: 5px 10px;
+  text-decoration: none;
   border-radius: 5px;
-  font-size: 1em;
   font-weight: bold;
-  z-index: 10;
+  font-size: 1.2em;
+  transition: background-color 0.3s ease;
+}
+
+.whatsapp-button:hover {
+  background-color: #1ebe57; /* Color de fondo al pasar el mouse */
 }
 
 @media (max-width: 768px) {
@@ -279,13 +291,6 @@ const closeModal = () => {
     width: 25px;
     height: 25px;
     font-size: 14px;
-  }
-
-  .promo-sticker-modal {
-    right: 50%;
-    bottom: -60px;
-    transform: translateX(50%);
-    top: unset;
   }
 }
 </style>
