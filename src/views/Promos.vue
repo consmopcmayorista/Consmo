@@ -71,6 +71,8 @@ const promos = ref([
     { title: 'CARRETA CABLE UTP INTERIOR CAT 5E', image: '1870.png' },
     { title: 'FUENTES DE PODER FULL MODULAR NEGRA JYR', image: '1551 - 1552 - 1553 - 1554.png' },
     { title: 'FUENTES DE PODER FULL MODULAR BLANCA JYR', image: '1547 - 1548 - 1549 - 1550.png' },
+    { title: 'ANTENA CPE EXTERIOR PUNTO A PUNTO 5KL', image: '2524.png' },
+    { title: 'ROUTER DUAL-BAND 5 ANTENAS', image: '2693.png' },
   ]);
 
 const closePopup = () => {
