@@ -374,92 +374,85 @@ provide('categorias_alfabetica', categorias_alfabetica);
 
 
         
-        <!-- search wrapper  -->
-        <div class="search_wrap d-none d-lg-block">
-          <!-- search input box  -->
-          <div class="search d-flex">
-            <div class="search_category">
-              <select v-model="categoria">
-                <option disabled value="">Categorias</option>
-                <option
-                  v-for="dato in categorias_alfabetica"
-                  :key="dato.categoria"
-                  :value="dato.categoria"
-                >
-                  {{ dato.categoria }}
-                </option>
-              </select>
-            </div>
-                <div class="search_input">
-                <input
-                    type="text"
-                    placeholder="Buscar"
-                    id="show_suggest"
-                    v-model="busqueda"
-                    @input="filtrarProductos"
-                    @keydown.enter="redirigirAListaDeProductos(busqueda)"
-                    autocomplete="off"
-                    @blur="ocultarSugerencias"
-                />
+  <!-- search wrapper  -->
+  <div class="search_wrap d-none d-lg-block">
+    <!-- search input box  -->
+    <div class="search d-flex">
+      <div class="search_category">
+        <select v-model="categoria">
+          <option disabled value="">Categorias</option>
+          <option
+            v-for="dato in categorias_alfabetica"
+            :key="dato.categoria"
+            :value="dato.categoria"
+          >
+            {{ dato.categoria }}
+          </option>
+        </select>
+      </div>
+      <div class="search_input">
+        <input
+          type="text"
+          placeholder="Buscar"
+          id="show_suggest"
+          v-model="busqueda"
+          @input="filtrarProductos"
+          @keydown.enter="redirigirAListaDeProductos(busqueda)"
+          autocomplete="off"
+          @blur="ocultarSugerencias"
+        />
+      </div>
+      <div class="search_subimt">
+        <RouterLink
+          :to="{
+            name: 'catalogo_cat',
+            query: { categoria: categoria, busqueda: busqueda }
+          }"
+          @click="ocultarSugerencias"
+        >
+          <button>
+            <span class="icon">
+              <span class="d-none d-sm-inline-block">Buscar</span>
+              <i class="las la-search"></i>
+            </span>
+          </button>
+        </RouterLink>
+      </div>
+
+      <!-- search suggest -->
+      <div :class="['search_suggest', { active: producto_buscado.length > 0 }]">
+        <div class="search_result_product scrollable">
+          <template v-for="(dato, index) in producto_buscado" :key="index">
+            <div
+              v-if="dato.separator"
+              class="separator"
+              style="font-weight: bold; color: #aaa; text-align: center; margin: 5px 0;"
+            ></div>
+
+            <!-- Si es un producto normal -->
+            <RouterLink
+              v-else
+              :to="{ name: 'producto', query: { producto: dato.id } }"
+              class="single_sresult_product"
+              @click="ocultarSugerencias"
+            >
+              <div class="sresult_img">
+                <img :src="dato.imagen">
+              </div>
+              <div class="sresult_content">
+                <h4>{{ dato.titulo }}</h4>
+                <div class="price">
+                  <span class="org_price">
+                    ${{ Math.round(parseFloat(dato.pt1)).toLocaleString() }}
+                  </span>
                 </div>
-                <div class="search_subimt">
-                    <RouterLink
-                        :to="{
-                        name: 'catalogo_cat',
-                        query: { categoria: categoria, busqueda: busqueda }
-                        }"
-                        @click="ocultarSugerencias"
-                    >
-                        <button>
-                        <span class="icon">
-                            <span class="d-none d-sm-inline-block">Buscar</span>
-                            <i class="las la-search"></i>
-                        </span>
-                        </button>
-                    </RouterLink>
-                </div>
-
-                <!-- search suggest -->
-                <div  :class="['search_suggest', { active: producto_buscado.length > 0 }]">
-                <div class="search_result_product">
-                    <template v-for="(dato, index) in producto_buscado" :key="index">
-                
-                    <div 
-                    v-if="dato.separator" 
-                    class="separator"
-                    style="font-weight: bold; color: #aaa; text-align: center; margin: 5px 0;"
-                    >
-    
-                    </div>
-
-                    <!-- Si es un producto normal -->
-                    <RouterLink
-                        v-else
-                        :to="{ name: 'producto', query: { producto: dato.id } }"
-                        class="single_sresult_product"
-                        @click="ocultarSugerencias"
-                    >
-                        <div class="sresult_img">
-                        <img :src=dato.imagen>
-                        </div>
-                        <div class="sresult_content">
-                        <h4>{{ dato.titulo }}</h4>
-                        <div class="price">
-                            <span class="org_price">
-                            ${{ Math.round(parseFloat(dato.pt1)).toLocaleString() }}
-                            </span>
-                        </div>
-                        </div>
-                    </RouterLink>
-                    </template>
-
-                </div>
-                </div>
-
-            
-            <!-- FIN search_suggest -->
-
-          </div> <!-- FIN .search.d-flex -->
+              </div>
+            </RouterLink>
+          </template>
+        </div>
+      </div>
+      <!-- FIN search_suggest -->
+    </div> <!-- FIN .search.d-flex -->
         </div> 
 
                    <!-- shop cart wrapper  -->
@@ -883,5 +876,9 @@ provide('categorias_alfabetica', categorias_alfabetica);
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+.search_suggest .search_result_product.scrollable {
+  max-height: 300px; /* Ajusta esta altura según tus necesidades */
+  overflow-y: auto;
 }
 </style>

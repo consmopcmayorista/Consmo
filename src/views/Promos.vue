@@ -57,12 +57,20 @@ const promos = ref([
     { title: 'RADIO DE COMUNICACIÓN X2 BAOFENG', image: '1048.png' },
     { title: 'LECTOR CODIGO DE BARRAS ALAMBRICO', image: '4355.png' },
     { title: 'DECODIFICADOR TDT 1080P', image: '5006.png' },
-    { title: 'COMBO POS LECTOR/IMPRESORA/CAJON', image: 'C9100 - 3391 - 4355.png' },
+    { title: 'COMBO POS GRANDE LECTOR/IMPRESORA/CAJON', image: 'C9100 - 3391 - 4355.png' },
+    { title: 'COMBO POS PEQUEÑO LECTOR/IMPRESORA/CAJON', image: '2211 - 4355 - C9102.png' },
     { title: 'TODO EN UNO POS 11.6"', image: '2706.png' },
     { title: 'CAMARA IP ROBOTICA 5 ANTENAS WIFI', image: 'C9663.png' },
     { title: 'DISCO DURO PC PULL 500GB SEAGATE', image: '2309.png' },
     { title: 'DISCO DURO PC PULL 3TB HITACHI', image: '2361.png' },
     { title: 'DISCO DURO PC PULL 4TB SEAGATE', image: '2966.png' },
+    { title: 'PARLANTE GAMER RGB USB-PLUG 6W', image: 'C9577.png' },
+    { title: 'CAJA EXTERNA SATA GAMER RGB 3.0', image: 'C9557.png' },
+    { title: 'SOPLADORA ELECTRICA VELOCIDADES 110V', image: 'C7001.png' },
+    { title: 'TV BOX 8K UHD 3GB+32GB CPU CORTEX', image: '9191.png' },
+    { title: 'CARRETA CABLE UTP INTERIOR CAT 5E', image: '1870.png' },
+    { title: 'FUENTES DE PODER FULL MODULAR NEGRA JYR', image: '1551 - 1552 - 1553 - 1554.png' },
+    { title: 'FUENTES DE PODER FULL MODULAR BLANCA JYR', image: '1547 - 1548 - 1549 - 1550.png' },
   ]);
 
 const closePopup = () => {
