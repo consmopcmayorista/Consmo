@@ -79,6 +79,7 @@ const promos = ref([
     { title: 'FUENTES DE PODER FULL MODULAR BLANCA JYR', image: '1547 - 1548 - 1549 - 1550.png' },
     { title: 'ANTENA CPE EXTERIOR PUNTO A PUNTO 5KL', image: '2524.png' },
     { title: 'ROUTER DUAL-BAND 5 ANTENAS', image: '2693.png' },
+    { title: 'BOARD DDR4 AMD RYZEN AM4', image: '2656.png' },
   ]);
 
 const closePopup = () => {
