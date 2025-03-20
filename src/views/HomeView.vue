@@ -288,19 +288,21 @@ document.getElementById("muestra").innerHTML=valores;
 /* -----------------------------------------     */
 
 
+// Función para cerrar el quickview
 function closeQuickview() {
   document.querySelector('.product_quickview').classList.remove('active');
-document.body.style.overflowY = 'auto'; 
+  document.body.style.overflowY = 'auto';
 }
 
-// Función para cortar línea de texto
+// Función para cortar línea de texto sin dividir palabras de forma incorrecta
 function formatLine(str, maxLength) {
   if (!str) return '';
   const words = str.split(' ');
   let line = '';
   let result = [];
+
   for (let word of words) {
-    if ((line + word).length <= maxLength) {
+    if ((line + ' ' + word).trim().length <= maxLength) {
       line += (line ? ' ' : '') + word;
     } else {
       result.push(line);
@@ -308,6 +310,7 @@ function formatLine(str, maxLength) {
     }
   }
   if (line) result.push(line);
+
   return result;
 }
 
@@ -396,6 +399,8 @@ $(document).ready(function() {
     }
   }, 5000)
 })
+
+
 </script>
 
 <template>
@@ -705,9 +710,12 @@ $(document).ready(function() {
   :to="{ name: 'producto', query: { producto: producto_mostrar.id } }"
   class="format_titulo"
 >
-  <h5>{{ formatLine(producto_mostrar.titulo, 0, 22) }}</h5>
-  <h5>{{ formatLine(producto_mostrar.titulo, 22, 22) }}</h5>
+  <h5 v-for="(line, index) in formatLine(producto_mostrar.titulo, 22)" :key="index">
+    {{ line }}
+  </h5>
 </router-link>
+
+
 
              <!-- rating  -->
                 <div class="rating">

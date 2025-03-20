@@ -80,6 +80,8 @@ const promos = ref([
     { title: 'ANTENA CPE EXTERIOR PUNTO A PUNTO 5KL', image: '2524.png' },
     { title: 'ROUTER DUAL-BAND 5 ANTENAS', image: '2693.png' },
     { title: 'BOARD DDR4 AMD RYZEN AM4', image: '2656.png' },
+    { title: 'ROUTER DUAL-BAND GIGABYTE 4 ANTENAS', image: '2529.png' },
+    { title: 'ROUTER 2 ANT 4G SIM CARD TENDA', image: '9559.png' },
   ]);
 
 const closePopup = () => {
