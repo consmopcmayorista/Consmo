@@ -23,6 +23,8 @@
   </template>
   
   <script setup>
+  import { computed } from 'vue'
+  
   const props = defineProps({
     promo: {
       type: Object,
@@ -85,6 +87,8 @@
   .modal-image {
     width: 100%;
     height: auto;
+    max-height: 400px;
+    object-fit: contain;
     border-radius: 14px;
     margin-top: 10px;
     margin-bottom: 20px;
