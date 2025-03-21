@@ -1,0 +1,79 @@
+<template>
+    <div class="promos-gallery">
+      <div
+        v-for="(promo, index) in promos"
+        :key="index"
+        class="promo-card"
+        @click="$emit('select-promo', { ...promo, folder: 'liquidacion' })"
+      >
+        <div class="badge">🔥 LIQUIDACIÓN</div>
+        <img :src="`/images2/promos/liquidacion/${promo.image}`" :alt="promo.title" />
+        <div class="promo-title">{{ promo.title }}</div>
+      </div>
+    </div>
+  </template>
+  
+  <script setup>
+  const promos = [
+  { title: 'DIADEMA PARA PC/TABLETS/CELULAR', image: '4060.jpg' },
+      { title: 'MEMORIA RAM DDR4 4GB 2666', image: '5052.jpg' },
+      { title: 'DATAFONO MOVIL', image: '9335.jpg' },
+      { title: 'DIADEMA PARA PC JD-868 2 PLUG', image: 'C9540.jpg' },
+      { title: 'DIADEMA PARA PC JD-808 2 PLUG', image: 'C9542.jpg' },
+      { title: 'DIADEMA PARA PC JD-809 1 PLUG', image: 'C9546.jpg' },
+      { title: 'PARLANTES USB DE 3W M600', image: 'C9560.jpg' },
+  ]
+  </script>
+  
+  <style scoped>
+  .promos-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  .promo-card {
+    width: 240px;
+    background: #fff5f5;
+    border: 2px solid #ff5252;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+  }
+  .promo-card:hover {
+    transform: scale(1.05);
+  }
+  .promo-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+  }
+  .badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #ff5252;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 8px;
+  }
+  .promo-title {
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #d32f2f;
+    text-align: center;
+  }
+  .promo-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  background-color: #fff1f1;
+}
+
+  </style>
+  
