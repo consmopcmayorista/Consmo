@@ -32,6 +32,11 @@
     }
   })
   
+  // Esta función codifica el texto para URL pero deja los espacios visibles (no los convierte en %20)
+  const customEncode = (text) => {
+    return encodeURIComponent(text).replace(/%20/g, ' ')
+  }
+  
   const getPromoTipo = (folder) => {
     switch (folder) {
       case 'mes':
@@ -47,11 +52,12 @@
   
   const whatsappLink = computed(() => {
     const tipo = getPromoTipo(props.promo.folder)
-    const titulo = encodeURIComponent(props.promo.title)
-    const texto = encodeURIComponent(`Hola, quiero más información sobre un ${tipo}. Producto: ${titulo}`)
+    const titulo = customEncode(props.promo.title)
+    const texto = customEncode(`Hola, quiero más información sobre un ${tipo}. Producto: ${props.promo.title}`)
     return `https://wa.me/573015537673?text=${texto}`
   })
   </script>
+  
   
   <style scoped>
   .modal-overlay {
