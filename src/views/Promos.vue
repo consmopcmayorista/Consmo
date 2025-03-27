@@ -23,6 +23,7 @@ import PromoModal from '@/components/PromoModal.vue'
 import PromoMes from '@/components/PromoMes.vue'
 import PromoLiquidacion from '@/components/PromoLiquidacion.vue'
 import PromoCombos from '@/components/PromoCombos.vue'
+import PromoRelampago from '@/components/PromoRelampago.vue'
 
 const activeTab = ref(0)
 const showModal = ref(false)
@@ -31,7 +32,8 @@ const selectedPromo = ref(null)
 const sections = [
   { name: 'Promociones del Mes', component: PromoMes },
   { name: 'Liquidación', component: PromoLiquidacion },
-  { name: 'Combos Pague y Lleve', component: PromoCombos }
+  { name: 'Combos Pague y Lleve', component: PromoCombos },
+  { name: 'Relámpago', component: PromoRelampago },
 ]
 
 const currentComponent = computed(() => sections[activeTab.value].component)

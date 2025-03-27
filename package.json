@@ -22,6 +22,7 @@
     "jspdf": "^2.5.2",
     "jspdf-autotable": "^3.8.4",
     "leaflet": "^1.9.4",
+    "lucide-vue-next": "^0.484.0",
     "owl.carousel": "^2.3.4",
     "path": "^0.12.7",
     "swiper": "^11.2.1",

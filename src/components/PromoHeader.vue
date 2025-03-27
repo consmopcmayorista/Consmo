@@ -12,7 +12,9 @@
           <span class="tab-icon">
             <template v-if="section.name.includes('Mes')">🗓️</template>
             <template v-else-if="section.name.includes('Liquidación')">🔥</template>
-            <template v-else>💥</template>
+            <template v-else-if="section.name.includes('Relámpago')">⚡</template>
+            <template v-else>💼</template>
+
           </span>
           {{ section.name }}
         </button>
