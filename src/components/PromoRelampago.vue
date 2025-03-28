@@ -25,6 +25,9 @@
   const promos = [
     { title: 'DIADEMA GAMER AOAS AS-20 USB-PLUG', image: '1456.png' },
     { title: 'CAJON MONEDERO PEQUEÑO COLPOS', image: '3513.png' },
+    { title: 'CAJA EXTERNA SATA USB 3.0', image: '9132.png' },
+    { title: 'COOLER DISIPADOR PARA BOARD RGB', image: '9218.png' },
+    { title: 'COOLER DISIPADOR TRIPLE RGB', image: '9268.png' },
   ]
   </script>
   
