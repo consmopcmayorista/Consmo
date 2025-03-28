@@ -66,7 +66,7 @@ export default {
           nombre: "CHASIS GAMER TRIDIMENCIONAL",
           descripcion: "CHASIS PARA PC GAMER TRIDIMENCIONAL RGB NEGRO 7 COOLER ORIGAMI",
           imagen: "/images2/destacados/destacado1.jpg",
-          link: "/producto?producto=41569"
+          link: "/producto?producto=41567"
         },
         {
           nombre: "MONITOR IPS 27 PULGADAS",
