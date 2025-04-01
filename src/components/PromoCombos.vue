@@ -15,11 +15,11 @@
   
   <script setup>
   const promos = [
-  { title: 'DIADEMA PARA PC', image: 'C9541.jpg' },
-      { title: 'BASE REFRIGERANTE', image: 'C9570.jpg' },
-      { title: 'PARLANTES USB 3W MADERA', image: 'C9664.jpg' },
-      { title: 'HUB USB 3.0 7 PUERTOS SWITCH', image: 'C9680.jpg' },
-      { title: 'LECTOR DE TARJETAS SD 5 EN 1', image: 'C9685.jpg' },
+      { title: 'DIADEMA PARA PC C:C9541', image: 'C9541.jpg' },
+      { title: 'BASE REFRIGERANTE C:C9570', image: 'C9570.jpg' },
+      { title: 'PARLANTES USB 3W MADERA C:C9664', image: 'C9664.jpg' },
+      { title: 'HUB USB 3.0 7 PUERTOS SWITCH C:C9680', image: 'C9680.jpg' },
+      { title: 'LECTOR DE TARJETAS SD 5 EN 1 C:C9685', image: 'C9685.jpg' },
   ]
   </script>
   

@@ -15,13 +15,13 @@
   
   <script setup>
   const promos = [
-  { title: 'DIADEMA PARA PC/TABLETS/CELULAR', image: '4060.jpg' },
-      { title: 'MEMORIA RAM DDR4 4GB 2666', image: '5052.jpg' },
-      { title: 'DATAFONO MOVIL', image: '9335.jpg' },
-      { title: 'DIADEMA PARA PC JD-868 2 PLUG', image: 'C9540.jpg' },
-      { title: 'DIADEMA PARA PC JD-808 2 PLUG', image: 'C9542.jpg' },
-      { title: 'DIADEMA PARA PC JD-809 1 PLUG', image: 'C9546.jpg' },
-      { title: 'PARLANTES USB DE 3W M600', image: 'C9560.jpg' },
+      { title: 'DIADEMA PARA PC/TABLETS/CELULAR C:4060', image: '4060.jpg' },
+      { title: 'MEMORIA RAM DDR4 4GB 2666 C:5052', image: '5052.jpg' },
+      { title: 'DATAFONO MOVIL C:9335', image: '9335.jpg' },
+      { title: 'DIADEMA PARA PC JD-868 2 PLUG C:C9540', image: 'C9540.jpg' },
+      { title: 'DIADEMA PARA PC JD-808 2 PLUG C:C9542', image: 'C9542.jpg' },
+      { title: 'DIADEMA PARA PC JD-809 1 PLUG C:C9546', image: 'C9546.jpg' },
+      { title: 'PARLANTES USB DE 3W M600 C:C9560', image: 'C9560.jpg' },
   ]
   </script>
   
