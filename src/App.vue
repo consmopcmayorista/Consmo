@@ -5,6 +5,7 @@
 import { ref, onMounted, provide, computed } from 'vue'
 import { useRouter } from "vue-router"
 import axios from 'axios'
+import WhatsAppWidget from "@/components/WhatsAppWidget.vue"
 
 
 import TopHeader from './components/TopHeader.vue'
@@ -614,16 +615,7 @@ provide('categorias_alfabetica', categorias_alfabetica);
   <RouterView :key="$route.fullPath" />
 
   <!-- Botón de WhatsApp -->
-  <div class="whatsapp-button">
-    <a
-      href="https://wa.me/573015537673?text=Vengo%20desde%20la%20pagina%20web%20y%20quiero%20consultar%20sobre%20algo"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="whatsapp-link"
-    >
-      <i class="fab fa-whatsapp"></i>
-    </a>
-  </div>
+  <WhatsAppWidget phoneNumber="573015537673" />
 
   <RedesComp />
 
