@@ -1,8 +1,8 @@
 <template>
     <div class="notfound-container">
       <div class="notfound-content">
-        <!-- Ilustración SVG inline -->
-        <div class="illustration">
+        <!-- Ilustración SVG inline con trigger del juego -->
+        <div class="illustration" @click="showGame = true" title="Haz clic para jugar 🕹️">
           <svg width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="4" y="6" width="16" height="12" rx="2" ry="2" stroke="#fdd835" stroke-width="2" fill="white"/>
             <circle cx="8" cy="12" r="1.5" fill="#ff6b6b"/>
@@ -29,11 +29,17 @@
           </a>
         </div>
       </div>
+  
+      <!-- Juego oculto -->
+      <DinoGame v-if="showGame" @close="showGame = false" />
     </div>
   </template>
   
   <script setup>
-  // Sin lógica necesaria
+  import { ref } from 'vue'
+  import DinoGame from '@/components/DinoGame.vue'
+  
+  const showGame = ref(false)
   </script>
   
   <style scoped>
@@ -63,6 +69,12 @@
   
   .illustration {
     margin-bottom: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .illustration:hover {
+    transform: scale(1.1);
   }
   
   .animated-404 {
