@@ -79,7 +79,13 @@ const router = createRouter({
       path: '/promociones',
       name: 'promociones',
       component: () => import('../views/Promos.vue'),
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: () => import('../views/Error404.vue'),
     }
+    
   ],
   strict: true,
   debug: true,

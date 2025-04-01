@@ -796,7 +796,7 @@ $(document).ready(function() {
           </div>
           </div>
 
-  <popup/>
+
 </template>
 
 <style scoped>

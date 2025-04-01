@@ -1,5 +1,5 @@
 <template>
-    <div class="promos-gallery">
+  <div v-if="promos.length > 0" class="promos-gallery">
       <div
         v-for="(promo, index) in promos"
         :key="index"
@@ -19,6 +19,9 @@
         <div class="promo-timer">Oferta válida por tiempo limitado</div>
       </div>
     </div>
+    <div v-else class="no-promos-message">
+    ⚠️ Actualmente no hay promociones Relampago. ¡Muy pronto tendrás nuevas ofertas!
+  </div>
   </template>
   
   <script setup>
@@ -88,5 +91,24 @@
     color: #5d4037;
     font-style: italic;
   }
+  .no-promos-message {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 2px dashed #ffeeba;
+  padding: 20px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 40px auto;
+  max-width: 500px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
   </style>
   

@@ -1,5 +1,5 @@
 <template>
-    <div class="promos-gallery">
+  <div v-if="promos.length > 0" class="promos-gallery">
       <div
         v-for="(promo, index) in promos"
         :key="index"
@@ -11,6 +11,9 @@
         <div class="promo-title">{{ promo.title }}</div>
       </div>
     </div>
+    <div v-else class="no-promos-message">
+      ⚠️ Actualmente no hay promociones de Liquidación. ¡Muy pronto tendrás nuevas ofertas!
+      </div>
   </template>
   
   <script setup>
@@ -74,6 +77,24 @@
   object-fit: contain;
   background-color: #fff1f1;
 }
+.no-promos-message {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 2px dashed #ffeeba;
+  padding: 20px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 40px auto;
+  max-width: 500px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  animation: fadeIn 0.4s ease-in-out;
+}
 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
   </style>
   
