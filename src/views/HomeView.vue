@@ -635,18 +635,7 @@ $(document).ready(function() {
                 </span>
               </div>
               <!-- rating -->
-              <div class="rating">
-                <div class="d-flex align-items-center justify-content-start">
-                  <div class="rating_star">
-                    <span><i class="las la-star"></i></span>
-                    <span><i class="las la-star"></i></span>
-                    <span><i class="las la-star"></i></span>
-                    <span><i class="las la-star"></i></span>
-                    <span><i class="las la-star"></i></span>
-                  </div>
-                  <p class="rating_count mb-0">(50)</p>
-                </div>
-              </div>
+
             </div>
             <div class="full_atc_btn">
               <button @click="buscar_productos(dato.id)">
@@ -718,19 +707,6 @@ $(document).ready(function() {
 
 
              <!-- rating  -->
-                <div class="rating">
-                <div class="d-flex align-items-center">
-                    <div class="rating_star">
-
-                        <span><i class="las la-star"></i></span>
-                        <span><i class="las la-star"></i></span>
-                        <span><i class="las la-star"></i></span>
-                        <span><i class="las la-star"></i></span>
-                        <span><i class="las la-star"></i></span>
-                    </div>
-                    <p class="rating_count">50 Reviews</p>
-                </div>
-            </div>
             <!-- product info  -->
             <div class="product_other_info">
                  <p><span class="text-semibold">

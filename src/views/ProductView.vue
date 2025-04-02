@@ -102,12 +102,36 @@
   height: 4px;
   cursor: pointer;
 }
+
+.decor-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.icono-decorativo {
+  color: #facc15; /* amarillo vibrante */
+  font-size: 18px;
+}
+
+.linea-decorativa {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, #d1d5db, #6b7280); /* gris claro a oscuro */
+  opacity: 0.7;
+  border-radius: 2px;
+}
+
+
 </style>
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
+import BarraPopularidad from '@/components/BarraPopularidad.vue'
 
 const producto_mostrar = ref(null)
 const imagenMostrada = ref('')
@@ -465,19 +489,14 @@ onMounted(() => {
         <div class="col-lg-6">
           <div class="product_info_wrapper" v-if="!cargando && producto_mostrar">
             <div class="product_base_info">
-              <h1>{{ producto_mostrar.titulo }}</h1>
-              <!-- rating -->
-              <div class="rating">
-                <div class="d-flex align-items-center">
-                  <div class="rating_star">
-                    <span><i class="las la-star"></i></span>
-                    <span><i class="las la-star"></i></span>
-                    <span><i class="las la-star"></i></span>
-                    <span><i class="las la-star"></i></span>
-                    <span><i class="las la-star"></i></span>
-                  </div>
-                </div>
-              </div>
+<h1>{{ producto_mostrar.titulo }}</h1>
+
+
+<BarraPopularidad/>
+
+
+
+
 
               <!-- product info -->
               <div class="product_other_info">
