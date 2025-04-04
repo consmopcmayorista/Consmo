@@ -2,10 +2,10 @@
     <div v-if="showPopup" class="popup-overlay" @click="closePopup">
       <div class="popup" @click.stop>
         <button class="close-btn" @click="closePopup">&times;</button>
-        <img src="/images2/promos/inicio.jpg" alt="Promociones de Marzo" class="promo-image">
+        <img src="/images2/promos/inicio.png" alt="Promociones de Abril" class="promo-image">
         <div class="popup-content">
-          <h2>¡Promociones de Marzo!</h2>
-          <p>No te pierdas nuestras increíbles promociones del mes de marzo.</p>
+          <h2>Promociones de Abril</h2>
+          <p>No te pierdas nuestras increíbles promociones del mes de Abril.</p>
           <button class="promo-btn" @click="goToPromociones">Ir a Promociones</button>
         </div>
       </div>
