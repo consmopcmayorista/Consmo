@@ -25,7 +25,7 @@
     { title: 'CAJA CONVERTIDORA HDMI A VGA :MC1045', image: 'MC1045.png' },
     { title: 'TABLET 10.5" IPS FHD ANDROID :8791', image: '8791.png' },
     { title: 'CHASIS GAMER TRIDIMENSIONAL RGB :8897', image: '8897.png' },
-    // Agrega más promociones según sea necesari
+    { title: 'TODO EN UNO POS 15.6" :2707', image: '2707.png' },
     // Agrega más promociones según sea necesario
   ]
   </script>
