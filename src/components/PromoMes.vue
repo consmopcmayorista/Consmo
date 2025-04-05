@@ -23,6 +23,9 @@
     { title: 'CONTROL INALAMBRICO PS3 :2805', image: '2805.png' },
     { title: 'CAMARA WEB USB NT-003 :9557', image: '9557.png' },
     { title: 'CAJA CONVERTIDORA HDMI A VGA :MC1045', image: 'MC1045.png' },
+    { title: 'TABLET 10.5" IPS FHD ANDROID :8791', image: '8791.png' },
+    { title: 'CHASIS GAMER TRIDIMENSIONAL RGB :8897', image: '8897.png' },
+    // Agrega más promociones según sea necesari
     // Agrega más promociones según sea necesario
   ]
   </script>
