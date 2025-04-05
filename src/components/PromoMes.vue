@@ -17,7 +17,12 @@
   
   <script setup>
   const promos = [
-    { title: 'CAJON MONEDERO PEQUEÑO C:3513', image: '3513.png' },
+    { title: 'CAJON MONEDERO PEQUEÑO :3513', image: '3513.png' },
+    { title: 'MOUSE ALAMBRICO RETROILUMINADO :1219', image: '1219.png' },
+    { title: 'FUENTE DE PODER 790W ATX :1530', image: '1530.png' },
+    { title: 'CONTROL INALAMBRICO PS3 :2805', image: '2805.png' },
+    { title: 'CAMARA WEB USB NT-003 :9557', image: '9557.png' },
+    { title: 'CAJA CONVERTIDORA HDMI A VGA :MC1045', image: 'MC1045.png' },
     // Agrega más promociones según sea necesario
   ]
   </script>
