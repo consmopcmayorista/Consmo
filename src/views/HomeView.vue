@@ -8,7 +8,7 @@ import axios from 'axios'
 
 import popup from '@/components/PopupPromociones.vue'
 import Destacados from '@/components/Destacados.vue'
-
+import instagram from '@/components/InstagramSlider.vue'
 
 // Configuración
 const dominio = 'consmopcmayorista.com'
@@ -579,6 +579,8 @@ $(document).ready(function() {
       </a>
     </div>
   </div>
+
+<instagram/>
 
 <!-- Sección Recomendados -->
 <div class="recfor_you section_padding_b">
