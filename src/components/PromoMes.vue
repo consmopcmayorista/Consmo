@@ -26,6 +26,15 @@
     { title: 'TABLET 10.5" IPS FHD ANDROID :8791', image: '8791.png' },
     { title: 'CHASIS GAMER TRIDIMENSIONAL RGB :8897', image: '8897.png' },
     { title: 'TODO EN UNO POS 15.6" :2707', image: '2707.png' },
+    { title: 'TODO EN UNO POS 11.6" I3 5TA :2706', image: '2706.png' },
+    { title: 'ROUTER DUAL-BAND 4 ANTENAS :2529', image: '2529.png' },
+    { title: 'ROUTER DUAL-BAND 5 ANTENAS WIFI 6 :2693', image: '2693.png' },
+    { title: 'MONITOR IPS 23.8" 100Hz :3431', image: '3431.png' },
+    { title: 'MONITOR IPS 27" 100Hz :3432', image: '3432.png' },
+    { title: 'MONITOR IPS 27" CURVO 180Hz :3433', image: '3433.png' },
+    { title: 'CHASIS PARA PC RGB LINEAL NEGRO :8898', image: '8898.png' },
+    { title: 'PARLANTE USB-PLUG GAMER RGB 6W X2 :C9577', image: 'C9577.png' },
+
     // Agrega más promociones según sea necesario
   ]
   </script>
