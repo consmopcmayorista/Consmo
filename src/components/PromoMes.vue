@@ -34,7 +34,10 @@
     { title: 'MONITOR IPS 27" CURVO 180Hz :3433', image: '3433.png' },
     { title: 'CHASIS PARA PC RGB LINEAL NEGRO :8898', image: '8898.png' },
     { title: 'PARLANTE USB-PLUG GAMER RGB 6W X2 :C9577', image: 'C9577.png' },
-
+    { title: 'DISCO DURO PARA PC PULL 500GB :2309', image: '2309.png' },
+    { title: 'PARLANTE USB-PLUG GAMER RGB 6W X2 :C9577', image: 'C9577.png' },
+    { title: 'MEMORIA RAM DDR4 16GB 3200MHZ KINGSTON :4497', image: '4497.png' },
+    { title: 'MEMORIA RAM DDR4 DDR4 16GB 2666MHZ :9551', image: '9551.png' },
     // Agrega más promociones según sea necesario
   ]
   </script>
