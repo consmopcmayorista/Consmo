@@ -37,6 +37,7 @@
     { title: 'DISCO DURO PARA PC PULL 500GB :2309', image: '2309.png' },
     { title: 'MEMORIA RAM DDR4 16GB 3200MHZ KINGSTON :4497', image: '4497.png' },
     { title: 'MEMORIA RAM DDR4 DDR4 16GB 2666MHZ :9551', image: '9551.png' },
+
     // Agrega más promociones según sea necesario
   ]
   </script>

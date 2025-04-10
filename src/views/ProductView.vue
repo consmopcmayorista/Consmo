@@ -1,7 +1,4 @@
-
 <style scoped>
-
-
  img {
   transition: opacity 0.3s ease-in-out;
   
@@ -401,7 +398,7 @@ onMounted(() => {
   })
 
   zoomContainer.addEventListener('mouseout', () => {
-    zoomResult.style.display = 'none'
+  zoomResult.style.display = 'none'
   })
 })
 
