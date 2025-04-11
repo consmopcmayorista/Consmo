@@ -139,7 +139,7 @@ const mostrarModal = ref(false)
 
 const route = useRoute()
 
-let  maximo = ref()
+const  maximo = ref(100) // Valor inicial, se actualizará al cargar el producto
 
 
 function cambiarImagen(url) {
@@ -147,8 +147,8 @@ function cambiarImagen(url) {
 }
 
 function incrementar() {
-  if(cantidades.value < maximo){
-  cantidades.value++
+  if(cantidades.value < maximo.value){
+    cantidades.value++
   }
 }
 function decrementar() {

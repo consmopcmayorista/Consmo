@@ -45,7 +45,7 @@
             <div class="banner-content">
               <h3>{{ producto.nombre }}</h3>
               <p>{{ producto.descripcion }}</p>
-              <a :href="producto.link" class="btn btn-primary">Ver Producto</a>
+              <a :href="producto.link" class="btn btn-primary">Ve Producto</a>
             </div>
           </div>
         </div>
