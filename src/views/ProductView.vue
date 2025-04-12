@@ -558,8 +558,7 @@ onMounted(() => {
       <div class="product_view_tabs mt-4">
         <div class="pv_tab_buttons spec_text">
           <div class="pbt_single_btn active">Detalle Productos</div>
-
-</div>
+      </div>
 
         <div class="pb_tab_content info active">
           <div class="row">
