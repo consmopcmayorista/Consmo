@@ -68,6 +68,7 @@
     font-size: 1rem;
     text-align: center;
     font-weight: bold;
+    color: white;
   }
   .promo-card img {
   width: 100%;
