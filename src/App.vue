@@ -455,7 +455,12 @@ provide('categorias_alfabetica', categorias_alfabetica);
       <!-- FIN search_suggest -->
     </div> <!-- FIN .search.d-flex -->
         </div> 
-
+                        <!-- button para pagos con addi 
+                        
+                        <div class="cart_sum_pros1">
+                            <button onclick="javascript:window.location.href='">CREDITO CON ADDI</button>
+                        </div> -->
+                        
                    <!-- shop cart wrapper  -->
                    <div class="shopcart">
                         <a href="carrito" class="icon_wrp text-center d-none d-lg-block">
