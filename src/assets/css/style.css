@@ -2246,7 +2246,6 @@ button.list_product_btn:hover {
     -o-transition: .3s;
     transition: .3s;
 }
-
 .cart_sum_pros {
     margin-bottom: 10px;
 }
@@ -2255,6 +2254,34 @@ button.list_product_btn:hover {
     background: transparent;
     color: #fd3d57;
 }
+
+.cart_sum_pros1 button {
+    width: 100%;
+    border: 1px solid #fd3d57;
+    background: #fd3d57;
+    text-align: center;
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: 500;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+
+.cart_sum_pros1 {
+    margin-bottom: 10px;
+}
+
+.cart_sum_pros1 button:hover {
+    background: #0c2685;
+    color: white;
+    border: 1px solid white;
+}
+
+
 
 .wishlist .cart_cont h5 {
     margin-bottom: 0;

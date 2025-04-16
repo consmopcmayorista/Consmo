@@ -99,6 +99,13 @@
                         <div class="cart_sum_pros">
                             <button onclick="javascript:window.location.href='./confirmacion'">Procesar Pago</button>
                         </div>
+                        <!-- button para pagos con addi -->
+                        <!--
+                        <div class="cart_sum_pros1">
+                            <button onclick="javascript:window.location.href='">CREDITO CON ADDI</button>
+                        </div>
+                        -->
+                        
                     </div>
                     </div>
                 </div>
