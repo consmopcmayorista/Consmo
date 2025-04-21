@@ -575,9 +575,45 @@ $(document).ready(function() {
             alt="ad"
           />
         </picture>
-      </a>
+      </a> 
+    </div>
+  </div> 
+
+  <!-- Fin Banner Tenda NUEVO -->
+  <!-- Banner Tenda NUEVO 
+  <div class="card-group px-4 ad_banner_area section_padding_b">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4">
+      <div class="card border-0 h-100">
+        <div class="card-img-container">
+          <a href="catalogo_cat?categoria=&busqueda=tenda">
+            <img src="/assets/images/banner_tenda.jpg" class="card-img-top card-img-full" alt="...">
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4">
+      <div class="card border-0 h-100">
+        <div class="card-img-container">
+          <a href="catalogo_cat?categoria=&busqueda=tenda">
+            <img src="/assets/images/banner_tenda.jpg" class="card-img-top card-img-full" alt="...">
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4">
+      <div class="card border-0 h-100">
+        <div class="card-img-container">
+          <a href="catalogo_cat?categoria=&busqueda=tenda">
+            <img src="/assets/images/banner_tenda.jpg" class="card-img-top card-img-full" alt="...">
+          </a>
+        </div>
+      </div>
     </div>
   </div>
+</div> -->
 
 
 <!-- Sección Recomendados -->
@@ -937,4 +973,29 @@ $(document).ready(function() {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.card-img-container {
+    height: 300px; /* Altura por defecto para móvil */
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  .card-img-full {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  /* Altura mayor en pantallas medianas y grandes */
+  @media (min-width: 768px) {
+    .card-img-container {
+      height: 400px;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .card-img-container {
+      height: 480px;
+    }
+  }
+
 </style>
