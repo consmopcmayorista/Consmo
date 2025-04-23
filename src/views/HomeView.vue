@@ -2,6 +2,8 @@
 import { RouterLink, RouterView } from 'vue-router'
 import services from '@/components/services.vue'
 import ProductQuickview from '@/components/product_indv.vue' // Importamos el modal
+import CarouselTarjetas from '@/components/CarouselTarjetas.vue' // Importamos el carrusel de tarjetas
+
 
 import { ref, onMounted, inject } from 'vue'
 import axios from 'axios'
@@ -579,41 +581,10 @@ $(document).ready(function() {
     </div>
   </div> 
 
-  <!-- Fin Banner Tenda NUEVO -->
-  <!-- Banner Tenda NUEVO 
-  <div class="card-group px-4 ad_banner_area section_padding_b">
-  <div class="row justify-content-center">
-    <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4">
-      <div class="card border-0 h-100">
-        <div class="card-img-container">
-          <a href="catalogo_cat?categoria=&busqueda=tenda">
-            <img src="/assets/images/banner_tenda.jpg" class="card-img-top card-img-full" alt="...">
-          </a>
-        </div>
-      </div>
-    </div>
 
-    <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4">
-      <div class="card border-0 h-100">
-        <div class="card-img-container">
-          <a href="catalogo_cat?categoria=&busqueda=tenda">
-            <img src="/assets/images/banner_tenda.jpg" class="card-img-top card-img-full" alt="...">
-          </a>
-        </div>
-      </div>
-    </div>
+  <!--<CarouselTarjetas :tarjetas="productos_alea.slice(0, 8)" />-->
+  <!-- Banner Tenda NUEVO -->
 
-    <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4">
-      <div class="card border-0 h-100">
-        <div class="card-img-container">
-          <a href="catalogo_cat?categoria=&busqueda=tenda">
-            <img src="/assets/images/banner_tenda.jpg" class="card-img-top card-img-full" alt="...">
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
 
 
 <!-- Sección Recomendados -->
@@ -997,5 +968,6 @@ $(document).ready(function() {
       height: 480px;
     }
   }
+  
 
 </style>
