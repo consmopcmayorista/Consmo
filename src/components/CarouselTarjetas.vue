@@ -43,23 +43,23 @@
         // Tarjetas definidas manualmente con imágenes locales
         tarjetas: [
           {
-            imagen: "/public/images/img/carrusel_tarjetas/TENDA.png",
+            imagen: "/public/images/img/banner/TENDA.png",
             link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=tenda"
           },
           {
-            imagen: "/public/images/img/carrusel_tarjetas/GENIUS.png",
+            imagen: "/public/images/img/banner/GENIUS.png",
             link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=GENIUS"
           },
           {
-            imagen: "/public/images/img/carrusel_tarjetas/DIGITAL POS.png",
+            imagen: "/public/images/img/banner/DIGITALPOS.png",
             link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=DIGITAL+POS"
           },
           {
-            imagen: "/public/images/img/carrusel_tarjetas/LOGITECH.png",
+            imagen: "/public/images/img/banner/LOGITECH.png",
             link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=LOGITECH"
           },
           {
-            imagen: "/public/images/img/carrusel_tarjetas/WATTANA.png",
+            imagen: "/public/images/img/banner/WATTANA.png",
             link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=WATTANA"
           },
         ]
