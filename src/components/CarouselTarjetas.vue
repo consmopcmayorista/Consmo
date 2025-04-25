@@ -55,16 +55,17 @@
             link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=DIGITAL+POS"
           },
           {
-            imagen: "/images/img/banner/LOGITECH.png",
-            link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=LOGITECH"
-          },
-          {
             imagen: "/images/img/banner/WATTANA.png",
             link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=WATTANA"
+          },
+          {
+            imagen: "/images/img/banner/LOGITECH.png",
+            link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=LOGITECH"
           },
         ]
       };
     },
+
     methods: {
       // Mover al siguiente índice
       next() {
