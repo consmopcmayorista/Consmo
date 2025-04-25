@@ -561,7 +561,7 @@ $(document).ready(function() {
     </div>
   </div>
 
-  <!-- Banner Tenda -->
+  <!-- Banner Tenda 
   <div class="ad_banner_area section_padding_b">
     <div class="container">
       <a href="catalogo_cat?categoria=&busqueda=tenda">
@@ -579,10 +579,10 @@ $(document).ready(function() {
         </picture>
       </a> 
     </div>
-  </div> 
+  </div> -->
 
 
-  <!--<CarouselTarjetas :tarjetas="productos_alea.slice(0, 8)" />-->
+  <CarouselTarjetas :tarjetas="productos_alea.slice(0, 8)" />
   <!-- Banner Tenda NUEVO -->
 
 

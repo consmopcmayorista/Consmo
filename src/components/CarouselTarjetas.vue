@@ -27,7 +27,7 @@
           >
               <img :src="card.imagen" alt="Imagen tarjeta" />
           </a>
-          </div>
+          </div>  
         </div>    
     </div>      
   </template>
@@ -43,24 +43,24 @@
         // Tarjetas definidas manualmente con imágenes locales
         tarjetas: [
           {
-            imagen: "/public/images/img/banner/banner_2_1731764371682.jpg",
+            imagen: "/public/images/img/carrusel_tarjetas/1. TENDA.png",
             link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=tenda"
           },
           {
-            imagen: "/public/images/img/banner/banner_2_1731764371682.jpg",
-            link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=tenda"
+            imagen: "/public/images/img/carrusel_tarjetas/2. GENIUS.png",
+            link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=GENIUS"
           },
           {
-            imagen: "/public/images/img/banner/banner_2_1731764371682.jpg",
-            link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=tenda"
+            imagen: "/public/images/img/carrusel_tarjetas/3. DIGITAL POS.png",
+            link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=DIGITAL+POS"
           },
           {
-            imagen: "/public/images/img/banner/banner_2_1731764371682.jpg",
-            link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=tenda"
+            imagen: "/public/images/img/carrusel_tarjetas/4. LOGITECH.png",
+            link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=LOGITECH"
           },
           {
-            imagen: "/public/images/img/banner/banner_2_1731764371682.jpg",
-            link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=tenda"
+            imagen: "/public/images/img/carrusel_tarjetas/5. WATTANA.png",
+            link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=WATTANA"
           },
         ]
       };
@@ -126,7 +126,7 @@
   /* Estilo general de cada tarjeta */
   .custom-card {
     min-width: 30%;
-    height: 100%; /* altura automática basada en contenido */
+    height: auto; /* altura automática basada en contenido */
     transition: transform 0.4s ease;
     background: #fff;
     /*border: 2px solid #007bff; /* borde azul */
@@ -135,15 +135,15 @@
     overflow: hidden; /* para que la imagen no se salga */
     display: flex;
     flex-direction: column;
+    
 }
   
   /* Imagen dentro de la tarjeta */
   .custom-card img {
     width: 100%;
-    height: 350px;
+    height: 100%;
     object-fit: cover;
-    border-radius: 10px 10px 0 0;
-    
+    display: block;
   }
   
   /* Contenido dentro de la tarjeta */
@@ -154,6 +154,7 @@
   /* Tarjeta activa se "levanta" */
   .custom-card.active {
     transform: translateY(-25px);
+    overflow: hidden;
   }
   
   /* Botones de navegación */
