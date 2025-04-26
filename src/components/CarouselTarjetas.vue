@@ -52,7 +52,7 @@
           },
           {
             imagen: "/images/img/banner/DIGITALPOS.png",
-            link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=DIGITAL+POS"
+            link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=POS+PUNTOS+DE+VENTA"
           },
           {
             imagen: "/images/img/banner/WATTANA.png",
