@@ -410,7 +410,7 @@ $(document).ready(function() {
     <div class="carousel-inner">
       <!-- Slide 1 -->
       <div class="carousel-item active">
-        <a href="pdfs/Catalogo.pdf" target="_blank">
+        <a href="pdfs/CatalogoActualizado.pdf" target="_blank">
           <img src="/images2/banner_equipos.jpg" class="d-block w-100" alt="Equipos" />
         </a>
       </div>
