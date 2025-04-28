@@ -422,7 +422,7 @@ $(document).ready(function() {
       </div>
       <!-- Slide 3 -->
       <div class="carousel-item">
-        <a href="pdfs/CatalogoGamer.pdf" target="_blank">
+        <a href="pdfs/CatalogoGamer26.04.2025.pdf" target="_blank">
           <img src="/images2/catalogo-gamer.jpg" class="d-block w-100" alt="Gamer" />
         </a>
       </div>
