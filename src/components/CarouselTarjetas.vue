@@ -8,27 +8,47 @@
       <button class="nav-btn next" @click="next">›</button>
   
       <!-- Carril de tarjetas scrollable -->
-    <div class="carousel-track" ref="track">
-        <!-- Recorremos cada tarjeta -->
+      <div class="carousel-track" ref="track">
+    <div
+      v-for="(card, index) in tarjetas"
+      :key="index"
+      class="card custom-card"
+      :class="{ active: index === activeIndex }"
+      ref="tarjeta"
+    >
+      <!-- Si tiene linkLeft y linkRight (nueva tarjeta especial) -->
         <div
-          v-for="(card, index) in tarjetas"
-          :key="index"
-          class="card custom-card"
-          :class="{ active: index === activeIndex }"
-          ref="tarjeta"
-          >
-          <!-- Enlace externo en toda la imagen -->
+          v-if="card.linkLeft && card.linkRight"
+          class="image-container"
+          :style="{ backgroundImage: 'url(' + card.imagen + ')' }"
+        >
           <a
-              v-if="card.link"
-              :href="card.link"
-              target="_blank"
-              rel="noopener"
-              class="card-link"
-          >
-              <img :src="card.imagen" alt="Imagen tarjeta" />
-          </a>
-          </div>  
-        </div>    
+            :href="card.linkLeft"
+            target="_blank"
+            rel="noopener"
+            class="half left"
+          ></a>
+          <a
+            :href="card.linkRight"
+            target="_blank"
+            rel="noopener"
+            class="half right"
+          ></a>
+        </div>
+
+        <!-- Si NO tiene linkLeft y linkRight (tarjeta normal) -->
+        <a
+          v-else-if="card.link"
+          :href="card.link"
+          target="_blank"
+          rel="noopener"
+          class="card-link"
+        >
+          <img :src="card.imagen" alt="Imagen tarjeta" />
+        </a>
+      </div>  
+    </div>
+
     </div>      
   </template>
   
@@ -62,6 +82,12 @@
             imagen: "/images/img/banner/LOGITECH.png",
             link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=LOGITECH"
           },
+          {
+            imagen: "/images/img/banner/TEROSORIGAMI.png",
+            linkLeft: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=TEROS",
+            linkRight: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=ORIGAMI"
+          },
+
         ]
       };
     },
@@ -195,6 +221,33 @@
       min-width: 90%;
     }
   }
+  .image-container {
+  position: relative;
+  width: 100%;
+  height: 100%; /* Igual que las imágenes normales */
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.half {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 2;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
+}
+
   </style>
   
   
