@@ -29,8 +29,8 @@
 .zoom-result {
   position: fixed;
   border: 1px solid #d4d4d4;
-  width: 800px;   /* ← Más ancho */
-  height: 700px;  /* ← Más alto */
+  width: 750px;   /* ← Más ancho */
+  height: 600px;  /* ← Más alto */
   overflow: hidden;
   background: #fff;
   display: none; 
@@ -381,7 +381,7 @@ onMounted(() => {
     zoomImage.style.position = 'absolute'
     zoomImage.style.top = '0'
     zoomImage.style.left = '0'
-    zoomImage.style.transform = 'scale(2)' // Ajusta la escala
+    zoomImage.style.transform = 'scale(1.5)' // Ajusta la escala
   })
 
   zoomContainer.addEventListener('mousemove', (e) => {
