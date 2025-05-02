@@ -19,7 +19,7 @@
 .zoom-lens {
   position: absolute;
   border: 1px solid #d4d4d4;
-  width: 100px;
+  width: 200px;
   height: 100px;
   cursor: none;
   border-radius: 50%;
@@ -29,13 +29,14 @@
 .zoom-result {
   position: fixed;
   border: 1px solid #d4d4d4;
-  width: 450px; 
-  height: 450px;
+  width: 800px;   /* ← Más ancho */
+  height: 700px;  /* ← Más alto */
   overflow: hidden;
   background: #fff;
   display: none; 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
+
 .zoom-result img {
   position: absolute;
   width: 100%;
@@ -393,7 +394,7 @@ onMounted(() => {
     
     zoomImage.style.transformOrigin = `${xPercentage}% ${yPercentage}%`
     // Ajustar posición del contenedor si deseas que se mueva
-    zoomResult.style.right = '250px'
+    zoomResult.style.right = '400px'
     zoomResult.style.top = '250px'
   })
 
@@ -442,12 +443,12 @@ onMounted(() => {
             </div>
             <div class="zoom-result"></div>
             <!-- Modal Zoom (click en la imagen) -->
-            <div v-if="mostrarModal" class="modal-overlay" @click="cerrarModal">
+            <!-- <div v-if="mostrarModal" class="modal-overlay" @click="cerrarModal">
               <div class="modal-content" @click.stop>
                 <img :src="imagenMostrada" alt="Zoom Image" class="zoom-image" />
                 <button class="close-btn" @click="cerrarModal">X</button>
               </div>
-            </div>
+            </div> -->
           </div>
 
           <!-- product slider small image -->
