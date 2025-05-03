@@ -29,7 +29,7 @@
 .zoom-result {
   position: fixed;
   border: 1px solid #d4d4d4;
-  width: 750px;   /* ← Más ancho */
+  width: 800px;   /* ← Más ancho */
   height: 600px;  /* ← Más alto */
   overflow: hidden;
   background: #fff;
@@ -394,8 +394,10 @@ onMounted(() => {
     
     zoomImage.style.transformOrigin = `${xPercentage}% ${yPercentage}%`
     // Ajustar posición del contenedor si deseas que se mueva
-    zoomResult.style.right = '400px'
-    zoomResult.style.top = '250px'
+    zoomResult.style.left = `${containerRect.right + 20}px`
+    zoomResult.style.top = `${containerRect.top}px`
+    // zoomResult.style.right = '400px'
+    // zoomResult.style.top = '250px'
   })
 
   zoomContainer.addEventListener('mouseout', () => {
