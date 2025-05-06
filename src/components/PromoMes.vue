@@ -17,26 +17,14 @@
   
   <script setup>
   const promos = [
-    // { title: 'CAJON MONEDERO PEQUEÑO :3513', image: '3513.png' },
-    // { title: 'MOUSE ALAMBRICO RETROILUMINADO :1219', image: '1219.png' },
-    // { title: 'FUENTE DE PODER 790W ATX :1530', image: '1530.png' },
-    // { title: 'CONTROL INALAMBRICO PS3 :2805', image: '2805.png' },
-    // { title: 'CAMARA WEB USB NT-003 :9557', image: '9557.png' },
-    // { title: 'CAJA CONVERTIDORA HDMI A VGA :MC1045', image: 'MC1045.png' },
-    // { title: 'TABLET 10.5" IPS FHD ANDROID :8791', image: '8791.png' },
-    // { title: 'CHASIS GAMER TRIDIMENSIONAL RGB :8897', image: '8897.png' },
-    // { title: 'TODO EN UNO POS 15.6" :2707', image: '2707.png' },
-    // { title: 'TODO EN UNO POS 11.6" I3 5TA :2706', image: '2706.png' },
-    // { title: 'ROUTER DUAL-BAND 4 ANTENAS :2529', image: '2529.png' },
-    // { title: 'ROUTER DUAL-BAND 5 ANTENAS WIFI 6 :2693', image: '2693.png' },
-    // { title: 'MONITOR IPS 23.8" 100Hz :3431', image: '3431.png' },
-    // { title: 'MONITOR IPS 27" 100Hz :3432', image: '3432.png' },
-    // { title: 'MONITOR IPS 27" CURVO 180Hz :3433', image: '3433.png' },
-    // { title: 'CHASIS PARA PC RGB LINEAL NEGRO :8898', image: '8898.png' },
-    // { title: 'PARLANTE USB-PLUG GAMER RGB 6W X2 :C9577', image: 'C9577.png' },
-    // { title: 'DISCO DURO PARA PC PULL 500GB :2309', image: '2309.png' },
-    // { title: 'MEMORIA RAM DDR4 16GB 3200MHZ KINGSTON :4497', image: '4497.png' },
-    // { title: 'MEMORIA RAM DDR4 DDR4 16GB 2666MHZ :9551', image: '9551.png' },
+    { title: 'DIADEMA GAMER USB AOAS :4133', image: '4133.png' },
+    { title: 'TV BOX 2GB+16GB 4K PRO :9081', image: '9081.png' },
+    { title: 'BATERIAS AA RECARGABLE X2 :C9003', image: 'C9003.png' },
+    { title: 'IMPRESORA TERMICA  POS 58MM :C9102', image: 'C9102.png'},
+    { title: 'TV BOX 4GB+32GB 8K UHD :C9105', image: 'C9105.png' },
+    { title: 'DECODIFICADOR TDT :C9117', image: 'C9117.png' },
+    { title: 'CAMARA IP ROBOTICA 5 ANTENAS DUAL BAND :C9663', image: 'C9663.png' },
+
 
     // Agrega más promociones según sea necesario
   ]
