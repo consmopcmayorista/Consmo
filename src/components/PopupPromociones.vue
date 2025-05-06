@@ -4,7 +4,7 @@
         <button class="close-btn" @click="closePopup">&times;</button>
         <img src="/images2/promos/inicio.jpg" alt="Promociones de Abril" class="promo-image">
         <div class="popup-content">
-          <h2>Ven y aprovecha</h2>
+          <h2>🛒 ¡Corre que vuelan! Lo mejor está aquí para ti.</h2>
           <p>No te pierdas la oportunidad de participar aprovecha </p>
           <button class="promo-btn" @click="goToPromociones">Ir a Promociones</button>
         </div>
@@ -92,7 +92,9 @@
 
 .popup-content h2 {
   margin-top: 0;
-  color: #007BFF; /* Color azul */
+  font-size: 32px;
+  font-weight: bold;
+  color: #000407; /* Color azul */
 }
 
 .popup-content p {
