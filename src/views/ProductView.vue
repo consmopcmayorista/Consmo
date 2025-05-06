@@ -5,7 +5,7 @@
 }
 
 
-.zoom-container {
+/* .zoom-container {
   position: relative;
   display: inline-block;
   overflow: hidden;
@@ -29,8 +29,8 @@
 .zoom-result {
   position: fixed;
   border: 1px solid #d4d4d4;
-  width: 800px;   /* ← Más ancho */
-  height: 600px;  /* ← Más alto */
+  width: 800px;  
+  height: 600px; 
   overflow: hidden;
   background: #fff;
   display: none; 
@@ -41,7 +41,39 @@
   position: absolute;
   width: 100%;
   height: auto;
+} */
+
+/* Estilo para el contenedor del zoom */
+.zoom-container {
+  position: relative;
+  display: inline-block;
+  cursor: zoom-in;
 }
+.zoom-container:hover {
+  cursor: crosshair;
+}
+
+.zoom-result {
+  position: absolute;
+  top: 0;
+  left: 105%;
+  width: 800px;
+  height: 600px;
+  overflow: hidden;
+  border: 2px solid #ccc;
+  background: white;
+  display: none;
+  z-index: 999;
+}
+
+.zoom-result img {
+  position: absolute;
+  width: 1200px;
+  height: auto;
+  pointer-events: none;
+  
+}
+
 
 /* Modal overlay */
 .modal-overlay {
@@ -356,54 +388,124 @@ function cargar_carro(id, descripcion, precio, foto, operacion, tags, existencia
 // Llamamos a la API al montar
 onMounted(() => {
   fetchProducto()
-  window.scrollTo({
-    top: 0
-   
-  });
-  // Aquí hacemos la lógica de zoom:
-  console.log('Montado: inicializando zoom...')
+  window.scrollTo({ top: 0 })
 
-  const zoomContainer = document.querySelector('.single_viewslider')
+  const zoomContainer = document.querySelector('.zoom-container')
   const zoomResult = document.querySelector('.zoom-result')
 
   if (!zoomContainer || !zoomResult) {
+    console.warn('No se encontró zoom-container o zoom-result')
     return
   }
-  
-  // Crear imagen para zoom
+
   const zoomImage = document.createElement('img')
+  zoomImage.style.position = 'absolute'
+  zoomImage.style.width = '1000px'
+  zoomImage.style.height = 'auto'
+  zoomImage.style.pointerEvents = 'none'
+  zoomImage.style.userSelect = 'none'
+
+  zoomResult.innerHTML = ''
   zoomResult.appendChild(zoomImage)
 
+  // Evento mouseenter
   zoomContainer.addEventListener('mouseenter', () => {
-    zoomResult.style.display = 'block'
-    const zoomImageSrc = zoomContainer.querySelector('img')?.src
-    zoomImage.src = zoomImageSrc || ''
-    zoomImage.style.position = 'absolute'
-    zoomImage.style.top = '0'
-    zoomImage.style.left = '0'
-    zoomImage.style.transform = 'scale(1.5)' // Ajusta la escala
-  })
+  const mainImg = zoomContainer.querySelector('img.zoomable-image')
 
-  zoomContainer.addEventListener('mousemove', (e) => {
-    const containerRect = zoomContainer.getBoundingClientRect()
-    const offsetX = e.clientX - containerRect.left
-    const offsetY = e.clientY - containerRect.top
-    
-    const xPercentage = (offsetX / containerRect.width) * 100
-    const yPercentage = (offsetY / containerRect.height) * 100
-    
-    zoomImage.style.transformOrigin = `${xPercentage}% ${yPercentage}%`
-    // Ajustar posición del contenedor si deseas que se mueva
-    zoomResult.style.left = `${containerRect.right + 20}px`
-    zoomResult.style.top = `${containerRect.top}px`
-    // zoomResult.style.right = '400px'
-    // zoomResult.style.top = '250px'
-  })
+  if (!mainImg || !mainImg.src) {
+    console.warn('No se encontró la imagen principal para zoom.')
+    return
+  }
 
-  zoomContainer.addEventListener('mouseout', () => {
-  zoomResult.style.display = 'none'
-  })
+  // Asignar la imagen al contenedor de zoom
+  zoomImage.src = mainImg.src
+  zoomImage.style.transform = 'scale(0)' // Nivel de zoom
+  zoomImage.style.transformOrigin = 'center center'
+
+  // Mostrar el contenedor de zoom
+  zoomResult.style.display = 'block'
 })
+
+
+  // Evento mousemove
+  zoomContainer.addEventListener('mousemove', (e) => {
+  const rect = zoomContainer.getBoundingClientRect()
+  const x = e.clientX - rect.left
+  const y = e.clientY - rect.top
+
+  const xPercent = (x / rect.width) * 150
+  const yPercent = (y / rect.height) * 170
+
+  zoomImage.style.transformOrigin = `${xPercent}% ${yPercent}%`
+  zoomImage.style.transform = 'scale(2)' // Zoom deseado
+})
+
+
+zoomContainer.addEventListener('mouseleave', () => {
+  // Ocultar el contenedor de zoom
+  zoomResult.style.display = 'none'
+
+  // Resetear la imagen
+  zoomImage.style.transform = 'none'
+  zoomImage.style.transformOrigin = 'center center'
+})
+
+})
+
+
+
+
+
+// onMounted(() => {
+//   fetchProducto()
+//   window.scrollTo({
+//     top: 0
+   
+//   });
+//   // Aquí hacemos la lógica de zoom:
+//   console.log('Montado: inicializando zoom...')
+
+//   const zoomContainer = document.querySelector('.single_viewslider')
+//   const zoomResult = document.querySelector('.zoom-result')
+
+//   if (!zoomContainer || !zoomResult) {
+//     return
+//   }
+  
+//   // Crear imagen para zoom
+//   const zoomImage = document.createElement('img')
+//   zoomResult.appendChild(zoomImage)
+
+//   zoomContainer.addEventListener('mouseenter', () => {
+//     zoomResult.style.display = 'block'
+//     const zoomImageSrc = zoomContainer.querySelector('img')?.src
+//     zoomImage.src = zoomImageSrc || ''
+//     zoomImage.style.position = 'absolute'
+//     zoomImage.style.top = '0'
+//     zoomImage.style.left = '0'
+//     zoomImage.style.transform = 'scale(1.5)' // Ajusta la escala
+//   })
+
+//   zoomContainer.addEventListener('mousemove', (e) => {
+//     const containerRect = zoomContainer.getBoundingClientRect()
+//     const offsetX = e.clientX - containerRect.left
+//     const offsetY = e.clientY - containerRect.top
+    
+//     const xPercentage = (offsetX / containerRect.width) * 100
+//     const yPercentage = (offsetY / containerRect.height) * 100
+    
+//     zoomImage.style.transformOrigin = `${xPercentage}% ${yPercentage}%`
+//     // Ajustar posición del contenedor si deseas que se mueva
+//     zoomResult.style.left = `${containerRect.right + 20}px`
+//     zoomResult.style.top = `${containerRect.top}px`
+//     // zoomResult.style.right = '400px'
+//     // zoomResult.style.top = '250px'
+//   })
+
+//   zoomContainer.addEventListener('mouseout', () => {
+//   zoomResult.style.display = 'none'
+//   })
+// })
 
 
 </script>
@@ -425,7 +527,7 @@ onMounted(() => {
         <!-- Columna Izquierda (Imagen) -->
         <div class="col-lg-6">
           <div class="product_view_slider">
-            <div class="single_viewslider zoom-container">
+            <div class="single_viewslider zoom-container" style="position: relative;">
               <!-- Imagen principal (si ya cargó el producto), si no mostramos loader -->
               <img
                 v-if="!cargando && producto_mostrar"
@@ -442,8 +544,9 @@ onMounted(() => {
                 src="/assets/images/progress.gif"
                 alt="Cargando..."
               >
+              <div class="zoom-result"></div>
             </div>
-            <div class="zoom-result"></div>
+            
             <!-- Modal Zoom (click en la imagen) -->
             <!-- <div v-if="mostrarModal" class="modal-overlay" @click="cerrarModal">
               <div class="modal-content" @click.stop>
