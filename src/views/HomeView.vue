@@ -498,68 +498,59 @@ $(document).ready(function() {
   </div> -->
 
 
-  <!-- Sección "Mercado Libre" y "Comunidad WhatsApp" -->
-  <div class="offer_wrp section_padding_b">
-    <div class="container">
-      <div class="row">
-        <!-- Offer 1 -->
-        <div class="col-md-6 mb-4 mb-md-0">
-          <div class="single_offercard h-100">
-            <div class="offertext">
-              <h3 class="offer_pers">Mercado Libre</h3>
-              <h4>Estamos en Mercado Libre</h4>
-              <p>Dale un vistazo a nuestro catálogo!!</p>
-              <div class="d-flex flex-column flex-md-row">
-                <a
-                  href="https://listado.mercadolibre.com.co/_CustId_292963841"
-                  class="default_btn rounded xs_btn mb-2 mb-md-0 me-md-2"
-                  >Consmo PC</a
-                >
-                <a
-                  href="https://listado.mercadolibre.com.co/_CustId_1659542107"
-                  class="default_btn rounded xs_btn"
-                  >WORLDTECHCOL</a
-                >
-              </div>
+<!-- Sección Mercado Libre y Comunidad WhatsApp estilizada -->
+<div class="offer_wrp section_padding_b py-3 bg-light text-dark dark-mode-bg">
+  <div class="container">
+    <div class="row g-4">
+      <!-- Tarjeta Mercado Libre -->
+      <div class="col-md-6">
+        <div class="card shadow-lg border-0 h-100 hover-card dark-mode-card">
+          <div class="row g-0 align-items-center">
+            <div class="col-4 d-flex justify-content-center align-items-center p-3">
+              <img src="/assets/images/aliado.png" alt="Mercado Libre" class="img-fluid rounded-circle" style="max-width: 110px;">
             </div>
-            <div class="offerimg">
-              <img loading="lazy" src="/assets/images/aliado.png" alt="product" />
+            <div class="col-8">
+              <div class="card-body">
+                <h5 class="fw-bold text-primary mb-1">🛒 Mercado Libre</h5>
+                <h6 class="text-dark ">¡Estamos presentes con 2 tiendas oficiales!</h6>
+                <p class="text-muted dark-mode-subtext mb-3">Dale un vistazo a nuestro catálogo con envío rápido y seguro.</p>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="https://listado.mercadolibre.com.co/_CustId_292963841" class="btn btn-warning btn-sm fw-bold shadow-sm">Consmo PC</a>
+                  <a href="https://listado.mercadolibre.com.co/_CustId_1659542107" class="btn btn-warning btn-sm fw-bold shadow-sm">WORLDTECHCOL</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <!-- Offer 2 -->
-        <div class="col-md-6">
-          <div class="single_offercard bg_2 h-100">
-            <div class="offertext">
-              <h3 class="offer_pers">Comunidad Difusiones WhatsApp</h3>
-              <h4>Productos nuevos y promociones</h4>
-              <p>Publicaciones diarias, ¿qué esperas?</p>
-              <div class="d-flex flex-column flex-md-row">
-                <a
-                  href="https://chat.whatsapp.com/CCgnqRsRHNh5bQDIazc2DF"
-                  class="default_btn rounded xs_btn mb-2 mb-md-0 me-md-2"
-                  >Suramericana</a
-                >
-                <a
-                  href="https://chat.whatsapp.com/EoiWvYD6jzTGFtDuk8gZON"
-                  class="default_btn rounded xs_btn mb-2 mb-md-0 me-md-2"
-                  >Minorista</a
-                >
-                <a
-                  href="https://chat.whatsapp.com/DPm4UI5L6PHA2G4e0Z0pgy"
-                  class="default_btn rounded xs_btn"
-                  >Monteria</a
-                >
-              </div>
+      </div>
+
+      <!-- Tarjeta Comunidad WhatsApp -->
+      <div class="col-md-6">
+        <div class="card shadow-lg border-0 h-100 hover-card bg-success bg-gradient text-white dark-mode-card-alt">
+          <div class="row g-0 align-items-center">
+            <div class="col-4 d-flex justify-content-center align-items-center p-3">
+              <img src="/assets/images/difusiones.png" alt="WhatsApp Comunidad" class="img-fluid rounded-circle" style="max-width: 100px;">
             </div>
-            <div class="offerimg">
-              <img loading="lazy" src="/assets/images/difusiones.png" alt="product" />
+            <div class="col-8">
+              <div class="card-body">
+                <h5 class="fw-bold mb-1">📢 Difusiones WhatsApp</h5>
+                <h6>Promociones nuevas cada día</h6>
+                <p class="mb-3">¡Únete y entérate antes que nadie!</p>
+                <div class="d-flex flex-wrap gap-2">
+                  <a href="https://chat.whatsapp.com/CCgnqRsRHNh5bQDIazc2DF" class="btn btn-light btn-sm fw-bold shadow-sm">Suramericana</a>
+                  <a href="https://chat.whatsapp.com/EoiWvYD6jzTGFtDuk8gZON" class="btn btn-light btn-sm fw-bold shadow-sm">Minorista</a>
+                  <a href="https://chat.whatsapp.com/DPm4UI5L6PHA2G4e0Z0pgy" class="btn btn-light btn-sm fw-bold shadow-sm">Montería</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+
 
   <!-- Banner Tenda 
   <div class="ad_banner_area section_padding_b">
@@ -955,6 +946,11 @@ $(document).ready(function() {
     width: 100%;
     object-fit: cover;
   }
+  .hover-card:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+  }
+
 
   /* Altura mayor en pantallas medianas y grandes */
   @media (min-width: 768px) {
@@ -968,6 +964,32 @@ $(document).ready(function() {
       height: 480px;
     }
   }
+/* Hover y transición suave */
+.hover-card {
+  transition: transform 0.3s ease;
+}
+.hover-card:hover {
+  transform: scale(1.02);
+}
+
+/* Modo oscuro */
+.dark-mode-bg {
+  background-color: white !important;
+}
+.dark-mode-card {
+  background-color: white !important;
+  color: #fff !important;
+}
+.dark-mode-card-alt {
+  background: linear-gradient(135deg, #1f8b4c, #145d31) !important;
+}
+.dark-mode-text {
+  color: #e0e0e0 !important;
+}
+.dark-mode-subtext {
+  color: #aaa !important;
+}
+
   
 
 </style>
