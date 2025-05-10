@@ -1,6 +1,11 @@
 <template>
   <!-- Contenedor principal del carrusel -->
   <div class="carousel-wrapper">
+    <h2 class="">
+      <STRong>
+        Nuestras Marcas Aliadas
+      </STRong>
+    </h2>
     <!-- Botón izquierdo -->
     <button class="nav-btn prev" @click="prev">‹</button>
 

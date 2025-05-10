@@ -579,66 +579,57 @@ $(document).ready(function() {
 
 
 <!-- Sección Recomendados -->
-<div class="recfor_you section_padding_b">
-  <p v-if="cargando">Cargando productos...</p>
+<!-- Sección Recomendados | Estilo moderno fondo blanco -->
+<div class="recfor_you section_padding_b bg-white text-dark">
+  
+  <p v-if="cargando" class="text-center fs-5 py-4">Cargando tus recomendaciones...</p>
 
   <div v-else-if="productos_alea.length > 0">
     <div class="container">
-      <h2 class="section_title_3">Recomendados para ti</h2>
-      <div class="row gy-4">
-        <!-- Iterar sobre productos -->
+      <h2 class="section_title_3 ">
+        🛍️ Recomendados para ti
+      </h2>
+
+      <div class="row g-4 justify-content-center">
         <div
           class="col-xl-3 col-lg-4 col-sm-6"
           v-for="(dato, index) in productos_alea.slice(0, 128)"
           :key="index"
         >
-          <div class="single_toparrival">
-            <div class="topariv_img">
-              <img
-                loading="lazy"
-                :src="dato.imagen"
-                alt="product"
-                style="width: 260px; height: 260px"
-              />
-              <div class="prod_soh">
-                <div class="adto_wish">
-                  <i class="icon-heart"></i>
-                </div>
-                <!-- Quick View -->
-                <div class="qk_view" @click="buscar_productos(dato.id)">
-                  <span><i class="las la-eye"></i></span>
-                  Ver
-                </div>
+          <div class="card-product-clean shadow-sm">
+            <!-- Imagen con hover suave -->
+            <div class="card-img-clean">
+              <img :src="dato.imagen" :alt="dato.titulo" loading="lazy" />
+              <div class="overlay-clean">
+                <button @click="buscar_productos(dato.id)" class="btn-outline-dark btn-sm">👁 Ver</button>
               </div>
             </div>
-            <div class="topariv_cont">
-              <!-- Título cortado en líneas sin cortar palabras -->
+
+            <!-- Info del producto -->
+            <div class="card-body px-3 py-3">
               <RouterLink
                 :to="{ name: 'producto', query: { producto: dato.id } }"
-                class="format_titulo"
+                class="text-decoration-none text-dark"
               >
-                <p v-for="(line, index) in formatLine(dato.titulo, 22)" :key="index">{{ line }}</p>
+                <p v-for="(line, index) in formatLine(dato.titulo, 22)" :key="index" class="mb-1 fw-semibold">
+                  {{ line }}
+                </p>
               </RouterLink>
-              <div class="format_titulo2">
-                <span>SKU: {{ dato.idpro }}</span>
+              <small class="text-muted d-block">SKU: {{ dato.idpro }}</small>
+              <div class="mt-2 fw-bold fs-5 text-primary">
+                $ {{
+                  Math.round(parseFloat(dato.pt1))
+                    .toString()
+                    .replace(/\./g, ',')
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                }}
               </div>
-              <div class="price mb-1">
-                <span class="org_price">
-                  $ {{
-                    Math.round(parseFloat(dato.pt1))
-                      .toString()
-                      .replace(/\./g, ',')
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-                  }}
-                </span>
-              </div>
-              <!-- rating -->
-
             </div>
-            <div class="full_atc_btn">
-              <button @click="buscar_productos(dato.id)">
-                <span class="me-1"><i class="icon-cart"></i></span>
-                Al Carrito
+
+            <!-- Botón de acción -->
+            <div class="card-footer border-top px-3 pb-3">
+              <button @click="buscar_productos(dato.id)" class="btn btn-dark w-100 fw-semibold">
+                <i class="icon-cart me-2"></i> Añadir al carrito
               </button>
             </div>
           </div>
@@ -649,9 +640,10 @@ $(document).ready(function() {
   </div>
 
   <div v-else>
-    <p>No hay productos recomendados en este momento.</p>
+    <p class="text-center text-muted">No hay productos recomendados en este momento.</p>
   </div>
 </div>
+
   <!-- Modal Quickview -->
   
 
@@ -774,222 +766,85 @@ $(document).ready(function() {
 </template>
 
 <style scoped>
+/* ESTILOS GENERALES */
 .recfor_you {
-  padding-bottom: 20px;
+  margin-top: 2rem;
+  padding-bottom: 2rem;
 }
-
 .section_title_3 {
-  font-size: 24px;
+  font-size: 1.6rem;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
 }
 
-.single_toparrival {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+/* TARJETAS DE PRODUCTO */
+.card-product-clean {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 430px;
+  background: #fff;
+  border-radius: 12px;
   overflow: hidden;
-  transition: all 0.3s ease;
-  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-product-clean:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
-.single_toparrival:hover {
-  transform: translateY(-5px);
-}
-
-.topariv_img {
+.card-img-clean {
   position: relative;
-  width: 100%;
   overflow: hidden;
+}
+.card-img-clean img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
   border-bottom: 1px solid #eee;
 }
-
-.topariv_img img {
-  width: 100%;
-  height: auto;
-  transition: transform 0.3s ease;
+.card-product-clean:hover img {
+  transform: scale(1.05);
 }
 
-.topariv_img:hover img {
-  transform: scale(1.1);
+.card-body {
+  flex-grow: 1;
 }
 
-.prod_soh {
+/* OVERLAY HOVER SOBRE IMAGEN */
+.overlay-clean {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.75);
   display: flex;
-  gap: 10px;
-}
-
-.adto_wish,
-.qk_view {
-  background: rgba(0, 0, 0, 0.5);
-  padding: 5px;
-  border-radius: 50%;
-  color: #fff;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.adto_wish:hover,
-.qk_view:hover {
-  background: #000;
-}
-
-.topariv_cont {
-  padding: 15px;
-  text-align: center;
-  height: 170px;
-}
-
-.format_titulo p {
-  margin: 0;
-  font-size: 14px; /* Tamaño de fuente más grande */
-  line-height: 1.3em;
-  white-space: normal;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.format_titulo2 {
-  font-size: 14px; /* Tamaño de fuente más grande */
-  color: #888;
-  margin-top: 5px;
-}
-
-.price .org_price {
-  font-size: 18px;
-  color: #e74c3c;
-  font-weight: bold;
-}
-
-.rating {
-  display: flex;
-  align-items: center;
   justify-content: center;
-  margin-top: 10px;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.card-img-clean:hover .overlay-clean {
+  opacity: 1;
 }
 
-.rating_star {
-  color: #f1c40f;
-}
-
-.rating_count {
-  margin-left: 5px;
-  font-size: 14px;
-}
-
-.full_atc_btn {
-  margin-top: 10px;
-}
-
-.full_atc_btn button {
-  background: #3498db; /* Color azul */
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
+/* BOTONES */
+button.btn {
+  border-radius: 8px;
   transition: all 0.3s ease;
 }
-
-.full_atc_btn button:hover {
-  background: #2980b9;
+button.btn:hover {
+  opacity: 0.9;
 }
 
-.recfor_you {
-  margin-top: 20px;
-}
-.single_toparrival {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.3s;
-}
-.single_toparrival:hover {
-  transform: translateY(-5px);
-}
-.prod_soh {
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 10px;
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
-}
-/* estilos de banners principales */
-@media (max-width: 768px) { 
+/* RESPONSIVE CAROUSEL BANNERS */
+@media (max-width: 768px) {
   #bannerCarousel img {
-    height: 160px; /* Ajusta la altura según necesites */
-    object-fit: cover; /* Asegura que la imagen se expanda correctamente */
-  }
-}
-
-.format_titulo p {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.3em;
-  white-space: normal; /* Permite el ajuste de palabras */
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.card-img-container {
-    height: 300px; /* Altura por defecto para móvil */
-    overflow: hidden;
-    border-radius: 12px;
-  }
-
-  .card-img-full {
-    height: 100%;
-    width: 100%;
+    height: 180px;
     object-fit: cover;
   }
-  .hover-card:hover {
-  transform: scale(1.02);
-  transition: transform 0.3s ease;
-  }
-
-
-  /* Altura mayor en pantallas medianas y grandes */
-  @media (min-width: 768px) {
-    .card-img-container {
-      height: 400px;
-    }
-  }
-
-  @media (min-width: 992px) {
-    .card-img-container {
-      height: 480px;
-    }
-  }
-/* Hover y transición suave */
-.hover-card {
-  transition: transform 0.3s ease;
 }
-.hover-card:hover {
-  transform: scale(1.02);
-}
-
-/* Modo oscuro */
-.dark-mode-bg {
-  background-color: white !important;
-}
-.dark-mode-card {
-  background-color: white !important;
-  color: #fff !important;
-}
-.dark-mode-card-alt {
-  background: linear-gradient(135deg, #1f8b4c, #145d31) !important;
-}
-.dark-mode-text {
-  color: #e0e0e0 !important;
-}
-.dark-mode-subtext {
-  color: #aaa !important;
-}
-
-  
-
 </style>
