@@ -23,7 +23,6 @@
       { title: 'PARLANTES USB 3W MADERA C:C9664', image: 'C9664.jpg' },
       { title: 'HUB USB 3.0 7 PUERTOS SWITCH C:C9680', image: 'C9680.jpg' },
       { title: 'LECTOR DE TARJETAS SD 5 EN 1 C:C9685', image: 'C9685.jpg' },
-      { title: 'DIADEMA GAMER LED :C9545', image: 'C9545.png' },
   ]
   </script>
   
