@@ -24,7 +24,12 @@
     { title: 'TV BOX 4GB+32GB 8K UHD :C9105', image: 'C9105.png' },
     { title: 'DECODIFICADOR TDT :C9117', image: 'C9117.png' },
     { title: 'CAMARA IP ROBOTICA 5 ANTENAS DUAL BAND :C9663', image: 'C9663.png' },
-
+    { title: 'DISCO NUEVO PARA PC NUEVO :2399', image: '2399.png' },
+    { title: 'BOARD DDR4 12VA GEN :2614', image: '2614.png' },
+    { title: 'TODO EN UNO POS 11.6" :2706', image: '2706.png' },
+    { title: 'LECTOR COD BARRAS INALAMBRICO :3502', image: '3502.png' },
+    
+    
 
     // Agrega más promociones según sea necesario
   ]
