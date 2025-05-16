@@ -651,7 +651,7 @@ $(document).ready(function() {
 
 
 
-  <div class="product_quickview">
+ <div class="product_quickview">
 <div class="prodquick_wrap position-relative">
   <div class="close_quickview" @click="closeQuickview">
 <i class="las la-times"></i>
@@ -675,8 +675,6 @@ $(document).ready(function() {
 <template v-for="(url, index) in (producto_mostrar.lista_imagenes || '').split(',')" :key="index">
 <img style="display: flex; width:100px; border: 0.5 px solid; "  loading="lazy" :src="url.trim()" alt="product"  @click="cambiarImagen(url.trim())">
 </template>
-
-
 </div>
 
 

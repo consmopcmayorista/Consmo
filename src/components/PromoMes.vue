@@ -28,6 +28,11 @@
     { title: 'BOARD DDR4 12VA GEN :2614', image: '2614.png' },
     { title: 'TODO EN UNO POS 11.6" :2706', image: '2706.png' },
     { title: 'LECTOR COD BARRAS INALAMBRICO :3502', image: '3502.png' },
+    { title: 'ANTENA CPE EXTERIOR PUNTO A PUNTO :2524', image: '2524.png' },
+    { title: 'CAJON MONEDERO GRANDE :3692', image: '3692.png' },
+    { title: 'CAJON MONEDERO PEQUEÑO :3694', image: '3694.png' },
+    { title: 'XPON ONT WIFI N300 :9225', image: '9225.png' },
+    { title: 'LECTOR CODIGOS DE BARRAS  :9891', image: '9891.png' },
     
     
 
