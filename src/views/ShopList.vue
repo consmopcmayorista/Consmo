@@ -148,7 +148,7 @@ onMounted(() => {
                 loading="lazy"
               />
               <div class="card-body d-flex flex-column text-center">
-                <h6 class="card-title mb-2 text-truncate">{{ dato.titulo }}</h6>
+                <h6 class="card-title mb-2 card-title-expandable" :title="dato.titulo">{{ dato.titulo }}</h6>
                 <small class="text-muted">SKU: {{ dato.idpro }}</small>
                 <p class="mt-1 text-success small">Disponible en: {{ dato.existencia }}</p>
                 <h5 class="text-primary mt-auto">$
@@ -264,4 +264,5 @@ onMounted(() => {
   background-color: #0b5ed7 !important;
   border-color: #0b5ed7 !important;
 }
+
 </style>
