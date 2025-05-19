@@ -497,12 +497,12 @@ provide('categorias_alfabetica', categorias_alfabetica);
             </div>
 
               <!-- Botón de carrito para versión móvil -->
-  <!-- <div class="mobile-cart-icon d-lg-none" @click="mostrarModal = true">
+  <div class="mobile-cart-icon d-lg-none" @click="mostrarModal = true">
     <span class="icon">
       <i class="icon-cart"></i>
     </span>
     <span class="pops2">{{cant_en_carrito}}</span>
-  </div> -->
+  </div>
 
   <!-- Actualiza el evento de clic para redirigir a /carrito -->
 <div class="mobile-cart-icon d-lg-none" @click="router.push('/carrito')">
