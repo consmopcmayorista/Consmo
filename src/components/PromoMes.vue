@@ -33,7 +33,7 @@
     { title: 'CAJON MONEDERO PEQUEÑO :3694', image: '3694.png' },
     { title: 'XPON ONT WIFI N300 :9225', image: '9225.png' },
     { title: 'LECTOR CODIGOS DE BARRAS  :9891', image: '9891.png' },
-    
+    { title: 'CABINA CON MICROFONO 8 " :1509', image: '1509.png' },   
     
 
     // Agrega más promociones según sea necesario
