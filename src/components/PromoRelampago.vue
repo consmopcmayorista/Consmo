@@ -26,6 +26,9 @@
   
   <script setup>
   const promos = [ 
+    { title: 'MONITOR PLANO 21.5" :3435', image: '3435.png' },
+    { title: 'MONITOR CURVO 24" :3436', image: '3436.png' },
+    { title: 'MONITOR PLANO 27" 2K :3437', image: '3437.png' },
  
   ]
   </script>
