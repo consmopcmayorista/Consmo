@@ -29,6 +29,9 @@
     { title: 'MONITOR PLANO 21.5" :3435', image: '3435.png' },
     { title: 'MONITOR CURVO 24" :3436', image: '3436.png' },
     { title: 'MONITOR PLANO 27" 2K :3437', image: '3437.png' },
+    { title: 'BOARD DDR4 AMD RYZEN 3000 :2616', image: '2616.png' },
+    { title: 'CHASIS GAMER PARA PC :6917', image: '6917.png' },
+    { title: 'COOLER DISIPADOR PARA BOARD :9270', image: '9270.png' },
  
   ]
   </script>
