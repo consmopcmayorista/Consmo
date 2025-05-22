@@ -549,32 +549,7 @@ $(document).ready(function() {
     </div>
   </div>
 </div>
-
-
-
-  <!-- Banner Tenda 
-  <div class="ad_banner_area section_padding_b">
-    <div class="container">
-      <a href="catalogo_cat?categoria=&busqueda=tenda">
-        <picture>
-          <source
-            media="(min-width: 768px)"
-            srcset="/assets/images/banner_tenda.jpg"
-          />
-          <img
-            loading="lazy8"
-            class="w-100"
-            src="/assets/images/banner_tenda.jpg"
-            alt="ad"
-          />
-        </picture>
-      </a> 
-    </div>
-  </div> -->
-
-
-  <CarouselTarjetas :tarjetas="productos_alea.slice(0, 8)" />
-  <!-- Banner Tenda NUEVO -->
+ <CarouselTarjetas :tarjetas="productos_alea.slice(0, 8)" />
 
 
 
@@ -768,6 +743,7 @@ $(document).ready(function() {
 .recfor_you {
   margin-top: 2rem;
   padding-bottom: 2rem;
+  
 }
 .section_title_3 {
   font-size: 1.6rem;

@@ -32,6 +32,12 @@
     { title: 'BOARD DDR4 AMD RYZEN 3000 :2616', image: '2616.png' },
     { title: 'CHASIS GAMER PARA PC :6917', image: '6917.png' },
     { title: 'COOLER DISIPADOR PARA BOARD :9270', image: '9270.png' },
+    { title: 'LECTOR CODIGOS DE BARRAS SLIM USB :2694', image: '2694.png' },
+    { title: 'IMPRESORA CODIGOS DE BARRA/ETIQUETA :3512', image: '3512.png' },
+    { title: 'CAJON MONEDERO AHORRADOR DE ESPACIO :3521', image: '3521.png' },
+    { title: 'BOCINA ASISTENTE DE VOZ INTELIGENTE ALEXA :6021', image: '6021.png' },
+ 
+ 
  
   ]
   </script>
