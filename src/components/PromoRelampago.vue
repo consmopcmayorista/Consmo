@@ -36,6 +36,14 @@
     { title: 'IMPRESORA CODIGOS DE BARRA/ETIQUETA :3512', image: '3512.png' },
     { title: 'CAJON MONEDERO AHORRADOR DE ESPACIO :3521', image: '3521.png' },
     { title: 'BOCINA ASISTENTE DE VOZ INTELIGENTE ALEXA :6021', image: '6021.png' },
+    { title: 'TARJETA DE VIDEO GDDR5 16GB :1226', image: '1226.png' },
+    { title: 'FUENTE DE PODER ATX GAMER :1571', image: '1571.png' },
+    { title: 'FUENTE DE PODER ATX GAMER :1753', image: '1573.png' },
+    { title: 'DIADEMA PREMIUM GAMER :2567', image: '2567.png' },
+    { title: 'TODO EN UNO POS INDUSTRIAL 15" :2703', image: '2703.png' },
+    { title: 'TARJETA INTERNA PCI EXPRESS :9084', image: '9084.png' },
+    { title: 'IMPRESORA TERMICA POS 80MM :C9100', image: 'C9100.png' },
+    
  
  
  
