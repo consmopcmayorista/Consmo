@@ -43,6 +43,8 @@
     { title: 'TODO EN UNO POS INDUSTRIAL 15" :2703', image: '2703.png' },
     { title: 'TARJETA INTERNA PCI EXPRESS :9084', image: '9084.png' },
     { title: 'IMPRESORA TERMICA POS 80MM :C9100', image: 'C9100.png' },
+    { title: 'ROUTER DUAL-BAND GIGABYTE 4 ANTENAS :2529', image: '2529.png' },
+    { title: 'ROUTER DUAL-BAND 5 ANTENAS :2693', image: '2693.png' },
     
  
  
