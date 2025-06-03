@@ -8,7 +8,7 @@
         <!-- Banner Principal (Largo) -->
         <div class="col-12 mb-4">
           <div class="featured-banner principal">
-            <img src="/images2/destacados/destacado_principal.jpg" alt="Producto Destacado Principal" class="img-fluid w-100">
+            <img src="/images2/destacados/viejo1.jpg" alt="Producto Destacado Principal" class="img-fluid w-100">
             <div class="banner-content">
                <h3>PRODUCTOS ICONNEX</h3>
               <!--<p>CONTROL BLUETOOTH VR SHINECON 4.0</p>-->
