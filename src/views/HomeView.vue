@@ -620,11 +620,6 @@ $(document).ready(function() {
 </div>
 
   <!-- Modal Quickview -->
-  
-
-
-
-
 
  <div class="product_quickview">
 <div class="prodquick_wrap position-relative">
@@ -720,7 +715,7 @@ $(document).ready(function() {
                   </div>
                   </div>
                     <div id='container_success'></div>
-            <!-- buttons  -->
+            
             <div class="product_buttons">
               <a style="cursor: pointer;" class="default_btn me-sm-3 me-2 px-2 px-lg-4" onclick="agregar_producto_car()" ><i
                       class="icon-cart me-2"></i> Al Carrito</a>
@@ -735,7 +730,7 @@ $(document).ready(function() {
           </div>
           </div>
 
- <popup/>
+ <!-- <popup/>  -->
 </template>
 
 <style scoped>
