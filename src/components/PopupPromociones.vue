@@ -2,7 +2,7 @@
     <div v-if="showPopup" class="popup-overlay" @click="closePopup">
       <div class="popup" @click.stop>
         <button class="close-btn" @click="closePopup">&times;</button>
-        <img src="/images2/promos/consmoavatar.png" alt="Promociones de Abril" class="promo-image">
+        <img src="/images2/promos/inicio.jpg" alt="Promociones de Abril" class="promo-image">
         <div class="popup-content">
           <h2>🛒 ¡Corre que vuelan! Lo mejor está aquí para ti.</h2>
           <p>No te pierdas la oportunidad de participar aprovecha </p>
