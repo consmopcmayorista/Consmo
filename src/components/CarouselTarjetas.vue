@@ -258,7 +258,7 @@ export default {
 .benefit-link.split {
   display: block;
   width: 100%;
-  height: 400px;
+  height: 380px;
   text-decoration: none;
   color: inherit;
   position: relative;
@@ -266,7 +266,7 @@ export default {
 
 /* Imagen dentro de la tarjeta */
 .benefit-image {
-  height: 400px;
+  height: 100%;
   background-size: cover;
   background-position: center;
 }
