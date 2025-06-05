@@ -456,12 +456,12 @@ $(document).ready(function() {
         <picture>
           <source
             media="(min-width: 768px)"
-            srcset="/images2/banner_promo.jpg"
+            srcset="/images2/servicio_tecnico.jpg"
           />
           <img
             loading="lazy8"
             class="w-100"
-            src="/images2/banner_promo.jpg"
+            src="/images2/servicio_tecnico.jpg"
             alt="ad"
           />
         </picture>
