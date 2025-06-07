@@ -10,8 +10,8 @@
           <div class="featured-banner principal">
             <img src="/images2/destacados/destacadoprincipal.jpg" alt="Producto Destacado Principal" class="img-fluid w-100">
             <div class="banner-content">
-               <h3>PRODUCTOS ICONNEX</h3>
-              <!--<p>CONTROL BLUETOOTH VR SHINECON 4.0</p>-->
+               <h3>ICONNEX: energía, conectividad y accesorios que hacen tu vida más fácil  </h3>
+              <p>Encuentra UPS, powerbanks, auriculares, cargadores, multitomas y más con la calidad y respaldo de ICONNEX.</p>
               <a href="/catalogo_cat?categoria=&busqueda=ICONNEX" class="btn btn-primary">Ver Producto</a>
             </div>
           </div>
