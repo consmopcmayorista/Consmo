@@ -1,15 +1,16 @@
 <template>
   <div class="top-header">
-    <div class="content">
-      <transition-group name="fade" tag="div" class="messages-container">
-        <div
-          class="message"
-          v-for="(message, index) in visibleMessages"
-          :key="index"
-        >
-          {{ message }}
+    <div class="marquee">
+      <div class="marquee-track">
+        <div class="marquee-content">
+          <span v-for="(message, index) in messages" :key="'1-' + index">
+            {{ message }}<span class="separator">•</span>
+          </span>
+          <span v-for="(message, index) in messages" :key="'2-' + index">
+            {{ message }}<span class="separator">•</span>
+          </span>
         </div>
-      </transition-group>
+      </div>
     </div>
   </div>
 </template>
@@ -24,94 +25,77 @@ export default {
         "🚚 Envíos gratis a todo Medellín por compras mayores a $400.000",
         "🆕 ¡Nueva colección de productos tecnológicos disponible ahora!",
       ],
-      currentIndex: 0,
-      visibleMessages: [],
-      interval: null,
     };
-  },
-  mounted() {
-    // Muestra el primer mensaje al cargar
-    this.visibleMessages.push(this.messages[this.currentIndex]);
-    // Inicia el ticker
-    this.startTicker();
-  },
-  beforeDestroy() {
-    // Limpia el intervalo al destruir el componente
-    clearInterval(this.interval);
-  },
-  methods: {
-    startTicker() {
-      this.interval = setInterval(() => {
-        this.nextMessage();
-      }, 4000); // Cambia cada 4 segundos
-    },
-    stopTicker() {
-      clearInterval(this.interval);
-    },
-    nextMessage() {
-      this.currentIndex = (this.currentIndex + 1) % this.messages.length;
-      this.updateVisibleMessages();
-    },
-    updateVisibleMessages() {
-      this.visibleMessages = [this.messages[this.currentIndex]];
-    },
   },
 };
 </script>
 
 <style scoped>
 .top-header {
-  background: linear-gradient(90deg, #f77f00, #fcbf49); /* Colores llamativos */
+  background: linear-gradient(90deg, #0f0f0f, #000000);
   color: #fff;
-  font-size: 1.2rem;
-  text-align: center;
+  font-size: 1rem;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
+  overflow: hidden;
   padding: 10px 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.messages-container {
+.marquee {
   overflow: hidden;
-  width: 100%; /* Ajusta según el diseño */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.message {
   white-space: nowrap;
-  padding: 0 10px;
+  position: relative;
 }
 
-/* Animaciones */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
+.marquee-track {
+  display: flex;
+  will-change: transform;
+  animation: scroll 25s linear infinite;
+  transform: translate3d(0, 0, 0); /* GPU acceleration */
 }
 
-/* Ajustes para dispositivos móviles */
+.marquee-content {
+  display: flex;
+}
+
+.marquee-content span {
+  padding: 0 40px;
+  display: inline-block;
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.separator {
+  margin: 0 20px;
+  color: #aaa;
+}
+
+/* ANIMACIÓN SUAVE CONTINUA */
+@keyframes scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   .top-header {
-    font-size: 1rem; /* Ajusta el tamaño de la fuente en móviles */
-    padding: 8px 0;
+    font-size: 0.9rem;
   }
 
-  .message {
-    padding: 0 5px; /* Reduce el padding en móviles */
+  .marquee-content span {
+    padding: 0 20px;
+  }
+
+  .separator {
+    margin: 0 10px;
   }
 }
 </style>

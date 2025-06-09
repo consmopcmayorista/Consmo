@@ -3,6 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import services from '@/components/services.vue'
 import ProductQuickview from '@/components/product_indv.vue' // Importamos el modal
 import CarouselTarjetas from '@/components/CarouselTarjetas.vue' // Importamos el carrusel de tarjetas
+import CarruselesPorCategoria from '@/components/CarruselesPorCategoria.vue' // Importamos el carrusel de categorías
 
 
 import { ref, onMounted, inject } from 'vue'
@@ -446,7 +447,16 @@ $(document).ready(function() {
     </div>
   </div>
 
-  <services />
+  <!--<services /> -->
+<!-- Mostrar carrusel de productos Gamer -->
+<CarruselesPorCategoria
+  :productos="productos_alea"
+  categoria="CHASIS"
+  titulo="🎮 Chasis Gamer"
+  :buscarProducto="buscar_productos"
+  :formatLine="formatLine"
+/>
+
   
   <Destacados />
 
@@ -498,53 +508,34 @@ $(document).ready(function() {
   </div> -->
 
 
-<!-- Sección Mercado Libre y Comunidad WhatsApp estilizada -->
-<div class="offer_wrp section_padding_b py-3 bg-light text-dark dark-mode-bg">
-  <div class="container">
-    <div class="row g-4">
-      <!-- Tarjeta Mercado Libre -->
-      <div class="col-md-6">
-        <div class="card shadow-lg border-0 h-100 hover-card dark-mode-card">
-          <div class="row g-0 align-items-center">
-            <div class="col-4 d-flex justify-content-center align-items-center p-3">
-              <img src="/assets/images/aliado.png" alt="Mercado Libre" class="img-fluid rounded-circle" style="max-width: 110px;">
-            </div>
-            <div class="col-8">
-              <div class="card-body">
-                <h5 class="fw-bold text-primary mb-1">🛒 Mercado Libre</h5>
-                <h6 class="text-dark ">¡Estamos presentes con 2 tiendas oficiales!</h6>
-                <p class="text-muted dark-mode-subtext mb-3">Dale un vistazo a nuestro catálogo con envío rápido y seguro.</p>
-                <div class="d-flex flex-wrap gap-2">
-                  <a href="https://listado.mercadolibre.com.co/_CustId_292963841" class="btn btn-warning btn-sm fw-bold shadow-sm">Consmo PC</a>
-                  <a href="https://listado.mercadolibre.com.co/_CustId_1659542107" class="btn btn-warning btn-sm fw-bold shadow-sm">WORLDTECHCOL</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+<!-- SECCIÓN MERCADO LIBRE + WHATSAPP DIFUSIONES -->
+<!-- BOTONES FLOTANTES ESTILO EXPANDIDO -->
+<div class="floating-cards-wrapper">
+  <!-- ✅ Mercado Libre -->
+  <div class="floating-card trigger-ml" @click="toggleFloatingCard($event)">
+    <img src="/assets/images/aliado.png" class="floating-icon" alt="Mercado Libre" />
+    <div class="card-info mercado-libre">
+      <p class="fw-bold text-primary mb-1">🛒 Mercado Libre</p>
+      <small class="text-dark d-block mb-1">¡Estamos presentes con 2 tiendas oficiales!</small>
+      <small class="text-muted d-block mb-2">Dale un vistazo a nuestro catálogo con envío rápido y seguro.</small>
+      <div class="d-flex gap-2 flex-wrap">
+        <a href="https://listado.mercadolibre.com.co/_CustId_292963841" class="btn btn-warning btn-sm fw-bold" target="_blank">Consmo PC</a>
+        <a href="https://listado.mercadolibre.com.co/_CustId_1659542107" class="btn btn-warning btn-sm fw-bold" target="_blank">WORLDTECHCOL</a>
       </div>
+    </div>
+  </div>
 
-      <!-- Tarjeta Comunidad WhatsApp -->
-      <div class="col-md-6">
-        <div class="card shadow-lg border-0 h-100 hover-card bg-success bg-gradient text-white dark-mode-card-alt">
-          <div class="row g-0 align-items-center">
-            <div class="col-4 d-flex justify-content-center align-items-center p-3">
-              <img src="/assets/images/difusiones.png" alt="WhatsApp Comunidad" class="img-fluid rounded-circle" style="max-width: 100px;">
-            </div>
-            <div class="col-8">
-              <div class="card-body">
-                <h5 class="fw-bold mb-1">📢 Difusiones WhatsApp</h5>
-                <h6>Promociones nuevas cada día</h6>
-                <p class="mb-3">¡Únete y entérate antes que nadie!</p>
-                <div class="d-flex flex-wrap gap-2">
-                  <a href="https://chat.whatsapp.com/CCgnqRsRHNh5bQDIazc2DF" class="btn btn-light btn-sm fw-bold shadow-sm">Suramericana</a>
-                  <a href="https://chat.whatsapp.com/EoiWvYD6jzTGFtDuk8gZON" class="btn btn-light btn-sm fw-bold shadow-sm">Minorista</a>
-                  <a href="https://chat.whatsapp.com/DPm4UI5L6PHA2G4e0Z0pgy" class="btn btn-light btn-sm fw-bold shadow-sm">Montería</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <!-- 💬 WhatsApp -->
+  <div class="floating-card trigger-wp" @click="toggleFloatingCard($event)">
+    <img src="/assets/images/difusiones.png" class="floating-icon" alt="Difusiones WhatsApp" />
+    <div class="card-info whatsapp">
+      <p class="fw-bold text-white mb-1">📢 Difusiones WhatsApp</p>
+      <small class="text-white d-block">Promociones nuevas cada día</small>
+      <small class="text-white d-block mb-2">¡Únete y entérate antes que nadie!</small>
+      <div class="d-flex gap-2 flex-wrap">
+        <a href="https://chat.whatsapp.com/CCgnqRsRHNh5bQDIazc2DF" class="btn btn-light btn-sm fw-bold" target="_blank">Suramericana</a>
+        <a href="https://chat.whatsapp.com/EoiWvYD6jzTGFtDuk8gZON" class="btn btn-light btn-sm fw-bold" target="_blank">Minorista</a>
+        <a href="https://chat.whatsapp.com/DPm4UI5L6PHA2G4e0Z0pgy" class="btn btn-light btn-sm fw-bold" target="_blank">Montería</a>
       </div>
     </div>
   </div>
@@ -814,6 +805,81 @@ button.btn:hover {
   #bannerCarousel img {
     height: 180px;
     object-fit: cover;
+  }
+}
+.floating-cards-wrapper {
+  position: fixed;
+  top: 40%;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.floating-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: #ffffff;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  width: 60px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.floating-card:hover,
+.floating-card.active {
+  width: 320px;
+}
+
+.floating-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.floating-card:hover .floating-icon,
+.floating-card.active .floating-icon {
+  transform: scale(1.05);
+}
+
+.card-info {
+  display: none;
+  margin-left: 12px;
+  width: 100%;
+}
+
+.floating-card:hover .card-info,
+.floating-card.active .card-info {
+  display: block;
+}
+
+.card-info.mercado-libre {
+  color: #333;
+}
+
+.card-info.whatsapp {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.card-info p,
+.card-info small {
+  margin: 0;
+  line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+  .floating-card {
+    width: 60px;
   }
 }
 </style>
