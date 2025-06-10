@@ -482,6 +482,13 @@ $(document).ready(function() {
   </div>
 </div>
 
+<CarruselesPorCategoria
+  :productos="productos_alea"
+  categoria="CAMARAS WEB"
+  titulo=" Camaras Web"
+  :buscarProducto="buscar_productos"
+  :formatLine="formatLine"
+/>
   <!-- Sección Categorías -->
    <!--
   <div class="shop_bycat section_padding_b">
