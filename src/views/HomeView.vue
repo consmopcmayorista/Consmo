@@ -460,24 +460,27 @@ $(document).ready(function() {
   
   <Destacados />
 
-  <div class="ad_banner_area section_padding_b">
-    <div class="container">
-      <a href="/promociones">
-        <picture>
-          <source
-            media="(min-width: 768px)"
-            srcset="/images2/servicio_tecnico.jpg"
-          />
-          <img
-            loading="lazy8"
-            class="w-100"
-            src="/images2/servicio_tecnico.jpg"
-            alt="ad"
-          />
-        </picture>
-      </a>
-    </div>
+<div class="futuristic-banner-wrapper section_padding_b">
+  <div class="container">
+    <a href="https://wa.me/573015537673?text=Hola%20ConsmoPC,%20quiero%20solicitar%20el%20servicio%20técnico%20de%20mi%20equipo."
+       target="_blank"
+       rel="noopener noreferrer"
+       class="futuristic-banner-link">
+      <picture>
+        <source
+          media="(min-width: 768px)"
+          srcset="/images2/servicio_tecnico.jpg"
+        />
+        <img
+          loading="lazy"
+          class="futuristic-banner-img"
+          src="/images2/servicio_tecnico.jpg"
+          alt="Servicio técnico Consmo PC"
+        />
+      </picture>
+    </a>
   </div>
+</div>
 
   <!-- Sección Categorías -->
    <!--
@@ -882,4 +885,34 @@ button.btn:hover {
     width: 60px;
   }
 }
+.futuristic-banner-wrapper {
+  padding: 40px 0;
+}
+
+.futuristic-banner-link {
+  display: block;
+  border-radius: 1.6rem;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 240, 255, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(135deg, #0e223a, #1e2f44);
+}
+
+.futuristic-banner-link:hover {
+  transform: scale(1.015);
+  box-shadow: 0 12px 36px rgba(0, 240, 255, 0.28);
+}
+
+.futuristic-banner-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: filter 0.3s ease;
+}
+
+.futuristic-banner-link:hover .futuristic-banner-img {
+  filter: brightness(1.05) saturate(1.15);
+}
+
 </style>

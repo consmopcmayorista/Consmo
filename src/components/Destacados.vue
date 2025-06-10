@@ -1,183 +1,223 @@
 <template>
-  <!-- Sección de Destacados -->
-  <div class="featured_products section_padding_b">
+  <section class="futuristic-featured py-5">
     <div class="container">
-      <h2 class="section_title_3 mb-4">Productos Destacados</h2>
 
-      <div class="row">
-        <!-- Banner Principal (Largo) -->
-        <div class="col-12 mb-4">
-          <div class="featured-banner principal">
-            <img src="/images2/destacados/destacadoprincipal.jpg" alt="Producto Destacado Principal" class="img-fluid w-100">
-            <div class="banner-content">
-               <h3>ICONNEX: energía, conectividad y accesorios que hacen tu vida más fácil  </h3>
-              <p>Encuentra UPS, powerbanks, auriculares, cargadores, multitomas y más con la calidad y respaldo de ICONNEX.</p>
-              <a href="/catalogo_cat?categoria=&busqueda=ICONNEX" class="btn btn-primary">Ver Producto</a>
-            </div>
-          </div>
+      <!-- 🎯 Banner principal (solo en escritorio) -->
+      <div class="futuristic-card mb-4 d-none d-md-block">
+        <img src="/images2/destacados/destacadoprincipal.jpg" alt="Banner ICONNEX" class="card-img" />
+        <div class="card-overlay">
+          <h3>ICONNEX: energía y conectividad</h3>
+          <p>UPS, powerbanks, auriculares, cargadores y más.</p>
+          <a href="/catalogo_cat?categoria=&busqueda=ICONNEX" class="futuristic-btn">🔍 Ver Producto</a>
         </div>
       </div>
 
-      <!-- Carrusel en dispositivos móviles -->
-      <div class="row d-block d-md-none">
-        <div class="featured-slider">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="(producto, index) in productos" :key="index">
-              <div class="featured-banner">
-                <img :src="producto.imagen" :alt="producto.nombre" class="img-fluid">
-                <div class="banner-content">
-                  <h3>{{ producto.nombre }}</h3>
-                  <p>{{ producto.descripcion }}</p>
-                  <a :href="producto.link" class="btn btn-primary">Ver Producto</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-      </div>
+      <!-- 🏷️ Título -->
+      <h2 class="futuristic-title text-center mb-4">🚀 Productos Destacados</h2>
 
-      <!-- Cuadrícula en pantallas grandes -->
-      <div class="row d-none d-md-flex">
-        <div class="col-md-4 mb-4" v-for="(producto, index) in productos" :key="index">
-          <div class="featured-banner">
-            <img :src="producto.imagen" :alt="producto.nombre" class="img-fluid">
-            <div class="banner-content">
+      <!-- 🖥️ Carrusel en escritorio -->
+      <Swiper
+        v-if="!isMobile"
+        :slides-per-view="3"
+        :space-between="28"
+        :pagination="{ clickable: true }"
+        class="futuristic-swiper"
+      >
+        <SwiperSlide v-for="(producto, index) in productos" :key="index">
+          <div class="futuristic-card">
+            <img :src="producto.imagen" :alt="producto.nombre" class="card-img" />
+            <div class="card-overlay">
               <h3>{{ producto.nombre }}</h3>
               <p>{{ producto.descripcion }}</p>
-              <a :href="producto.link" class="btn btn-primary">Ve Producto</a>
+              <a :href="producto.link" class="futuristic-btn">Ver más</a>
             </div>
           </div>
-        </div>
-      </div>
+        </SwiperSlide>
+        <template #pagination></template>
+      </Swiper>
+
+      <!-- 📱 Carrusel combinado (banner + productos) en móviles -->
+      <Swiper
+        v-else
+        :slides-per-view="1.1"
+        :space-between="16"
+        :pagination="{ clickable: true }"
+        class="futuristic-swiper"
+      >
+        <!-- Banner como slide -->
+        <SwiperSlide>
+          <div class="futuristic-card">
+            <img src="/images2/destacados/destacadoprincipal.jpg" alt="Banner ICONNEX" class="card-img" />
+            <div class="card-overlay">
+              <a href="/catalogo_cat?categoria=&busqueda=ICONNEX" class="futuristic-btn">🔍 Ver Producto</a>
+            </div>
+          </div>
+        </SwiperSlide>
+
+        <!-- Productos -->
+        <SwiperSlide v-for="(producto, index) in productos" :key="index">
+          <div class="futuristic-card">
+            <img :src="producto.imagen" :alt="producto.nombre" class="card-img" />
+            <div class="card-overlay">
+              <a :href="producto.link" class="futuristic-btn">Ver más</a>
+            </div>
+          </div>
+        </SwiperSlide>
+        <template #pagination></template>
+      </Swiper>
     </div>
-  </div>
+  </section>
 </template>
 
-<script>
-import "swiper/css";
-import "swiper/css/pagination";
+<script setup>
+// 📦 Swiper y breakpoints
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import 'swiper/css'
+import 'swiper/css/pagination'
 
-export default {
-  data() {
-    return {
-      productos: [
-        {
-          nombre: "CHASIS GAMER TRIDIMENCIONAL",
-          descripcion: "CHASIS PARA PC GAMER TRIDIMENCIONAL RGB NEGRO 7 COOLER ORIGAMI",
-          imagen: "/images2/destacados/destacado1.jpg",
-          link: "/producto?producto=41567"
-        },
-        {
-          nombre: "MONITOR IPS 27 PULGADAS",
-          descripcion: "1920x1080 FULL HD CURVO 180HZ HDMI/VGA TEROS TE-2766G",
-          imagen: "/images2/destacados/destacado2.jpg",
-          link: "/producto?producto=41558"
-        },
-        {
-          nombre: "TIMON GENIUS SPEEDMASTER",
-          descripcion: "TIMON Y PEDAL PARA PC/PS3/PS4 NEGRO ROJO GENIUS SPEEDMASTER",
-          imagen: "/images2/destacados/destacado3.jpg",
-          link: "/producto?producto=41579"
-        }
-      ]
-    };
+// 📋 Productos destacados
+const productos = [
+  {
+    nombre: 'CHASIS GAMER TRIDIMENSIONAL',
+    descripcion: 'PC GAMER ORIGAMI RGB, 7 COOLER, NEGRO, GLASS',
+    imagen: '/images2/destacados/destacado1.jpg',
+    link: '/producto?producto=41567'
   },
-  mounted() {
-    new Swiper(".featured-slider", {
-      slidesPerView: 1,
-      spaceBetween: 20,
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true
-      }
-    });
+  {
+    nombre: 'MONITOR IPS 27” CURVO',
+    descripcion: 'Full HD 180HZ HDMI/VGA TEROS TE-2766G',
+    imagen: '/images2/destacados/destacado2.jpg',
+    link: '/producto?producto=41558'
+  },
+  {
+    nombre: 'TIMÓN GENIUS SPEEDMASTER',
+    descripcion: 'Volante y pedalera PC/PS3/PS4, negro-rojo',
+    imagen: '/images2/destacados/destacado3.jpg',
+    link: '/producto?producto=41579'
   }
-};
+]
+
+// 🧠 Detectar móvil
+const isMobile = ref(window.innerWidth < 768)
+const handleResize = () => isMobile.value = window.innerWidth < 768
+onMounted(() => window.addEventListener('resize', handleResize))
+onBeforeUnmount(() => window.removeEventListener('resize', handleResize))
 </script>
 
 <style scoped>
-/* Estilos de destacados */
-.featured-banner {
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+/* 🎯 Título futurista */
+.futuristic-title {
+  font-family: 'Orbitron', 'Poppins', sans-serif;
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: #4dfbff;
+  text-shadow: 0 2px 20px #0efcf8aa;
+}
+
+/* 🎠 Swiper carrusel */
+.futuristic-swiper {
+  margin-bottom: 2rem;
+}
+
+/* 🧊 Tarjetas de productos + banner */
+.futuristic-card {
   position: relative;
+    max-height: 460px;
+  min-height: 300px;
+  border-radius: 1.6rem;
   overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: #0e223a;
+  box-shadow: 0 8px 28px #00e8ff33;
   transition: transform 0.3s ease;
 }
-
-.featured-banner:hover {
-  transform: translateY(-5px);
+.futuristic-card:hover {
+  transform: scale(1.02);
 }
 
-.banner-content {
+/* 🖼️ Imagen nítida y ajustada */
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1.6rem;
+  display: block;
+}
+
+/* 🎛️ Overlay con info (hover en desktop) */
+.card-overlay {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.88));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
   padding: 20px;
-  background: rgba(0, 0, 0, 0.7);
   color: white;
   text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
-
-/* Ajustes para móviles */
-@media (max-width: 768px) {
-  .banner-content {
-    padding: 10px;
-  }
-  .banner-content h3 {
-    font-size: 1.4rem;
-  }
-  .banner-content p {
-    font-size: 1rem;
-  }
-  .featured-banner.principal {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  .featured-banner.principal img {
-    width: 100%;
-    height: auto;
-  }
-}
-
-/* Carrusel */
-.featured-slider {
-  overflow: hidden;
-  position: relative;
-  padding: 20px 10px;
-  background: linear-gradient(180deg, #f8f9fa, #e0e7ff);
-  border-radius: 10px;
-}
-
-/* Estilos de las tarjetas en el carrusel */
-.swiper-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Mejora en la paginación */
-.swiper-pagination {
-  position: relative;
-  bottom: -5px;
-}
-
-.swiper-pagination-bullet {
-  background: #4a90e2 !important;
-  width: 10px;
-  height: 10px;
-  opacity: 0.7;
-  transition: transform 0.2s;
-}
-
-.swiper-pagination-bullet-active {
-  transform: scale(1.3);
-  background: #007bff !important;
+.futuristic-card:hover .card-overlay {
   opacity: 1;
+  pointer-events: auto;
+}
+
+/* 🎨 Texto */
+.card-overlay h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #31f8fa;
+  margin-bottom: 0.5rem;
+}
+.card-overlay p {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+/* 🌐 Botón futurista */
+.futuristic-btn {
+  background: linear-gradient(90deg, #09c9ff 0%, #25f8ff 60%, #27f9d2 100%);
+  color: #000;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 800;
+  padding: 10px 22px;
+  border-radius: 100px;
+  font-size: 1rem;
+  box-shadow: 0 2px 12px #27f9d266;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.futuristic-btn:hover {
+  background: linear-gradient(90deg, #1fffff 0%, #007bff 100%);
+  color: white;
+  transform: scale(1.05);
+}
+
+/* 📱 Estilo móvil: imagen y botón solamente */
+@media (max-width: 767px) {
+  .futuristic-card {
+    height: 260px;
+  }
+
+  .card-overlay {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+    padding: 12px;
+  }
+
+  .card-overlay h3,
+  .card-overlay p {
+    display: none;
+  }
+
+  .card-img {
+    height: 100%;
+  }
 }
 </style>
