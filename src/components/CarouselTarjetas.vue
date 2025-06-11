@@ -1,301 +1,132 @@
 <template>
-  <div class="carousel-wrapper">
-    <!-- Encabezado del carrusel -->
-    <div class="carousel-header">
-      <h2 class="carousel-title">Nuestras Marcas Aliadas</h2>
-
-      <!-- Puntos indicadores -->
-      <div class="dots-wrapper">
-        <span 
-          v-for="(card, index) in tarjetas"
-          :key="index"
-          class="dot"
-          :class="{ active: index === activeIndex }"
-        ></span>
-      </div>
+  <section class="brands-section">
+    <!-- Encabezado elegante -->
+    <div class="brands-header">
+      <h2 class="brands-title">
+        <span>🌟</span> Marcas Aliadas <span>🌟</span>
+      </h2>
+      <p class="brands-subtitle">Las marcas que potencian tu negocio</p>
     </div>
 
-    <!-- Controles de navegación + pista de tarjetas -->
-    <div class="carousel-controls">
-      <!-- Botón izquierdo -->
-      <button 
-        class="nav-arrow left" 
-        @click="scrollLeft" 
-      >‹</button>
-
-      <!-- Carril de tarjetas -->
-      <div class="carousel-track" ref="track">
-        <div
-          v-for="(card, index) in tarjetas"
-          :key="index"
-          class="benefit-card"
-          :class="{ active: index === activeIndex }"
-          :ref="el => tarjetaRefs[index] = el"
+    <!-- Tarjetas fijas -->
+    <div class="brands-grid">
+      <div
+        v-for="(card, index) in tarjetas"
+        :key="card.imagen"
+        class="brand-card"
+      >
+        <a
+          v-if="card.link"
+          :href="card.link"
+          target="_blank"
+          class="brand-card-link"
         >
-          <!-- Tarjeta doble (2 enlaces) -->
-          <div v-if="card.linkLeft && card.linkRight" class="benefit-link split">
-            <a :href="card.linkLeft" target="_blank" class="half-link left"></a>
-            <a :href="card.linkRight" target="_blank" class="half-link right"></a>
-            <div class="benefit-image" :style="{ backgroundImage: 'url(' + card.imagen + ')' }"></div>
-          </div>
-
-          <!-- Tarjeta simple -->
-          <a v-else :href="card.link" target="_blank" rel="noopener" class="benefit-link">
-            <div class="benefit-image" :style="{ backgroundImage: 'url(' + card.imagen + ')' }"></div>
-          </a>
+          <img :src="card.imagen" :alt="'Marca ' + index" class="brand-card-img" />
+        </a>
+        <div v-else class="brand-card-split">
+          <a :href="card.linkLeft" target="_blank" class="split half left"></a>
+          <a :href="card.linkRight" target="_blank" class="split half right"></a>
+          <img :src="card.imagen" class="brand-card-img" />
         </div>
       </div>
-
-      <!-- Botón derecho -->
-      <button 
-        class="nav-arrow right" 
-        @click="scrollRight" 
-      >›</button>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
 export default {
-  name: "CarouselTarjetas",
+  name: "NuevoCarouselMarcasAliadas",
   data() {
     return {
-      activeIndex: 0,           // Índice actual activo
-      tarjetaRefs: [],          // Refs de cada tarjeta
-      observer: null,           // Observador para detectar la tarjeta visible
-      tarjetas: [               // Lista de tarjetas con sus imágenes y enlaces
-        {
-          imagen: "/images/img/banner/TENDA.png",
-          link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=tenda"
-        },
-        {
-          imagen: "/images/img/banner/GENIUS.png",
-          link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=GENIUS"
-        },
-        {
-          imagen: "/images/img/banner/DIGITALPOS.png",
-          link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=pos"
-        },
-        {
-          imagen: "/images/img/banner/WATTANA.png",
-          link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=WATTANA"
-        },
-        {
-          imagen: "/images/img/banner/LOGITECH.png",
-          link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=LOGITECH"
-        },
-        {
-          imagen: "/images/img/banner/TEROSORIGAMI.png",
-          linkLeft: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=TEROS",
-          linkRight: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=ORIGAMI"
-        }
+      tarjetas: [
+        { imagen: "/images/img/banner/TENDA.png", link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=tenda" },
+        { imagen: "/images/img/banner/GENIUS.png", link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=GENIUS" },
+        { imagen: "/images/img/banner/DIGITALPOS.png", link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=pos" },
+        { imagen: "/images/img/banner/WATTANA.png", link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=WATTANA" },
+        { imagen: "/images/img/banner/LOGITECH.png", link: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=LOGITECH" },
+        { imagen: "/images/img/banner/TEROSORIGAMI.png", linkLeft: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=TEROS", linkRight: "https://www.consmopcmayorista.com/catalogo_cat?categoria=&busqueda=ORIGAMI" }
       ]
     };
-  },
-  methods: {
-    // Navega a la tarjeta anterior
-    scrollLeft() {
-      if (this.activeIndex > 0) {
-        this.activeIndex = this.activeIndex - 1;
-        this.scrollToActive();
-      }
-    },
-
-    // Navega a la tarjeta siguiente
-    scrollRight() {
-      if (this.activeIndex < this.tarjetas.length - 1) {
-        this.activeIndex = this.activeIndex + 1;
-        this.scrollToActive();
-      }
-    },
-
-    // Centra visualmente la tarjeta activa
-    scrollToActive() {
-      this.$nextTick(() => {
-        const tarjetaActiva = this.tarjetaRefs[this.activeIndex];
-        if (tarjetaActiva) {
-          tarjetaActiva.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-        }
-      });
-    },
-
-    // Detecta qué tarjeta está visible con IntersectionObserver
-    setupObserver() {
-      if (this.observer) this.observer.disconnect();
-      this.observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const index = this.tarjetaRefs.indexOf(entry.target);
-              if (index !== -1) this.activeIndex = index;
-            }
-          });
-        },
-        { root: this.$refs.track, threshold: 0.6 }
-      );
-      this.tarjetaRefs.forEach((el) => {
-        if (el) this.observer.observe(el);
-      });
-    }
-  },
-  mounted() {
-    this.$nextTick(() => {
-      this.setupObserver();
-    });
-  },
-  beforeUnmount() {
-    if (this.observer) this.observer.disconnect();
   }
 };
 </script>
+
 <style scoped>
-/* Contenedor principal */
-.carousel-wrapper {
-  background: #f2f6f7;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  max-width: 1840px;
+.brands-section {
+  padding: 32px 16px;
+  background: linear-gradient(to right, #f9fbfc, #eef4f8);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  max-width: 1800px;
   margin: 0 auto;
-  padding: 20px;
 }
 
-/* Encabezado del carrusel */
-.carousel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+.brands-header {
+  margin-bottom: 24px;
 }
 
-.carousel-title {
-  font-size: 1.5rem;
-  font-weight: 600;
+.brands-title {
+  font-size: 1.8rem;
+  font-weight: 700;
   color: #222;
 }
 
-/* Puntos indicadores */
-.dots-wrapper {
+.brands-subtitle {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 4px;
+}
+
+.brands-grid {
   display: flex;
-  gap: 8px;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
 }
 
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #ccc;
-  transition: background 0.3s;
-}
-
-.dot.active {
-  background: #3483fa;
-}
-
-/* Controles del carrusel */
-.carousel-controls {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-/* Botones de navegación */
-.nav-arrow {
+.brand-card {
   background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  width: 56px;
-  height: 56px;
-  font-size: 40px;
-  color: #333;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: background 0.3s ease, opacity 0.3s ease;
-  z-index: 2;
-}
-
-.nav-arrow:hover {
-  background: #9ce3ec;
-}
-
-/* Carril de tarjetas */
-.carousel-track {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding: 10px 0;
-  flex: 1;
-  scrollbar-width: none;
-}
-
-.carousel-track::-webkit-scrollbar {
-  display: none;
-}
-
-/* Tarjeta de marca */
-.benefit-card {
-  flex: 0 0 380px;
-  scroll-snap-align: start;
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  width: 280px;
+  transition: transform 0.3s;
   position: relative;
 }
 
-/* Elevación cuando está activa */
-.benefit-card.active {
-  transform: translateY(-20px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+.brand-card:hover {
+  transform: translateY(-6px);
 }
 
-/* Enlace completo o dividido */
-.benefit-link,
-.benefit-link.split {
-  display: block;
+.brand-card-img {
   width: 100%;
-  height: 380px;
-  text-decoration: none;
-  color: inherit;
+  height: auto;
+  border-radius: 12px;
+}
+
+.brand-card-split {
   position: relative;
 }
 
-/* Imagen dentro de la tarjeta */
-.benefit-image {
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-}
-
-/* Enlaces divididos (50/50) */
-.half-link {
+.split.half {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 50%;
-  height: 100%;
   z-index: 2;
 }
 
-.left {
-  left: 0;
-}
+.left { left: 0; }
+.right { right: 0; }
 
-.right {
-  right: 0;
-}
-
-/* Responsive */
 @media (max-width: 768px) {
-  .benefit-card {
-    flex: 0 0 80%;
+  .brands-grid {
+    gap: 16px;
   }
-  .benefit-image {
-    height: 180px;
+
+  .brand-card {
+    width: 90%;
+    max-width: 320px;
   }
 }
 </style>

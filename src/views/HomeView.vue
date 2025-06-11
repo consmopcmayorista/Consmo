@@ -35,6 +35,15 @@ const imagenCargada =ref(false)
 let  maximo = ref()
 let cantidades = ref(1)
 
+const categoriasCarrusel = [
+  { nombre: "CHASIS", titulo: "🎮 Chasis Gamer" },
+  { nombre: "CAMARAS WEB", titulo: "📷 Cámaras Web" },
+  { nombre: "MONITOR", titulo: "🖥️ Monitores" },
+  { nombre: "", titulo: "🎮 Gaming" },
+  { nombre: "IMPRESORAS", titulo: "🖨️ Impresoras" }
+]
+
+
 function sumarExistencias(existenciaStr) {
   console.log(existenciaStr)
   if (!existenciaStr) return 0;
@@ -555,70 +564,6 @@ $(document).ready(function() {
 
 
 <!-- Sección Recomendados -->
-<!-- Sección Recomendados | Estilo moderno fondo blanco -->
-<div class="recfor_you section_padding_b bg-white text-dark">
-  
-  <p v-if="cargando" class="text-center fs-5 py-4">Cargando tus recomendaciones...</p>
-
-  <div v-else-if="productos_alea.length > 0">
-    <div class="container">
-      <h2 class="section_title_3 ">
-        🛍️ Recomendados para ti
-      </h2>
-
-      <div class="row g-4 justify-content-center">
-        <div
-          class="col-xl-3 col-lg-4 col-sm-6"
-          v-for="(dato, index) in productos_alea.slice(0, 128)"
-          :key="index"
-        >
-          <div class="card-product-clean shadow-sm">
-            <!-- Imagen con hover suave -->
-            <div class="card-img-clean">
-              <img :src="dato.imagen" :alt="dato.titulo" loading="lazy" />
-              <div class="overlay-clean">
-                <button @click="buscar_productos(dato.id)" class="btn-outline-dark btn-sm">👁 Ver</button>
-              </div>
-            </div>
-
-            <!-- Info del producto -->
-            <div class="card-body px-3 py-3">
-              <RouterLink
-                :to="{ name: 'producto', query: { producto: dato.id } }"
-                class="text-decoration-none text-dark"
-              >
-                <p v-for="(line, index) in formatLine(dato.titulo, 22)" :key="index" class="mb-1 fw-semibold">
-                  {{ line }}
-                </p>
-              </RouterLink>
-              <small class="text-muted d-block">SKU: {{ dato.idpro }}</small>
-              <div class="mt-2 fw-bold fs-5 text-primary">
-                $ {{
-                  Math.round(parseFloat(dato.pt1))
-                    .toString()
-                    .replace(/\./g, ',')
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-                }}
-              </div>
-            </div>
-
-            <!-- Botón de acción -->
-            <div class="card-footer border-top px-3 pb-3">
-              <button @click="buscar_productos(dato.id)" class="btn btn-dark w-100 fw-semibold">
-                <i class="icon-cart me-2"></i> Añadir al carrito
-              </button>
-            </div>
-          </div>
-        </div>
-        <!-- Fin v-for -->
-      </div>
-    </div>
-  </div>
-
-  <div v-else>
-    <p class="text-center text-muted">No hay productos recomendados en este momento.</p>
-  </div>
-</div>
 
   <!-- Modal Quickview -->
 
