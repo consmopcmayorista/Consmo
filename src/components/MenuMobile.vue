@@ -1,90 +1,93 @@
 <template>
   <div class="menu-mobile">
-    <!-- Ícono de menú hamburguesa -->
-    <button @click="toggleMenu" class="hamburger">
-      &#9776;
+    <!-- Botón hamburguesa (izquierda) -->
+    <button @click="toggleMenu" class="hamburger-button">
+      ☰
     </button>
 
-    <!-- fondo oscuro cuando lo abrimos -->
-    <div v-if="isMenuOpen" class="overlay" @click="toggleMenu"></div>
+    <!-- Fondo oscuro al abrir -->
+    <div v-if="isMenuOpen" class="menu-overlay" @click="toggleMenu"></div>
 
-    <!-- menu con scroll -->
-    <nav :class="{'mobile-menu': true, 'open': isMenuOpen}">
-  <ul>
-    <li><RouterLink to="/">🏠 Inicio</RouterLink></li>
-    <li class="centered-list-item">
-      <button @click="toggleBuscarModal">🔍 Buscar</button>
-    </li>
-    <li><RouterLink to="/catalogo">📦 Catalogo</RouterLink></li>
-    <li><RouterLink to="/promociones">🏷️ Promociones</RouterLink></li>
-    <li><RouterLink to="/calificanos">⭐ Califícanos</RouterLink></li>
-    <li><RouterLink to="/foro">💬 Foro</RouterLink></li>
-    <li><RouterLink to="/conocenos">ℹ️ Conócenos</RouterLink></li>
-    <li><RouterLink to="/encuentranos">📍 Encuéntranos</RouterLink></li>
-  </ul>
-</nav>
-    <!-- Modal de búsqueda -->
+    <!-- Menú lateral visual estructurado -->
+    <aside :class="['side-menu', { open: isMenuOpen }]">
+      <!-- Encabezado -->
+      <div class="menu-header">
+        <h2>Menu</h2>
+        <button @click="toggleMenu" class="close-button">✖</button>
+      </div>
+
+      <!-- Ítems del menú -->
+      <ul class="menu-items">
+        <!-- 🔍 Buscar primero -->
+        <li @click="abrirBuscador">
+          <i class="icon">🔍</i>
+          <span>Buscar</span>
+        </li>
+        <li @click="goTo('/')">
+          <i class="icon">🏠</i>
+          <span>Inicio</span>
+        </li>
+        <li @click="goTo('/catalogo')">
+          <i class="icon">📦</i>
+          <span>Catálogo</span>
+        </li>
+        <li @click="goTo('/promociones')">
+          <i class="icon">🏷️</i>
+          <span>Promociones</span>
+        </li>
+        <li @click="goTo('/calificanos')">
+          <i class="icon">⭐</i>
+          <span>Califícanos</span>
+        </li>
+        <li @click="goTo('/foro')">
+          <i class="icon">💬</i>
+          <span>Foro</span>
+        </li>
+        <li @click="goTo('/conocenos')">
+          <i class="icon">ℹ️</i>
+          <span>Conócenos</span>
+        </li>
+        <li @click="goTo('/encuentranos')">
+          <i class="icon">📍</i>
+          <span>Encuéntranos</span>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Modal del buscador integrado -->
     <div v-if="isBuscarModalOpen" class="buscar-modal">
       <button class="close-button" @click="toggleBuscarModal">✖️</button>
       <div class="buscar-modal-content">
-        <!-- search wrapper  -->
         <div class="search_wrap">
-          <!-- search input box  -->
-          <div class="search d-flex">
-            <div class="search_input">
-              <input
-                type="text"
-                placeholder="Buscar"
-                v-model="busqueda"
-                @input="filtrarProductos"
-                autocomplete="off"
-                @blur="ocultarSugerencias"
-              />
+          <input
+            type="text"
+            placeholder="Buscar producto..."
+            v-model="busqueda"
+            @input="filtrarProductos"
+            autocomplete="off"
+            @blur="ocultarSugerencias"
+          />
+          <button class="btn-buscar" @click="buscarProductos">Buscar</button>
+        </div>
+
+        <!-- Resultados -->
+        <div v-if="producto_buscado.length" class="search_result_product">
+          <div
+            v-for="(dato, index) in producto_buscado"
+            :key="index"
+            class="single_sresult_product"
+            @click="irAlProducto(dato.id)"
+          >
+            <div class="sresult_img">
+              <img :src="dato.imagen" />
             </div>
-            <div class="search_submit">
-              <RouterLink
-                :to="{ name: 'catalogo_cat', query: { categoria: '', busqueda: busqueda } }"
-                @click="buscarProductos"
-              >
-                <button>
-                  <span class="icon">
-                    <span>Buscar</span>
-                    <i class="las la-search"></i>
-                  </span>
-                </button>
-              </RouterLink>
+            <div class="sresult_content">
+              <h4>{{ dato.titulo }}</h4>
+              <div class="price">
+                ${{ Math.round(parseFloat(dato.pt1)).toLocaleString() }}
+              </div>
             </div>
           </div>
-
-          <!-- search suggest -->
-          <div :class="['search_suggest', { active: producto_buscado.length > 0 }]">
-            <div class="search_result_product">
-              <template v-for="(dato, index) in producto_buscado" :key="index">
-                <div v-if="dato.separator" class="separator" style="font-weight: bold; color: #aaa; text-align: center; margin: 5px 0;"></div>
-
-                <!-- Si es un producto normal -->
-                <RouterLink
-                  v-else
-                  :to="{ name: 'producto', query: { producto: dato.id } }"
-                  class="single_sresult_product"
-                  @click="ocultarSugerencias"
-                >
-                  <div class="sresult_img">
-                    <img :src="dato.imagen" />
-                  </div>
-                  <div class="sresult_content">
-                    <h4>{{ dato.titulo }}</h4>
-                    <div class="price">
-                      <span class="org_price">
-                        ${{ Math.round(parseFloat(dato.pt1)).toLocaleString() }}
-                      </span>
-                    </div>
-                  </div>
-                </RouterLink>
-              </template>
-            </div>
-          </div>
-          <!-- FIN search_suggest -->
         </div>
       </div>
     </div>
@@ -92,16 +95,16 @@
 </template>
 
 <script>
-import { ref } from 'vue'
 import axios from 'axios'
 
 export default {
+  name: 'MenuMobile',
   data() {
     return {
       isMenuOpen: false,
       isBuscarModalOpen: false,
       busqueda: '',
-      producto_buscado: [] // Suponiendo que tienes esta data
+      producto_buscado: []
     };
   },
   methods: {
@@ -111,329 +114,240 @@ export default {
     toggleBuscarModal() {
       this.isBuscarModalOpen = !this.isBuscarModalOpen;
     },
+    abrirBuscador() {
+      this.toggleMenu();
+      this.toggleBuscarModal();
+    },
+    goTo(ruta) {
+      this.$router.push(ruta);
+      this.toggleMenu();
+    },
     async filtrarProductos() {
-      // Si la búsqueda es de 2 caracteres o menos, vacía y retorna
       if (this.busqueda.length <= 2) {
-        this.producto_buscado = []
-        return
+        this.producto_buscado = [];
+        return;
       }
 
       try {
-        // Armar la URL con la búsqueda y el id_empresa
-        const url = `https://whatsapp-nube.com/api_web/api_web_catalogo_new_producto_varios.php?texto=${this.busqueda}&id=24`
-        console.log("Consultando:", url)
+        const url = `https://whatsapp-nube.com/api_web/api_web_catalogo_new_producto_varios.php?texto=${this.busqueda}&id=24`;
+        const response = await axios.get(url);
+        const productos = response.data.productos || [];
 
-        // Petición a la API
-        const response = await axios.get(url)
-        // Se asume que la API retorna { productos: [...] }
-        const productos = response.data.productos || []
-        console.log("Productos recibidos:", productos)
+        const busquedaMinus = this.busqueda.toLowerCase();
+        const palabrasClave = busquedaMinus.split(" ").filter(Boolean);
 
-        // Convertir la búsqueda a minúsculas
-        const busquedaMinus = this.busqueda.toLowerCase()
-        // Separar las palabras de la búsqueda (ej: "casa nueva" => ["casa", "nueva"])
-        const palabrasClave = busquedaMinus.split(" ").filter(Boolean)
+        const exactas = productos.filter(p => {
+          const t = p.titulo?.toLowerCase() || "";
+          const id = p.idpro?.toLowerCase() || "";
+          return t.includes(busquedaMinus) || id.includes(busquedaMinus);
+        });
 
-        // Coincidencias EXACTAS: si en título o en idpro se incluye la frase completa
-        const coincidenciasExactas = productos.filter(p => {
-          const tituloLower = p.titulo ? p.titulo.toLowerCase() : ""
-          const idproLower = p.idpro ? p.idpro.toLowerCase() : ""
-          return (
-            tituloLower.includes(busquedaMinus) ||
-            idproLower.includes(busquedaMinus)
-          )
-        })
+        const parciales = productos.filter(p => {
+          const t = p.titulo?.toLowerCase() || "";
+          const id = p.idpro?.toLowerCase() || "";
+          return palabrasClave.every(pal => t.includes(pal) || id.includes(pal)) && !exactas.includes(p);
+        });
 
-        // Coincidencias PARCIALES: cada palabra debe aparecer en alguno de los dos campos,
-        // pero NO es coincidencia exacta de la frase completa
-        const coincidenciasParciales = productos.filter(p => {
-          const tituloLower = p.titulo ? p.titulo.toLowerCase() : ""
-          const idproLower = p.idpro ? p.idpro.toLowerCase() : ""
-          // Cada palabra debe aparecer en titulo o en idpro
-          const todasAparecen = palabrasClave.every(pal =>
-            tituloLower.includes(pal) || idproLower.includes(pal)
-          )
-          // Se excluyen los que ya están en exactas
-          return todasAparecen && !coincidenciasExactas.includes(p)
-        })
-
-        // Combinar resultados, insertando un separador si hay ambas coincidencias
-        let combinado
-        if (coincidenciasParciales.length > 0 && coincidenciasExactas.length > 0) {
-          combinado = [
-            ...coincidenciasExactas,
-            { separator: true },
-            ...coincidenciasParciales
-          ]
-        } else {
-          combinado = [...coincidenciasExactas, ...coincidenciasParciales]
-        }
-
-        // Elimina duplicados por id (función que debes tener implementada)
-        this.producto_buscado = this.removeDuplicatesById(combinado)
+        this.producto_buscado = [...exactas, ...parciales];
 
       } catch (error) {
-        console.error("Error al obtener productos:", error)
+        console.error("Error al buscar:", error);
       }
     },
     ocultarSugerencias() {
-      // Esperamos un micro-tick para ver si el usuario clicó en un resultado
-      // con un pequeño setTimeout
       setTimeout(() => {
-        this.producto_buscado = []
-      }, 200)
-    },
-    removeDuplicatesById(list) {
-      const seen = new Set()
-      return list.filter(item => {
-        // Si es el separador especial `{ separator: true }`, déjalo
-        if (item.separator) return true
-
-        // Si no tiene `id`, lo dejamos pasar 
-        if (!item.id) return true
-
-        if (seen.has(item.id)) {
-          return false
-        } else {
-          seen.add(item.id)
-          return true
-        }
-      })
+        this.producto_buscado = [];
+      }, 200);
     },
     buscarProductos() {
       if (this.busqueda.length > 2) {
         this.filtrarProductos();
         this.toggleBuscarModal();
       }
+    },
+    irAlProducto(id) {
+      this.$router.push({ name: 'producto', query: { producto: id } }).then(() => {
+        this.toggleBuscarModal();
+        this.ocultarSugerencias();
+        window.scrollTo(0, 0);
+      });
     }
   }
 };
 </script>
 
 <style scoped>
-/* estilo para celu */
-@media (min-width: 769px) {
+/* Oculta en pantallas grandes */
+@media (min-width: 768px) {
   .menu-mobile {
     display: none;
   }
 }
 
-/* boton hamburguesa */
-.hamburger {
-  font-size: 32px;
-  cursor: pointer;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 55px;
-  height: 55px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.menu-mobile {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Botón hamburguesa */
+.hamburger-button {
   position: fixed;
-  bottom: 15px;
-  left: 5px;
-  z-index: 1000;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, background 0.3s ease;
+  top: 20px;
+  left: 20px;
+  z-index: 1200;
+  background: #061F27;
+  color: #fff;
+  font-size: 26px;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 14px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
 }
 
-.hamburger:hover {
-  transform: scale(1.1);
-  background: #0056b3;
-}
-
-/* fondo oscuro */
-.overlay {
+/* Fondo oscuro */
+.menu-overlay {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1190;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 999;
-  transition: opacity 0.3s ease;
+  background: rgba(0,0,0,0.5);
 }
 
-/* menu degradado y scroll */
-.mobile-menu {
+/* Panel lateral */
+.side-menu {
   position: fixed;
-  bottom: -100%;
+  top: 0;
+  left: -280px;
+  width: 260px;
+  height: 100%;
+  background: #061F27;
+  color: white;
+  z-index: 1201;
+  transition: left 0.3s ease;
+  box-shadow: 4px 0 16px rgba(0, 255, 255, 0.15);
+}
+.side-menu.open {
   left: 0;
-  width: 100%;
-  height: 50%;
-  background: linear-gradient(135deg, #007bff, #6610f2);
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
-  transition: bottom 0.4s ease-in-out;
-  z-index: 1000;
-  border-radius: 20px 20px 0 0;
-  padding-top: 20px;
-  overflow-y: auto; /* habilitacion de scrol si hay varias */
-  max-height: 50%;
 }
 
-.mobile-menu.open {
-  bottom: 0;
-}
-/* estilos para scroll */
-.mobile-menu::-webkit-scrollbar {
-  width: 6px;
-}
-
-.mobile-menu ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  padding-bottom: 20px;
-  text-align: center;
-}
-
-.mobile-menu li {
-  padding: 15px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.mobile-menu a,
-.mobile-menu button {
-  text-decoration: none;
-  color: #ffffff;
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
   font-size: 20px;
   font-weight: bold;
-  display: block;
-  transition: color 0.3s ease;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.close-button {
   background: none;
   border: none;
+  color: #fff;
+  font-size: 22px;
   cursor: pointer;
 }
 
-.mobile-menu a:hover,
-.mobile-menu button:hover {
-  color: #0056b3;
+.menu-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-
-.centered-list-item {
+.menu-items li {
   display: flex;
-  justify-content: center;
   align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.menu-items li:hover {
+  background: rgba(0,255,255,0.05);
+}
+.icon {
+  margin-right: 12px;
+  font-size: 20px;
+}
+.menu-items span {
+  font-size: 16px;
 }
 
-/* modal de búsqueda */
+/* Modal buscador */
 .buscar-modal {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1300;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
   display: flex;
   justify-content: center;
-  align-items: center;
-  z-index: 1000;
+  align-items: flex-start; /* 👈 Alínea hacia arriba */
+  padding-top: 60px;        /* 👈 Espacio desde arriba (ajústalo si quieres) */
 }
 
 .buscar-modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
+  background: #111;
+  border: 1px solid #0ff;
+  border-radius: 12px;
+  padding: 24px;
   width: 90%;
   max-width: 500px;
-  max-height: 80%; /* Evita que el modal sobresalga de la pantalla */
-  overflow-y: auto; /* Permite el scroll si el contenido es muy grande */
-  position: relative;
-  transition: max-height 0.4s ease-in-out;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
 }
-
-.buscar-modal-content.expanded {
-  max-height: 80%; /* Ajusta el tamaño del contenedor expandido */
-}
-
-/* Botón para cerrar el modal */
-.close-button {
-  background: none;
-  border: none;
-  font-size: 24px;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-  color: #007bff;
-}
-
 .search_wrap {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
-
-.search_input {
-  position: relative;
-  width: 100%;
+.search_wrap input {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #0ff;
+  border-radius: 8px;
+  background: #000;
+  color: #0ff;
 }
-
-.search_input input {
-  width: 100%;
-  padding: 15px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 18px;
-}
-
-.search_submit {
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.search_submit button {
-  background: #007bff;
+.btn-buscar {
+  background: #0ff;
+  color: #000;
+  font-weight: bold;
   border: none;
-  cursor: pointer;
-  color: white;
-  font-size: 18px;
   padding: 10px;
-  border-radius: 4px;
+  border-radius: 8px;
+  cursor: pointer;
 }
-
 .search_result_product {
   margin-top: 20px;
-  max-height: 500px; /* Ajusta el tamaño del contenedor */
+  max-height: 300px;
   overflow-y: auto;
 }
-
-.search_result_product::-webkit-scrollbar {
-  width: 6px;
-}
-
-.search_result_product::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-}
-
 .single_sresult_product {
   display: flex;
   align-items: center;
+  background: #000;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 8px;
+  margin-bottom: 8px;
   padding: 10px;
-  border-bottom: 1px solid #ccc;
-  text-decoration: none;
-  color: black;
+  cursor: pointer;
+  color: #0ff;
 }
-
-.single_sresult_product:hover {
-  background-color: #f1f1f1;
-}
-
 .sresult_img img {
   width: 50px;
   height: 50px;
+  object-fit: contain;
   margin-right: 10px;
 }
-
-.sresult_content {
-  flex: 1;
+.sresult_content h4 {
+  margin: 0 0 4px;
+  font-size: 15px;
 }
-
 .price {
-  color: #007bff;
+  font-weight: bold;
+  font-size: 14px;
 }
 </style>

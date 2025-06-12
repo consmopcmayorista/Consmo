@@ -1,6 +1,6 @@
 <template>
   <div class="section_padding_b bg-white text-dark" v-if="productosFiltrados.length">
-    <div class="container position-relative pb-5">
+    <div class="container-fluid px-3 px-sm-4 px-md-5 position-relative pb-5 carrusel-full">
       <!-- Encabezado del carrusel con título y botón "Ver todos" -->
       <div class="d-flex justify-content-between align-items-center mb-4 encabezado-carrusel flex-wrap gap-2">
         <h2 class="section_title_3 mb-0">
@@ -119,6 +119,7 @@ const productosFiltrados = computed(() => {
 .fixed-card {
   height: 100%;
   max-height: 500px;
+  width: 80%;
   display: flex;
   flex-direction: column;
 }
@@ -198,5 +199,15 @@ const productosFiltrados = computed(() => {
 ::v-deep(.swiper-button-next:hover) {
   background-color: #0d6efd;
   color: #fff;
+}
+.carrusel-full {
+  max-width: 100%;
+}
+
+@media (min-width: 1400px) {
+  .carrusel-full {
+    max-width: 1840px;
+    margin: 0 auto;
+  }
 }
 </style>
