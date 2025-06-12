@@ -1,72 +1,46 @@
 <template>
   <div class="menu-mobile">
     <!-- Botón hamburguesa (izquierda) -->
-    <button @click="toggleMenu" class="hamburger-button">
-      ☰
-    </button>
+    <button @click="toggleMenu" class="hamburger-button">☰</button>
 
-    <!-- Fondo oscuro al abrir -->
+    <!-- Fondo oscuro al abrir menú -->
     <div v-if="isMenuOpen" class="menu-overlay" @click="toggleMenu"></div>
 
-    <!-- Menú lateral visual estructurado -->
+    <!-- Menú lateral -->
     <aside :class="['side-menu', { open: isMenuOpen }]">
-      <!-- Encabezado -->
       <div class="menu-header">
         <h2>Menu</h2>
         <button @click="toggleMenu" class="close-button">✖</button>
       </div>
-
-      <!-- Ítems del menú -->
       <ul class="menu-items">
-        <!-- 🔍 Buscar primero -->
-        <li @click="abrirBuscador">
-          <i class="icon">🔍</i>
-          <span>Buscar</span>
-        </li>
-        <li @click="goTo('/')">
-          <i class="icon">🏠</i>
-          <span>Inicio</span>
-        </li>
-        <li @click="goTo('/catalogo')">
-          <i class="icon">📦</i>
-          <span>Catálogo</span>
-        </li>
-        <li @click="goTo('/promociones')">
-          <i class="icon">🏷️</i>
-          <span>Promociones</span>
-        </li>
-        <li @click="goTo('/calificanos')">
-          <i class="icon">⭐</i>
-          <span>Califícanos</span>
-        </li>
-        <li @click="goTo('/foro')">
-          <i class="icon">💬</i>
-          <span>Foro</span>
-        </li>
-        <li @click="goTo('/conocenos')">
-          <i class="icon">ℹ️</i>
-          <span>Conócenos</span>
-        </li>
-        <li @click="goTo('/encuentranos')">
-          <i class="icon">📍</i>
-          <span>Encuéntranos</span>
-        </li>
+        <li @click="abrirBuscador"><i class="icon">🔍</i><span>Buscar</span></li>
+        <li @click="goTo('/')"><i class="icon">🏠</i><span>Inicio</span></li>
+        <li @click="goTo('/catalogo')"><i class="icon">📦</i><span>Catálogo</span></li>
+        <li @click="goTo('/promociones')"><i class="icon">🏷️</i><span>Promociones</span></li>
+        <li @click="goTo('/calificanos')"><i class="icon">⭐</i><span>Califícanos</span></li>
+        <li @click="goTo('/foro')"><i class="icon">💬</i><span>Foro</span></li>
+        <li @click="goTo('/conocenos')"><i class="icon">ℹ️</i><span>Conócenos</span></li>
+        <li @click="goTo('/encuentranos')"><i class="icon">📍</i><span>Encuéntranos</span></li>
       </ul>
     </aside>
 
-    <!-- Modal del buscador integrado -->
+    <!-- Buscador Modal (con botón limpiar y fondo blanco) -->
     <div v-if="isBuscarModalOpen" class="buscar-modal">
-      <button class="close-button" @click="toggleBuscarModal">✖️</button>
       <div class="buscar-modal-content">
+        <button class="close-button" @click="toggleBuscarModal">✖️</button>
         <div class="search_wrap">
-          <input
-            type="text"
-            placeholder="Buscar producto..."
-            v-model="busqueda"
-            @input="filtrarProductos"
-            autocomplete="off"
-            @blur="ocultarSugerencias"
-          />
+          <!-- 🆕 Input + botón limpiar -->
+          <div class="search_input_wrapper">
+            <input
+              type="text"
+              placeholder="Buscar producto..."
+              v-model="busqueda"
+              @input="filtrarProductos"
+              autocomplete="off"
+              @blur="ocultarSugerencias"
+            />
+            <button v-if="busqueda" class="clear-input" @click="limpiarBusqueda">✖</button>
+          </div>
           <button class="btn-buscar" @click="buscarProductos">Buscar</button>
         </div>
 
@@ -98,7 +72,6 @@
 import axios from 'axios'
 
 export default {
-  name: 'MenuMobile',
   data() {
     return {
       isMenuOpen: false,
@@ -148,11 +121,21 @@ export default {
           return palabrasClave.every(pal => t.includes(pal) || id.includes(pal)) && !exactas.includes(p);
         });
 
-        this.producto_buscado = [...exactas, ...parciales];
+        const combinados = [...exactas, ...parciales];
+        this.producto_buscado = this.removeDuplicatesById(combinados);
 
       } catch (error) {
         console.error("Error al buscar:", error);
       }
+    },
+    removeDuplicatesById(lista) {
+      const seen = new Set();
+      return lista.filter(item => {
+        const clave = item.id || item.titulo || '';
+        if (seen.has(clave)) return false;
+        seen.add(clave);
+        return true;
+      });
     },
     ocultarSugerencias() {
       setTimeout(() => {
@@ -171,13 +154,18 @@ export default {
         this.ocultarSugerencias();
         window.scrollTo(0, 0);
       });
+    },
+    // 🆕 Método para limpiar input y sugerencias
+    limpiarBusqueda() {
+      this.busqueda = "";
+      this.producto_buscado = [];
     }
   }
-};
+}
 </script>
 
 <style scoped>
-/* Oculta en pantallas grandes */
+/* Responsive solo para móviles */
 @media (min-width: 768px) {
   .menu-mobile {
     display: none;
@@ -203,7 +191,7 @@ export default {
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
 }
 
-/* Fondo oscuro */
+/* Overlay oscuro */
 .menu-overlay {
   position: fixed;
   top: 0;
@@ -214,7 +202,7 @@ export default {
   background: rgba(0,0,0,0.5);
 }
 
-/* Panel lateral */
+/* Menú lateral */
 .side-menu {
   position: fixed;
   top: 0;
@@ -225,7 +213,6 @@ export default {
   color: white;
   z-index: 1201;
   transition: left 0.3s ease;
-  box-shadow: 4px 0 16px rgba(0, 255, 255, 0.15);
 }
 .side-menu.open {
   left: 0;
@@ -238,7 +225,6 @@ export default {
   padding: 18px 20px;
   font-size: 20px;
   font-weight: bold;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 .close-button {
@@ -260,7 +246,6 @@ export default {
   padding: 16px 20px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
   cursor: pointer;
-  transition: background 0.2s ease;
 }
 .menu-items li:hover {
   background: rgba(0,255,255,0.05);
@@ -273,7 +258,7 @@ export default {
   font-size: 16px;
 }
 
-/* Modal buscador */
+/* Modal del buscador */
 .buscar-modal {
   position: fixed;
   top: 0;
@@ -281,16 +266,16 @@ export default {
   z-index: 1300;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 1);
+  padding-top: 40px;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* 👈 Alínea hacia arriba */
-  padding-top: 60px;        /* 👈 Espacio desde arriba (ajústalo si quieres) */
+  align-items: flex-start;
+  overflow-y: auto;
 }
 
 .buscar-modal-content {
-  background: #111;
+  background: #fff;
   border: 1px solid #0ff;
   border-radius: 12px;
   padding: 24px;
@@ -298,19 +283,37 @@ export default {
   max-width: 500px;
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
 }
-.search_wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+
+/* 🆕 Input con botón limpiar */
+.search_input_wrapper {
+  position: relative;
 }
-.search_wrap input {
-  padding: 12px;
+
+.search_input_wrapper input {
+  width: 100%;
+  padding: 12px 36px 12px 12px;
   font-size: 16px;
   border: 1px solid #0ff;
   border-radius: 8px;
-  background: #000;
-  color: #0ff;
+  background: #fff;
+  color: #000;
 }
+
+.clear-input {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #888;
+}
+.clear-input:hover {
+  color: #000;
+}
+
 .btn-buscar {
   background: #0ff;
   color: #000;
@@ -319,7 +322,9 @@ export default {
   padding: 10px;
   border-radius: 8px;
   cursor: pointer;
+  margin-top: 10px;
 }
+
 .search_result_product {
   margin-top: 20px;
   max-height: 300px;
@@ -328,13 +333,12 @@ export default {
 .single_sresult_product {
   display: flex;
   align-items: center;
-  background: #000;
+  background: #f7f7f7;
   border: 1px solid rgba(0, 255, 255, 0.2);
   border-radius: 8px;
   margin-bottom: 8px;
   padding: 10px;
   cursor: pointer;
-  color: #0ff;
 }
 .sresult_img img {
   width: 50px;
@@ -345,9 +349,11 @@ export default {
 .sresult_content h4 {
   margin: 0 0 4px;
   font-size: 15px;
+  color: #000;
 }
 .price {
   font-weight: bold;
   font-size: 14px;
+  color: #0ff;
 }
 </style>
