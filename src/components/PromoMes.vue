@@ -17,23 +17,15 @@
   
   <script setup>
   const promos = [
-    // { title: 'DIADEMA GAMER USB AOAS :4133', image: '4133.png' },
-    // { title: 'TV BOX 2GB+16GB 4K PRO :9081', image: '9081.png' },
-    // { title: 'BATERIAS AA RECARGABLE X2 :C9003', image: 'C9003.png' },
-    // { title: 'IMPRESORA TERMICA  POS 58MM :C9102', image: 'C9102.png'},
-    // { title: 'TV BOX 4GB+32GB 8K UHD :C9105', image: 'C9105.png' },
-    // { title: 'DECODIFICADOR TDT :C9117', image: 'C9117.png' },
-    // { title: 'CAMARA IP ROBOTICA 5 ANTENAS DUAL BAND :C9663', image: 'C9663.png' },
-    // { title: 'DISCO NUEVO PARA PC NUEVO :2399', image: '2399.png' },
-    // { title: 'BOARD DDR4 12VA GEN :2614', image: '2614.png' },
-    // { title: 'TODO EN UNO POS 11.6" :2706', image: '2706.png' },
-    // { title: 'LECTOR COD BARRAS INALAMBRICO :3502', image: '3502.png' },
-    // { title: 'ANTENA CPE EXTERIOR PUNTO A PUNTO :2524', image: '2524.png' },
-    // { title: 'CAJON MONEDERO GRANDE :3692', image: '3692.png' },
-    // { title: 'CAJON MONEDERO PEQUEÑO :3694', image: '3694.png' },
-    // { title: 'XPON ONT WIFI N300 :9225', image: '9225.png' },
-    // { title: 'LECTOR CODIGOS DE BARRAS  :9891', image: '9891.png' },
-    // { title: 'CABINA CON MICROFONO 8 " :1509', image: '1509.png' },   
+    { title: 'CAJA EXTERNAS SATA USB 2.0 PARA DISCO 2.5" :1412', image: '1412.png'},
+    { title: 'ADAPTADOR WIFI USB 2.0 :6645', image: '6645.png' },
+    { title: 'CHASIS GAMER RGB :8897', image: '8897.png' },
+    { title: 'FUNDA PARA PORTATIL TIPO SOBRE 15.6" :9381', image: '9381.png' },
+    { title: 'TECLADO NUMERICO :C9566', image: 'C9566.png' },
+    { title: 'CONVERTIDOR USB 2.0 A RJ45 10/100 :C9568', image: 'C9568.png' },
+    { title: 'CAMARA IP ROBOTICA WIFI 5 ANTENAS :C9663', image: 'C9663.png' },
+    { title: 'HUB USB 3.0 7 PUERTOS CON SWITCH :C9680', image: 'C9680.png' },
+
     
 
     // Agrega más promociones según sea necesario

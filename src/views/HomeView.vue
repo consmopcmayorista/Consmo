@@ -493,7 +493,7 @@ $(document).ready(function() {
 
 <CarruselesPorCategoria
   :productos="productos_alea"
-  categoria="CAMARAS WEB"
+  categoria="monitores"
   titulo=" Camaras Web"
   :buscarProducto="buscar_productos"
   :formatLine="formatLine"

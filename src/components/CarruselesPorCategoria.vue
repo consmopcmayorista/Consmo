@@ -20,9 +20,9 @@
           :modules="[Navigation]"
           navigation
           :slides-per-view="1.2"
-          :space-between="16"
+          :space-between="0"
           :breakpoints="{
-            576: { slidesPerView: 2 },
+            480: { slidesPerView: 2 },
             768: { slidesPerView: 3 },
             992: { slidesPerView: 4 },
             1200: { slidesPerView: 5 }
@@ -118,7 +118,6 @@ const productosFiltrados = computed(() => {
 
 .fixed-card {
   height: 100%;
-  min-height: 500px;
   max-height: 500px;
   display: flex;
   flex-direction: column;
@@ -129,11 +128,11 @@ const productosFiltrados = computed(() => {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
-.card-img-clean {
+/* .card-img-clean {
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
-}
+} */
 
 .card-img-clean img {
   width: 100%;
