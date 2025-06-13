@@ -25,9 +25,18 @@
     { title: 'CONVERTIDOR USB 2.0 A RJ45 10/100 :C9568', image: 'C9568.png' },
     { title: 'CAMARA IP ROBOTICA WIFI 5 ANTENAS :C9663', image: 'C9663.png' },
     { title: 'HUB USB 3.0 7 PUERTOS CON SWITCH :C9680', image: 'C9680.png' },
-
+    { title: 'MEMORIA RAM DDR3 4GB 1333 :2136', image: '2136.png' },
+    { title: 'LECTOR DE CODIIGO DE BARRAS SLIM USB TIPO C + BT :2694', image: '2694.png' },
+    { title: 'TODO EN UNO POS 15.6" :2792', image: '2792.png' },
+    { title: 'IMPRESORA CODIGOS DE BARRA/ETIQUETA :3512', image: '3512.png' }, 
+    { title: 'MINI KARAOKE RGB :3591', image: '3591.png' },
+    { title: 'PROYECTOR PORTABLE FHD ANDROID :3627', image: '3627.png' }, 
+    { title: 'CAJA EXTERNA GAMER RGB USB 3.0 :9516', image: '9516.png' },
+    { title: 'CAPUCHON DE RED GRIS BOLSA X1000 :C9616', image: 'C9616.png' },
+    { title: 'APUNTADOR/PRESENTADOR LASER INALAMBRICO :MC3000', image: 'MC3000.png' },
     
-
+    
+  
     // Agrega más promociones según sea necesario
   ]
   </script>
@@ -102,5 +111,4 @@
     }
   }
   </style>
-  
   

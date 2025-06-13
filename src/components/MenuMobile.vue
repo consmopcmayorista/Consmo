@@ -41,7 +41,7 @@
             />
             <button v-if="busqueda" class="clear-input" @click="limpiarBusqueda">✖</button>
           </div>
-          <button class="btn-buscar" @click="buscarProductos">Buscar</button>
+          <!-- <button class="btn-buscar" @click="buscarProductos">Buscar</button> -->
         </div>
 
         <!-- Resultados -->

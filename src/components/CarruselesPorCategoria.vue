@@ -137,11 +137,34 @@ const productosFiltrados = computed(() => {
 
 .card-img-clean img {
   width: 100%;
-  height: 260px;
+  height: 200px;
   object-fit: cover;
   transition: transform 0.3s ease;
   border-bottom: 1px solid #eee;
 }
+
+/* Más pequeñas en celulares */
+@media (max-width: 480px) {
+  .card-img-clean img {
+    height: 180px;
+  }
+}
+
+/* Más grandes en pantallas grandes */
+@media (min-width: 1200px) {
+  .card-img-clean img {
+    height: 220px;
+  }
+}
+
+/* Aún más espacio en pantallas extra grandes */
+@media (min-width: 1600px) {
+  .card-img-clean img {
+    height: 240px;
+  }
+}
+
+
 
 .card-product-clean:hover img {
   transform: scale(1.05);
@@ -210,4 +233,5 @@ const productosFiltrados = computed(() => {
     margin: 0 auto;
   }
 }
+
 </style>

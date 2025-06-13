@@ -91,10 +91,10 @@ const productos = [
     link: '/producto?producto=41558'
   },
   {
-    nombre: 'TIMÓN GENIUS SPEEDMASTER',
-    descripcion: 'Volante y pedalera PC/PS3/PS4, negro-rojo',
-    imagen: '/images2/destacados/destacado3.jpg',
-    link: '/producto?producto=41579'
+    nombre: 'SILLA GAMER HAVIT',
+    descripcion: 'Silla gamer negro con rojo havit GC-933',
+    imagen: '/images2/destacados/destacado4.jpg',
+    link: '/producto?producto=42246'
   }
 ]
 
