@@ -494,7 +494,7 @@ $(document).ready(function() {
 <CarruselesPorCategoria
   :productos="productos_alea"
   categoria="monitores"
-  titulo=" Camaras Web"
+  titulo="🖥️ Monitores"
   :buscarProducto="buscar_productos"
   :formatLine="formatLine"
 />

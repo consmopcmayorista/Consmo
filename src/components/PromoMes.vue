@@ -34,6 +34,7 @@
     { title: 'CAJA EXTERNA GAMER RGB USB 3.0 :9516', image: '9516.png' },
     { title: 'CAPUCHON DE RED GRIS BOLSA X1000 :C9616', image: 'C9616.png' },
     { title: 'APUNTADOR/PRESENTADOR LASER INALAMBRICO :MC3000', image: 'MC3000.png' },
+    { title: 'TABLET 10.95" IPS FHD :8791', image: '8791.png' },
     
     
   

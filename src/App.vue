@@ -13,6 +13,7 @@ import RedesComp from './components/RedesComp.vue'
 import FooterInteractivo from "./components/footer.vue"
 import MenuMobile from './components/MenuMobile.vue'
 import Up from './components/Up.vue'
+import BuscadorMovil from './components/BuscadorMovil.vue'
 
 /* ===============================
    VARIABLES REACTIVAS
@@ -361,7 +362,8 @@ provide('categorias_alfabetica', categorias_alfabetica);
 
 <template>
   <TopHeader />
-  <div class="spacer"></div> <!-- Espacio en blanco debajo del header -->
+  <div class="spacer">
+</div> <!-- Espacio en blanco debajo del header -->
   <header>
 
     <div class="container">
