@@ -56,17 +56,34 @@ export default {
         producto_buscado.value = [];
         return;
       }
+
       try {
         const url = `https://whatsapp-nube.com/api_web/api_web_catalogo_new_producto_varios.php?texto=${busqueda.value}&id=24`;
         const res = await axios.get(url);
         const productos = res.data.productos || [];
+
         const query = busqueda.value.toLowerCase();
         const palabras = query.split(" ").filter(Boolean);
 
-        const exactas = productos.filter(p => p.titulo?.toLowerCase().includes(query) || p.idpro?.toLowerCase().includes(query));
-        const parciales = productos.filter(p => palabras.every(pal => p.titulo?.toLowerCase().includes(pal) || p.idpro?.toLowerCase().includes(pal)) && !exactas.includes(p));
+        const exactas = productos.filter(p =>
+          p.titulo?.toLowerCase().includes(query) ||
+          p.idpro?.toLowerCase().includes(query)
+        );
 
-        producto_buscado.value = [...new Set([...exactas, ...parciales])];
+        const parciales = productos.filter(p =>
+          palabras.every(pal =>
+            p.titulo?.toLowerCase().includes(pal) ||
+            p.idpro?.toLowerCase().includes(pal)
+          )
+        );
+
+        // 💡 Unificar y deduplicar por ID del producto (idpro)
+        const mapa = new Map();
+        [...exactas, ...parciales].forEach(p => {
+          mapa.set(p.idpro, p); // Usa `idpro` como clave única
+        });
+
+        producto_buscado.value = Array.from(mapa.values());
       } catch (e) {
         console.error("Error búsqueda:", e);
       }
@@ -100,13 +117,14 @@ export default {
 };
 </script>
 
+
 <style scoped>
 
 @media (max-width: 991px) {
   /* 🔷 Contenedor principal de la fila logo + buscador */
   .search_mobile_row {
-    background: #000000;
-    padding: 10px;
+    padding: px;
+    border: 1px solid #e0e0e0;
     border-radius: 8px;
     margin-bottom: 10px;
   }
@@ -130,7 +148,7 @@ export default {
 
   /* 🔘 Botón de buscar */
   .btn-buscar {
-    background: #000;
+    background: #1035ad;
     color: #fff;
     border: none;
     padding: 8px 12px;

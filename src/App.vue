@@ -86,6 +86,7 @@ function imprimir_carrito(arreglo_car, total){
     `;
   });
   valores += "</ul>";
+  
 
   const total_monto = total;
   const formateado = Math.round(parseFloat(total_monto))
@@ -362,160 +363,151 @@ provide('categorias_alfabetica', categorias_alfabetica);
 
 <template>
   <TopHeader />
-  <div class="spacer">
-</div> <!-- Espacio en blanco debajo del header -->
-  <header>
+  <div class="spacer"></div> <!-- Espacio bajo el top -->
 
+  <header>
+    <!-- ✅ HEADER MÓVIL: Menú + Logo + Buscador -->
+    <div class="d-flex align-items-center gap-2 d-lg-none w-100 px-3 mt-2">
+      <!-- Menú hamburguesa (con prop modoHeader para estilo inline) -->
+      <MenuMobile :modoHeader="true" />
+
+      <!-- Logo móvil -->
+      <a href="/" class="d-flex align-items-center">
+        <img loading="lazy" src="/assets/images/120x24.png" alt="logo" style="height: 40px;" />
+      </a>
+
+      <!-- Buscador móvil -->
+      <div class="flex-grow-1">
+        <BuscadorMovil />
+      </div>
+    </div>
+
+    <!-- 💻 HEADER DE ESCRITORIO -->
     <div class="container">
       <div class="d-flex align-items-center justify-content-sm-between">
-        <!-- logo  -->
-        <div class="logo">
+        <!-- Logo escritorio -->
+        <div class="logo d-none d-lg-block">
           <a href="/">
             <img loading="lazy8" src="/assets/images/120x24.png" alt="logo" />
           </a>
         </div>
 
-
-        
-  <!-- search wrapper  -->
-  <div class="search_wrap d-none d-lg-block">
-    <!-- search input box  -->
-    <div class="search d-flex">
-      <div class="search_category">
-        <select v-model="categoria">
-          <option disabled value="">Categorias</option>
-          <option
-            v-for="dato in categorias_alfabetica"
-            :key="dato.categoria"
-            :value="dato.categoria"
-          >
-            {{ dato.categoria }}
-          </option>
-        </select>
-      </div>
-      <div class="search_input">
-        <input
-          type="text"
-          placeholder="Buscar"
-          id="show_suggest"
-          v-model="busqueda"
-          @input="filtrarProductos"
-          @keydown.enter="redirigirAListaDeProductos(busqueda)"
-          autocomplete="off"
-          @blur="ocultarSugerencias"
-        />
-      </div>
-      <div class="search_subimt">
-        <RouterLink
-          :to="{
-            name: 'catalogo_cat',
-            query: { categoria: categoria, busqueda: busqueda }
-          }"
-          @click="ocultarSugerencias"
-        >
-          <button>
-            <span class="icon">
-              <span class="d-none d-sm-inline-block">Buscar</span>
-              <i class="las la-search"></i>
-            </span>
-          </button>
-        </RouterLink>
-      </div>
-
-      <!-- search suggest -->
-      <div :class="['search_suggest', { active: producto_buscado.length > 0 }]">
-        <div class="search_result_product scrollable">
-          <template v-for="(dato, index) in producto_buscado" :key="index">
-            <div
-              v-if="dato.separator"
-              class="separator"
-              style="font-weight: bold; color: #aaa; text-align: center; margin: 5px 0;"
-            ></div>
-
-            <!-- Si es un producto normal -->
-            <RouterLink
-              v-else
-              :to="{ name: 'producto', query: { producto: dato.id } }"
-              class="single_sresult_product"
-              @click="ocultarSugerencias"
-            >
-              <div class="sresult_img">
-                <img :src="dato.imagen">
-              </div>
-              <div class="sresult_content">
-                <h4>{{ dato.titulo }}</h4>
-                <div class="price">
-                  <span class="org_price">
-                    ${{ Math.round(parseFloat(dato.pt1)).toLocaleString() }}
+        <!-- Buscador escritorio -->
+        <div class="search_wrap d-none d-lg-block">
+          <div class="search d-flex">
+            <div class="search_category">
+              <select v-model="categoria">
+                <option disabled value="">Categorias</option>
+                <option
+                  v-for="dato in categorias_alfabetica"
+                  :key="dato.categoria"
+                  :value="dato.categoria"
+                >
+                  {{ dato.categoria }}
+                </option>
+              </select>
+            </div>
+            <div class="search_input">
+              <input
+                type="text"
+                placeholder="Buscar"
+                id="show_suggest"
+                v-model="busqueda"
+                @input="filtrarProductos"
+                @keydown.enter="redirigirAListaDeProductos(busqueda)"
+                autocomplete="off"
+                @blur="ocultarSugerencias"
+              />
+            </div>
+            <div class="search_subimt">
+              <RouterLink
+                :to="{
+                  name: 'catalogo_cat',
+                  query: { categoria: categoria, busqueda: busqueda }
+                }"
+                @click="ocultarSugerencias"
+              >
+                <button>
+                  <span class="icon">
+                    <span class="d-none d-sm-inline-block">Buscar</span>
+                    <i class="las la-search"></i>
                   </span>
-                </div>
-              </div>
-            </RouterLink>
-          </template>
-        </div>
-      </div>
-      <!-- FIN search_suggest -->
-    </div> <!-- FIN .search.d-flex -->
-        </div> 
-                        <!-- button para pagos con addi -->
-                        <!--
-                        <div class="cart_sum_pros1">
-                            <button onclick="javascript:window.location.href='">CREDITO CON ADDI</button>
-                        </div> 
-                        -->
-                         
-
-                   <!-- shop cart wrapper  -->
-                   <div class="shopcart">
-                        <a href="carrito" class="icon_wrp text-center d-none d-lg-block">
-                            <span class="icon">
-                                <i class="icon-cart"></i>
-                            </span>
-                            <span class="icon_text">Carrito</span>
-                            <span class="pops2">{{cant_en_carrito}}</span>
-                        </a>
-                        <div class="shopcart_dropdown">
-                            <div class="cart_droptitle">
-                                <h4 class="text_lg">{{cant_en_carrito}} Productos</h4>
-                            </div>
-                            <div class="cartsdrop_wrap" if="lista_productos">
-                                
-                                  <div class="muestra" id="muestra"></div>      
-                              
-                   
-                            </div>
-                            <div class="total_cartdrop">
-                                <h4 class="text_lg text-uppercase mb-0">Sub Total:</h4>
-                                <h4 class="text_lg mb-0 ms-2" id="total_ticket"></h4>
-                            </div>
-                           <!-- mobile cart button  -->
-                            <div class="cartdrop_footer d-flex mt-3">
-                                <a href="carrito" class="default_btn w-50 text_xs px-1">Ver Carro</a>
-                                 <a href="confirmacion" class="default_btn second ms-3 w-50 text_xs px-1">Pagar</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </button>
+              </RouterLink>
             </div>
 
-              <!-- Botón de carrito para versión móvil -->
-  <div class="mobile-cart-icon d-lg-none" @click="mostrarModal = true">
-    <span class="icon">
-      <i class="icon-cart"></i>
-    </span>
-    <span class="pops2">{{cant_en_carrito}}</span>
-  </div>
+            <!-- Sugerencias -->
+            <div :class="['search_suggest', { active: producto_buscado.length > 0 }]">
+              <div class="search_result_product scrollable">
+                <template v-for="(dato, index) in producto_buscado" :key="index">
+                  <div
+                    v-if="dato.separator"
+                    class="separator"
+                    style="font-weight: bold; color: #aaa; text-align: center; margin: 5px 0;"
+                  ></div>
 
-  <!-- Actualiza el evento de clic para redirigir a /carrito -->
-<div class="mobile-cart-icon d-lg-none" @click="router.push('/carrito')">
-  <span class="icon">
-    <i class="icon-cart"></i>
-  </span>
-  <span class="pops2">{{cant_en_carrito}}</span>
-</div>
+                  <RouterLink
+                    v-else
+                    :to="{ name: 'producto', query: { producto: dato.id } }"
+                    class="single_sresult_product"
+                    @click="ocultarSugerencias"
+                  >
+                    <div class="sresult_img">
+                      <img :src="dato.imagen" />
+                    </div>
+                    <div class="sresult_content">
+                      <h4>{{ dato.titulo }}</h4>
+                      <div class="price">
+                        <span class="org_price">
+                          ${{ Math.round(parseFloat(dato.pt1)).toLocaleString() }}
+                        </span>
+                      </div>
+                    </div>
+                  </RouterLink>
+                </template>
+              </div>
+            </div>
+          </div>
+        </div>
 
+        <!-- 🛒 Carrito escritorio -->
+        <div class="shopcart">
+          <a href="carrito" class="icon_wrp text-center d-none d-lg-block">
+            <span class="icon"><i class="icon-cart"></i></span>
+            <span class="icon_text">Carrito</span>
+            <span class="pops2">{{ cant_en_carrito }}</span>
+          </a>
+          <div class="shopcart_dropdown">
+            <div class="cart_droptitle">
+              <h4 class="text_lg">{{ cant_en_carrito }} Productos</h4>
+            </div>
+            <div class="cartsdrop_wrap" if="lista_productos">
+              <div class="muestra" id="muestra"></div>
+            </div>
+            <div class="total_cartdrop">
+              <h4 class="text_lg text-uppercase mb-0">Sub Total:</h4>
+              <h4 class="text_lg mb-0 ms-2" id="total_ticket"></h4>
+            </div>
+            <div class="cartdrop_footer d-flex mt-3">
+              <a href="carrito" class="default_btn w-50 text_xs px-1">Ver Carro</a>
+              <a href="confirmacion" class="default_btn second ms-3 w-50 text_xs px-1">Pagar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <!-- navbar -->
+    <!-- 🛒 Carrito móvil -->
+    <div class="mobile-cart-icon d-lg-none" @click="mostrarModal = true">
+      <span class="icon"><i class="icon-cart"></i></span>
+      <span class="pops2">{{ cant_en_carrito }}</span>
+    </div>
+    <div class="mobile-cart-icon d-lg-none" @click="router.push('/carrito')">
+      <span class="icon"><i class="icon-cart"></i></span>
+      <span class="pops2">{{ cant_en_carrito }}</span>
+    </div>
+
+    <!-- 📂 NAVBAR (solo escritorio) -->
     <nav class="d-none d-lg-block">
       <div class="container">
         <div class="d-flex">
@@ -524,13 +516,9 @@ provide('categorias_alfabetica', categorias_alfabetica);
               <span class="icon"><i class="las la-bars"></i></span>
               <span class="icon_text">Categorias</span>
             </div>
-            <!-- sub categories wrapper  -->
             <div class="sub_categories_wrp">
               <div class="sub_categories scrollable-categories">
-                <h5 class="d-block position-relative d-lg-none subcats_title">
-                  Categorias
-                </h5>
-
+                <h5 class="d-block position-relative d-lg-none subcats_title">Categorias</h5>
                 <RouterLink
                   v-for="(dato, index) in categorias_alfabetica"
                   :key="index"
@@ -538,49 +526,30 @@ provide('categorias_alfabetica', categorias_alfabetica);
                   class="singlecats"
                 >
                   <span class="txt">{{ dato.categoria }}</span>
-                </RouterLink>   
+                </RouterLink>
               </div>
             </div>
           </div>
 
           <ul class="nav_bar d-flex list-unstyled mb-0">
-            <!-- with sub menu  -->
-            <li class="withsubs">
-              <RouterLink to="/">Inicio</RouterLink>
-            </li>
-            <!-- with sub menu  -->
-            <li class="withsubs">
-              <RouterLink to="/catalogo">Catalogo</RouterLink>
-            </li>
-            <!-- with sub menu  -->
+            <li class="withsubs"><RouterLink to="/">Inicio</RouterLink></li>
+            <li class="withsubs"><RouterLink to="/catalogo">Catálogo</RouterLink></li>
             <li class="withsubs dropdown">
-              <RouterLink to="#" class="dropdown-toggle">
-                Nosotros <span></span>
-              </RouterLink>
+              <RouterLink to="#" class="dropdown-toggle">Nosotros <span></span></RouterLink>
               <div class="dropdown-content">
                 <RouterLink to="/conocenos">Conócenos</RouterLink>
                 <RouterLink to="/encuentranos">Encuéntranos</RouterLink>
               </div>
             </li>
-            <li class="withsubs">
-              <RouterLink to="/calificanos">Califícanos</RouterLink>
-            </li>
-            <li class="withsubs">
-              <RouterLink to="/promociones">Promociones</RouterLink>
-            </li>
-            <li class="withsubs">
-              <RouterLink to="/foro">Foro</RouterLink>
-            </li>
+            <li class="withsubs"><RouterLink to="/calificanos">Califícanos</RouterLink></li>
+            <li class="withsubs"><RouterLink to="/promociones">Promociones</RouterLink></li>
+            <li class="withsubs"><RouterLink to="/foro">Foro</RouterLink></li>
           </ul>
         </div>
       </div>
     </nav>
 
-
-   
-
-   
-    <!--  mobile cart -->
+    <!-- 🛒 Carrito lateral móvil -->
     <div class="mobile_menwrap d-lg-none" id="mobileCart">
       <div class="mobile_cart_wrap d-flex flex-column">
         <h5 class="mobile_title">
@@ -601,36 +570,28 @@ provide('categorias_alfabetica', categorias_alfabetica);
               <h4 class="text_lg text-uppercase mb-0">Sub Total:</h4>
               <h4 class="text_lg mb-0 ms-2" id="total_ticket2"></h4>
             </div>
-            <!-- mobile cart button  -->
             <div class="cartdrop_footer mt-3 d-flex">
               <a href="/carrito" class="default_btn w-50 text_xs px-1">Ver Carro</a>
-              <a href="confirmacion" class="default_btn second ms-3 w-50 text_xs px-1"
-                >Pagar</a
-              >
+              <a href="confirmacion" class="default_btn second ms-3 w-50 text_xs px-1">Pagar</a>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
+
+    <!-- 📦 Otros componentes -->
     <Up />
- <MenuMobile />
- 
-
-
   </header>
 
   <!-- Vista principal -->
   <RouterView :key="$route.fullPath" />
 
-  <!-- Botón de WhatsApp -->
+  <!-- WhatsApp y redes -->
   <WhatsAppWidget phoneNumber="573015537673" />
-
   <RedesComp />
-
-  <!-- footer area -->
   <FooterInteractivo />
 </template>
+
 
 <style scoped>
 .whatsapp-button {
