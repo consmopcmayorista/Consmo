@@ -460,11 +460,12 @@ $(document).ready(function() {
 <!-- Mostrar carrusel de productos Gamer -->
 <CarruselesPorCategoria
   :productos="productos_alea"
-  categoria="CHASIS"
-  titulo="🎮 Chasis Gamer"
+  categoria="CELULARES"
+  titulo="📱 Celulares"
   :buscarProducto="buscar_productos"
   :formatLine="formatLine"
 />
+
 
   
   <Destacados />
@@ -480,6 +481,7 @@ $(document).ready(function() {
           media="(min-width: 768px)"
           srcset="/images2/servicio_tecnico.jpg"
         />
+        
         <img
           loading="lazy"
           class="futuristic-banner-img"
@@ -525,7 +527,13 @@ $(document).ready(function() {
       </div>
     </div>
   </div> -->
-
+<CarruselesPorCategoria
+  :productos="productos_alea"
+  categoria="ARTICULOS Y ACCESORIOS"
+  titulo="🛒 Artículos y Accesorios"
+  :buscarProducto="buscar_productos"
+  :formatLine="formatLine"
+/>
 
 <!-- SECCIÓN MERCADO LIBRE + WHATSAPP DIFUSIONES -->
 <!-- BOTONES FLOTANTES ESTILO EXPANDIDO -->
