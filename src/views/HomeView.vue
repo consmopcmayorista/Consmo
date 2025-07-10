@@ -4,7 +4,7 @@ import services from '@/components/services.vue'
 import ProductQuickview from '@/components/product_indv.vue' // Importamos el modal
 import CarouselTarjetas from '@/components/CarouselTarjetas.vue' // Importamos el carrusel de tarjetas
 import CarruselesPorCategoria from '@/components/CarruselesPorCategoria.vue' // Importamos el carrusel de categorías
-
+import PopupPromociones from '@/components/PopupPromociones.vue'
 
 import { ref, onMounted, inject } from 'vue'
 import axios from 'axios'
