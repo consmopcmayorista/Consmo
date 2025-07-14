@@ -27,6 +27,13 @@
     { title: 'ROUTER DUAL-BAND 5 ANT 6DBI GIGABIT WIFI 6 TENDA TX2L PRO :2693', image: '2693.png'},
     { title: 'TODO EN UNO POS INDUSTRIAL 15" :2703', image: '2703.png'},
     { title: 'LECTOR CODIGO DE BARRAS INALAMBRICO-BT :2955', image: '2955.png'},
+    { title: 'UPS INTERACTIVA 6 TOMAS 500VA :1653 ', image: '1653.png'},
+    { title: 'UPS INTERACTIVA 6 TOMAS 600VA :1655', image: '1655.png'},
+    { title: 'AUDIFONOS BLUETOOHT 5.4 RGB  :1951', image: '1951.png'},
+    { title: 'IMPRESORA TERMICA POS 80MM :2409', image: '2409.png'},
+    { title: 'BASE REFRIGERANTE RECLINABLE 3 COOLER :3691', image: '3691.png'},
+    { title: 'BASE REFRIGERANTE RECLINABLE LED 6 COOLER :6192', image: '6192.png'},
+    { title: 'CAJA EXTERNA SATA GAMER RGB USB 3.0 :C9557', image: 'C9557.png'}, 
 
 
     
