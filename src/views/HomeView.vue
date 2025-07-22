@@ -454,14 +454,14 @@ $(document).ready(function() {
       <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="1"></button>
       <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="2"></button>
     </div>
-  </div>
+  </div><br>
 
   <!--<services /> -->
 <!-- Mostrar carrusel de productos Gamer -->
 <CarruselesPorCategoria
   :productos="productos_alea"
-  categoria="CELULARES"
-  titulo="📱 Celulares"
+  categoria="DISCOS DE ESTADO SOLIDO"
+  titulo="📱 SSD "
   :buscarProducto="buscar_productos"
   :formatLine="formatLine"
 />
