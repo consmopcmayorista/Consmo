@@ -708,30 +708,47 @@ provide('categorias_alfabetica', categorias_alfabetica);
 /* Estilo del ícono de carrito para versión móvil */
 .mobile-cart-icon {
   position: fixed;
-  top: 35px;
-  right: 1px;
-  z-index: 1000;
+  bottom: 1.5rem;
+  left: 80%;
+  transform: translateX(-50%);
+  z-index: 999;
+  background-color: #f2f7f2;
+  color: rgb(9, 3, 43);
+  padding: 0.75rem 1.2rem;
+  border-radius: 50px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
-  background-color: #fff;
-  border-radius: 50%;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  gap: 0.5rem;
+  font-size: 1.2rem;
   cursor: pointer;
+
+  
+  @media (min-width: 992px) {
+    display: none !important;
+  }
+
+  .icon {
+    font-size: 1.4rem;
+  }
+
+  .pops2 {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
+    margin-left: 0.4rem;
+  }
 }
 
-.mobile-cart-icon .icon {
-  font-size: 24px;
-  color: #333;
-}
 
 .mobile-cart-icon .pops2 {
   position: absolute;
   top: -5px;
   right: -5px;
-  background-color: red;
+  background-color: rgb(13, 13, 240);
   color: #fff;
   border-radius: 50%;
   padding: 2px 6px;
