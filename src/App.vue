@@ -709,7 +709,7 @@ provide('categorias_alfabetica', categorias_alfabetica);
 .mobile-cart-icon {
   position: fixed;
   bottom: 1.5rem;
-  left: 80%;
+  left: 8%;
   transform: translateX(-50%);
   z-index: 999;
   background-color: #f2f7f2;
