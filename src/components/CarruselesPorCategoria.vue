@@ -19,9 +19,10 @@
         <swiper
           :modules="[Navigation]"
           navigation
-          :slides-per-view="1.2"
-          :space-between="0"
+          :slides-per-view="2"
+          :space-between="12"
           :breakpoints="{
+            320: { slidesPerView: 2 },
             480: { slidesPerView: 2 },
             768: { slidesPerView: 3 },
             992: { slidesPerView: 4 },
@@ -118,8 +119,8 @@ const productosFiltrados = computed(() => {
 
 .fixed-card {
   height: 100%;
-  max-height: 500px;
-  width: 80%;
+  width: 100%;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
 }
