@@ -26,42 +26,37 @@
             480: { slidesPerView: 2 },
             768: { slidesPerView: 3 },
             992: { slidesPerView: 4 },
-            1200: { slidesPerView: 5 }
+            1200: { slidesPerView: 5 },
+            1600: { slidesPerView: 6 }
           }"
           class="carrusel-swiper"
         >
-          <!-- Tarjetas de producto dentro del carrusel -->
           <swiper-slide
             v-for="(producto, index) in productosFiltrados"
             :key="categoria + '-' + index"
           >
-            <div class="card-product-clean shadow-sm fixed-card">
-              <div class="card-img-clean">
-                <img :src="producto.imagen" :alt="producto.titulo" loading="lazy" />
-                <div class="overlay-clean">
-                  <button @click="buscarProducto(producto.id)" class="btn-outline-dark btn-sm">👁 Ver</button>
-                </div>
+            <div class="card producto-card shadow-sm">
+              <div class="imagen-wrapper">
+                <img
+                  :src="producto.imagen"
+                  class="card-img-top pointer"
+                  :alt="producto.titulo"
+                  loading="lazy"
+                />
               </div>
-              <div class="card-body px-3 py-3 flex-grow-1 d-flex flex-column justify-content-between">
-                <div>
-                  <RouterLink
-                    :to="{ name: 'producto', query: { producto: producto.id } }"
-                    class="text-decoration-none text-dark"
-                  >
-                    <p class="titulo-truncado fw-semibold mb-1">
-                      {{ producto.titulo }}
-                    </p>
-                  </RouterLink>
-                  <small class="text-muted d-block">SKU: {{ producto.idpro }}</small>
-                </div>
-                <div class="mt-2 fw-bold fs-5 text-primary">
-                  $ {{ Math.round(parseFloat(producto.pt1)).toString().replace(/\./g, ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.') }}
-                </div>
-              </div>
-              <div class="card-footer border-top px-3 pb-3">
-                <button @click="buscarProducto(producto.id)" class="btn btn-dark w-100 fw-semibold">
-                  <i class="icon-cart me-2"></i> Añadir al carrito
-                </button>
+              <div class="card-body d-flex flex-column text-center">
+                <h6 class="card-title mb-2 card-title-expandable titulo-clamp" :title="producto.titulo">
+                  {{ producto.titulo }}
+                </h6>
+                <small class="text-muted">SKU: {{ producto.idpro }}</small>
+                <p class="mt-1 text-success small">Disponible en: {{ producto.existencia }}</p>
+                <h5 class="text-primary mt-auto">
+                  $ {{ Math.round(parseFloat(producto.pt1)).toLocaleString('es-CO') }}
+                </h5>
+                <button
+                  @click.stop="buscarProducto(producto.id)"
+                  class="btn btn-sm btn-outline-primary mt-2"
+                >Ver más</button>
               </div>
             </div>
           </swiper-slide>
@@ -103,136 +98,119 @@ const productosFiltrados = computed(() => {
 
 .swiper-wrapper-container {
   position: relative;
-  padding: 0 50px; /* deja espacio para las flechas */
+  padding: 0 60px; /* Más espacio para flechas */
 }
 
-.card-product-clean {
+.producto-card {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-radius: 0.75rem;
   background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 100%;
-}
-
-.fixed-card {
-  height: 100%;
-  width: 100%;
-  max-width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.card-product-clean:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-}
-
-/* .card-img-clean {
-  position: relative;
   overflow: hidden;
-  flex-shrink: 0;
-} */
-
-.card-img-clean img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  height: 450px;
+  max-width: 100%;
+}
+.producto-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Más pequeñas en celulares */
-@media (max-width: 480px) {
-  .card-img-clean img {
-    height: 180px;
-  }
-}
-
-/* Más grandes en pantallas grandes */
-@media (min-width: 1200px) {
-  .card-img-clean img {
-    height: 220px;
-  }
-}
-
-/* Aún más espacio en pantallas extra grandes */
-@media (min-width: 1600px) {
-  .card-img-clean img {
-    height: 240px;
-  }
-}
-
-
-
-.card-product-clean:hover img {
-  transform: scale(1.05);
-}
-
-.overlay-clean {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.75);
+.imagen-wrapper {
+  height: 180px;
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  padding: 1rem;
+  background-color: #f9f9f9;
+}
+.card-img-top {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
 }
 
-.card-img-clean:hover .overlay-clean {
-  opacity: 1;
+.card-body {
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
-.titulo-truncado {
+.card-body p.text-success {
+  font-weight: bold;
+  color: #198754 !important;
+  position: relative;
+  padding-left: 1.4em;
+  min-height: 1.5em;
+}
+.card-body p.text-success::before {
+  content: "\2714";
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  color: #198754;
+  font-size: 1em;
+}
+
+.titulo-clamp {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  min-height: 3.2em;
-  line-height: 1.6em;
+  min-height: 2.8em;
+  line-height: 1.4em;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.btn-outline-primary {
+  background-color: #01060e !important;
+  color: white !important;
+  border-color: #0d6efd !important;
+}
+.btn-outline-primary:hover {
+  background-color: #0b5ed7 !important;
+  border-color: #0b5ed7 !important;
 }
 
 ::v-deep(.swiper-button-prev),
 ::v-deep(.swiper-button-next) {
-  top: 40%;
-  transform: translateY(-50%);
+  top: 50% !important;
+  transform: translateY(-50%) !important;
   width: 42px;
   height: 42px;
   color: #000;
-  background: #fff;
+
   border-radius: 50%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 10;
 }
-
 ::v-deep(.swiper-button-prev) {
-  left: -24px;
+  left: 10px !important;
 }
-
 ::v-deep(.swiper-button-next) {
-  right: -24px;
+  right: 10px !important;
 }
-
 ::v-deep(.swiper-button-prev:hover),
 ::v-deep(.swiper-button-next:hover) {
   background-color: #0d6efd;
   color: #fff;
 }
+
 .carrusel-full {
   max-width: 100%;
 }
-
 @media (min-width: 1400px) {
   .carrusel-full {
     max-width: 1840px;
     margin: 0 auto;
   }
 }
-
 </style>
