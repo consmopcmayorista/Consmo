@@ -24,13 +24,14 @@
         <a href="https://www.youtube.com/@ConsmoPcMayorista"><i class="fab fa-youtube"></i></a>
       </div>
     </div>
-        <!-- <div class="footer-col">
-          <h4>Newsletter</h4>
-          <form class="newsletter-form">
-            <input type="email" placeholder="Tu correo electrónico" required>
-            <button type="submit">Suscribirse</button>
-          </form>
-        </div> -->
+      <div class="footer-col">
+        <h4>Política de privacidad</h4>
+        <form class="newsletter-form">
+          <a href="/pdfs/POLITICAS-PRIVACIDAD-CONSMO.pdf" target="_blank" class="btn btn-primary">
+            Ver acá
+          </a>
+        </form> 
+      </div>
       </div>
     </div>
     <div class="footer-bottom">
