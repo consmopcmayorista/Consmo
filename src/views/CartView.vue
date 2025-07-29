@@ -106,6 +106,7 @@
                         </div>
                         -->
                         
+                        
                     </div>
                     </div>
                 </div>
@@ -214,6 +215,7 @@ onMounted(() => {
 
           }
     }
+
 
 function imprimir_carrito_checkout(arreglo_car, total){
     
