@@ -194,8 +194,9 @@
                       </div>
 
                       <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
+                      <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
 
-                      <!-- Botón pago con wompi -->
+                      <!-- Botón pago con wompi 
                       <div class="form-group">
                           <div class="payment-info">
                               <div class="option-label option-2" @click="toggleCollapse('puntoVenta')">
@@ -216,7 +217,7 @@
                               </v-collapse>
                           </div>
                       </div>
-                        <hr style="margin: 20px 0; border-top: 3px solid #000000;" /> 
+                        <hr style="margin: 20px 0; border-top: 3px solid #000000;" /> -->
                     
 
                       <!-- Botón Recoger en Punto de Venta -->
@@ -242,6 +243,7 @@
                           </div>
                       </div>
 
+                      <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
                       <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
                       
 
