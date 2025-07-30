@@ -182,7 +182,7 @@
                                   </ul>
                                   <img style="width:100%;" src="https://consmopcmayorista.com/images2/banner_contraentrega.png" />
                                   <ul>
-                                      <p><strong>Envíos a Medellín y alrededores:</strong> $11,000</p>
+                                      <p><strong>Envíos a Medellín y alrededores:</strong> $13,000</p>
                                       <p><strong>Otras ciudades:</strong> Te contactaremos de inmediato</p>
                                   </ul>
                                   <p><em>¡Tu comodidad es nuestra prioridad!</em></p>
@@ -194,7 +194,30 @@
                       </div>
 
                       <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
-                      <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
+
+                      <!-- Botón pago con wompi -->
+                      <div class="form-group">
+                          <div class="payment-info">
+                              <div class="option-label option-2" @click="toggleCollapse('puntoVenta')">
+                                  <i class="fas fa-store"></i> Opción 2 (paga con Wompi )
+                              </div>
+                              <v-collapse :show="showPuntoVenta">
+                                  <ul>
+                                      <p>Con nuestra opción <strong>Paga con wompi puedes pagar con =></strong>...</p>
+                                  </ul>
+                                  <img style="width:100%;" src="https://consmopcmayorista.com/images2/WOMPI.png" />
+                                  <p></p>
+                                  <ul>
+                                      <p><strong>Un credito a bajo costo </strong></p>
+                                  </ul>
+                                  <button type="button" class="btn-punto-venta" @click="recogerEnPuntoDeVenta">
+                                      Paga aquí con Wompi
+                                  </button>
+                              </v-collapse>
+                          </div>
+                      </div>
+                        <hr style="margin: 20px 0; border-top: 3px solid #000000;" /> 
+                    
 
                       <!-- Botón Recoger en Punto de Venta -->
                       <div class="form-group">
@@ -220,7 +243,7 @@
                       </div>
 
                       <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
-                      <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
+                      
 
                       <!-- Botón Transferencia Bancaria -->
  <!--                    <div class="form-group">
