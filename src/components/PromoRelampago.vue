@@ -26,12 +26,12 @@
   
   <script setup>
   const promos = [ 
-    { title: 'GAFAS DE REALIDAD VIRTUAL 3D + CONTROL :5002', image: '5002.png' },
-    { title: 'TARJETA INTERNA PCI EXPRESS SONIDO :9084', image: '9084.png' },
-    { title: 'COOLER DISIPADOR PARA BOARD RGB INTEL/AMD :9218', image: '9218.png' },
-    { title: 'DECODIFICADOR TDT 1080P :C9117', image: 'C9117.png' },
-    { title: 'LECTOR DE CODIGOS DE BARRA OMNIDIRECCIONAL 2D :3071', image: '3071.png' },
-    { title: 'MONITOR IPS 23.8" :3431', image: '3431.png' },
+    // { title: 'GAFAS DE REALIDAD VIRTUAL 3D + CONTROL :5002', image: '5002.png' },
+    // { title: 'TARJETA INTERNA PCI EXPRESS SONIDO :9084', image: '9084.png' },
+    // { title: 'COOLER DISIPADOR PARA BOARD RGB INTEL/AMD :9218', image: '9218.png' },
+    // { title: 'DECODIFICADOR TDT 1080P :C9117', image: 'C9117.png' },
+    // { title: 'LECTOR DE CODIGOS DE BARRA OMNIDIRECCIONAL 2D :3071', image: '3071.png' },
+    // { title: 'MONITOR IPS 23.8" :3431', image: '3431.png' },
 
     
  
