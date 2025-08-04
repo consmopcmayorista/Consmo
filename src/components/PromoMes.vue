@@ -17,23 +17,15 @@
   
   <script setup>
   const promos = [
-    // { title: 'CAMARA AI 5MP IP WI-F16 :1696', image: '1696.png'},
-    // { title: 'CAMARA EXTERIOR 1080P FULL COLOR 2K 3MP :1911', image: '1911.png'},
-    // { title: 'CAMARA IP/PT/ALEXA 10MP FULL COLOR H.265 :1974', image: '1974.png'},
-    // { title: 'DISCO ESTADO SOLIDO 256GB DTECHCO :2331', image: '2331.png'},
-    // { title: 'DISCO ESTADO SOLIDO 128GB DTECHCO :2332', image: '2332.png'},
-    // { title: 'ROUTER 3 ANTENAS N300 MOD F3 :2504', image: '2504.png'},
-    // { title: 'ROUTER DUAL-BAND 4 ANT GIGABYTE TENDA AC1200 :2529', image: '2529.png'},
-    // { title: 'ROUTER DUAL-BAND 5 ANT 6DBI GIGABIT WIFI 6 TENDA TX2L PRO :2693', image: '2693.png'},
-    // { title: 'TODO EN UNO POS INDUSTRIAL 15" :2703', image: '2703.png'},
-    // { title: 'LECTOR CODIGO DE BARRAS INALAMBRICO-BT :2955', image: '2955.png'},
-    // { title: 'UPS INTERACTIVA 6 TOMAS 500VA :1653 ', image: '1653.png'},
-    // { title: 'UPS INTERACTIVA 6 TOMAS 600VA :1655', image: '1655.png'},
-    // { title: 'AUDIFONOS BLUETOOHT 5.4 RGB  :1951', image: '1951.png'},
-    // { title: 'IMPRESORA TERMICA POS 80MM :2409', image: '2409.png'},
-    // { title: 'BASE REFRIGERANTE RECLINABLE 3 COOLER :3691', image: '3691.png'},
-    // { title: 'BASE REFRIGERANTE RECLINABLE LED 6 COOLER :6192', image: '6192.png'},
-    // { title: 'CAJA EXTERNA SATA GAMER RGB USB 3.0 :C9557', image: 'C9557.png'}, 
+    { title: 'IMPRESORA TERMICA POS 80MM :2405', image: '2405.png'},
+    { title: 'IMPRESORA TERMICA POS 58MM :2424', image: '2424.png'},
+    { title: 'MONITOR IPS 23.8" 1920X1080 FULL HD :3431', image: '3431.png'},
+    { title: 'DIADEMA PARA PC USB MONOAURAL :4046', image: '4046.png'},
+    { title: 'CARRETA EXT FIBRA OPTICA MONOMODO 1000MT :9825', image: '9825.png'},
+    { title: 'LECTOR CODIGO DE BARRAS 1D/2D ALAMBRICO :9863', image: '9863.png'},
+
+
+
 
 
     
