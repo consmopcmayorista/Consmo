@@ -101,7 +101,7 @@ margin-right: -25px; /* Ajusta la distancia del borde derecho */
 
 .card {
 max-width: fit-content;
-border-radius: 15px;
+width: 70px;
 display: flex;
 flex-direction: column;
 align-content: center;
@@ -139,8 +139,8 @@ transition: all 0.3s;
 /* if you find some problems change w - h : 30px*/
 padding: 1rem;
 height: 60px;
-width: 60px;
-border-radius: 100%;
+width: 58px;
+
 color: #000000;
 fill: currentColor;
 box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3),
@@ -152,7 +152,6 @@ opacity: 0;
 border-radius: 5px;
 padding: 5px;
 transition: all 0.3s;
-color: rgb(255, 174, 0);
 background-color: rgba(255, 255, 255, 0.3);
 position: absolute;
 z-index: 9999;

@@ -4,8 +4,8 @@
         <button class="close-btn" @click="closePopup">&times;</button>
         <img src="/images2/promos/inicio.png" alt="Promociones de Abril" class="promo-image">
         <div class="popup-content">
-          <h2>🛒 ¡Corre que vuelan! Lo mejor está aquí para ti.</h2>
-          <p>No te pierdas la oportunidad de participar aprovecha </p>
+          <h2>🚀 ¡Productos top y precios imbatibles... solo por poco tiempo!</h2>
+          <p>Distribuyes tecnología? Tenemos los precios que estás buscando.</p>
           <button class="promo-btn" @click="goToPromociones">Ir a Promociones</button>
         </div>
       </div>
@@ -47,7 +47,7 @@
 
 .popup {
   background: white;
-  padding: 20px;
+  padding: 10px;
   border-radius: 12px;
   text-align: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -92,7 +92,7 @@
 
 .popup-content h2 {
   margin-top: 0;
-  font-size: 32px;
+  font-size: 22px;
   font-weight: bold;
   color: #000407; /* Color azul */
 }

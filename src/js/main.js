@@ -224,7 +224,7 @@ function agregar_producto_car(){
     
     let cant1=new Intl.NumberFormat().format($('#cantidades_producto').html());
     let cant2=new Intl.NumberFormat().format($('#cantidadesx').val());
-   //  document.getElementById("cantidades_producto").innerHTML=1;
+    document.getElementById("cantidades_producto").innerHTML=1;
 	if($('#cantidades_producto').html()!=""){
 	    
 	    let maximo=mod_cantidades(cant1, cant2);
@@ -237,7 +237,8 @@ function agregar_producto_car(){
     		const precio=document.getElementById('precio').value;
     		const foto=document.getElementById('foto').value;
     		const tags=document.getElementById('tags').value;
-    		const existencia=document.getElementById('cantidadesx').value;
+    		const existencia = Number(document.getElementById('stock_disponible')?.value || 0);
+
     		cargar_carro( id, detalle, precio,  foto, "Agregado_ppl", tags, existencia);
     		
     		$('#cantidades_producto').val('1');
@@ -409,7 +410,7 @@ function imprimir_carrito(arreglo_car, total){
 			   foto,
 			   cant,
 			   tags,
-			   existencia
+			   existencia: Number(existencia) || 0
 			 };
 	
 		   
@@ -423,7 +424,7 @@ function imprimir_carrito(arreglo_car, total){
 			   foto,
 			   cant,
 			   tags,
-			   existencia
+			   existencia: Number(existencia) || 0
 			 };
 	
 				 let cantidad=0;

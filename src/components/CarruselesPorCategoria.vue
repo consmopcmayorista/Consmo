@@ -1,6 +1,7 @@
 <template>
-  <div class="section_padding_b bg-white text-dark" v-if="productosFiltrados.length">
-    <div class="container-fluid px-3 px-sm-4 px-md-5 position-relative pb-5 carrusel-full">
+  <div class="section_padding_b bg-blue text-dark" v-if="productosFiltrados.length">
+    <!-- Contenedor personalizado para hacer el carrusel más angosto -->
+    <div class="carrusel-wrapper px-3 px-sm-4 px-md-5 position-relative pb-5 carrusel-full">
       <!-- Encabezado del carrusel con título y botón "Ver todos" -->
       <div class="d-flex justify-content-between align-items-center mb-4 encabezado-carrusel flex-wrap gap-2">
         <h2 class="section_title_3 mb-0">
@@ -10,24 +11,23 @@
           :to="`/catalogo_cat?categoria=${encodeURIComponent(categoria)}`"
           class="btn btn-outline-primary btn-sm"
         >
-          Ver todos los {{ categoria.charAt(0).toUpperCase() + categoria.slice(1) }}
+         VER TODOS LOS {{ categoria.charAt(0).toUpperCase() + categoria.slice(1) }}
         </RouterLink>
       </div>
 
-      <!-- Carrusel Swiper dinámico por categoría -->
+      <!-- Carrusel Swiper dinámico -->
       <div class="swiper-wrapper-container">
         <swiper
           :modules="[Navigation]"
-          navigation
+          :navigation="showNavigation"  
           :slides-per-view="2"
-          :space-between="12"
+          :space-between="16"
           :breakpoints="{
-            320: { slidesPerView: 2 },
-            480: { slidesPerView: 2 },
+            320: { slidesPerView: 1.2 },
+            576: { slidesPerView: 2 },
             768: { slidesPerView: 3 },
             992: { slidesPerView: 4 },
-            1200: { slidesPerView: 5 },
-            1600: { slidesPerView: 6 }
+            1200: { slidesPerView: 5 }
           }"
           class="carrusel-swiper"
         >
@@ -35,28 +35,27 @@
             v-for="(producto, index) in productosFiltrados"
             :key="categoria + '-' + index"
           >
-            <div class="card producto-card shadow-sm">
-              <div class="imagen-wrapper">
-                <img
-                  :src="producto.imagen"
-                  class="card-img-top pointer"
-                  :alt="producto.titulo"
-                  loading="lazy"
-                />
+            <div class="futuristic-card">
+              <div class="card-badge" v-if="producto.descuento">-{{ producto.descuento }}%</div>
+              <div class="card-badge new" v-if="producto.nuevo">¡Nuevo!</div>
+              <div class="image-container">
+                <img :src="producto.imagen" :alt="producto.titulo" loading="lazy" />
               </div>
-              <div class="card-body d-flex flex-column text-center">
-                <h6 class="card-title mb-2 card-title-expandable titulo-clamp" :title="producto.titulo">
-                  {{ producto.titulo }}
-                </h6>
-                <small class="text-muted">SKU: {{ producto.idpro }}</small>
-                <p class="mt-1 text-success small">Disponible en: {{ producto.existencia }}</p>
-                <h5 class="text-primary mt-auto">
-                  $ {{ Math.round(parseFloat(producto.pt1)).toLocaleString('es-CO') }}
-                </h5>
-                <button
-                  @click.stop="buscarProducto(producto.id)"
-                  class="btn btn-sm btn-outline-primary mt-2"
-                >Ver más</button>
+              <div class="info-container">
+                <h6 class="title" :title="producto.titulo">{{ producto.titulo }}</h6>
+                <p class="sku">SKU: {{ producto.idpro }}</p>
+                <p class="stock">✔ {{ producto.existencia }}</p>
+                <div class="price-group">
+                  <span class="old-price" v-if="producto.precioAnterior">
+                    ${{ Math.round(parseFloat(producto.precioAnterior)).toLocaleString('es-CO') }}
+                  </span>
+                  <span class="current-price">
+                    ${{ Math.round(parseFloat(producto.pt1)).toLocaleString('es-CO') }}
+                  </span>
+                </div>
+              </div>
+              <div class="cta-container">
+                <button class="cta-button" @click.stop="buscarProducto(producto.id)">Ver más</button>
               </div>
             </div>
           </swiper-slide>
@@ -67,7 +66,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation } from 'swiper/modules'
 import 'swiper/css'
@@ -77,10 +76,7 @@ import { RouterLink } from 'vue-router'
 const props = defineProps({
   productos: Array,
   categoria: String,
-  titulo: {
-    type: String,
-    default: ''
-  },
+  titulo: { type: String, default: '' },
   buscarProducto: Function,
   formatLine: Function
 })
@@ -88,129 +84,155 @@ const props = defineProps({
 const productosFiltrados = computed(() => {
   return props.productos.filter(p => p.linea?.toLowerCase().includes(props.categoria.toLowerCase()))
 })
+
+const showNavigation = ref(true)
+
+const handleResize = () => {
+  showNavigation.value = window.innerWidth >= 768
+}
+
+onMounted(() => {
+  handleResize()
+  window.addEventListener('resize', handleResize)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
 </script>
 
 <style scoped>
-.section_title_3 {
-  font-size: 1.6rem;
-  font-weight: bold;
+.carrusel-wrapper {
+  max-width: 1540px;
+  margin: 0 auto;
 }
 
-.swiper-wrapper-container {
-  position: relative;
-  padding: 0 60px; /* Más espacio para flechas */
+/* 🔧 Nuevo: fuerza altura uniforme en el carrusel */
+.swiper-slide {
+  display: flex;
+  height: auto !important;
 }
 
-.producto-card {
-  width: 100%;
-  height: 100%;
+/* 🔧 Ajuste principal: tarjeta ocupa toda la altura del slide */
+.futuristic-card {
+  border-radius: 16px;
+  color: #070707;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-radius: 0.75rem;
-  background: #fff;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden;
-  cursor: pointer;
-  height: 450px;
-  max-width: 100%;
-}
-.producto-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 20px #000000;
+  transition: transform 0.3s ease;
+  position: relative;
+  height: 100%;
+  min-height: 0;
+  padding: 1rem;
 }
 
-.imagen-wrapper {
-  height: 180px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  background-color: #f9f9f9;
+.futuristic-card:hover {
+  transform: translateY(-6px);
 }
-.card-img-top {
-  max-height: 100%;
+
+.card-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  z-index: 2;
+}
+.card-badge.new {
+  left: auto;
+  right: 10px;
+}
+
+.image-container {
+  width: 100%;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+.image-container img {
   max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
 }
 
-.card-body {
-  padding: 0.75rem;
+.info-container {
+  text-align: center;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  justify-content: flex-start;
 }
 
-.card-body p.text-success {
+/* 🔧 Controla el alto máximo del título y fuerza uniformidad */
+.title {
   font-weight: bold;
-  color: #198754 !important;
-  position: relative;
-  padding-left: 1.4em;
-  min-height: 1.5em;
-}
-.card-body p.text-success::before {
-  content: "\2714";
-  position: absolute;
-  left: 0;
-  top: 0.1em;
-  color: #198754;
-  font-size: 1em;
-}
-
-.titulo-clamp {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  min-height: 2.4em;
+  max-height: 2.4em;
   overflow: hidden;
-  min-height: 2.8em;
-  line-height: 1.4em;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  margin-bottom: 0.5rem;
 }
 
-.pointer {
+.sku {
+  font-size: 0.99rem;
+  font-weight: bold;
+  color: #02471d;
+  margin-bottom: 0.25rem;
+}
+
+.stock {
+  font-size: 0.89rem;
+  color: #060706;
+  margin-bottom: 0.5rem;
+}
+
+.price-group {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #bbb;
+  font-size: 0.85rem;
+}
+
+.current-price {
+  color: #000708;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.cta-container {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.cta-button {
+  background: hsl(224, 99%, 26%);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
   cursor: pointer;
+  transition: background 0.2s ease;
 }
 
-.btn-outline-primary {
-  background-color: #01060e !important;
-  color: white !important;
-  border-color: #0d6efd !important;
-}
-.btn-outline-primary:hover {
-  background-color: #0b5ed7 !important;
-  border-color: #0b5ed7 !important;
-}
-
-::v-deep(.swiper-button-prev),
-::v-deep(.swiper-button-next) {
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  width: 42px;
-  height: 42px;
-  color: #000;
-
-  border-radius: 50%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 10;
-}
-::v-deep(.swiper-button-prev) {
-  left: 10px !important;
-}
-::v-deep(.swiper-button-next) {
-  right: 10px !important;
-}
-::v-deep(.swiper-button-prev:hover),
-::v-deep(.swiper-button-next:hover) {
-  background-color: #0d6efd;
-  color: #fff;
-}
-
-.carrusel-full {
-  max-width: 100%;
-}
-@media (min-width: 1400px) {
-  .carrusel-full {
-    max-width: 1840px;
-    margin: 0 auto;
-  }
-}
 </style>
