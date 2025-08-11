@@ -23,7 +23,10 @@
     { title: 'DIADEMA PARA PC USB MONOAURAL :4046', image: '4046.png'},
     { title: 'CARRETA EXT FIBRA OPTICA MONOMODO 1000MT :9825', image: '9825.png'},
     { title: 'LECTOR CODIGO DE BARRAS 1D/2D ALAMBRICO :9863', image: '9863.png'},
-
+    { title: 'MEMORIA RAM DDR4 16GB 3200 MHZ :2691', image: '2691.png'},
+    { title: 'TABLET 10.95" IPS FHD 128GB :8791', image: '8791.png'},
+    { title: 'DECODIFICADOR TDT :C9117', image: 'C9117.png'},
+    { title: 'TORRE TINI CORE I5 6TA :U9130', image: 'U9130.png'},
 
 
 
