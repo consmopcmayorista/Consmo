@@ -107,61 +107,11 @@
               <p>${{ formatMoney(total) }}</p>
             </div>
 
-            <!-- ===========================
-                 NUEVO: selección de método de pago
-                 =========================== -->
-            <div class="mt-4">
-              <h5 class="mb-2">Método de pago</h5>
-
-              <div class="payment-method">
-                <label class="pm-item">
-                  <input type="radio" name="pm" value="contraentrega" v-model="metodoPago" />
-                  <span>Contra entrega</span>
-                </label>
-
-                <label class="pm-item">
-                  <input type="radio" name="pm" value="tienda" v-model="metodoPago" />
-                  <span>Reclama y paga en tienda</span>
-                </label>
-
-                <label class="pm-item">
-                  <input type="radio" name="pm" value="wompi" v-model="metodoPago" />
-                  <span>Wompi (PSE, tarjetas)</span>
-                </label>
-
-                <!-- mini-logos (opcional) -->
-                <div v-if="metodoPago === 'wompi'" class="pm-logos">
-                  <img src="https://static.wompi.co/images/visa.png" alt="Visa">
-
-                </div>
-              </div>
-            </div>
-
-            <!-- CTA dinámico según método -->
-            <div class="cart_sum_pros mt-3">
-              <!-- Para Wompi, abrimos widget -->
-              <button
-                v-if="metodoPago === 'wompi'"
-                :disabled="pagando || total <= 0"
-                @click="pagarConWompi"
-              >
-                {{ pagando ? 'Abriendo Wompi…' : 'Pagar con Wompi' }}
-              </button>
-
-              <!-- Para contraentrega/tienda, seguimos flujo actual -->
-              <button
-                v-else
-                :disabled="total <= 0"
-                @click="irAConfirmacion"
-              >
+            <div class="cart_sum_pros">
+              <button onclick="javascript:window.location.href='./confirmacion'">
                 Procesar Pago
               </button>
-
-              <small v-if="total <= 0" class="text-muted d-block mt-2">
-                Agrega productos para continuar con el pago.
-              </small>
             </div>
-            <!-- /NUEVO -->
           </div>
         </div>
 
@@ -172,10 +122,10 @@
 
 <script setup>
 // =====================================================
-// Carrito con control de stock real + métodos de pago:
-// - Stock: usa "existencia" o suma "existencia2_raw".
-// - On mount: refresca stock desde API y clampa cantidades.
-// - Pagos: contraentrega/tienda -> confirmación; Wompi -> widget.
+// Carrito con control de stock real:
+// - Si el item tiene "existencia" (número) se usa como tope.
+// - Si no, se calcula desde "existencia2_raw" (p.ej. "Sede:2,Otra:1").
+// - Al montar: se refresca stock desde la API y se clampa el carrito.
 // =====================================================
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
@@ -183,17 +133,11 @@ import axios from 'axios'
 // ---------- Config API (tu backend real) ----------
 const API_URL = 'https://whatsapp-nube.com/api_web/api_web_catalogo_new2.php?dominio=consmopcmayorista.com&id=24'
 
-// ---------- Estado carrito ----------
+// ---------- Estado ----------
 const ticket   = ref([])  // [{ id, descripcion, precio, cant, existencia, existencia2_raw, foto, ... }]
 const total    = ref(0)
 const subtotal = ref(0)
 const iva      = ref(0)
-
-// ---------- NUEVO: estado pagos ----------
-const metodoPago = ref('contraentrega')          // 'contraentrega' | 'tienda' | 'wompi'
-const pagando    = ref(false)
-const WOMPI_PUBLIC_KEY = 'pub_test_xxxxxxxxxxxxxxxxxxxxx' // <-- Acá va nuestra llave plublica de Wompi
-const WOMPI_REDIRECT_URL = `${window.location.origin}/confirmacion` // redirección tras pago
 
 // ---------- Helpers de formato ----------
 function formatMoney(val) {
@@ -459,98 +403,4 @@ function imprimir_carrito_checkout(arreglo_car, totalNumero) {
   // document.getElementById("casilla_monto").innerHTML   = "$" + total_monto
   // document.getElementById("monto_total").innerHTML     = "$" + total_monto
 }
-
-// =====================
-// NUEVO: Pagos Wompi
-// =====================
-function irAConfirmacion() {
-  window.location.href = './confirmacion'
-}
-
-// Carga el widget si hace falta
-function ensureWompiScript() {
-  return new Promise((resolve, reject) => {
-    if (window.WidgetCheckout) return resolve()
-    const s = document.createElement('script')
-    s.src = 'https://checkout.wompi.co/widget.js'
-    s.async = true
-    s.onload = () => resolve()
-    s.onerror = () => reject(new Error('No se pudo cargar el widget de Wompi'))
-    document.head.appendChild(s)
-  })
-}
-
-// Abre Wompi con el total del carrito
-async function pagarConWompi() {
-  try {
-    if ((Number(total.value) || 0) <= 0) {
-      alert('El total debe ser mayor a 0.')
-      return
-    }
-
-    pagando.value = true
-    await ensureWompiScript()
-
-    const amountInCents = Math.round(Number(total.value) * 100) // Wompi trabaja en centavos
-    const reference = `ORD-${Date.now()}`
-
-    // Guarda la referencia por si quieres consultarla en la confirmación
-    localStorage.setItem('wompi_reference', reference)
-
-    const checkout = new window.WidgetCheckout({
-      currency: 'COP',
-      amountInCents,
-      reference,
-      publicKey: WOMPI_PUBLIC_KEY,
-      redirectUrl: WOMPI_REDIRECT_URL,
-      // customerData: { email: 'cliente@correo.com', fullName: 'Nombre Apellido' }, // opcional
-    })
-
-    checkout.open(() => {
-      // Se ejecuta al cerrar el widget; Wompi además redirige a WOMPI_REDIRECT_URL
-      pagando.value = false
-    })
-  } catch (e) {
-    pagando.value = false
-    console.error(e)
-    alert('No pudimos abrir Wompi. Intenta nuevamente.')
-  }
-}
 </script>
-
-<style scoped>
-/* (opcional) si no usas Tailwind, estas clases aseguran desactivar el click */
-.pointer-events-none { pointer-events: none; }
-
-/* ====== NUEVO: estilos de métodos de pago ====== */
-.payment-method {
-  display: grid;
-  gap: .5rem;
-  margin-top: .5rem;
-}
-.pm-item {
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-  padding: .5rem .75rem;
-  border: 1px solid #e5e7eb;
-  border-radius: .5rem;
-  cursor: pointer;
-}
-.pm-item input { accent-color: #0d6efd; }
-.pm-item:hover { background: #f9fafb; }
-.pm-logos {
-  display: flex;
-  gap: .5rem;
-  align-items: center;
-  margin-top: .5rem;
-}
-.pm-logos img {
-  height: 18px;
-  filter: grayscale(0.1);
-}
-.cart_sum_pros button[disabled] {
-  opacity: .6;
-  cursor: not-allowed;
-}
-</style>
