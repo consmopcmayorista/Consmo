@@ -1,9 +1,9 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import services from '@/components/services.vue'
-import ProductQuickview from '@/components/product_indv.vue' // Importamos el modal
-import CarouselTarjetas from '@/components/CarouselTarjetas.vue' // Importamos el carrusel de tarjetas
-import CarruselesPorCategoria from '@/components/CarruselesPorCategoria.vue' // Importamos el carrusel de categorías
+import ProductQuickview from '@/components/product_indv.vue'
+import CarouselTarjetas from '@/components/CarouselTarjetas.vue'
+import CarruselesPorCategoria from '@/components/CarruselesPorCategoria.vue'
 import PopupPromociones from '@/components/PopupPromociones.vue'
 
 import { ref, onMounted, inject } from 'vue'
@@ -12,326 +12,256 @@ import axios from 'axios'
 import popup from '@/components/PopupPromociones.vue'
 import Destacados from '@/components/Destacados.vue'
 
+// =====================
 // Configuración
+// =====================
 const dominio = 'consmopcmayorista.com'
 const id_empresa = '24'
 
-// Variables reactivas
-const productos_alea = ref([])    // Lista de productos para "Recomendados"
-const categorias_alea = inject('categorias_alea', ref([])) 
-console.log('Categorías inyectadas:', categorias_alea.value)
-
+// =====================
+// Estado
+// =====================
+const productos_alea = ref([])              // Recomendados
+const categorias_alea = inject('categorias_alea', ref([]))
 const cargando = ref(true)
-
-
-
-
 
 const mostrarQuickview = ref(false)
 const productoSeleccionado = ref(null)
-const producto_mostrar =ref([])
-const imagenMostrada = ref()
-const imagenCargada =ref(false)
-let  maximo = ref()
-let cantidades = ref(1)
+const producto_mostrar = ref({})
+const imagenMostrada = ref('')
+const imagenCargada = ref(false)
 
-const categoriasCarrusel = [
-  { nombre: "CHASIS", titulo: "🎮 Chasis Gamer" },
-  { nombre: "CAMARAS WEB", titulo: "📷 Cámaras Web" },
-  { nombre: "MONITOR", titulo: "🖥️ Monitores" },
-  { nombre: "", titulo: "🎮 Gaming" },
-  { nombre: "IMPRESORAS", titulo: "🖨️ Impresoras" }
-]
+// Cantidad solicitada en el modal + tope por stock
+const cantidades = ref(1)
+const maximo = ref(Infinity)                // tope de stock para el producto abierto
 
+// =====================
+// Helpers de stock
+// =====================
 
-function sumarExistencias(existenciaStr) {
-  console.log(existenciaStr)
-  if (!existenciaStr) return 0;
-  return existenciaStr.split(',').reduce((total, item) => {
-    const parts = item.split(':');
-    const cantidad = parseInt(parts[1]) || 0;
-    console.log(cantidad)
-    return total + cantidad;
-  }, 0);
+/**
+ * Suma cantidades desde un string existencia2: "Suramericana:2,Minorista:1"
+ * - Si falta el número después de ":", NO suma (cuenta 0).
+ * - Si el string viene vacío o no es string, retorna 0.
+ */
+function sumarExistencias2(existenciaStr) {
+  if (!existenciaStr || typeof existenciaStr !== 'string') return 0
+  return existenciaStr
+    .split(',')
+    .map(s => s.trim())
+    .filter(Boolean)
+    .reduce((acc, token) => {
+      const n = parseInt((token.split(':')[1] || '').trim(), 10)
+      return acc + (Number.isFinite(n) ? n : 0)
+    }, 0)
 }
 
+/**
+ * Devuelve el tope disponible de un producto:
+ * 1) Si product.existencia (num) > 0 → ese número
+ * 2) Si no, suma de product.existencia2
+ * 3) Si nada, Infinity (sin tope)
+ */
+function computeTopeProducto(producto) {
+  const byField = Number(producto?.existencia)
+  if (Number.isFinite(byField) && byField > 0) return byField
+  const byRaw = sumarExistencias2(producto?.existencia2 || '')
+  return byRaw > 0 ? byRaw : Infinity
+}
 
-
+// =====================
+// Quickview (abrir producto)
+// =====================
 
 function buscar_productos(id) {
-    cantidades=1
-            
-            let get={};
-           
-             let valor=productos_alea.value
-             get=(valor.filter(e => (`${e.id} `.includes(id))));
-             get.pt2 = Math.round(parseInt(get.pt2));
-             producto_mostrar.value=get[0]
-           
-            
-             console.log(producto_mostrar.value)
-             imagenCargada.value=true
-              maximo = sumarExistencias(producto_mostrar.value.existencia);
-             
-              imagenMostrada.value= producto_mostrar.value.imagen 
-               document.querySelector('.product_quickview').classList.add('active');
-     
-               document.body.style.overflowY = 'hidden';
-             
-  //productoSeleccionado.value = id
-  //mostrarQuickview.value = true
-  //console.log('Abriendo modal, id=', id, 'mostrarQuickview=', mostrarQuickview.value)
+  // cantidad inicial
+  cantidades.value = 1
+
+  // Buscar por id exacto
+  const prod = (productos_alea.value || []).find(p => String(p.id) === String(id))
+  if (!prod) {
+    console.warn('Producto no encontrado para id', id)
+    return
+  }
+
+  // Seteamos el producto y su imagen
+  producto_mostrar.value = prod
+  imagenCargada.value = true
+  imagenMostrada.value = prod.imagen || ''
+
+  // Calculamos tope usando existencia2 (o existencia si ya viene)
+  maximo.value = computeTopeProducto(prod)
+
+  // Abrimos modal nativo (tu quickview)
+  const qv = document.querySelector('.product_quickview')
+  if (qv) qv.classList.add('active')
+  document.body.style.overflowY = 'hidden'
+
+  // Debug opcional
+  try {
+    console.log('[Quickview] id:', prod.id, 'existencia:', prod.existencia, 'existencia2:', prod.existencia2, 'tope:', maximo.value)
+  } catch (_) {}
 }
 
+// =====================
+// Agregar al carrito (dejo tu flujo original, solo paso existencia correcta)
+// =====================
+function agregar_producto_car() {
+  // toma cantidad que el usuario seleccionó en el modal
+  const cantSolicitada = Number(cantidades.value) || 1
 
-function agregar_producto_car(){
-    
-    let cant1=new Intl.NumberFormat().format($('#cantidades_producto').html());
-    
-   //  document.getElementById("cantidades_producto").innerHTML=1;
-	if($('#cantidades_producto').html()!=""){
-	    
-	   // let maximo=mod_cantidades(cant1);
-	    
-		
-		  
-    		const id=document.getElementById('item_producto').value;
-    		//const referencia=document.getElementById('referencia').value
-    		const detalle=document.getElementById('detalle').value
-    		const precio=document.getElementById('precio').value;
-    		const foto=document.getElementById('foto').value;
-    		const tags=document.getElementById('tags').value;
-    		const existencia=document.getElementById('cantidadesx').value;
-    		
-    		cargar_carro( id, detalle, precio,  foto, "Agregado_ppl", tags, existencia);
-    		
-    		$('#cantidades_producto').val('1');
-    	
-    		$('#myModal3').modal('hide');	
-		
-		
-		
-	}
+  // Prevenir 0
+  if (cantSolicitada < 1) {
+    alert('Indica una cantidad válida (mínimo 1).')
+    return
+  }
+
+  // Respetar tope
+  const tope = Number(maximo.value)
+  const cantFinal = Number.isFinite(tope) ? Math.min(cantSolicitada, tope) : cantSolicitada
+  if (cantFinal !== cantSolicitada) {
+    alert(`Solo hay ${tope} unidad(es) disponible(s). Ajustamos tu solicitud a ${cantFinal}.`)
+  }
+
+  const id       = String(producto_mostrar.value.id || '')
+  const detalle  = String(producto_mostrar.value.titulo || '')
+  const precio   = Number(producto_mostrar.value.pt1 || 0)
+  const foto     = String(producto_mostrar.value.imagen || '')
+  const tags     = String(producto_mostrar.value.idpro || '')
+  const existenciaTotal = tope // tope calculado
+  const existencia2Raw  = String(producto_mostrar.value.existencia2 || '')
+
+  // Guardamos en localStorage 'ticket'
+  cargar_carro(id, detalle, precio, foto, 'Agregado_ppl', tags, existenciaTotal, existencia2Raw, cantFinal)
+
+  // Reseteo de UI
+  cantidades.value = 1
+  const modal = document.getElementById('myModal3')
+  if (modal && typeof $(modal).modal === 'function') {
+    $('#myModal3').modal('hide')
+  }
 }
 
-function cargar_carro(id, descripcion, precio, foto, operacion, tags, existencia) {
-          precio = parseFloat(precio.toFixed(2)); // Limita "precio" a 2 decimales
-          tags = parseFloat(tags.toFixed(2)); // Limita "tags" a 2 decimales
+/**
+ * Versión local de cargar_carro que respeta existencias.
+ * Se parece a tu main.js, pero aquí lo dejamos autocontenido.
+ */
+function cargar_carro(id, descripcion, precio, foto, operacion, tags, existenciaTotal, existencia2Raw, cantOverride = null) {
+  // Normalizar
+  precio = Number(precio) || 0
+  tags   = String(tags || '')
+  const tope = Number(existenciaTotal) || 0
 
-        
-        if (operacion=='Agregado_ppl') {    	
-        var cant = new Number($('#cantidades_producto').html());
-        
-        operacion="Agregado ";
-        }else{
-         if (operacion=='Agregado') {
-            var cant =1;
-         }else{ 
-            var cant =-1;
-         }  
-     
-        }
-	
-	
-	   const arreglo_car=JSON.parse(localStorage.getItem('ticket'));  
-		
-	   
-	   var estructura;
-	
-	   const carrito = Object.create(prototipoCarrito);
-	  
-	  
-		if (!arreglo_car) {
-			
-		   const producto={
-			   id,
-			   descripcion,
-			   precio,
-			   foto,
-			   cant,
-			   tags,
-			   existencia
-			 };
-	
-		   
-		   carrito.agregarProducto(producto);
-			//var estructura =  id+ ";" +  descripcion+ ";" +  precio+ ";" +  cant + ";" +foto;  
-	   }else{
-			  const producto={
-			   id,
-			   descripcion,
-			   precio,
-			   foto,
-			   cant,
-			   tags,
-			   existencia
-			 };
-	
-				 let cantidad=0;
-				 let indice;
-			   let encontrado=false;
-			   arreglo_car.productos.forEach((datos, index)=>{
-					   if (datos.id==id) {
-						
-						 cantidad= datos.cant;
-						 indice=index;
-						 encontrado=true;
-					   }
-				   
-			   })
-			   
-	
-				if (encontrado) {
-					 
-					 arreglo_car.productos[indice].cant=parseInt(cant) + parseInt(cantidad);
-					 
-					 
-	
-				}else{
-					//carrito.agregarProducto(producto);
-	
-					arreglo_car.productos.push(producto);
-				}	
-			 
-				 arreglo_car.productos.forEach((datos)=>{
-				 carrito.agregarProducto(datos);
-	
-			    })	
-	
-			
-	
-	
-			
-			
-	
-			
-		   }
-		   //console.log(arreglo_car);
-		  localStorage.setItem('ticket', JSON.stringify(carrito)); 
-		  cargar_arreglo_car() ; 
-	
-		  mensaje_add_car(descripcion, id , operacion, cant);
-	  
-	}
- 
-  function mensaje_add_car(descripcion, id , operacion, cant){
-	
-	let valores ="";
-	
-	valores +="<div class='alert alert-primary' role='alert'>Se ha "+operacion+" "+cant+" "+descripcion+" al carrito de compra </div>";
-	document.getElementById("container_success").innerHTML=valores;
-	setTimeout(function(){ document.getElementById("container_success").innerHTML=""; }, 3000);
-	
-	
-	}
+  // Determinar cantidad base por tipo de operación
+  let cant = 1
+  if (operacion === 'Agregado_ppl') {
+    cant = cantOverride != null ? Number(cantOverride) : 1
+    operacion = 'Agregado '
+  } else if (operacion === 'Agregado') {
+    cant = 1
+  } else {
+    cant = -1
+  }
 
+  // Leer carrito
+  const existente = JSON.parse(localStorage.getItem('ticket') || '{"productos":[]}')
+  if (!Array.isArray(existente.productos)) {
+    existente.productos = []
+  }
 
+  // Buscar si existe este id
+  const idx = existente.productos.findIndex(p => String(p.id) === String(id))
 
-function 	imprimir_carro_vacio(){
-let valores=`<ul classs=hopping-cart-items">
-                          <li class="clearfix">
-                           
-                            <span class="item-quantity">No hay Productos en tu Carrito!</span>
-                            <br/>
-                            <br/><br/>
-                          </li>
+  if (idx >= 0) {
+    // Ya existe: sumamos y respetamos tope si lo hay
+    const actual = existente.productos[idx]
+    const nueva  = (Number(actual.cant) || 0) + cant
 
-                        </ul>`
-document.getElementById("total_ticket").innerHTML=0;
-document.getElementById("total_ticket2").innerHTML=0;
-document.getElementById("muestra").innerHTML=valores;
-document.getElementById("muestra2").innerHTML=valores;
-}
-function imprimir_carrito(arreglo_car, total){
-  var valores='';
- var cantidad_valores= arreglo_car.productos.length
- document.querySelector('.pops2').innerHTML= cantidad_valores,
-valores+="<ul class='shopping-cart-items'>";
+    const limite = Number.isFinite(tope) && tope > 0 ? tope : Infinity
+    actual.cant = Math.max(0, Math.min(nueva, limite))
 
-     arreglo_car.productos.forEach((datos)=>{
+    // actualizar datos frescos
+    actual.precio          = precio
+    actual.tags            = tags
+    actual.existencia      = Number.isFinite(tope) ? tope : 0
+    actual.existencia2_raw = existencia2Raw
+  } else {
+    // Nuevo item: respetar tope
+    const cantInicial = Math.max(0, Math.min(cant, Number.isFinite(tope) ? tope : cant))
+    existente.productos.push({
+      id,
+      descripcion,
+      precio,
+      foto,
+      cant: cantInicial,
+      tags,
+      existencia: Number.isFinite(tope) ? tope : 0,
+      existencia2_raw: existencia2Raw
+    })
+  }
 
-   var codigo1 = datos.id;
-   var codigo2 = '"'+codigo1+'"';
-     var descripcion1 = datos.descripcion+ " ("+codigo1+")";
-      var descripcion2 = '"'+descripcion1+'"';
-      
-     var precio1 = datos.precio;
-     
-     var cant1 = datos.cant;
-     var foto1 = datos.foto;
-     var subtotal1=precio1*cant1;
-     precio1=datos.precio ; 
-      subtotal1=subtotal1;
-     
-     
-     valores+= ` 
-                          <li class="clearfix">
-                            <img style="width:75; height:60px" src='${foto1}' alt="" />
-                            <span class="item-name">${descripcion1.slice(0, 18)}</span>
-                            <span class="item-price">$ ${Math.round(parseFloat(precio1)).toString().replace(/\./g, ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.') }</span>
-                            <span class="item-quantity">/ Cantidad: ${cant1}</span>
-                          </li>
-                          
-                          
-                    
-                         
-                        `;
-  
+  // Persistir y notificar
+  localStorage.setItem('ticket', JSON.stringify(existente))
 
-})
-  
-  total_monto=total;
-    
+  // Si existe globalmente, refresca mini carrito
+  if (typeof window !== 'undefined' && typeof window.cargar_arreglo_car === 'function') {
+    window.cargar_arreglo_car()
+  }
 
-    
-
- valores+="</ul>";
- 
-  document.getElementById("total_ticket").innerHTML=Math.round(parseFloat(total_monto)).toString().replace(/\./g, ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.') 
-  document.getElementById("total_ticket2").innerHTML=Math.round(parseFloat(total_monto)).toString().replace(/\./g, ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.') 
-document.getElementById("muestra").innerHTML=valores;
-  document.getElementById("muestra2").innerHTML=valores;
+  mensaje_add_car(descripcion, id, operacion, cant)
 }
 
+function mensaje_add_car(descripcion, id, operacion, cant) {
+  const target = document.getElementById('container_success')
+  if (target) {
+    target.innerHTML = `<div class='alert alert-primary' role='alert'>Se ha ${operacion} ${cant} ${descripcion} al carrito de compra</div>`
+    setTimeout(() => { target.innerHTML = '' }, 3000)
+  }
+}
 
-
-
-/* -----------------------------------------     */
-
-
-// Función para cerrar el quickview
+// =====================
+// Quickview (otros)
+// =====================
 function closeQuickview() {
-  document.querySelector('.product_quickview').classList.remove('active');
-  document.body.style.overflowY = 'auto';
+  const qv = document.querySelector('.product_quickview')
+  if (qv) qv.classList.remove('active')
+  document.body.style.overflowY = 'auto'
 }
 
 // Función para cortar línea de texto sin dividir palabras de forma incorrecta
 function formatLine(str, maxLength) {
-  if (!str) return '';
-  const words = str.split(' ');
-  let line = '';
-  let result = [];
-
-  for (let word of words) {
-    if ((line + ' ' + word).trim().length <= maxLength) {
-      line += (line ? ' ' : '') + word;
+  if (!str) return ''
+  const words = String(str).split(' ')
+  let line = ''
+  const result = []
+  for (const w of words) {
+    if ((line + ' ' + w).trim().length <= maxLength) {
+      line += (line ? ' ' : '') + w
     } else {
-      result.push(line);
-      line = word;
+      result.push(line)
+      line = w
     }
   }
-  if (line) result.push(line);
-
-  return result;
+  if (line) result.push(line)
+  return result
 }
 
 function cambiarImagen(url) {
   imagenMostrada.value = url
 }
 
+// ===============
+// Controles de cantidad en el modal
+// ===============
 function incrementar() {
-  if(cantidades.value < maximo){
-  cantidades.value++
+  const tope = Number(maximo.value)
+  if (!Number.isFinite(tope)) {
+    // sin tope → incrementa libre
+    cantidades.value++
+    return
+  }
+  if (cantidades.value < tope) {
+    cantidades.value++
   }
 }
 function decrementar() {
@@ -339,11 +269,10 @@ function decrementar() {
     cantidades.value--
   }
 }
-function cerrarModal() {
-  mostrarModal.value = false
-}
 
-// Función para barajar el array
+// ===============
+// Datos iniciales
+// ===============
 function shuffleArray(array) {
   return array
     .map(value => ({ value, sort: Math.random() }))
@@ -351,15 +280,12 @@ function shuffleArray(array) {
     .map(({ value }) => value)
 }
 
-// Carga de productos "recomendados"
 async function fetchProductos() {
   try {
     const response = await axios.get(
       `https://whatsapp-nube.com/api_web/api_web_catalogo_new2.php?dominio=${dominio}&id=${id_empresa}`
     )
-    // Asignamos array barajado
-    productos_alea.value = shuffleArray(response.data.productos) || []
-    console.log(productos_alea.value)
+    productos_alea.value = shuffleArray(response.data.productos || [])
   } catch (error) {
     console.error('Error al obtener productos:', error)
   } finally {
@@ -369,50 +295,46 @@ async function fetchProductos() {
 
 onMounted(() => {
   fetchProductos()
-})
 
-// Scripts de carrusel, etc. (usando jQuery, owl, etc.)
-$(document).ready(function() {
-  $(".owl-carousel").owlCarousel({
-    items: 1,
-    loop: true,
-    autoplay: true,
-    autoplayTimeout: 5000,
-    autoplayHoverPause: true
+  // plugins externos que ya usas
+  $(document).ready(function() {
+    $(".owl-carousel").owlCarousel({
+      items: 1,
+      loop: true,
+      autoplay: true,
+      autoplayTimeout: 5000,
+      autoplayHoverPause: true
+    })
+
+    const swiper = new Swiper('.swiper-container', {
+      slidesPerView: 4,
+      spaceBetween: 20,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      },
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false
+      },
+      observer: true,
+      observeParents: true
+    })
+
+    setInterval(() => {
+      const paginationBullet = document.getElementById('button-next')
+      if (paginationBullet) {
+        paginationBullet.click()
+      }
+    }, 5000)
   })
-
-  const swiper = new Swiper('.swiper-container', {
-    slidesPerView: 4,
-    spaceBetween: 20,
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev'
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true
-    },
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false
-    },
-    observer: true,
-    observeParents: true
-  })
-
-  setInterval(() => {
-    const paginationBullet = document.getElementById('button-next')
-    if (paginationBullet) {
-      paginationBullet.click()
-      console.log('Clic simulado en el botón Next')
-    } else {
-      console.log('No se encontró el botón con id "button-next"')
-    }
-  }, 5000)
 })
-
-
 </script>
+
 
 <template>
   <!-- Carrusel principal con Bootstrap -->
