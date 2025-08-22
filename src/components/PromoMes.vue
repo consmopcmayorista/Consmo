@@ -29,6 +29,8 @@
     { title: 'TORRE TINI CORE I5 6TA :U9130', image: 'U9130.png'},
     { title: 'CLONADORA LECTORA DE DISCOS SATA 2.5 Y 3.5 // 3.0 :9397', image: '9397.png'},
     { title: 'SUPER PROMOCION CORE I5 8GB RAM SSD 256GB CON MONITOR NUEVO DE 23.8" FULL HD :U9132', image: 'U9132.png'},
+    { title: 'CAMINA CON MICROFONO 8 PULGADAS :1509', image: '1509.png'},
+    { title: 'ROUTER DUAL-BAND 5 ANTENA :2693', image: '2693.png'},
 
 
 

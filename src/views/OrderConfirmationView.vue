@@ -1,872 +1,636 @@
 <template>
   <!-- breadcrumbs -->
   <div class="container">
-      <div class="breadcrumbs">
-          <a href="index.html"><i class="las la-home"></i></a>
-          <a href="shop-list.html">Tienda</a>
-          <a class="active">Procesar Pago</a>
-      </div>
+    <div class="breadcrumbs">
+      <a href="index.html"><i class="las la-home"></i></a>
+      <a href="shop-list.html">Tienda</a>
+      <a class="active">Procesar Pago</a>
+    </div>
   </div>
 
   <!-- cart area -->
   <div class="text-center my-4">
-      <h2 class="mb-3">¿Quieres saber el costo de tu envío?</h2>
-      <router-link to="/envios" class="btn btn-primary btn-lg animate__animated animate__pulse animate__infinite">
-          <i class="las la-map-marker"></i> Descubre el costo de tu domicilio en nuestro mapa interactivo
-      </router-link>
+    <h2 class="mb-3">¿Quieres saber el costo de tu envío?</h2>
+    <router-link
+      to="/envios"
+      class="btn btn-primary btn-lg animate__animated animate__pulse animate__infinite"
+    >
+      <i class="las la-map-marker"></i>
+      Descubre el costo de tu domicilio en nuestro mapa interactivo
+    </router-link>
   </div>
+
   <div class="cart_area section_padding_b">
-      <div class="container">
-          <div class="row">
-              <!-- Columna de datos de facturación y envío -->
-              <div class="col-xl-8 col-lg-7 col-md-6">
-                  <h4 class="shop_cart_title mb-4 ps-3">Información Facturación y Envío</h4>
+    <div class="container">
+      <div class="row">
+        <!-- Columna de datos de facturación y envío -->
+        <div class="col-xl-8 col-lg-7 col-md-6">
+          <h4 class="shop_cart_title mb-4 ps-3">Información Facturación y Envío</h4>
 
-                  <div class="mb-4">
-                      <p>referencia: {{ reference }}</p>
-                      <div class="row">
-                          <div class="col-md-6 form-group">
-                              <label>Tipo de Documento</label>
-                              <select class="form-control" v-model="tip_doc_cliente">
-                                  <option value="CC">Cédula de ciudadanía</option>
-                                  <option value="NIT">NIT</option>
-                                  <option value="CE">Cédula de extranjería</option>
-                                  <option value="DNI">DNI</option>
-                                  <option value="Pasaporte">Pasaporte</option>
-                                  <option value="Tarjeta de identidad">Tarjeta de identidad</option>
-                              </select>
-                          </div>
-                          <div class="col-md-6 form-group">
-                              <label>Documento Cliente</label>
-                              <input class="form-control" type="text" placeholder="Nit o Cédula" v-model="rut_cliente" />
-                          </div>
-                          <div class="col-md-6 form-group">
-                              <label>Nombres</label>
-                              <input class="form-control" type="text" placeholder="Juan" v-model="nombre_cliente" />
-                          </div>
-                          <div class="col-md-6 form-group">
-                              <label>Apellidos</label>
-                              <input class="form-control" type="text" placeholder="Salas" v-model="apellido_cliente" />
-                          </div>
-                          <div class="col-md-6 form-group">
-                              <label>E-mail</label>
-                              <input class="form-control" type="text" placeholder="example@email.com" v-model="email_cliente" />
-                          </div>
-                          <div class="col-md-6 form-group">
-                              <label>Celular</label>
-                              <input class="form-control" type="text" placeholder="+57 123 456 789" v-model="tel_cliente" />
-                          </div>
-                          <div class="col-md-6 form-group">
-                              <label>Dirección</label>
-                              <input class="form-control" type="text" placeholder="calle 666 #66-66" v-model="direccion_cliente" />
-                          </div>
-                          <div class="col-md-6 form-group">
-                              <label>Continuación de Dirección (opcional)</label>
-                              <input class="form-control" type="text" placeholder="123 Street" v-model="direccion_cliente2" />
-                          </div>
-                          <div class="col-md-6 form-group">
-                              <label>Ciudad</label>
-                              <input class="form-control" type="text" placeholder="Medellín" v-model="ciudad_cliente" />
-                          </div>
-                          <div class="col-md-6 form-group">
-                              <label>Departamento</label>
-                              <input class="form-control" type="text" placeholder="Antioquia" v-model="departamento_cliente" />
-                          </div>
-                          <div class="col-md-12 form-group">
-                              <div class="custom-control custom-checkbox">
-                                  <input type="checkbox" class="custom-control-input" id="shipto" data-toggle="collapse" data-target="#shipping-address" />
-                                  <label class="custom-control-label" for="shipto" data-toggle="collapse" data-target="#shipping-address">
-                                      ¿Desea enviar a dirección diferente?
-                                  </label>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-                  <!-- Dirección de envío adicional (oculta con collapse) -->
-                  <div class="collapse mb-4" id="shipping-address">
-                      <h4 class="font-weight-semi-bold mb-4">Dirección de Envío</h4>
-                      <div class="row">
-                          <div class="col-md-6 form-group">
-                              <label>Nombres</label>
-                              <input class="form-control" type="text" placeholder="María" v-model="e_nombre_cliente" />
-                          </div>
-                          <div class="col-md-6 form-group">
-                              <label>Apellidos</label>
-                              <input class="form-control" type="text" placeholder="Salas" v-model="e_apellido_cliente" />
-                          </div>
-                          <div class="col-md-6 form-group">
-                              <label>E-mail</label>
-                              <input class="form-control" type="text" placeholder="example@email.com" v-model="e_email_cliente" />
-                          </div>
-                          <div class="col-md-6 form-group">
-                              <label>Celular</label>
-                              <input class="form-control" type="text" placeholder="+57 123 456 789" v-model="e_tel_cliente" />
-                          </div>
-                          <div class="col-md-6 form-group">
-                              <label>Dirección</label>
-                              <input class="form-control" type="text" placeholder="123 Street" v-model="e_direccion_cliente" />
-                          </div>
-                          <div class="col-md-6 form-group">
-                              <label>Continuación de Dirección (opcional)</label>
-                              <input class="form-control" type="text" placeholder="123 Street" v-model="e_direccion_cliente2" />
-                          </div>
-                          <div class="col-md-6 form-group">
-                              <label>Ciudad</label>
-                              <input class="form-control" type="text" placeholder="Medellín" v-model="e_ciudad_cliente" />
-                          </div>
-                          <div class="col-md-6 form-group">
-                              <label>Departamento</label>
-                              <input class="form-control" type="text" placeholder="Antioquia" v-model="e_departamento_cliente" />
-                          </div>
-                      </div>
-                  </div>
+          <div class="mb-4">
+            <p>referencia: {{ reference }}</p>
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label>Tipo de Documento</label>
+                <!-- IMPORTANTE: los values son abreviaturas. Por eso el v-model inicia en "CC" -->
+                <select class="form-control" v-model="tip_doc_cliente">
+                  <option value="CC">Cédula de ciudadanía</option>
+                  <option value="NIT">NIT</option>
+                  <option value="CE">Cédula de extranjería</option>
+                  <option value="DNI">DNI</option>
+                  <option value="Pasaporte">Pasaporte</option>
+                  <option value="TI">Tarjeta de identidad</option>
+                </select>
               </div>
 
-              <!-- Columna resumen de orden -->
-              <div class="col-xl-4 col-lg-5 col-md-6">
-                  <h4 class="shop_cart_title ps-3">Tu orden</h4>
-                  <div class="checkout_order mt-4">
-                      <h4>producto</h4>
-
-                      <!-- Itera los items del carrito -->
-                      <div class="single_check_order" v-for="(dato, index) in ticket" :key="index">
-                          <div class="checkorder_cont">
-                              <h5>{{ dato.descripcion }}</h5>
-                          </div>
-                          <p class="checkorder_qnty">x{{ dato.cant }}</p>
-                          <p class="checkorder_price">
-                              ${{ Math.round(parseFloat(dato.precio)).toString().replace(/\./g, ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.') }}
-                          </p>
-                      </div>
-
-                      <!-- Subtotal -->
-                      <div class="single_check_order subs">
-                          <div class="checkorder_cont subtotal-h">
-                              <h5>Subtotal</h5>
-                          </div>
-                          <p class="checkorder_price">
-                              ${{ Math.round(parseFloat(subtotal)).toString().replace(/\./g, ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.') }}
-                          </p>
-                      </div>
-
-                      <!-- IVA -->
-                      <div class="single_check_order subs">
-                          <div class="checkorder_cont subtotal-h">
-                              <h5>Iva</h5>
-                          </div>
-                          <p class="checkorder_price">
-                              ${{ Math.round(parseFloat(iva)).toString().replace(/\./g, ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.') }}
-                          </p>
-                      </div>
-
-                      <!-- Total -->
-                      <div class="single_check_order total">
-                          <div class="checkorder_cont">
-                              <h5>Total</h5>
-                          </div>
-                          <p class="checkorder_price">
-                              ${{ Math.round(parseFloat(total)).toString().replace(/\./g, ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.') }}
-                          </p>
-                      </div>
-
-                      <!-- Botón de Pago Contra Entrega -->
-                      <div class="form-group">
-                          <div class="payment-info">
-                              <div class="option-label option-1" @click="toggleCollapse('contraEntrega')">
-                                  <i class="fas fa-handshake"></i> Opción 1 (Contra Entrega)
-                              </div>
-                              <v-collapse :show="showContraEntrega">
-                                  <ul>
-                                      <p>Ahora puedes realizar tu pedido con <strong>pago contra entrega</strong>...</p>
-                                  </ul>
-                                  <img style="width:100%;" src="https://consmopcmayorista.com/images2/banner_contraentrega.png" />
-                                  <ul>
-                                      <p><strong>Envíos a Medellín y alrededores:</strong> $13,000</p>
-                                      <p><strong>Otras ciudades:</strong> Te contactaremos de inmediato</p>
-                                  </ul>
-                                  <p><em>¡Tu comodidad es nuestra prioridad!</em></p>
-                                  <button type="button" class="btn-contra-entrega" @click="pagoContraEntrega">
-                                      Pago Contra Entrega
-                                  </button>
-                              </v-collapse>
-                          </div>
-                      </div>
-
-                      <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
-                      <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
-
-                      <!-- Botón pago con wompi 
-                      <div class="form-group">
-                          <div class="payment-info">
-                              <div class="option-label option-2" @click="toggleCollapse('puntoVenta')">
-                                  <i class="fas fa-store"></i> Opción 2 (paga con Wompi )
-                              </div>
-                              <v-collapse :show="showPuntoVenta">
-                                  <ul>
-                                      <p>Con nuestra opción <strong>Paga con wompi puedes pagar con =></strong>...</p>
-                                  </ul>
-                                  <img style="width:100%;" src="https://consmopcmayorista.com/images2/WOMPI.png" />
-                                  <p></p>
-                                  <ul>
-                                      <p><strong>Un credito a bajo costo </strong></p>
-                                  </ul>
-                                  <button type="button" class="btn-punto-venta" @click="recogerEnPuntoDeVenta">
-                                      Paga aquí con Wompi
-                                  </button>
-                              </v-collapse>
-                          </div>
-                      </div>
-                        <hr style="margin: 20px 0; border-top: 3px solid #000000;" /> -->
-                    
-
-                      <!-- Botón Recoger en Punto de Venta -->
-                      <div class="form-group">
-                          <div class="payment-info">
-                              <div class="option-label option-2" @click="toggleCollapse('puntoVenta')">
-                                  <i class="fas fa-store"></i> Opción 2 (Recoger en Punto de Venta)
-                              </div>
-                              <v-collapse :show="showPuntoVenta">
-                                  <ul>
-                                      <p>Con nuestra opción <strong>Recoger en Punto de Venta</strong>...</p>
-                                  </ul>
-                                  <img style="width:100%;" src="https://consmopcmayorista.com/images2/banner_recoger.png" />
-                                  <p></p>
-                                  <ul>
-                                      <p><strong>Recoge tu pedido en tienda</strong>...</p>
-                                  </ul>
-                                  <p>Calle 48C #65A-24 Suramericana, Medellín</p>
-                                  <button type="button" class="btn-punto-venta" @click="recogerEnPuntoDeVenta">
-                                      Recoger en Punto de Venta
-                                  </button>
-                              </v-collapse>
-                          </div>
-                      </div>
-
-                      <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
-                      <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
-                      
-
-                      <!-- Botón Transferencia Bancaria -->
- <!--                    <div class="form-group">
-                          <div class="payment-info">
-                              <div class="option-label option-3" @click="toggleCollapse('transferenciaBancaria')">
-                                  <i class="fas fa-university"></i> Opción 3 (Transferencia Bancaria)
-                              </div>
-                              <v-collapse :show="showTransferenciaBancaria">
-                                  <ul>
-                                      <p>Realiza tu pago mediante <strong>transferencia bancaria</strong>...</p>
-                                  </ul>
-                                  <img style="width:100%;" src="https://consmopcmayorista.com/images2/banner_bancolombia.png" />
-                                  <p></p>
-                                  <ul>
-                                      <p><strong>Datos para la transferencia:</strong></p>
-                                      <p>Banco: Bancolombia</p>
-                                      <p>Cuenta: 95874544408</p>
-                                      <p>Tipo: Corriente</p>
-                                      <p>Titular: Consmo PC Mayorista</p>
-                                      <p>Total a transferir: ${{ Math.round(parseFloat(total)).toString().replace(/\./g, ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.') }}</p>
-                                  </ul>
-                                  <button type="button" class="btn-bancolombia" @click="openBancolombiaPopup">
-                                      Transferencia Bancaria
-                                  </button>
-                                  <p><em>¡Es fácil y seguro!</em></p>
-                              </v-collapse>
-                          </div>
-                      </div>--> 
-                  </div>
+              <div class="col-md-6 form-group">
+                <label>Documento Cliente</label>
+                <input class="form-control" type="text" placeholder="NIT o Cédula" v-model.trim="rut_cliente" />
               </div>
+
+              <div class="col-md-6 form-group">
+                <label>Nombres</label>
+                <input class="form-control" type="text" placeholder="Juan" v-model.trim="nombre_cliente" />
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label>Apellidos</label>
+                <input class="form-control" type="text" placeholder="Salas" v-model.trim="apellido_cliente" />
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label>E-mail</label>
+                <input class="form-control" type="email" placeholder="example@email.com" v-model.trim="email_cliente" />
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label>Celular</label>
+                <input class="form-control" type="text" placeholder="+57 123 456 789" v-model.trim="tel_cliente" />
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label>Dirección</label>
+                <input class="form-control" type="text" placeholder="calle 666 #66-66" v-model.trim="direccion_cliente" />
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label>Continuación de Dirección (opcional)</label>
+                <input class="form-control" type="text" placeholder="Apto, interior..." v-model.trim="direccion_cliente2" />
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label>Ciudad</label>
+                <input class="form-control" type="text" placeholder="Medellín" v-model.trim="ciudad_cliente" />
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label>Departamento</label>
+                <input class="form-control" type="text" placeholder="Antioquia" v-model.trim="departamento_cliente" />
+              </div>
+
+              <div class="col-md-12 form-group">
+                <div class="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    id="shipto"
+                    v-model="shipToOther"
+                  />
+                  <label class="custom-control-label" for="shipto">
+                    ¿Desea enviar a dirección diferente?
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
+
+          <!-- Dirección de envío adicional -->
+          <div class="mb-4" v-show="shipToOther">
+            <h4 class="font-weight-semi-bold mb-4">Dirección de Envío</h4>
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label>Nombres</label>
+                <input class="form-control" type="text" placeholder="María" v-model.trim="e_nombre_cliente" />
+              </div>
+              <div class="col-md-6 form-group">
+                <label>Apellidos</label>
+                <input class="form-control" type="text" placeholder="Salas" v-model.trim="e_apellido_cliente" />
+              </div>
+              <div class="col-md-6 form-group">
+                <label>E-mail</label>
+                <input class="form-control" type="email" placeholder="example@email.com" v-model.trim="e_email_cliente" />
+              </div>
+              <div class="col-md-6 form-group">
+                <label>Celular</label>
+                <input class="form-control" type="text" placeholder="+57 123 456 789" v-model.trim="e_tel_cliente" />
+              </div>
+              <div class="col-md-6 form-group">
+                <label>Dirección</label>
+                <input class="form-control" type="text" placeholder="Calle..." v-model.trim="e_direccion_cliente" />
+              </div>
+              <div class="col-md-6 form-group">
+                <label>Continuación de Dirección (opcional)</label>
+                <input class="form-control" type="text" placeholder="Apto, interior..." v-model.trim="e_direccion_cliente2" />
+              </div>
+              <div class="col-md-6 form-group">
+                <label>Ciudad</label>
+                <input class="form-control" type="text" placeholder="Medellín" v-model.trim="e_ciudad_cliente" />
+              </div>
+              <div class="col-md-6 form-group">
+                <label>Departamento</label>
+                <input class="form-control" type="text" placeholder="Antioquia" v-model.trim="e_departamento_cliente" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna resumen + métodos de pago -->
+        <div class="col-xl-4 col-lg-5 col-md-6">
+          <h4 class="shop_cart_title ps-3">Tu orden</h4>
+          <div class="checkout_order mt-4">
+            <h4>producto</h4>
+
+            <div class="single_check_order" v-for="(dato, index) in ticket" :key="index">
+              <div class="checkorder_cont">
+                <h5>{{ dato.descripcion }}</h5>
+              </div>
+              <p class="checkorder_qnty">x{{ dato.cant }}</p>
+              <p class="checkorder_price">
+                ${{ Math.round(parseFloat(dato.precio)).toString().replace(/\./g, ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.') }}
+              </p>
+            </div>
+
+            <!-- Subtotal -->
+            <div class="single_check_order subs">
+              <div class="checkorder_cont subtotal-h"><h5>Subtotal</h5></div>
+              <p class="checkorder_price">
+                ${{ Math.round(parseFloat(subtotal)).toString().replace(/\./g, ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.') }}
+              </p>
+            </div>
+
+            <!-- IVA -->
+            <div class="single_check_order subs">
+              <div class="checkorder_cont subtotal-h"><h5>Iva</h5></div>
+              <p class="checkorder_price">
+                ${{ Math.round(parseFloat(iva)).toString().replace(/\./g, ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.') }}
+              </p>
+            </div>
+
+            <!-- Total -->
+            <div class="single_check_order total">
+              <div class="checkorder_cont"><h5>Total</h5></div>
+              <p class="checkorder_price">
+                ${{ Math.round(parseFloat(total)).toString().replace(/\./g, ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.') }}
+              </p>
+            </div>
+
+            <!-- Opción 1: Pago Contra Entrega -->
+            <div class="form-group">
+              <div class="payment-info">
+                <div class="option-label option-1" @click="toggleCollapse('contraEntrega')">
+                  <i class="fas fa-handshake"></i> Opción 1 (Contra Entrega)
+                </div>
+                <v-collapse :show="showContraEntrega">
+                  <ul>
+                    <p>Ahora puedes realizar tu pedido con <strong>pago contra entrega</strong>...</p>
+                  </ul>
+                  <img style="width:100%;" src="https://consmopcmayorista.com/images2/banner_contraentrega.png" />
+                  <ul>
+                    <p><strong>Envíos a Medellín y alrededores:</strong> $13,000</p>
+                    <p><strong>Otras ciudades:</strong> Te contactaremos de inmediato</p>
+                  </ul>
+                  <p><em>¡Tu comodidad es nuestra prioridad!</em></p>
+                  <button type="button" class="btn-contra-entrega" @click="pagoContraEntrega">
+                    Pago Contra Entrega
+                  </button>
+                </v-collapse>
+              </div>
+            </div>
+
+            <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
+            <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
+
+            <!-- Opción 2: Pagar con Wompi (NUEVO) -->
+            <div class="form-group">
+              <div class="payment-info">
+                <div class="option-label option-2" @click="toggleCollapse('wompi')">
+                  <i class="fas fa-credit-card"></i> Opción 2 (Pagar con Wompi)
+                </div>
+                <v-collapse :show="showWompi">
+                  <ul>
+                    <p>
+                      Paga en línea con <strong>tarjeta, PSE, Nequi</strong> y más, de forma segura con
+                      <strong>Wompi</strong>.
+                    </p>
+                  </ul>
+                  <img style="width:100%;" src="https://consmopcmayorista.com/images2/WOMPI.png" />
+                  <p></p>
+                 <!-- <button type="button" class="btn-punto-venta" @click="pagarConWompi">
+                    Pagar aquí con Wompi
+                  </button>-->
+                  <a
+                    class="btn-punto-venta"
+                    href="https://wa.me/573015537673?text=Hola%20Consmo%20PC,%20quiero%20saber%20sobre%20pagos%20a%20cr%C3%A9dito%20con%20Wompi."
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    pregunta por  pagos a credito con wompi acá
+                  </a>
+
+                </v-collapse>
+              </div>
+            </div>
+
+            <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
+            <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
+
+            <!-- Opción 3: Recoger en Punto de Venta -->
+            <div class="form-group">
+              <div class="payment-info">
+                <div class="option-label option-2" @click="toggleCollapse('puntoVenta')">
+                  <i class="fas fa-store"></i> Opción 3 (Recoger en Punto de Venta)
+                </div>
+                <v-collapse :show="showPuntoVenta">
+                  <ul>
+                    <p>Con nuestra opción <strong>Recoger en Punto de Venta</strong>...</p>
+                  </ul>
+                  <img style="width:100%;" src="https://consmopcmayorista.com/images2/banner_recoger.png" />
+                  <ul>
+                    <p><strong>Recoge tu pedido en tienda</strong>...</p>
+                  </ul>
+                  <p>Calle 48C #65A-24 Suramericana, Medellín</p>
+                  <button type="button" class="btn-punto-venta" @click="recogerEnPuntoDeVenta">
+                    Recoger en Punto de Venta
+                  </button>
+                </v-collapse>
+              </div>
+            </div>
+
+            <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
+            <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
+
+            <!-- (Opcional) Transferencia Bancaria: puedes reactivarla luego -->
+            <!--
+            <div class="form-group">
+              ...
+            </div>
+            -->
+
+          </div>
+        </div>
       </div>
-  </div> 
+    </div>
+  </div>
 </template>
+
 <script setup>
 import { ref, onMounted, reactive } from 'vue'
 import axios from 'axios'
 
-const publicKey = ref(import.meta.env.VITE_WOMPI_PUBLIC_KEY);
+/* ===========================
+   CONFIG WOMPI
+   - Clave pública desde .env: VITE_WOMPI_PUBLIC_KEY
+   =========================== */
+const publicKey = ref(import.meta.env.VITE_WOMPI_PUBLIC_KEY || '')
 
-console.log(publicKey.value)
+/* ===========================
+   STATE
+   =========================== */
 const datos_ticket = ref([])
 const ticket = ref([])
-const producto_imprimir = ref([]);
-const tip_doc_cliente = ref("Cédula de ciudadanía"); // Tipo de documento
-const rut_cliente = ref(""); // Documento del cliente
-const info_cliente_envio = ref([])
-// Datos de facturación
-const nombre_cliente = ref("");
-const apellido_cliente = ref("");
-const email_cliente = ref("");
-const tel_cliente = ref("");
-const direccion_cliente = ref("");
-const direccion_cliente2 = ref(""); // Continuación de la dirección
-const ciudad_cliente = ref("");
-const departamento_cliente = ref("");
+const producto_imprimir = ref([])
 
-// Datos de envío si "shipTo" está activado
-const e_nombre_cliente = ref("");
-const e_apellido_cliente = ref("");
-const e_email_cliente = ref("");
-const e_tel_cliente = ref("");
-const e_direccion_cliente = ref("");
-const e_direccion_cliente2 = ref("");
-const e_ciudad_cliente = ref("");
-const e_departamento_cliente = ref("");
+const tip_doc_cliente = ref('CC') // <-- importante: coincide con los <option value="...">
+const rut_cliente = ref('')
 
-// Otros datos numéricos
+const nombre_cliente = ref('')
+const apellido_cliente = ref('')
+const email_cliente = ref('')
+const tel_cliente = ref('')
+const direccion_cliente = ref('')
+const direccion_cliente2 = ref('')
+const ciudad_cliente = ref('')
+const departamento_cliente = ref('')
+
+const shipToOther = ref(false)
+const e_nombre_cliente = ref('')
+const e_apellido_cliente = ref('')
+const e_email_cliente = ref('')
+const e_tel_cliente = ref('')
+const e_direccion_cliente = ref('')
+const e_direccion_cliente2 = ref('')
+const e_ciudad_cliente = ref('')
+const e_departamento_cliente = ref('')
+
 let subtotal = ref(0)
 let iva = ref(0)
 let total = ref(0)
 let amountInCents = ref(0)
 let vatInCents = ref(0)
-const fechaHoy = ref()
-// Variables auxiliares
-const reference = ref("")
+const fechaHoy = ref('')
 
-const fechaHoy1 = new Date(); // Obtiene la fecha y hora actual
+const reference = ref('')
 
-// Formatea la fecha como YYYY-MM-DD
-const año = fechaHoy1.getFullYear();
-const mes = String(fechaHoy1.getMonth() + 1).padStart(2, '0'); // Los meses van de 0 a 11, por eso se suma 1
-const dia = String(fechaHoy1.getDate()).padStart(2, '0');
+/* Collapses (no estaban definidos) */
+const showContraEntrega = ref(false)
+const showPuntoVenta = ref(false)
+const showWompi = ref(false)
+const showTransferenciaBancaria = ref(false)
 
-fechaHoy.value = `${año}-${mes}-${dia}`;
+function toggleCollapse(which) {
+  if (which === 'contraEntrega') {
+    showContraEntrega.value = !showContraEntrega.value
+    showPuntoVenta.value = false
+    showWompi.value = false
+    showTransferenciaBancaria.value = false
+  } else if (which === 'puntoVenta') {
+    showPuntoVenta.value = !showPuntoVenta.value
+    showContraEntrega.value = false
+    showWompi.value = false
+    showTransferenciaBancaria.value = false
+  } else if (which === 'wompi') {
+    showWompi.value = !showWompi.value
+    showContraEntrega.value = false
+    showPuntoVenta.value = false
+    showTransferenciaBancaria.value = false
+  } else if (which === 'transferenciaBancaria') {
+    showTransferenciaBancaria.value = !showTransferenciaBancaria.value
+    showContraEntrega.value = false
+    showPuntoVenta.value = false
+    showWompi.value = false
+  }
+}
 
-// ...
-// infoFactura será un objeto, podemos usar reactive:
+/* ===========================
+   FACTURA (estructura que guardas en localStorage)
+   =========================== */
 const infoFactura = reactive({
-    reference: "",
-    cliente: [],
-    productos: [],
-    info_cliente_envio: [],
-    descuento: 0,
-    sub_total_factura_bruto: 0,
-    total_descuento: 0,
-    sub_total_factura: 0,
-    imp_iva_factura: 0,
-    total_factura: 0,
-    form_pago: "1",
-    nota: "",
-    fecha_fac: "",
-    fecha_vencimiento: ""
+  reference: '',
+  cliente: [],
+  productos: [],
+  info_cliente_envio: [],
+  descuento: 0,
+  sub_total_factura_bruto: 0,
+  total_descuento: 0,
+  sub_total_factura: 0,
+  imp_iva_factura: 0,
+  total_factura: 0,
+  form_pago: '1',
+  nota: '',
+  fecha_fac: '',
+  fecha_vencimiento: ''
 })
 
+const info_cliente_envio = ref([])
 const info_cliente = ref([])
 
+/* ===========================
+   HELPERS
+   =========================== */
 function generateRef(length = 30) {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let reference = '';
-    const randomValues = new Uint8Array(length);
-    crypto.getRandomValues(randomValues); // Genera valores aleatorios seguros
-
-    for (let i = 0; i < length; i++) {
-        reference += characters[randomValues[i] % characters.length];
-    }
-
-    return reference;
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  const bytes = new Uint8Array(length)
+  crypto.getRandomValues(bytes)
+  return Array.from(bytes).map(n => chars[n % chars.length]).join('')
 }
 
-async function actualizarDatos() {
-    if (
-        nombre_cliente.value &&
-        apellido_cliente.value &&
-        email_cliente.value &&
-        tel_cliente.value &&
-        direccion_cliente.value &&
-        rut_cliente.value &&
-        parseFloat(total.value) > 0
-    ) {
-        // Construcción de info_factura
-        const infoFactura = {
-            productos: producto_imprimir.value,
-            reference: reference.value,
-            cliente: {
-                nombres: nombre_cliente.value,
-                apellidos: apellido_cliente.value,
-                email: email_cliente.value,
-                tel: tel_cliente.value,
-                direccion: `${direccion_cliente.value} ${direccion_cliente2.value}`,
-                ciudad: ciudad_cliente.value,
-                departamento: departamento_cliente.value,
-                tip_doc_cliente: tip_doc_cliente.value,
-                rut_cliente: rut_cliente.value
-            },
-            sub_total_factura: subtotal.value,
-            imp_iva_factura: iva.value,
-            total_factura: total.value,
-            form_pago: "2", // Identificador de pago con Wompi
-            fecha_fac: new Date().toISOString().split("T")[0], // Fecha actual
-            nota: "Compra ejecutada por página web, facturada para pago en línea."
-        };
+function validateFormBasic() {
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email_cliente.value || '')
+  const phoneDigits = (tel_cliente.value || '').replace(/\D/g, '')
+  if (!rut_cliente.value || rut_cliente.value.length < 5) return alert('Documento inválido'), false
+  if (!nombre_cliente.value || nombre_cliente.value.length < 2) return alert('Nombre inválido'), false
+  if (!apellido_cliente.value || apellido_cliente.value.length < 2) return alert('Apellido inválido'), false
+  if (!emailOk) return alert('Correo inválido'), false
+  if (phoneDigits.length < 7) return alert('Celular inválido'), false
+  if (!direccion_cliente.value || direccion_cliente.value.length < 4) return alert('Dirección inválida'), false
+  if (!ciudad_cliente.value) return alert('Ciudad requerida'), false
+  if (!departamento_cliente.value) return alert('Departamento requerido'), false
+  if (total.value <= 0) return alert('Tu carrito está vacío'), false
 
-        // Guardar en localStorage
-        localStorage.setItem("facturacion_web", JSON.stringify(infoFactura));
-
-        // Enviar formulario de Wompi
-        const form = document.getElementById("wompi");
-        if (form) {
-            form.submit();
-        } else {
-            console.error("No se encontró el formulario Wompi");
-        }
-    } else {
-        alert("Llene los campos obligatorios");
-    }
-};
-
-async function obtenerUltimoPedido() {
-    try {
-        const response = await axios.get('https://whatsapp-nube.com/api_web/api_ultimo_pedido.php?id_empresa=24')
-        const ultimoPedido = response.data.nrofactura
-        console.log('Último número de factura:', ultimoPedido)
-        return ultimoPedido // Devuelve el número directamente
-    } catch (error) {
-        console.error('Error al obtener el último pedido:', error)
-        return 0 // Devuelve 0 si hay un error
-    }
+  if (shipToOther.value) {
+    const emailOk2 = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e_email_cliente.value || '')
+    const phoneDigits2 = (e_tel_cliente.value || '').replace(/\D/g, '')
+    if (!e_nombre_cliente.value) return alert('Nombre de envío requerido'), false
+    if (!e_apellido_cliente.value) return alert('Apellido de envío requerido'), false
+    if (!emailOk2) return alert('Correo de envío inválido'), false
+    if (phoneDigits2.length < 7) return alert('Celular de envío inválido'), false
+    if (!e_direccion_cliente.value) return alert('Dirección de envío requerida'), false
+    if (!e_ciudad_cliente.value) return alert('Ciudad de envío requerida'), false
+    if (!e_departamento_cliente.value) return alert('Departamento de envío requerido'), false
+  }
+  return true
 }
 
-// 3) Función llenar_satisfactorio (adaptada a Composition API)
-async function llenar_satisfactorio(id, rutaArchivo) {
-    // Si la ruta es index.html, muestra un modal
-    if (rutaArchivo === "index.html") {
-        document.querySelector('.product_quickview')?.classList.add('active')
-        document.body.style.overflowY = 'hidden'
-    }
+function buildClienteArrays() {
+  const principal = {
+    nombres: nombre_cliente.value,
+    apellidos: apellido_cliente.value,
+    email: email_cliente.value,
+    tel: tel_cliente.value,
+    direccion: `${direccion_cliente.value} ${direccion_cliente2.value || ''}`.trim(),
+    ciudad: ciudad_cliente.value,
+    departamento: departamento_cliente.value,
+    tip_doc_cliente: tip_doc_cliente.value,
+    rut_cliente: rut_cliente.value
+  }
 
-    // Si la ruta incluye order-completed.html, entonces...
-    if (rutaArchivo.includes('order-completed.html')) {
-        // Verificamos que datos_ticket no sea null
-        if (datos_ticket.value !== null) {
-            const urlSearchParams = new URLSearchParams(window.location.search)
-            let referenciaURL = urlSearchParams.get("id")
+  const envio = shipToOther.value
+    ? {
+        nombres: e_nombre_cliente.value,
+        apellidos: e_apellido_cliente.value,
+        email: e_email_cliente.value,
+        tel: e_tel_cliente.value,
+        direccion: `${e_direccion_cliente.value} ${e_direccion_cliente2.value || ''}`.trim(),
+        ciudad: e_ciudad_cliente.value,
+        departamento: e_departamento_cliente.value
+      }
+    : { ...principal }
 
-            if (!referenciaURL || referenciaURL === "null") {
-                const ultimoPedido = await obtenerUltimoPedido()
-
-                if (ultimoPedido && !isNaN(ultimoPedido) && parseInt(ultimoPedido) > 0) {
-                    // Se le suma 1 a lo que se haya obtenido
-                    referencia_pago.value = (parseInt(ultimoPedido) + 1).toString()
-                } else {
-                    // Si no hay datos válidos, iniciamos en "1"
-                    referencia_pago.value = "1"
-                }
-            } else {
-                // Si ya viene en la URL, lo usamos tal cual
-                referencia_pago.value = referenciaURL
-            }
-
-            // Llamamos a facturar_pedido pasando id
-            facturar_pedido(id)
-        } else {
-            // Si no hay datos_ticket, redirigimos al carrito
-            window.location.href = "carrito.html"
-        }
-    }
+  return { principal, envio }
 }
 
-// 4) Función llamar_ultima (adaptada a Composition API)
-async function llamar_ultima() {
-    const ultimo_pedido = await obtenerUltimoPedido()
-    console.log("Último pedido:", ultimo_pedido)
+function persistFactura(form_pago, nota) {
+  const { principal, envio } = buildClienteArrays()
+  infoFactura.reference = reference.value
+  infoFactura.cliente = [principal]
+  infoFactura.info_cliente_envio = [envio]
+  infoFactura.productos = [...producto_imprimir.value]
+  infoFactura.sub_total_factura_bruto = subtotal.value
+  infoFactura.total_descuento = 0
+  infoFactura.sub_total_factura = subtotal.value
+  infoFactura.imp_iva_factura = iva.value
+  infoFactura.total_factura = total.value
+  infoFactura.form_pago = form_pago
+  infoFactura.nota = nota
+  infoFactura.fecha_fac = fechaHoy.value
+  infoFactura.fecha_vencimiento = fechaHoy.value
+
+  localStorage.setItem('facturacion_web', JSON.stringify(infoFactura))
 }
 
+/* ===========================
+   WOMPI (widget)
+   =========================== */
+function ensureWompiScript() {
+  return new Promise((resolve, reject) => {
+    if (window.WidgetCheckout) return resolve()
+    const s = document.createElement('script')
+    s.src = 'https://checkout.wompi.co/widget.js'
+    s.async = true
+    s.onload = () => resolve()
+    s.onerror = () => reject(new Error('No se pudo cargar el widget de Wompi'))
+    document.head.appendChild(s)
+  })
+}
+
+
+async function pagarConWompi() {
+  if (!validateFormBasic()) return
+  if (!publicKey.value) {
+    alert('Falta configurar la llave pública de Wompi (VITE_WOMPI_PUBLIC_KEY).')
+    return
+  }
+  try {
+    // Persistimos antes de abrir el widget
+    persistFactura('2', 'Compra ejecutada por página web, facturada para pago en línea.')
+
+    await ensureWompiScript()
+    const checkout = new window.WidgetCheckout({
+      currency: 'COP',
+      amountInCents: Math.max(1, amountInCents.value), // en centavos
+      reference: reference.value,
+      publicKey: publicKey.value,
+      redirectUrl: `${window.location.origin}/confirmacion`
+    })
+    checkout.open((result) => {
+      // opcional: el flujo oficial redirige a redirectUrl
+      console.log('Wompi result:', result)
+    })
+  } catch (e) {
+    console.error(e)
+    alert('Hubo un problema al abrir Wompi. Intenta nuevamente.')
+  }
+}
+
+/* ===========================
+   OTRAS OPCIONES
+   =========================== */
 async function recogerEnPuntoDeVenta() {
-    if (
-        nombre_cliente.value !== '' &&
-        apellido_cliente.value !== '' &&
-        email_cliente.value !== '' &&
-        tel_cliente.value !== '' &&
-        parseFloat(total.value) > 0
-    ) {
-        // Agregar la información del cliente
-        info_cliente.value.push({
-            nombres: nombre_cliente.value,
-            apellidos: apellido_cliente.value,
-            email: email_cliente.value,
-            tel: tel_cliente.value,
-            direccion: direccion_cliente.value + (direccion_cliente2.value || ""),
-            ciudad: ciudad_cliente.value,
-            departamento: departamento_cliente.value,
-            tip_doc_cliente: tip_doc_cliente.value,
-            rut_cliente: rut_cliente.value
-        })
-
-        // Armar el objeto de facturación
-        infoFactura.value = {
-            productos: producto_imprimir.value,
-            reference: reference.value,
-            cliente: info_cliente.value,
-            descuento: 0,
-            sub_total_factura_bruto: subtotal.value,
-            total_descuento: 0,
-            sub_total_factura: subtotal.value,
-            imp_iva_factura: iva.value,
-            total_factura: total.value,
-            form_pago: "3",
-            nota: "Compra ejecutada por página web, facturada para recogida en punto de venta.",
-            fecha_fac: fechaHoy.value,
-            fecha_vencimiento: fechaHoy.value
-        }
-
-        // Guardar en localStorage
-        const arrayJson = JSON.stringify(infoFactura.value)
-        localStorage.setItem("facturacion_web", arrayJson)
-
-        // Redirigir a la página de confirmación
-        window.location.href = "/compra-exitosa"
-    } else {
-        alert("Por favor, completa todos los campos obligatorios")
-    }
+  if (!validateFormBasic()) return
+  persistFactura('3', 'Compra ejecutada por página web, facturada para recogida en punto de venta.')
+  window.location.href = '/compra-exitosa'
 }
 
 async function pagoContraEntrega() {
-    console.log(nombre_cliente.value)
-    console.log(apellido_cliente.value)
-    console.log(email_cliente.value)
-    console.log(tel_cliente.value)
-    console.log(direccion_cliente.value)
-    console.log(total.value)
-
-    if (
-        nombre_cliente.value !== "" &&
-        apellido_cliente.value !== "" &&
-        email_cliente.value !== "" &&
-        tel_cliente.value !== "" &&
-        direccion_cliente.value !== "" &&
-        rut_cliente.value !== "" &&
-        parseFloat(total.value) > 0
-    ) {
-        // Obtener número de factura
-
-        // Llenar info_cliente
-        info_cliente.value.push({
-            nombres: nombre_cliente.value,
-            apellidos: apellido_cliente.value,
-            email: email_cliente.value,
-            tel: tel_cliente.value,
-            direccion: direccion_cliente.value + direccion_cliente2.value,
-            ciudad: ciudad_cliente.value,
-            departamento: departamento_cliente.value,
-            tip_doc_cliente: tip_doc_cliente.value,
-            rut_cliente: rut_cliente.value
-        })
-
-        // Verificamos si hay shipTo
-        const checkbox = document.getElementById('shipto')
-        if (checkbox && checkbox.checked) {
-            info_cliente_envio.value.push({
-                nombres: enombre_cliente.value,
-                apellidos: eapellido_cliente.value,
-                email: eemail_cliente.value,
-                tel: etel_cliente.value,
-                direccion: edireccion_cliente.value + edireccion_cliente2.value,
-                ciudad: eciudad_cliente.value,
-                departamento: edepartamento_cliente.value
-            })
-        } else {
-            info_cliente_envio.value.push({
-                nombres: nombre_cliente.value,
-                apellidos: apellido_cliente.value,
-                email: email_cliente.value,
-                tel: tel_cliente.value,
-                direccion: direccion_cliente.value + direccion_cliente2.value,
-                ciudad: ciudad_cliente.value,
-                departamento: departamento_cliente.value
-            })
-        }
-
-        // Rellenar infoFactura
-        infoFactura.productos = producto_imprimir.value,
-            infoFactura.reference = reference.value
-        infoFactura.cliente = info_cliente.value
-        infoFactura.info_cliente_envio = info_cliente_envio.value
-        infoFactura.descuento = 0
-        infoFactura.sub_total_factura_bruto = subtotal.value
-        infoFactura.total_descuento = 0
-        infoFactura.sub_total_factura = subtotal.value
-        infoFactura.imp_iva_factura = iva.value
-        infoFactura.total_factura = total.value
-        infoFactura.form_pago = "1"
-        infoFactura.nota = "Compra ejecutada por página web, facturada para contra entrega."
-        infoFactura.fecha_fac = fechaHoy.value
-        infoFactura.fecha_vencimiento = fechaHoy.value
-
-        // Convertir a JSON y guardar en localStorage
-        const arrayJson = JSON.stringify(infoFactura)
-        localStorage.setItem("facturacion_web", arrayJson)
-
-        // Redirigir
-        window.location.href = "/compra-exitosa"
-    } else {
-        alert("Llene los campos obligatorios")
-    }
+  if (!validateFormBasic()) return
+  persistFactura('1', 'Compra ejecutada por página web, facturada para contra entrega.')
+  window.location.href = '/compra-exitosa'
 }
 
-onMounted(() => {
-    datos_ticket.value = JSON.parse(localStorage.getItem('ticket'))
-    ticket.value = datos_ticket.value.productos
-    actualizarTotales()
-    cargar_detalles();
-    reference.value = generateRef();
-})
-
+/* ===========================
+   TOTALES / CARGA CARRITO
+   =========================== */
 function cargar_detalles() {
-    producto_imprimir.value = []; // Reiniciar el array
-    console.log(ticket.value)
-    if (ticket.value && ticket.value.length > 0) {
-        ticket.value.forEach((element) => {
-            const valor2 = element.precio / 1.19;
-            const iva2 = element.precio - valor2;
-            const total2 = element.precio * element.cant;
+  producto_imprimir.value = []
+  if (ticket.value && ticket.value.length > 0) {
+    ticket.value.forEach((element) => {
+      const valor2 = element.precio / 1.19
+      const iva2 = element.precio - valor2
+      const total2 = element.precio * element.cant
 
-            producto_imprimir.value.push({
-                id: element.id,
-                idpro: element.tags,
-                titulo: element.descripcion,
-                cant: element.cant,
-                valor: parseFloat(valor2.toFixed(2)), // Redondear a 2 decimales
-                desc: 0,
-                tot_desc: 0,
-                valor_desc: parseFloat(valor2.toFixed(2)), // Redondear a 2 decimales
-                iva: 19,
-                impuesto: parseFloat(iva2.toFixed(2)), // Redondear a 2 decimales
-                precio: parseFloat(element.precio), // Redondear a 2 decimales
-                total: parseFloat(total2.toFixed(2)), // Redondear a 2 decimales
-                lista_precio: [],
-            });
-        });
-
-        infoFactura.productos.value = producto_imprimir.value; // Actualizar la factura
-    }
+      producto_imprimir.value.push({
+        id: element.id,
+        idpro: element.tags,
+        titulo: element.descripcion,
+        cant: element.cant,
+        valor: parseFloat(valor2.toFixed(2)),
+        desc: 0,
+        tot_desc: 0,
+        valor_desc: parseFloat(valor2.toFixed(2)),
+        iva: 19,
+        impuesto: parseFloat(iva2.toFixed(2)),
+        precio: parseFloat(element.precio),
+        total: parseFloat(total2.toFixed(2)),
+        lista_precio: []
+      })
+    })
+  }
 }
 
 function actualizarTotales() {
-    total.value = ticket.value.reduce((acumulador, actual) => acumulador + (actual.cant * parseFloat(actual.precio)), 0);
-    subtotal.value = Math.floor(total.value / 1.19); // Redondear el subtotal hacia abajo
-    iva.value = Math.round(total.value - subtotal.value);
-
-    // Convertir a centavos y asegurarse de que sean enteros
-    amountInCents.value = Math.round(total.value * 100);
-    vatInCents.value = Math.round(iva.value * 100);
-
-    console.log('Total:', total.value);
-    console.log('Amount in Cents:', amountInCents.value);
-    console.log('VAT in Cents:', vatInCents.value);
+  total.value = ticket.value.reduce((acc, it) => acc + (Number(it.cant) * parseFloat(it.precio)), 0)
+  subtotal.value = Math.floor(total.value / 1.19)
+  iva.value = Math.round(total.value - subtotal.value)
+  amountInCents.value = Math.round(total.value * 100)
+  vatInCents.value = Math.round(iva.value * 100)
 }
 
-function imprimir_carrito_checkout(arreglo_car, total) {
-    var valores = '';
-    var cant_productos = 0;
-    arreglo_car.productos.forEach((datos) => {
-        var codigo1 = datos.id;
-        var codigo2 = '"' + codigo1 + '"';
-        var descripcion1 = datos.descripcion;
-        var descripcion2 = '"' + descripcion1 + '"';
-        var precio1 = datos.precio;
-        var cant1 = datos.cant;
-        var foto1 = datos.foto;
-        var subtotal1 = precio1 * cant1;
-        precio1 = new Intl.NumberFormat().format(datos.precio);
-        subtotal1 = new Intl.NumberFormat().format(subtotal1);
+onMounted(() => {
+  // fecha actual
+  const now = new Date()
+  const yyyy = now.getFullYear()
+  const mm = String(now.getMonth() + 1).padStart(2, '0')
+  const dd = String(now.getDate()).padStart(2, '0')
+  fechaHoy.value = `${yyyy}-${mm}-${dd}`
 
-        valores += `<div class="single_shop_cart d-flex align-items-center flex-wrap">
-                          <div class="cart_img mb-4 mb-md-0">
-                              <img loading="lazy" src='${foto1}'  alt="product">
-                          </div>
-                          <div class="cart_cont">
-                              <a href="product-view.html">
-                                  <h5>${descripcion1}</h5>
-                              </a>
-                              <p class="price">${precio1}</p>
-                             
-                          </div>
-                          <div class="cart_qnty d-flex align-items-center ms-md-auto">
-                              <div class="cart_qnty_btn">
-                                  <i class="las la-minus"></i>
-                              </div>
-                              <div class="cart_count">${cant1}</div>
-                              <div class="cart_qnty_btn">
-                                  <i class="las la-plus"></i>
-                              </div>
-                          </div>
-                          <div class="cart_price ms-auto">
-                              <p>${subtotal1}</p>
-                          </div>
-                          <div class="cart_remove ms-auto">
-                               <i class="icon-trash"></i>
-                          </div>
-                      </div>`;
-        cant_productos++;
-    });
+  // ticket
+  const raw = localStorage.getItem('ticket')
+  const parsed = raw ? JSON.parse(raw) : null
+  ticket.value = Array.isArray(parsed?.productos) ? parsed.productos : []
 
-    total_monto = new Intl.NumberFormat().format(total);
-    document.getElementById("lista_productos").innerHTML = valores;
-    document.getElementById("casilla_monto").innerHTML = "$" + total_monto;
-    document.getElementById("monto_total").innerHTML = "$" + total_monto;
-}
+  actualizarTotales()
+  cargar_detalles()
+  reference.value = generateRef()
+})
 
+/* ===========================
+   (Opcional) utilidades legacy
+   =========================== */
 function openBancolombiaPopup() {
-    alert(`Por favor realiza una transferencia bancaria a la siguiente cuenta:\n\nBanco: Bancolombia\nCuenta: 123456789\nTitular: Consmo PC Mayorista\n\nTotal a transferir: $${Math.round(parseFloat(total.value)).toString().replace(/\./g, ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`);
+  alert(`Por favor realiza una transferencia bancaria a la siguiente cuenta:
+Banco: Bancolombia
+Cuenta: 123456789
+Titular: Consmo PC Mayorista
+
+Total a transferir: $${Math.round(parseFloat(total.value)).toString().replace(/\./g, ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`)
 }
 </script>
 
 <style scoped>
 /* Estilos generales */
-.container {
-    margin-top: 20px;
-}
+.container { margin-top: 20px; }
+.breadcrumbs { display: flex; gap: 5px; margin-bottom: 20px; }
+.breadcrumbs a { color: #333; text-decoration: none; }
+.breadcrumbs a.active { font-weight: bold; }
 
-.breadcrumbs {
-    display: flex;
-    gap: 5px;
-    margin-bottom: 20px;
-}
+.cart_area { background: #f9f9f9; padding: 20px 0; }
+.shop_cart_title { font-size: 24px; font-weight: bold; margin-bottom: 20px; }
 
-.breadcrumbs a {
-    color: #333;
-    text-decoration: none;
-}
+.form-group { margin-bottom: 15px; }
+.form-group label { font-weight: bold; margin-bottom: 5px; display: block; }
+.form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
 
-.breadcrumbs a.active {
-    font-weight: bold;
-}
+.payment-info { margin-top: 20px; }
+.payment-info .option-label { font-size: 18px; font-weight: bold; margin-bottom: 10px; cursor: pointer; }
 
-.cart_area {
-    background: #f9f9f9;
-    padding: 20px 0;
-}
-
-.shop_cart_title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
-}
-
-.form-group input,
-.form-group select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.payment-info {
-    margin-top: 20px;
-}
-
-.payment-info .option-label {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.payment-info ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.payment-info ul p {
-    margin: 5px 0;
-}
-
-.payment-policies-link {
-    display: block;
-    margin-top: 10px;
-    color: #007bff;
-    text-decoration: none;
-}
-
-.payment-policies-link:hover {
-    text-decoration: underline;
-}
-
-.single_check_order {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-}
-
-.single_check_order.subs {
-    font-weight: bold;
-}
-
-.single_check_order.total {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.checkorder_cont h5 {
-    margin: 0;
-}
-
-.checkorder_qnty,
-.checkorder_price {
-    margin: 0;
-}
-
-/* Estilos específicos para cada opción de pago */
+.single_check_order { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #ddd; }
+.single_check_order.subs { font-weight: bold; }
+.single_check_order.total { font-size: 20px; font-weight: bold; }
+.checkorder_cont h5 { margin: 0; }
+.checkorder_qnty, .checkorder_price { margin: 0; }
 
 /* Opción 1: Contra Entrega */
-.option-1 {
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
-    padding: 15px;
-    border-radius: 5px;
-}
+.option-1 { background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 15px; border-radius: 5px; }
+.btn-contra-entrega { background-color: #dc3545; color: #fff; }
+.btn-contra-entrega:hover { background-color: #c82333; }
 
-.btn-contra-entrega {
-    background-color: #dc3545;
-    color: #fff;
-}
+/* Opción 2: Wompi y Opción 3: Punto de Venta reutilizan estos estilos */
+.option-2 { background-color: #d4edda; border: 1px solid #c3e6cb; padding: 15px; border-radius: 5px; }
+.btn-punto-venta { background-color: #28a745; color: #fff; }
+.btn-punto-venta:hover { background-color: #218838; }
 
-.btn-contra-entrega:hover {
-    background-color: #c82333;
-}
-
-/* Opción 2: Recoger en Punto de Venta */
-.option-2 {
-    background-color: #d4edda;
-    border: 1px solid #c3e6cb;
-    padding: 15px;
-    border-radius: 5px;
-}
-
-.btn-punto-venta {
-    background-color: #28a745;
-    color: #fff;
-}
-
-.btn-punto-venta:hover {
-    background-color: #218838;
-}
-
-/* Opción 3: Transferencia Bancaria */
-.option-3 {
-  background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
-    padding: 15px;
-    border-radius: 5px;
-}
-
-.btn-bancolombia {
-    background-color: #dc3545;
-    color: #fff;
-}
-
-.btn-bancolombia:hover {
-    background-color: #138496;
-}
+/* Opción 3: Transferencia Bancaria (si la reactivas) */
+.option-3 { background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 15px; border-radius: 5px; }
+.btn-bancolombia { background-color: #dc3545; color: #fff; }
+.btn-bancolombia:hover { background-color: #138496; }
 </style>
