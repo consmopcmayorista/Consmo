@@ -21,7 +21,7 @@
                                 </div>
                                 <!-- description  -->
                                 <div class="order_complete_content">
-                                    <h4>Tu compra se ha realizado exitosamente. ¡Gracias por tu compra!</h4>
+                                    <h4>Tu pedido se ha realizado exitosamente. Nos comunicaremos para programar tu envio</h4>
                                     <ul class="list-group">
             
             
