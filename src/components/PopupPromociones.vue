@@ -2,10 +2,12 @@
     <div v-if="showPopup" class="popup-overlay" @click="closePopup">
       <div class="popup" @click.stop>
         <button class="close-btn" @click="closePopup">&times;</button>
-        <img src="/images2/promos/inicio.png" alt="Promociones de Abril" class="promo-image">
+        <img src="/images2/promos/wompi.png" alt="Promociones de Abril" class="promo-image">
         <div class="popup-content">
-          <h2>🚀 ¡Productos top y precios imbatibles... solo por poco tiempo!</h2>
-          <p>Distribuyes tecnología? Tenemos los precios que estás buscando.</p>
+          <h1>PROXIMAMENTE</h1>
+          <h2>🚀 ¡INCREIBLE LO LLEVAS HOY Y PAGAS DESPUES!</h2>
+          <p>Y DESCUBRE NUESTRAS PROMOCIONES DANDO CLICK EN EL SIGUIENTE BOTON 
+            <BR></BR>⬇️.</p>
           <button class="promo-btn" @click="goToPromociones">Ir a Promociones</button>
         </div>
       </div>
@@ -99,7 +101,7 @@
 
 .popup-content p {
   color: #333;
-  font-size: 16px;
+  font-size: 20px;
   margin-bottom: 20px;
 }
 

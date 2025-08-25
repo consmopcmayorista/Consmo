@@ -5,11 +5,25 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 import { copyFileSync } from 'fs'
 import path from 'path'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     vueDevTools(),
+    // ✅ mover closeBundle a un plugin de Vite
+    {
+      name: 'copy-htaccess',
+      closeBundle() {
+        try {
+          copyFileSync(
+            path.resolve('public/.htaccess'),
+            path.resolve('dist/.htaccess')
+          )
+          console.log('✅ .htaccess copiado a dist/')
+        } catch (error) {
+          console.error('⚠️ Error copiando .htaccess:', error)
+        }
+      }
+    }
   ],
   resolve: {
     alias: {
@@ -23,23 +37,18 @@ export default defineConfig({
     commonjsOptions: {
       include: [/@vue-leaflet\/vue-leaflet/, /node_modules/]
     },
-    emptyOutDir: false, // No borra la carpeta dist en cada build
-    outDir: 'dist', // Carpeta de salida
+    emptyOutDir: false,
+    outDir: 'dist',
   },
   base: '/',
   server: {
-    historyApiFallback: true, // Permite que Vite maneje rutas SPA
-  },
-  // Hook post-build para copiar el .htaccess
-  async closeBundle() {
-    try {
-      copyFileSync(
-        path.resolve('public/.htaccess'),
-        path.resolve('dist/.htaccess')
-      )
-      console.log('✅ .htaccess copiado a dist/')
-    } catch (error) {
-      console.error('⚠️ Error copiando .htaccess:', error)
+    // ❌ historyApiFallback: true,  (no existe en Vite)
+    // ✅ proxy para tu endpoint de firma (servidor local en 5174)
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5174',
+        changeOrigin: true
+      }
     }
   }
 })

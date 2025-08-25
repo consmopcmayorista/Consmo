@@ -19,7 +19,6 @@
   const promos = [
     { title: 'IMPRESORA TERMICA POS 80MM :2405', image: '2405.png'},
     { title: 'IMPRESORA TERMICA POS 58MM :2424', image: '2424.png'},
-    { title: 'MONITOR IPS 23.8" 1920X1080 FULL HD :3431', image: '3431.png'},
     { title: 'DIADEMA PARA PC USB MONOAURAL :4046', image: '4046.png'},
     { title: 'CARRETA EXT FIBRA OPTICA MONOMODO 1000MT :9825', image: '9825.png'},
     { title: 'LECTOR CODIGO DE BARRAS 1D/2D ALAMBRICO :9863', image: '9863.png'},
@@ -28,8 +27,6 @@
     { title: 'DECODIFICADOR TDT :C9117', image: 'C9117.png'},
     { title: 'TORRE TINI CORE I5 6TA :U9130', image: 'U9130.png'},
     { title: 'CLONADORA LECTORA DE DISCOS SATA 2.5 Y 3.5 // 3.0 :9397', image: '9397.png'},
-    { title: 'SUPER PROMOCION CORE I5 8GB RAM SSD 256GB CON MONITOR NUEVO DE 23.8" FULL HD :U9132', image: 'U9132.png'},
-    { title: 'CAMINA CON MICROFONO 8 PULGADAS :1509', image: '1509.png'},
     { title: 'ROUTER DUAL-BAND 5 ANTENA :2693', image: '2693.png'},
 
 

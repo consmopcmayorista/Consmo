@@ -227,14 +227,14 @@
                   <p></p>
                  <!-- <button type="button" class="btn-punto-venta" @click="pagarConWompi">
                     Pagar aquí con Wompi
-                  </button>-->
+                  </button> -->
                   <a
                     class="btn-punto-venta"
                     href="https://wa.me/573015537673?text=Hola%20Consmo%20PC,%20quiero%20saber%20sobre%20pagos%20a%20cr%C3%A9dito%20con%20Wompi."
                     target="_blank"
                     rel="noopener"
                   >
-                    pregunta por  pagos a credito con wompi acá
+                    pregunta por tu pago a crédito con Wompi
                   </a>
 
                 </v-collapse>
@@ -487,28 +487,42 @@ function ensureWompiScript() {
 async function pagarConWompi() {
   if (!validateFormBasic()) return
   if (!publicKey.value) {
-    alert('Falta configurar la llave pública de Wompi (VITE_WOMPI_PUBLIC_KEY).')
+    alert('Falta configurar VITE_WOMPI_PUBLIC_KEY')
     return
   }
+
   try {
-    // Persistimos antes de abrir el widget
+    // 1) Persiste tu factura antes de abrir el widget (como ya lo haces)
     persistFactura('2', 'Compra ejecutada por página web, facturada para pago en línea.')
 
+    // 2) Pide firma al backend
+    const payload = {
+      reference: reference.value,
+      amountInCents: Math.max(1, Math.floor(amountInCents.value)), // entero
+      currency: 'COP'
+      // expirationTime: '2025-09-01T23:59:59.000Z' // si decides usarla
+    }
+    const { data } = await axios.post('/api/wompi-sign', payload)
+    const integrity = data?.integrity
+    if (!integrity) throw new Error('No llegó integrity desde el backend')
+
+    // 3) Carga script del widget y abre
     await ensureWompiScript()
     const checkout = new window.WidgetCheckout({
       currency: 'COP',
-      amountInCents: Math.max(1, amountInCents.value), // en centavos
-      reference: reference.value,
-      publicKey: publicKey.value,
+      amountInCents: payload.amountInCents,
+      reference: payload.reference,
+      publicKey: publicKey.value, // pub_test_... en pruebas
+      signature: { integrity },   // 👈 OBLIGATORIO
       redirectUrl: `${window.location.origin}/confirmacion`
+      // expirationTime: payload.expirationTime, // si la usas, recuérdala en la concatenación
     })
     checkout.open((result) => {
-      // opcional: el flujo oficial redirige a redirectUrl
       console.log('Wompi result:', result)
     })
   } catch (e) {
     console.error(e)
-    alert('Hubo un problema al abrir Wompi. Intenta nuevamente.')
+    alert('No se pudo abrir Wompi. ' + (e?.message || 'Intenta de nuevo.'))
   }
 }
 
@@ -561,9 +575,9 @@ function actualizarTotales() {
   total.value = ticket.value.reduce((acc, it) => acc + (Number(it.cant) * parseFloat(it.precio)), 0)
   subtotal.value = Math.floor(total.value / 1.19)
   iva.value = Math.round(total.value - subtotal.value)
-  amountInCents.value = Math.round(total.value * 100)
-  vatInCents.value = Math.round(iva.value * 100)
+  amountInCents.value = Math.round(total.value * 100) // entero exacto
 }
+
 
 onMounted(() => {
   // fecha actual
