@@ -225,17 +225,17 @@
                   </ul>
                   <img style="width:100%;" src="https://consmopcmayorista.com/images2/WOMPI.png" />
                   <p></p>
-                 <!-- <button type="button" class="btn-punto-venta" @click="pagarConWompi">
+                  <button type="button" class="btn-punto-venta" @click="pagarConWompi">
                     Pagar aquí con Wompi
-                  </button>-->
-                  <a
+                  </button>
+                 <!-- <a
                     class="btn-punto-venta"
                     href="https://wa.me/573015537673?text=Hola%20Consmo%20PC,%20quiero%20saber%20sobre%20pagos%20a%20cr%C3%A9dito%20con%20Wompi."
                     target="_blank"
                     rel="noopener"
                   >
                     pregunta por  pagos a credito con wompi acá
-                  </a>
+                  </a>-->
 
                 </v-collapse>
               </div>
@@ -292,6 +292,8 @@ import axios from 'axios'
    - Clave pública desde .env: VITE_WOMPI_PUBLIC_KEY
    =========================== */
 const publicKey = ref(import.meta.env.VITE_WOMPI_PUBLIC_KEY || '')
+
+const SIGN_URL = '/wompi/sign'
 
 /* ===========================
    STATE
@@ -482,35 +484,105 @@ function ensureWompiScript() {
     document.head.appendChild(s)
   })
 }
+// Llama al backend para obtener signature.integrity (requerido por Wompi)
+async function getIntegritySignature({ reference, amountInCents, currency = 'COP' }) {
+  // Logs útiles en desarrollo
+  console.log('[WOMPI] firmando →', { reference, amountInCents, currency })
+
+  let resp
+  try {
+    resp = await fetch(SIGN_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        reference,
+        amount_in_cents: amountInCents, // ¡entero en centavos!
+        currency
+      })
+    })
+  } catch (err) {
+    console.error('[WOMPI] fallo de red al firmar:', err)
+    throw new Error('No se pudo contactar al firmador (¿server.js en 3001 encendido?)')
+  }
+
+  let data = null
+  try { data = await resp.json() } catch {}
+
+  if (!resp.ok || !data?.integrity) {
+    const msg = data?.error || `Respuesta ${resp.status}`
+    console.error('[WOMPI] firmador respondió error:', msg, data)
+    throw new Error(`No se pudo obtener la firma de integridad: ${msg}`)
+  }
+
+  console.log('[WOMPI] firma OK:', data.integrity.slice(0, 12) + '…')
+  return data.integrity
+}
+
 
 
 async function pagarConWompi() {
-  if (!validateFormBasic()) return
+  console.log('[WOMPI] pagarConWompi() start')
+
+  // Tu validación original (no tocamos lógica)
+  if (!validateFormBasic()) {
+    console.warn('[WOMPI] validateFormBasic() falló')
+    return
+  }
   if (!publicKey.value) {
     alert('Falta configurar la llave pública de Wompi (VITE_WOMPI_PUBLIC_KEY).')
     return
   }
+
   try {
-    // Persistimos antes de abrir el widget
+    // Persistimos antes de abrir el widget (tu lógica)
     persistFactura('2', 'Compra ejecutada por página web, facturada para pago en línea.')
 
+    // Asegura script del widget
     await ensureWompiScript()
-    const checkout = new window.WidgetCheckout({
-      currency: 'COP',
-      amountInCents: Math.max(1, amountInCents.value), // en centavos
+
+    // Recalcula totales por si cambió el carrito (tu función)
+    actualizarTotales()
+
+    // Prepara datos
+    const currency = 'COP'
+    const amount = Math.max(1, amountInCents.value) // entero en centavos
+    console.log('[WOMPI] antes de firmar:', { reference: reference.value, amount, currency })
+
+    // Firma desde el backend
+    const integrity = await getIntegritySignature({
       reference: reference.value,
-      publicKey: publicKey.value,
-      redirectUrl: `${window.location.origin}/confirmacion`
+      amountInCents: amount,
+      currency
     })
+
+    // Abre el widget con firma de integridad
+    const checkout = new window.WidgetCheckout({
+      currency,
+      amountInCents: amount,
+      reference: reference.value,
+      publicKey: publicKey.value,     // pub_test_... en sandbox
+      signature: { integrity },       // 👈 REQUERIDO
+      redirectUrl: `${window.location.origin}/confirmacion`,
+
+      // Puedes prellenar datos del cliente si ya los tienes:
+      // customerData: {
+      //   email: email_cliente.value,
+      //   fullName: `${nombre_cliente.value} ${apellido_cliente.value}`,
+      //   phoneNumber: tel_cliente.value,
+      //   phoneNumberPrefix: '+57'
+      // }
+    })
+
     checkout.open((result) => {
-      // opcional: el flujo oficial redirige a redirectUrl
-      console.log('Wompi result:', result)
+      // El flujo oficial redirige a redirectUrl; log por si necesitas debug
+      console.log('[WOMPI] widget result:', result)
     })
   } catch (e) {
-    console.error(e)
-    alert('Hubo un problema al abrir Wompi. Intenta nuevamente.')
+    console.error('[WOMPI] error:', e)
+    alert(e.message || 'Hubo un problema al abrir Wompi. Intenta nuevamente.')
   }
 }
+
 
 /* ===========================
    OTRAS OPCIONES

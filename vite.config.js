@@ -1,35 +1,43 @@
+// vite.config.js
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
-import { copyFileSync } from 'fs'
+import { copyFileSync, existsSync } from 'fs'
 import path from 'path'
 
+// https://vite.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     vueDevTools(),
-    // ✅ mover closeBundle a un plugin de Vite
+
+    // Copiar .htaccess SOLO al finalizar el build (no se ejecuta en dev)
     {
       name: 'copy-htaccess',
+      apply: 'build',
       closeBundle() {
         try {
-          copyFileSync(
-            path.resolve('public/.htaccess'),
-            path.resolve('dist/.htaccess')
-          )
-          console.log('✅ .htaccess copiado a dist/')
+          const src = path.resolve('public/.htaccess')
+          const dst = path.resolve('dist/.htaccess')
+          if (existsSync(src)) {
+            copyFileSync(src, dst)
+            console.log('✅ .htaccess copiado a dist/')
+          } else {
+            console.warn('⚠️ No se encontró public/.htaccess, se omite copia.')
+          }
         } catch (error) {
-          console.error('⚠️ Error copiando .htaccess:', error)
+          console.warn('⚠️ Error copiando .htaccess:', error?.message || error)
         }
       }
     }
   ],
+
   resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    },
+    alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) }
   },
+
+  // Si ya tenías optimizeDeps/build/base, puedes mantenerlos aquí
   optimizeDeps: {
     include: ['@vue-leaflet/vue-leaflet', 'leaflet']
   },
@@ -38,16 +46,20 @@ export default defineConfig({
       include: [/@vue-leaflet\/vue-leaflet/, /node_modules/]
     },
     emptyOutDir: false,
-    outDir: 'dist',
+    outDir: 'dist'
   },
   base: '/',
+
+  // Dev server con proxy a /wompi → backend local
   server: {
-    // ❌ historyApiFallback: true,  (no existe en Vite)
-    // ✅ proxy para tu endpoint de firma (servidor local en 5174)
+    host: true,
+    port: 5173,
+    strictPort: true,
     proxy: {
-      '/api': {
-        target: 'http://localhost:5174',
-        changeOrigin: true
+      '/wompi': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+        secure: false
       }
     }
   }
