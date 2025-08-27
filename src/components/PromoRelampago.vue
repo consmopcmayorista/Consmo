@@ -26,15 +26,11 @@
   
   <script setup>
   const promos = [ 
-    // { title: 'GAFAS DE REALIDAD VIRTUAL 3D + CONTROL :5002', image: '5002.png' },
-    // { title: 'TARJETA INTERNA PCI EXPRESS SONIDO :9084', image: '9084.png' },
-    // { title: 'COOLER DISIPADOR PARA BOARD RGB INTEL/AMD :9218', image: '9218.png' },
-    // { title: 'DECODIFICADOR TDT 1080P :C9117', image: 'C9117.png' },
-    // { title: 'LECTOR DE CODIGOS DE BARRA OMNIDIRECCIONAL 2D :3071', image: '3071.png' },
-    // { title: 'MONITOR IPS 23.8" :3431', image: '3431.png' },
-
-    
- 
+    { title: 'CAJON MONEDERO GRANDE :3391', image: '3391.png' },
+    { title: 'CAJON MONEDERO PEQUEÑO :3615', image: '3615.png'},
+    { title: 'IMPRESORA TERMICA POS 80MM :3616', image: '3616.png' },
+    { title: 'LECTOR CODIGO DE BARRAS ALAMBRICO USB :3618', image: '3618.png' },
+    { title: 'IMPRESORA TERMICA POS 5MM :3619', image: '3619.png' },
  
  
   ]
