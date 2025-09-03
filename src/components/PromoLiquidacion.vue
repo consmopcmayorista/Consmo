@@ -20,11 +20,9 @@
   const promos = [
       { title: 'DIADEMA PARA PC/TABLETS/CELULAR C:4060', image: '4060.png' },
       { title: 'MEMORIA RAM DDR4 4GB 2666 C:5052', image: '5052.png' },
-      { title: 'DATAFONO MOVIL C:9335', image: '9335.png' },
       { title: 'DIADEMA PARA PC JD-868 2 PLUG C:C9540', image: 'C9540.png' },
       { title: 'DIADEMA PARA PC JD-808 2 PLUG C:C9542', image: 'C9542.png' },
       { title: 'DIADEMA PARA PC JD-809 1 PLUG C:C9546', image: 'C9546.png' },
-      { title: 'PARLANTES USB DE 3W M600 C:C9560', image: 'C9560.png' },
       { title: 'ROUTER XPON-ONU 2.4G :C2565', image: 'C2565.png' },
       { title: 'CARRETA FIBRA OPTICA DROP PLANA :C9001', image: 'C9001.png' },
       { title: 'TECLADO NUMERICO :C9566', image: 'C9566.png' },

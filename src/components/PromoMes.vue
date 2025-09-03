@@ -27,7 +27,7 @@
     // { title: 'DECODIFICADOR TDT :C9117', image: 'C9117.png'},
     // { title: 'TORRE TINI CORE I5 6TA :U9130', image: 'U9130.png'},
     // { title: 'CLONADORA LECTORA DE DISCOS SATA 2.5 Y 3.5 // 3.0 :9397', image: '9397.png'},
-    // { title: 'ROUTER DUAL-BAND 5 ANTENA :2693', image: '2693.png'},
+    //{ title: 'ROUTER DUAL-BAND 5 ANTENA :2693', image: '2693.png'},
 
 
 
