@@ -32,7 +32,6 @@
             <div class="row">
               <div class="col-md-6 form-group">
                 <label>Tipo de Documento</label>
-                <!-- IMPORTANTE: los values son abreviaturas. Por eso el v-model inicia en "CC" -->
                 <select class="form-control" v-model="tip_doc_cliente">
                   <option value="CC">Cédula de ciudadanía</option>
                   <option value="NIT">NIT</option>
@@ -90,15 +89,8 @@
 
               <div class="col-md-12 form-group">
                 <div class="custom-control custom-checkbox">
-                  <input
-                    type="checkbox"
-                    class="custom-control-input"
-                    id="shipto"
-                    v-model="shipToOther"
-                  />
-                  <label class="custom-control-label" for="shipto">
-                    ¿Desea enviar a dirección diferente?
-                  </label>
+                  <input type="checkbox" class="custom-control-input" id="shipto" v-model="shipToOther" />
+                  <label class="custom-control-label" for="shipto">¿Desea enviar a dirección diferente?</label>
                 </div>
               </div>
             </div>
@@ -151,16 +143,13 @@
             <h4>producto</h4>
 
             <div class="single_check_order" v-for="(dato, index) in ticket" :key="index">
-              <div class="checkorder_cont">
-                <h5>{{ dato.descripcion }}</h5>
-              </div>
+              <div class="checkorder_cont"><h5>{{ dato.descripcion }}</h5></div>
               <p class="checkorder_qnty">x{{ dato.cant }}</p>
               <p class="checkorder_price">
                 ${{ Math.round(parseFloat(dato.precio)).toString().replace(/\./g, ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.') }}
               </p>
             </div>
 
-            <!-- Subtotal -->
             <div class="single_check_order subs">
               <div class="checkorder_cont subtotal-h"><h5>Subtotal</h5></div>
               <p class="checkorder_price">
@@ -168,7 +157,6 @@
               </p>
             </div>
 
-            <!-- IVA -->
             <div class="single_check_order subs">
               <div class="checkorder_cont subtotal-h"><h5>Iva</h5></div>
               <p class="checkorder_price">
@@ -176,7 +164,6 @@
               </p>
             </div>
 
-            <!-- Total -->
             <div class="single_check_order total">
               <div class="checkorder_cont"><h5>Total</h5></div>
               <p class="checkorder_price">
@@ -184,25 +171,21 @@
               </p>
             </div>
 
-            <!-- Opción 1: Pago Contra Entrega -->
+            <!-- Opción 1 -->
             <div class="form-group">
               <div class="payment-info">
                 <div class="option-label option-1" @click="toggleCollapse('contraEntrega')">
                   <i class="fas fa-handshake"></i> Opción 1 (Contra Entrega)
                 </div>
                 <v-collapse :show="showContraEntrega">
-                  <ul>
-                    <p>Ahora puedes realizar tu pedido con <strong>pago contra entrega</strong>...</p>
-                  </ul>
+                  <ul><p>Ahora puedes realizar tu pedido con <strong>pago contra entrega</strong>...</p></ul>
                   <img style="width:100%;" src="https://consmopcmayorista.com/images2/banner_contraentrega.png" />
                   <ul>
                     <p><strong>Envíos a Medellín y alrededores:</strong> $13,000</p>
                     <p><strong>Otras ciudades:</strong> Te contactaremos de inmediato</p>
                   </ul>
                   <p><em>¡Tu comodidad es nuestra prioridad!</em></p>
-                  <button type="button" class="btn-contra-entrega" @click="pagoContraEntrega">
-                    Pago Contra Entrega
-                  </button>
+                  <button type="button" class="btn-contra-entrega" @click="pagoContraEntrega">Pago Contra Entrega</button>
                 </v-collapse>
               </div>
             </div>
@@ -210,21 +193,15 @@
             <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
             <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
 
-            <!-- Opción 2: Pagar con Wompi -->
+            <!-- Opción 2: Wompi -->
             <div class="form-group">
               <div class="payment-info">
                 <div class="option-label option-2" @click="toggleCollapse('wompi')">
                   <i class="fas fa-credit-card"></i> Opción 2 (Pagar con Wompi)
                 </div>
                 <v-collapse :show="showWompi">
-                  <ul>
-                    <p>
-                      Paga en línea con <strong>tarjeta, PSE, Nequi</strong> y más, de forma segura con
-                      <strong>Wompi</strong>.
-                    </p>
-                  </ul>
+                  <ul><p>Paga en línea con <strong>tarjeta, PSE, Nequi</strong> y más.</p></ul>
 
-                  <!-- DESGLOSE VISUAL DEL 5% (siempre visible en la sección Wompi) -->
                   <div class="wompi-breakdown">
                     <div class="wompi-row">
                       <span>Total del carrito</span>
@@ -242,22 +219,13 @@
                   </div>
 
                   <img style="width:100%; margin-top:10px" src="https://consmopcmayorista.com/images2/WOMPI.png" />
-
                   <p></p>
-                  <!-- Descomenta para habilitar el pago directo -->
-                  
-                  <!--<button type="button" class="btn-punto-venta" @click="pagarConWompi">
-                    Pagar aquí con Wompi
-                  </button>-->
-                 
+                 <!-- <button type="button" class="btn-punto-venta" @click="pagarConWompi">Pagar aquí con Wompi</button>-->
                   <a
-                    class="btn-punto-venta"
-                    href="https://wa.me/573015537673?text=Hola%20Consmo%20PC,%20quiero%20saber%20sobre%20pagos%20a%20cr%C3%A9dito%20con%20Wompi."
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    pregunta por tu pago a crédito con Wompi
-                  </a> 
+                    class="btn-punto-venta mt-2"
+                    href="https://wa.me/573016148080?text=Hola%20Consmo%20PC,%20quiero%20saber%20sobre%20pagos%20a%20cr%C3%A9dito%20con%20Wompi."
+                    target="_blank" rel="noopener"
+                  >pregunta por tu pago a crédito con Wompi</a>
                 </v-collapse>
               </div>
             </div>
@@ -265,24 +233,18 @@
             <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
             <hr style="margin: 20px 0; border-top: 3px solid #000000;" />
 
-            <!-- Opción 3: Recoger en Punto de Venta -->
+            <!-- Opción 3 -->
             <div class="form-group">
               <div class="payment-info">
                 <div class="option-label option-2" @click="toggleCollapse('puntoVenta')">
                   <i class="fas fa-store"></i> Opción 3 (Recoger en Punto de Venta)
                 </div>
                 <v-collapse :show="showPuntoVenta">
-                  <ul>
-                    <p>Con nuestra opción <strong>Recoger en Punto de Venta</strong>...</p>
-                  </ul>
+                  <ul><p>Con nuestra opción <strong>Recoger en Punto de Venta</strong>...</p></ul>
                   <img style="width:100%;" src="https://consmopcmayorista.com/images2/banner_recoger.png" />
-                  <ul>
-                    <p><strong>Recoge tu pedido en tienda</strong>...</p>
-                  </ul>
+                  <ul><p><strong>Recoge tu pedido en tienda</strong>...</p></ul>
                   <p>Calle 48C #65A-24 Suramericana, Medellín</p>
-                  <button type="button" class="btn-punto-venta" @click="recogerEnPuntoDeVenta">
-                    Recoger en Punto de Venta
-                  </button>
+                  <button type="button" class="btn-punto-venta" @click="recogerEnPuntoDeVenta">Recoger en Punto de Venta</button>
                 </v-collapse>
               </div>
             </div>
@@ -302,18 +264,14 @@ import axios from 'axios'
 
 /* ===========================
    CONFIG WOMPI
-   - Clave pública desde .env: VITE_WOMPI_PUBLIC_KEY
-   - Firmador por proxy: /wompi/sign
    =========================== */
 const publicKey = ref(import.meta.env.VITE_WOMPI_PUBLIC_KEY || '')
 const SIGN_URL = import.meta.env.VITE_WOMPI_SIGN_URL || '/wompi/sign'
+const WOMPI_FEE_PCT = 6
 
-// % de recargo solo para Wompi
-const WOMPI_FEE_PCT = 5
-
-// Refs para desglose (opcionales en UI)
-const wompiFeeInCents = ref(0)        // recargo en centavos
-const wompiPayableInCents = ref(0)    // total a cobrar por Wompi en centavos
+/* UI Wompi */
+const wompiFeeInCents = ref(0)
+const wompiPayableInCents = ref(0)
 
 /* ===========================
    STATE
@@ -322,7 +280,7 @@ const datos_ticket = ref([])
 const ticket = ref([])
 const producto_imprimir = ref([])
 
-const tip_doc_cliente = ref('CC') // coincide con los values del select
+const tip_doc_cliente = ref('CC')
 const rut_cliente = ref('')
 
 const nombre_cliente = ref('')
@@ -384,7 +342,7 @@ function toggleCollapse(which) {
 }
 
 /* ===========================
-   FACTURA (estructura que guardas en localStorage)
+   FACTURA (estructura localStorage)
    =========================== */
 const infoFactura = reactive({
   reference: '',
@@ -403,12 +361,6 @@ const infoFactura = reactive({
   fecha_vencimiento: ''
 })
 
-const info_cliente_envio = ref([])
-const info_cliente = ref([])
-
-/* ===========================
-   HELPERS
-   =========================== */
 function generateRef(length = 30) {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
   const bytes = new Uint8Array(length)
@@ -416,6 +368,7 @@ function generateRef(length = 30) {
   return Array.from(bytes).map(n => chars[n % chars.length]).join('')
 }
 
+/* ====== VALIDACIONES ====== */
 function validateFormBasic() {
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email_cliente.value || '')
   const phoneDigits = (tel_cliente.value || '').replace(/\D/g, '')
@@ -443,6 +396,7 @@ function validateFormBasic() {
   return true
 }
 
+/* ====== Cliente/Envio ====== */
 function buildClienteArrays() {
   const principal = {
     nombres: nombre_cliente.value,
@@ -455,7 +409,6 @@ function buildClienteArrays() {
     tip_doc_cliente: tip_doc_cliente.value,
     rut_cliente: rut_cliente.value
   }
-
   const envio = shipToOther.value
     ? {
         nombres: e_nombre_cliente.value,
@@ -467,41 +420,41 @@ function buildClienteArrays() {
         departamento: e_departamento_cliente.value
       }
     : { ...principal }
-
   return { principal, envio }
 }
 
-// Calcula recargo en centavos
+/* ====== SNAPSHOT ====== */
+function saveCheckoutSnapshot() {
+  const snap = {
+    ref: reference.value,
+    products: (ticket.value || []).map(p => ({
+      id: p.id ?? p.tags ?? p.sku ?? p.descripcion,
+      titulo: p.descripcion,
+      precio: Number(p.precio),
+      cant: Number(p.cant)
+    }))
+  }
+  try { localStorage.setItem('checkout_snapshot', JSON.stringify(snap)) } catch (_) {}
+}
+
+/* ====== Wompi ====== */
 function calcWompiFeeCents(baseAmountInCents, pct = WOMPI_FEE_PCT) {
   return Math.round((baseAmountInCents * pct) / 100)
 }
-
-// Formatea COP desde centavos
 function formatCOP(cents) {
   return (cents / 100).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })
 }
-
-// Llama al backend firmador (usa proxy /wompi/sign)
 async function getIntegritySignature({ reference, amountInCents, currency = 'COP' }) {
-  const { data } = await axios.post(SIGN_URL, {
-    reference,
-    amount_in_cents: amountInCents,
-    currency
-  })
+  const { data } = await axios.post(SIGN_URL, { reference, amount_in_cents: amountInCents, currency })
   if (!data?.integrity) throw new Error('No se pudo obtener la firma de integridad')
   return data.integrity
 }
-
-// Persiste factura; permite inyectar líneas extra (ej. recargo Wompi)
 function persistFactura(form_pago, nota, extraItems = []) {
   const { principal, envio } = buildClienteArrays()
   infoFactura.reference = reference.value
   infoFactura.cliente = [principal]
   infoFactura.info_cliente_envio = [envio]
-
-  // ⚠️ No alteramos producto_imprimir original para no afectar otros métodos
   infoFactura.productos = [...producto_imprimir.value, ...extraItems]
-
   infoFactura.sub_total_factura_bruto = subtotal.value
   infoFactura.total_descuento = 0
   infoFactura.sub_total_factura = subtotal.value
@@ -511,13 +464,9 @@ function persistFactura(form_pago, nota, extraItems = []) {
   infoFactura.nota = nota
   infoFactura.fecha_fac = fechaHoy.value
   infoFactura.fecha_vencimiento = fechaHoy.value
-
   localStorage.setItem('facturacion_web', JSON.stringify(infoFactura))
 }
 
-/* ===========================
-   WOMPI (widget)
-   =========================== */
 function ensureWompiScript() {
   return new Promise((resolve, reject) => {
     if (window.WidgetCheckout) return resolve()
@@ -530,142 +479,94 @@ function ensureWompiScript() {
   })
 }
 
-// Abre el widget de Wompi cobrando el total + 5%
 async function pagarConWompi() {
   if (!validateFormBasic()) return
-  if (!publicKey.value) {
-    alert('Falta configurar VITE_WOMPI_PUBLIC_KEY')
-    return
-  }
+  if (!publicKey.value) return alert('Falta configurar VITE_WOMPI_PUBLIC_KEY')
 
   try {
-    // Recalcula por si cambió el carrito
     actualizarTotales()
 
     const currency = 'COP'
-    const base = Math.max(1, Math.floor(amountInCents.value)) // entero centavos
+    const base = Math.max(1, Math.floor(amountInCents.value))
     const fee = calcWompiFeeCents(base, WOMPI_FEE_PCT)
     const totalForWompi = base + fee
 
-    // Guarda en refs (para mostrar en UI)
     wompiFeeInCents.value = fee
     wompiPayableInCents.value = totalForWompi
 
-    // Línea extra para la factura (no altera los productos originales)
-    const feeItemPesos = fee / 100 // a pesos
-    const extraItems = [
-      {
-        id: 'WOMPI-FEE',
-        idpro: 'WOMPI_FEE_5',
-        titulo: `Cargo pasarela Wompi (${WOMPI_FEE_PCT}%)`,
-        cant: 1,
-        valor: parseFloat(feeItemPesos.toFixed(2)), // sin IVA (tratado como exento)
-        desc: 0,
-        tot_desc: 0,
-        valor_desc: parseFloat(feeItemPesos.toFixed(2)),
-        iva: 0,
-        impuesto: 0,
-        precio: parseFloat(feeItemPesos.toFixed(2)),
-        total: parseFloat(feeItemPesos.toFixed(2)),
-        lista_precio: []
-      }
-    ]
+    const feeItemPesos = fee / 100
+    const extraItems = [{
+      id: 'WOMPI-FEE', idpro: 'WOMPI_FEE_5',
+      titulo: `Cargo pasarela Wompi (${WOMPI_FEE_PCT}%)`,
+      cant: 1, valor: +feeItemPesos.toFixed(2), desc: 0, tot_desc: 0,
+      valor_desc: +feeItemPesos.toFixed(2), iva: 0, impuesto: 0,
+      precio: +feeItemPesos.toFixed(2), total: +feeItemPesos.toFixed(2), lista_precio: []
+    }]
 
-    // Persistimos factura con la línea de recargo (form_pago = '2' Wompi)
+    saveCheckoutSnapshot()  // 👈 foto del carrito visible
     persistFactura('2', 'Compra ejecutada por página web, facturada para pago en línea (Wompi).', extraItems)
 
-    // Firma el MONTO FINAL que se enviará a Wompi
-    const integrity = await getIntegritySignature({
-      reference: reference.value,
-      amountInCents: totalForWompi,
-      currency
-    })
-
-    // Carga script y abre widget
+    const integrity = await getIntegritySignature({ reference: reference.value, amountInCents: totalForWompi, currency })
     await ensureWompiScript()
     const checkout = new window.WidgetCheckout({
-      currency,
-      amountInCents: totalForWompi, // 👈 total con recargo
-      reference: reference.value,
-      publicKey: publicKey.value,
-      signature: { integrity },     // 👈 obligatorio
-      redirectUrl: `${window.location.origin}/confirmacion`
+      currency, amountInCents: totalForWompi, reference: reference.value,
+      publicKey: publicKey.value, signature: { integrity },
+      redirectUrl: `${window.location.origin}/compra-exitosa`
     })
-
-    checkout.open((result) => {
-      console.log('Wompi result:', result)
-    })
+    checkout.open(() => {})
   } catch (e) {
     console.error(e)
     alert('No se pudo abrir Wompi. ' + (e?.message || 'Intenta de nuevo.'))
   }
 }
 
-/* ===========================
-   OTRAS OPCIONES
-   =========================== */
+/* ====== Otras opciones ====== */
 async function recogerEnPuntoDeVenta() {
   if (!validateFormBasic()) return
+  saveCheckoutSnapshot()
   persistFactura('3', 'Compra ejecutada por página web, facturada para recogida en punto de venta.')
   window.location.href = '/compra-exitosa'
 }
-
 async function pagoContraEntrega() {
   if (!validateFormBasic()) return
+  saveCheckoutSnapshot()
   persistFactura('1', 'Compra ejecutada por página web, facturada para contra entrega.')
   window.location.href = '/compra-exitosa'
 }
 
-/* ===========================
-   TOTALES / CARGA CARRITO
-   =========================== */
+/* ====== Totales/Carga ====== */
 function cargar_detalles() {
   producto_imprimir.value = []
   if (ticket.value && ticket.value.length > 0) {
-    ticket.value.forEach((element) => {
-      const valor2 = element.precio / 1.19
-      const iva2 = element.precio - valor2
-      const total2 = element.precio * element.cant
-
+    ticket.value.forEach((e) => {
+      const valor2 = e.precio / 1.19
+      const iva2 = e.precio - valor2
+      const total2 = e.precio * e.cant
       producto_imprimir.value.push({
-        id: element.id,
-        idpro: element.tags,
-        titulo: element.descripcion,
-        cant: element.cant,
-        valor: parseFloat(valor2.toFixed(2)),
-        desc: 0,
-        tot_desc: 0,
-        valor_desc: parseFloat(valor2.toFixed(2)),
-        iva: 19,
-        impuesto: parseFloat(iva2.toFixed(2)),
-        precio: parseFloat(element.precio),
-        total: parseFloat(total2.toFixed(2)),
+        id: e.id, idpro: e.tags, titulo: e.descripcion, cant: e.cant,
+        valor: +valor2.toFixed(2), desc: 0, tot_desc: 0, valor_desc: +valor2.toFixed(2),
+        iva: 19, impuesto: +iva2.toFixed(2), precio: +e.precio, total: +total2.toFixed(2),
         lista_precio: []
       })
     })
   }
 }
-
 function actualizarTotales() {
   total.value = ticket.value.reduce((acc, it) => acc + (Number(it.cant) * parseFloat(it.precio)), 0)
   subtotal.value = Math.floor(total.value / 1.19)
   iva.value = Math.round(total.value - subtotal.value)
-  amountInCents.value = Math.round(total.value * 100) // entero exacto
-
-  // 👉 Actualiza el desglose Wompi en tiempo real
+  amountInCents.value = Math.round(total.value * 100)
   wompiFeeInCents.value = calcWompiFeeCents(amountInCents.value, WOMPI_FEE_PCT)
   wompiPayableInCents.value = amountInCents.value + wompiFeeInCents.value
 }
 
 onMounted(() => {
-  // fecha actual
   const now = new Date()
   const yyyy = now.getFullYear()
   const mm = String(now.getMonth() + 1).padStart(2, '0')
   const dd = String(now.getDate()).padStart(2, '0')
   fechaHoy.value = `${yyyy}-${mm}-${dd}`
 
-  // ticket
   const raw = localStorage.getItem('ticket')
   const parsed = raw ? JSON.parse(raw) : null
   ticket.value = Array.isArray(parsed?.productos) ? parsed.productos : []
@@ -674,74 +575,32 @@ onMounted(() => {
   cargar_detalles()
   reference.value = generateRef()
 })
-
-/* ===========================
-   (Opcional) utilidades legacy
-   =========================== */
-function openBancolombiaPopup() {
-  alert(`Por favor realiza una transferencia bancaria a la siguiente cuenta:
-Banco: Bancolombia
-Cuenta: 123456789
-Titular: Consmo PC Mayorista
-
-Total a transferir: $${Math.round(parseFloat(total.value)).toString().replace(/\./g, ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`)
-}
 </script>
 
 <style scoped>
-/* Estilos generales */
 .container { margin-top: 20px; }
 .breadcrumbs { display: flex; gap: 5px; margin-bottom: 20px; }
 .breadcrumbs a { color: #333; text-decoration: none; }
 .breadcrumbs a.active { font-weight: bold; }
-
 .cart_area { background: #f9f9f9; padding: 20px 0; }
 .shop_cart_title { font-size: 24px; font-weight: bold; margin-bottom: 20px; }
-
 .form-group { margin-bottom: 15px; }
 .form-group label { font-weight: bold; margin-bottom: 5px; display: block; }
 .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
-
 .payment-info { margin-top: 20px; }
 .payment-info .option-label { font-size: 18px; font-weight: bold; margin-bottom: 10px; cursor: pointer; }
-
 .single_check_order { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #ddd; }
 .single_check_order.subs { font-weight: bold; }
 .single_check_order.total { font-size: 20px; font-weight: bold; }
 .checkorder_cont h5 { margin: 0; }
 .checkorder_qnty, .checkorder_price { margin: 0; }
-
-/* Opción 1: Contra Entrega */
 .option-1 { background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 15px; border-radius: 5px; }
 .btn-contra-entrega { background-color: #dc3545; color: #fff; }
 .btn-contra-entrega:hover { background-color: #c82333; }
-
-/* Opción 2: Wompi y Opción 3: Punto de Venta reutilizan estos estilos */
 .option-2 { background-color: #d4edda; border: 1px solid #c3e6cb; padding: 15px; border-radius: 5px; }
 .btn-punto-venta { background-color: #28a745; color: #fff; }
 .btn-punto-venta:hover { background-color: #218838; }
-
-/* Opción 3: Transferencia Bancaria (si la reactivas) */
-.option-3 { background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 15px; border-radius: 5px; }
-.btn-bancolombia { background-color: #dc3545; color: #fff; }
-.btn-bancolombia:hover { background-color: #138496; }
-
-/* Desglose Wompi */
-.wompi-breakdown {
-  background: #ffffff;
-  border: 1px dashed #bcd5c0;
-  border-radius: 6px;
-  padding: 10px 12px;
-  margin: 10px 0;
-}
-.wompi-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 4px 0;
-}
-.wompi-total {
-  font-weight: 700;
-  font-size: 1.05rem;
-}
+.wompi-breakdown { background: #fff; border: 1px dashed #bcd5c0; border-radius: 6px; padding: 10px 12px; margin: 10px 0; }
+.wompi-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; }
+.wompi-total { font-weight: 700; font-size: 1.05rem; }
 </style>
