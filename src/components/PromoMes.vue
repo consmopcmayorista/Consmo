@@ -20,6 +20,9 @@
     { title: 'POWER BANK PORTATIL 20000 mAH :1566', image: '1566.png'},
     { title: 'UPS INTERATIVA 6 TOMAS 500VA/240 :1653', image: '1653.png'},
     { title: 'LECTOR CODIGO DE BARRAS INALAMBRICO :3502', image: '3502.png'},
+    { title: 'PROYECTOR PORTABLE FHD ANDROID WIFI DUAL BAND :3627', image: '3627.png'},
+    { title: 'CHASIS GAMER PARA PC TRIDIMENCIONAL RGB 6 COOLERS :8897', image: '8897.png'},
+    { title: 'COMBO TECLADO Y MOUSE ALAMBRICO USB RETROILUMINADO :C2005', image: 'C2005.png'},
 
 
     
