@@ -30,7 +30,7 @@ const comunasMedellin = ref([
       [6.298928622798513, -75.54916677381586]
     ],
     color: "#FF6347",
-    precioDomicilio: 11000
+    precioDomicilio: 13000
   },
   {
     nombre: "Santa Cruz",
@@ -48,7 +48,7 @@ const comunasMedellin = ref([
       [6.302138623559074, -75.55624349567128]
     ],
     color: "#00BFFF",
-    precioDomicilio: 11000
+    precioDomicilio: 13000
   },
   {
     nombre: "Aranjuez",
@@ -64,7 +64,7 @@ const comunasMedellin = ref([
       [6.286288129282951, -75.56445257460396]
     ],
     color: "#FF7C00",
-    precioDomicilio: 11000
+    precioDomicilio: 13000
   },
   {
     nombre: "Manrique",
@@ -77,7 +77,7 @@ const comunasMedellin = ref([
       [6.262670401953287, -75.55486256097899]
     ],
     color: "#FFD700",
-    precioDomicilio: 11000
+    precioDomicilio: 13000
   },
   {
     nombre: "Poblado",
@@ -110,7 +110,7 @@ const comunasMedellin = ref([
     [6.235756514769122, -75.57573495011538]
   ],
     color: "#00c0ff",
-    precioDomicilio: 11000
+    precioDomicilio: 13000
   },
   {
     nombre: "Candelaria",
@@ -130,7 +130,7 @@ const comunasMedellin = ref([
     [6.272340528133043, -75.56993272650526]
   ],
     color: "#FF1493",
-    precioDomicilio: 11000
+    precioDomicilio: 13000
   },
   {
     nombre: "Villa Hermosa",
@@ -155,7 +155,7 @@ const comunasMedellin = ref([
     [6.261809328128578, -75.54788030221675]
   ],
     color: "#00FF00",
-    precioDomicilio: 11000
+    precioDomicilio: 13000
   },
   {
     nombre: "Buenos Aires",
@@ -174,7 +174,7 @@ const comunasMedellin = ref([
     [6.248879087571339, -75.56414195527113]
   ],
     color: "#FF4500",
-    precioDomicilio: 11000
+    precioDomicilio: 13000
   },
   {
     nombre: "Guayabal",
@@ -202,7 +202,7 @@ const comunasMedellin = ref([
     [6.236873293291993, -75.57692407549304]
   ],
     color: "#9932CC",
-    precioDomicilio: 11000
+    precioDomicilio: 13000
   },
   {
     nombre: "Belen",
@@ -237,7 +237,7 @@ const comunasMedellin = ref([
     [6.236726452240461, -75.57681103526102]
   ],
     color: "#20B2AA",
-    precioDomicilio: 11000
+    precioDomicilio: 13000
   },
   {
     nombre: "San Javier",
@@ -272,7 +272,7 @@ const comunasMedellin = ref([
     [6.259628049826759, -75.60531296420058]
   ],
     color: "#FF6347",
-    precioDomicilio: 11000
+    precioDomicilio: 14000
   },
   {
     nombre: "Robledo",
@@ -304,7 +304,7 @@ const comunasMedellin = ref([
     [6.296124828754898, -75.58445926921856]
   ],
     color: "#7FFF00",
-    precioDomicilio: 11000
+    precioDomicilio: 13000
   },
   {
     nombre: "La America",
@@ -326,7 +326,7 @@ const comunasMedellin = ref([
     [6.257626614768668, -75.60478664352229]
   ],
     color: "#191919",
-    precioDomicilio: 11000
+    precioDomicilio: 13000
   },
   {
     nombre: "Laureles",
@@ -371,7 +371,7 @@ const comunasMedellin = ref([
     [6.290973850696233, -75.5737579986452]
   ],
     color: "#4169E1",
-    precioDomicilio: 11000
+    precioDomicilio: 13000
   },
   {
     nombre: "Castilla",
@@ -391,7 +391,7 @@ const comunasMedellin = ref([
     [6.3087015661104715, -75.55773887209781]
   ],
   color: "#A52A2A",
-    precioDomicilio: 11000
+    precioDomicilio: 13000
   },
   {
   "nombre": "Bello",
@@ -443,7 +443,7 @@ const comunasMedellin = ref([
     [6.301186774419975, -75.55412058506631]
   ],
   "color": "#00FFE8",
-  "precioDomicilio": 11000
+  "precioDomicilio": 16000
 },
 {
   "nombre": "Envigado",
@@ -479,7 +479,7 @@ const comunasMedellin = ref([
     [6.194924088628994, -75.58122628232493]
   ],
   "color": "#CB0CF1",
-  "precioDomicilio": 11000
+  "precioDomicilio": 15000
 },
 {
   "nombre": "Sabaneta",
@@ -504,7 +504,7 @@ const comunasMedellin = ref([
     [6.167655118734331, -75.60744982700692]
   ],
   "color": "#32CD32", 
-  "precioDomicilio": 11000
+  "precioDomicilio": 15000
 },
 {
   "nombre": "Itagüí",
@@ -528,7 +528,7 @@ const comunasMedellin = ref([
     [6.187216907362327, -75.58593768469441]
   ],
   "color": "#fee300", 
-  "precioDomicilio": 11000
+  "precioDomicilio": 15000
 },
 {
   "nombre": "La Estrella",
@@ -552,7 +552,7 @@ const comunasMedellin = ref([
     [6.16958156857433, -75.62412660093273]
   ],
   "color": "#FF6347", 
-  "precioDomicilio": 11000
+  "precioDomicilio": 15000
 },
 {
   "nombre": "San Antonio de Prado",
@@ -569,7 +569,7 @@ const comunasMedellin = ref([
     [6.187369642880711, -75.64720157528795]
   ],
   "color": "#FFD700", 
-  "precioDomicilio": 13000
+  "precioDomicilio": 17000
 },
 {
   "nombre": "San Cristóbal",
@@ -587,7 +587,7 @@ const comunasMedellin = ref([
     [6.2753663992415625, -75.62132620725924]
   ],
   "color": "#4c9cff", 
-  "precioDomicilio": 13000
+  "precioDomicilio": 20000
 }
 
 ]);
