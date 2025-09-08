@@ -182,7 +182,7 @@
                   <img style="width:100%;" src="https://consmopcmayorista.com/images2/banner_contraentrega.png" />
                   <ul>
                     <p><strong>Envíos a Medellín </strong> $13,000</p>
-                    <p><strong> Alrededor de Medellín </strong> $14,000 - $25.000</p>
+                    <p><strong> Alrededores de Medellín y Valle de aburrá </strong> $15,000 - $25.000</p>
                     <p><strong>Otras ciudades:</strong> Te contactaremos de inmediato</p>
                   </ul>
                   <p><em>¡Tu comodidad es nuestra prioridad!</em></p>
