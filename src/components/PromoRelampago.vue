@@ -26,11 +26,10 @@
   
   <script setup>
   const promos = [ 
-    // { title: 'CAJON MONEDERO GRANDE :3391', image: '3391.png' },
-    // { title: 'CAJON MONEDERO PEQUEÑO :3615', image: '3615.png'},
-    // { title: 'IMPRESORA TERMICA POS 80MM :3616', image: '3616.png' },
-    // { title: 'LECTOR CODIGO DE BARRAS ALAMBRICO USB :3618', image: '3618.png' },
-    // { title: 'IMPRESORA TERMICA POS 5MM :3619', image: '3619.png' },
+    { title: 'IMPRESORA TERMICA POS 80MM USB/LAN DIGITAL POS :2610', image: '2610.png' },
+    { title: 'TODO EN UNO POS 15.6* CORE I3-3217U 128GB SSD/ 4GB RAM  :2708', image: '2708.png'},
+    { title: 'CARRETA EXTERIOR FIBRA OPTICA DROP PLANA 1 HILO 1000MT:C9001', image: 'C9001.png' },
+    { title: 'CARRETA INTERIOR FIBRA OPTICA DROP PLANA 1 HILO 1000MT :C9002', image: 'C9002.png' },
  
  
   ]
