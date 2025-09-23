@@ -18,7 +18,6 @@
   
   <script setup>
   const promos = [
-      { title: 'DIADEMA PARA PC/TABLETS/CELULAR C:4060', image: '4060.png' },
       { title: 'MEMORIA RAM DDR4 4GB 2666 C:5052', image: '5052.png' },
       { title: 'DIADEMA PARA PC JD-868 2 PLUG C:C9540', image: 'C9540.png' },
       { title: 'DIADEMA PARA PC JD-808 2 PLUG C:C9542', image: 'C9542.png' },
@@ -27,11 +26,9 @@
       { title: 'CARRETA FIBRA OPTICA DROP PLANA :C9001', image: 'C9001.png' },
       { title: 'TECLADO NUMERICO :C9566', image: 'C9566.png' },
       { title: 'CONVERTIDOR USB 2.0 A RJ45 :C9568', image: 'C9568.png' },
-      { title: 'CABLE DE RED BLANCO CAT 6E 10MTS :C9610', image: 'C9610.png' },
       { title: 'CABLE DE RED BLANCO CAT 6E 15MTS :C9611', image: 'C9611.png' },
       { title: 'CABLE DE RED BLANCO CAT 6E 20MTS :C9612', image: 'C9612.png' },
       { title: 'CABLE DE RED BLANCO CAT 6E 30MTS :C9613', image: 'C9613.png' },
-      { title: 'CABLE USB MACHO A MACHO 2.0 BLINDADO 60CM :C9625', image: 'C9625.png' },
       { title: 'CABLE EXTENSION USB 2.0 BLINDADO 1.5CM :C9627', image: 'C9627.png' },
       { title: 'CABLE EXTENSION USB 2.0 BLINDADO 3 METROS :C9628', image: 'C9628.png' },
       { title: 'CABLE EXTENSION USB 2.0 ACTIVA 15 METROS :C9631', image: 'C9631.png' },
@@ -41,7 +38,6 @@
       { title: 'CONVERTIDOR MINI DISPLAYPORT A HDMI :C9647', image: 'C9647.png' },
       { title: 'CABLE VGA MACHO EN Y :C9653', image: 'C9653.png' },
       { title: 'CORREA DE DATOS SATA 40CM :C9656', image: 'C9656.png' },
-      { title: 'GUAYA CON LLAVE 1.10 METROS :C9657', image: 'C9657.png' },
       { title: 'KIT DE DESTORNILLADORES 31 EN 1 :C9675', image: 'C9675.png' },
       { title: 'CABLE DATOS MOLEX IDE SATA EN Y :C9681', image: 'C9681.png' },
       { title: 'CABLE OPTICO ENMALLADO 1.5 METROS :C9688', image: 'C9688.png' },
