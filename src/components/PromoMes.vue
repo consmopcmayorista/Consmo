@@ -17,7 +17,6 @@
   
   <script setup>
   const promos = [
-    { title: 'POWER BANK PORTATIL 20000 mAH :1566', image: '1566.png'},
     { title: 'UPS INTERATIVA 6 TOMAS 500VA/240 :1653', image: '1653.png'},
     { title: 'LECTOR CODIGO DE BARRAS INALAMBRICO :3502', image: '3502.png'},
     { title: 'PROYECTOR PORTABLE FHD ANDROID WIFI DUAL BAND :3627', image: '3627.png'},
@@ -40,7 +39,6 @@
     { title: 'MOUSE INALAMBRICO COLOR NEGRO JEDEL W927 :2238', image: '2238.png'},
     { title: 'COMBO MOUSE GAMER Y PAD MOUSE GAMER COLOR NARANJA-NEGRO :2237', image: '2237.png'},
     { title: 'TECLADO ALAMBRICO RGB COLOR NEGRO JEDEL K500+ :2236', image: '2236.png'},
-    { title: 'TECLADO ALAMBRICO RGB COLOR BLANCO JEDEL K500 :2235', image: '2235.png'},
     { title: 'COMBO TECLADO/DIADEMA/MOUSE/PADMOUSE 4 EN 1 JEDEL :2234', image: '2234.png'},
     { title: 'COMBO TECLADO Y MOUSE INALAMBRICO COLOR NEGRO JEDEL :2233', image: '2233.png'},
     { title: 'COMBO TECLADO Y MOUSE ALAMBRICO COLOR BLANCO RGB JEDEL :2231', image: '2231.png'},
