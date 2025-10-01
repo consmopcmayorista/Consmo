@@ -27,9 +27,6 @@
   <script setup>
   const promos = [ 
     { title: 'IMPRESORA TERMICA POS 80MM USB/LAN DIGITAL POS :2610', image: '2610.png' },
-    { title: 'TODO EN UNO POS 15.6* CORE I3-3217U 128GB SSD/ 4GB RAM  :2708', image: '2708.png'},
-    { title: 'CARRETA EXTERIOR FIBRA OPTICA DROP PLANA 1 HILO 1000MT:C9001', image: 'C9001.png' },
-    { title: 'CARRETA INTERIOR FIBRA OPTICA DROP PLANA 1 HILO 1000MT :C9002', image: 'C9002.png' },
  
  
   ]
