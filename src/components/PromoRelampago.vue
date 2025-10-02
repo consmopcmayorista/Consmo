@@ -26,7 +26,7 @@
   
   <script setup>
   const promos = [ 
-    { title: 'IMPRESORA TERMICA POS 80MM USB/LAN DIGITAL POS :2610', image: '2610.png' },
+    // { title: 'IMPRESORA TERMICA POS 80MM USB/LAN DIGITAL POS :2610', image: '2610.png' },
  
  
   ]

@@ -17,10 +17,10 @@
   
   <script setup>
   const promos = [
-    { title: 'UPS INTERATIVA 6 TOMAS 500VA/240 :1653', image: '1653.png'},
+    // { title: 'UPS INTERATIVA 6 TOMAS 500VA/240 :1653', image: '1653.png'},
 
 
-    
+
     
   
     // Agrega más promociones según sea necesario
