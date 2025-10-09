@@ -17,7 +17,9 @@
   
   <script setup>
   const promos = [
-    // { title: 'UPS INTERATIVA 6 TOMAS 500VA/240 :1653', image: '1653.png'},
+    { title: 'REGULADOR DE VOLTAJE 8 TOMAS 1200VA / 600W WATTANA : 1564', image: '1564.png'},
+    { title: 'MINI TECLADO PREMIUM INALAMBRICO BLUETOOTH RGB : 2077', image: '2077.png'},
+    { title: 'IMPRESORA TERMICA POS 80MM USB+LAN+RJ11 NEOTEK : 3616', image: '3616.png'},
 
 
 
