@@ -34,7 +34,7 @@ import { ref } from 'vue'
 
 const open = ref(false)
 const message = ref("")
-const phoneNumber = '573016148080'
+const phoneNumber = '573015537673'
 
 function toggleChat() {
   open.value = !open.value

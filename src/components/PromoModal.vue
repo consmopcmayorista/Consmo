@@ -54,7 +54,7 @@
     const tipo = getPromoTipo(props.promo.folder)
     const titulo = customEncode(props.promo.title)
     const texto = customEncode(`Hola, quiero más información sobre un ${tipo}. Producto: ${props.promo.title}`)
-    return `https://wa.me/573016148080?text=${texto}`
+    return `https://wa.me/53015537673?text=${texto}`
   })
   </script>
   
