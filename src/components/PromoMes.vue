@@ -17,19 +17,30 @@
   
   <script setup>
   const promos = [
-    { title: 'MOUSE ALAMBRICO USB RETROILUMINADO WEIBO M-39 : 1219', image: '(1) 1219.png'},
-    { title: 'DIADEMA PARA PC JD808 2 PLUG : C9542', image: '(2) C9542.png'},
-    { title: 'DIADEMA PARA PC JD868 2 PLUG : C9540', image: '(3) C9540.png'},
-    { title: 'CONVERTIDOR MINI DISPLAYPORT A HDMI : C9647', image: '(4) C9647.png'},
-    { title: 'APUNTADOR/PRESENTADOR LASER INALAMBRICO : MC3000', image: '(5) MC3000.png'},
-    { title: 'BATERIAS AA RECARGABLES X2 CARTON 1.2V NH-AA : C9003', image: '(6) C9003.png'},
-    { title: 'COOLER PARA CHASIS RGB 120MM FUNCOOLER : 1320', image: '(7) 1320.png'},
-    { title: 'DECODIFICADOR TDT +ATENA+CONTROL 1080P DVB-T2 : C9117', image: '(8) C9117.png'},
-    { title: 'COOLER DISIPADOR PARA BOARD RGB INTEL/AMD : 9218', image: '(9) 9218.png'},
-    { title: 'TV BOX 4GB+32GB 8K UHD CPU CORTEX-A53 T95MAX : C9105', image: '(10) C9105.png'},
-    { title: 'GUAYA DE SEGURIDAD  USADA PARA PORTATIL (CON LLAVE) : U6003', image: '(11) U6003.png'},
-    { title: 'ROUTER 2 ANTENAS TENDA N300 MOD N301 : 2501', image: '(12) 2501.png'},
-    { title: 'ROUTER DUAL-BAND GIGABYTE 4 ANT TENDA AC1200 MOD AC8 : 2529', image: '(13) 2529.png'},
+    { title: 'VASO TERMICO CON PITILLO COLORES VARIOS: C9135', image: 'C9135.png'},
+    { title: 'UPS INTERACTIVA 6 TOMAS 600VA/360W WATTANA: 1655', image: '1655.png'},
+    { title: 'UPS INTERACTIVA 6 TOMAS 800VA/480W WATTANA: 1656', image: '1656.png'},
+    { title: 'POWER BANK PORTATIL 20000mAH ICONNEX: 1680', image: '1680.png'},
+    { title: 'MINI TECLADO INALAMBRICO RGB SMART: 2042', image: '2042.png'},
+    { title: 'IMPRESORA TERMICA POS 2en1 JALTECH: 2428', image: '2428.png'},
+    { title: 'LECTOR CODIGO DE BARRAS ALAMBRICO DIGITALPOS: 2954', image: '2954.png'},
+    { title: 'LECTOR CODIGO DE BARRAS OMNIDIRECCIONAL AUTO: 3367', image: '3367.png'},
+    { title: 'LECTOR CODIGO DE BARRAS INALAMBRICO JALTECH: 3369', image: '3369.png'},
+    { title: 'LECTOR CODIGO DE BARRAS OMNIDIRECCIONAL 2D: 3508', image: '3508.png'},
+    { title: 'MINI KARAOKE RGB BT 5.3 JALTECH: 3598', image: '3598.png'},
+    { title: 'PROYECTOR PORTABLE FHD ANDROID P30: 3627', image: '3627.png'},
+    { title: 'PARLANTE MICROFONO BLUETOOTH 5.1: 3630', image: '3630.png'},
+    { title: 'TECLADO GAMER RGB MECANICO NEGRO USB JEDEL: 4107', image: '4107.png'},
+    { title: 'PARLANTE BT CON CARGA INALAMBRICA LUZ LED: 5896', image: '5896.png'},
+    { title: 'BOLSO TIPO MILITAR CAMUFLAJEADO COLORES: 7891', image: '7891.png'},
+    { title: 'CHASIS GAMER PARA PC TRIDIMENSIONAL RGB: 8897', image: '8897.png'},
+    { title: 'TECLADO ALAMBRICO GAMER RGB GENIUS ERGONOMICO: 9202', image: '9202.png'},
+    { title: 'WATCH ONN GOOGLE TV HDMI 4K: 9800', image: '9800.png'},
+    { title: 'SET BROCHAS X3 PIEZAS DE SILICONA: C2553', image: 'C2553.png'},
+    { title: 'BROCHAS DE MAQUILLAJE SET DE 13 PIEZAS: C2558', image: 'C2558.png'},
+    { title: 'CAMARA IP WIFI ROBOTICA 1080P TENDA CP3: 1918', image: '1918.png'},
+    
+    
   
 
 
