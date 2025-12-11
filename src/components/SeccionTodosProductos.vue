@@ -140,19 +140,14 @@ function formatearPrecio (valor) {
   }
 }
 
-/* 2 columnas en móviles grandes */
+/* 2 columnas en móviles grandes Y pequeños */
 @media (max-width: 768px) {
   .grid-productos {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-/* 1 columna en móviles pequeños */
-@media (max-width: 480px) {
-  .grid-productos {
-    grid-template-columns: 1fr;
-  }
-}
+
 
 /* 🎴 Tarjetas de producto */
 .card-producto {
