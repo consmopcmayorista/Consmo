@@ -3,7 +3,7 @@
 /* ===============================
    IMPORTS
 =============================== */
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView, useRoute } from 'vue-router'
 import services from '@/components/services.vue'
 import ProductQuickview from '@/components/product_indv.vue'
 import { ref, onMounted, inject, computed, defineProps } from 'vue'
@@ -23,7 +23,8 @@ const categorias_hijo = ref([])// Lista completa de productos (sin filtrar)
 const imagenCargada = ref(false)           // Control de carga de imagen
 const filtro_activo = ref(null)            // Categoría actualmente filtrada
 const selectedIndex = ref(null)            // Índice de la categoría seleccionada
-
+// === Ruta actual (para leer los parámetros de la URL) ===
+const route = useRoute()
 
 // Props (por ejemplo, si la vista recibe una categoría desde la ruta)
 const props = defineProps({
@@ -40,16 +41,42 @@ const cargando = ref(true)
 const pagina = ref(1)             // Página actual (1-based)
 const cant_maxima_pag = ref(10)   // Cantidad de ítems por página
 
-// Computada para calcular la cantidad total de páginas
-const cant_pagina = computed(() => {
-  return Math.ceil(productos_alea.value.length / cant_maxima_pag.value)
+// === Categorías que vienen en el query ?categorias=PARLANTES,CABINAS,... ===
+const categoriasQuery = computed(() => {
+  const q = route.query.categorias
+
+  if (!q) return [] // si no viene nada → sin filtro especial
+
+  return String(q)
+    .split(',')
+    .map(c => c.trim().toUpperCase())
+    .filter(Boolean)
 })
 
-// Computada para obtener sólo los productos de la página actual
-const productosPaginados = computed(() => {
-  const start = (pagina.value - 1) * cant_maxima_pag.value
-  const end = pagina.value * cant_maxima_pag.value
-  return productos_alea.value.slice(start, end)
+// === Productos filtrados según las categorías del query ===
+const productos_filtrados = computed(() => {
+  // Si no hay ?categorias usamos todos los productos_alea como antes
+  if (!categoriasQuery.value.length) {
+    return productos_alea.value
+  }
+
+  return productos_alea.value.filter((p) => {
+    const lineaCruda = p.linea || p.categoria || ''
+    const lineaNorm = lineaCruda.toUpperCase().trim()
+    return categoriasQuery.value.includes(lineaNorm)
+  })
+})
+
+// Número total de páginas, pero usando la lista filtrada
+const cant_pagina = computed(() => {
+  return Math.ceil(productos_filtrados.value.length / cant_maxima_pag.value)
+})
+
+// Productos que se muestran en la página actual
+const productos_pagina = computed(() => {
+  const inicio = (pagina.value - 1) * cant_maxima_pag.value
+  const fin = inicio + cant_maxima_pag.value
+  return productos_filtrados.value.slice(inicio, fin)
 })
 
 // Función para cambiar de página (y hacer scroll al inicio)
@@ -381,7 +408,7 @@ const categorias_alfabetica = inject('categorias_alfabetica', ref([]))
                 <!-- Itera SOLO los productosPaginados -->
                 <div
                   class="single_list_product"
-                  v-for="(dato, index) in productosPaginados"
+                  v-for="(dato, index) in productos_pagina"
                   :key="index"
                 >
                   <div class="row">

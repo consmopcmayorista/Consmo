@@ -4,16 +4,17 @@
     <div class="carrusel-wrapper px-3 px-sm-4 px-md-5 position-relative pb-5 carrusel-full">
       <!-- Encabezado del carrusel con título y botón "Ver todos" -->
       <div class="d-flex justify-content-between align-items-center mb-4 encabezado-carrusel flex-wrap gap-2">
-        <h2 class="section_title_3 mb-0">
-           {{ titulo || (categoria.charAt(0).toUpperCase() + categoria.slice(1)) }}
-        </h2>
-        <RouterLink
-  :to="`/catalogo_cat?categoria=${encodeURIComponent(categoria || (categorias?.[0] || ''))}`"
-  class="btn btn-outline-primary btn-sm"
->
-  VER TODOS
-</RouterLink>
-      </div>
+  <h2 class="section_title_3 mb-0">
+    🧩 {{ titulo || (categoria.charAt(0).toUpperCase() + categoria.slice(1)) }}
+  </h2>
+
+  <RouterLink
+    :to="linkVerTodos"
+    class="btn btn-outline-primary btn-sm"
+  >
+    Ver productos relacionados
+  </RouterLink>
+</div>
 
       <!-- Carrusel Swiper dinámico -->
       <div class="swiper-wrapper-container">
@@ -78,12 +79,12 @@ const props = defineProps({
     type: Array,
     default: () => []
   },
-  // una sola categoría (para Monitores, Artículos y Accesorios)
+  // 1 sola categoría (modo viejo)
   categoria: {
     type: String,
     default: ''
   },
-  // varias categorías (para TENDENCIA)
+  // VARIAS categorías (modo Tendencia)
   categorias: {
     type: Array,
     default: () => []
@@ -94,46 +95,106 @@ const props = defineProps({
   },
   buscarProducto: {
     type: Function,
-    default: null    // solo se usa para el botón "Ver más"
+    default: null
   },
   formatLine: {
     type: Function,
     default: null
+  },
+  // 👇 NUEVA prop opcional por si luego quieres forzar un link distinto
+  linkVerTodos: {
+    type: String,
+    default: ''
   }
 })
 
+const normalizar = (str) => {
+  if (!str) return ''
+  return String(str).trim().toUpperCase()
+}
 
 // 🔹 Filtra SOLO por la categoría del producto (linea/categoria)
 const productosFiltrados = computed(() => {
   const lista = props.productos || []
 
-  // 1) Si nos pasan VARIAS categorías (TENDENCIA)
-  if (Array.isArray(props.categorias) && props.categorias.length > 0) {
-    const cats = props.categorias
-      .map(c => String(c).toLowerCase().trim())
-      .filter(Boolean)
+  // Si hay varias categorías → usamos esas
+  // Si no, usamos la categoría única
+  const cats = (props.categorias && props.categorias.length
+    ? props.categorias
+    : (props.categoria ? [props.categoria] : [])
+  ).map(normalizar)
 
-    return lista.filter((p) => {
-      const linea = String(p.linea || p.categoria || '').toLowerCase()
-      // el producto entra si su línea contiene alguna de las categorías
-      return cats.some(cat => linea.includes(cat))
-    })
-  }
+  // Si no hay ninguna categoría, devolvemos todo
+  if (!cats.length) return lista
 
-  // 2) Si solo nos pasan UNA categoría (Monitores, Artículos, etc.)
-  if (props.categoria) {
-    const cat = String(props.categoria).toLowerCase().trim()
-
-    return lista.filter((p) => {
-      const linea = String(p.linea || p.categoria || '').toLowerCase()
-      return linea.includes(cat)
-    })
-  }
-
-  // 3) Si no hay filtros, devolvemos todo
-  return lista
+  // Filtramos productos que tengan linea/categoria dentro del grupo
+  return lista.filter((p) => {
+    const cruda = p.linea || p.categoria || ''
+    const linea = normalizar(cruda)
+    return cats.includes(linea)
+  })
 })
 
+const multiCategoriasLink = computed(() => {
+  // 1) Si nos pasan linkVerTodos explícito, lo usamos
+  if (props.linkVerTodos) {
+    return props.linkVerTodos
+  }
+
+  // 2) Si hay varias categorías → mandamos todas en un solo parámetro
+  if (props.categorias && props.categorias.length) {
+    const joined = props.categorias
+      .map(c => encodeURIComponent(c))
+      .join(',')
+    return `/catalogo_cat?categorias=${joined}`
+  }
+
+  // 3) Si hay una sola categoría (modo antiguo)
+  if (props.categoria) {
+    return `/catalogo_cat?categoria=${encodeURIComponent(props.categoria)}`
+  }
+
+  // 4) Sin categoría → catálogo general (por si acaso)
+  return '/catalogo'
+})
+
+const textoBoton = computed(() => {
+  // Personalízalo a tu gusto
+  return 'Ver todos'
+})
+
+// 🔗 Link para el botón "Ver todos"
+const linkVerTodos = computed(() => {
+  // 1) Caso Tendencia: varias categorías (props.categorias)
+  if (Array.isArray(props.categorias) && props.categorias.length > 0) {
+    // Normalizamos un poco el texto
+    const lista = props.categorias
+      .map(c => c.toString().trim().toUpperCase())
+      .filter(Boolean)
+
+    return {
+      path: '/catalogo_cat',
+      query: {
+        // ejemplo: "PARLANTES,CABINAS,COMPUTADORES NUEVOS"
+        categorias: lista.join(',')
+      }
+    }
+  }
+
+  // 2) Caso normal: una sola categoría (Monitores, Artículos y Accesorios)
+  if (props.categoria) {
+    const cat = props.categoria.toString().trim().toUpperCase()
+    return {
+      path: '/catalogo_cat',
+      query: {
+        categoria: cat
+      }
+    }
+  }
+
+  // 3) Sin nada → catálogo general
+  return { path: '/catalogo_cat' }
+})
 
 const showNavigation = ref(true)
 
