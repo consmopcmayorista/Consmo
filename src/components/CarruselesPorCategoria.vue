@@ -5,14 +5,14 @@
       <!-- Encabezado del carrusel con título y botón "Ver todos" -->
       <div class="d-flex justify-content-between align-items-center mb-4 encabezado-carrusel flex-wrap gap-2">
         <h2 class="section_title_3 mb-0">
-          🧩 {{ titulo || (categoria.charAt(0).toUpperCase() + categoria.slice(1)) }}
+           {{ titulo || (categoria.charAt(0).toUpperCase() + categoria.slice(1)) }}
         </h2>
         <RouterLink
-          :to="`/catalogo_cat?categoria=${encodeURIComponent(categoria)}`"
-          class="btn btn-outline-primary btn-sm"
-        >
-         VER TODOS LOS {{ categoria.charAt(0).toUpperCase() + categoria.slice(1) }}
-        </RouterLink>
+  :to="`/catalogo_cat?categoria=${encodeURIComponent(categoria || (categorias?.[0] || ''))}`"
+  class="btn btn-outline-primary btn-sm"
+>
+  VER TODOS
+</RouterLink>
       </div>
 
       <!-- Carrusel Swiper dinámico -->
@@ -74,16 +74,66 @@ import 'swiper/css/navigation'
 import { RouterLink } from 'vue-router'
 
 const props = defineProps({
-  productos: Array,
-  categoria: String,
-  titulo: { type: String, default: '' },
-  buscarProducto: Function,
-  formatLine: Function
+  productos: {
+    type: Array,
+    default: () => []
+  },
+  // una sola categoría (para Monitores, Artículos y Accesorios)
+  categoria: {
+    type: String,
+    default: ''
+  },
+  // varias categorías (para TENDENCIA)
+  categorias: {
+    type: Array,
+    default: () => []
+  },
+  titulo: {
+    type: String,
+    default: ''
+  },
+  buscarProducto: {
+    type: Function,
+    default: null    // solo se usa para el botón "Ver más"
+  },
+  formatLine: {
+    type: Function,
+    default: null
+  }
 })
 
+
+// 🔹 Filtra SOLO por la categoría del producto (linea/categoria)
 const productosFiltrados = computed(() => {
-  return props.productos.filter(p => p.linea?.toLowerCase().includes(props.categoria.toLowerCase()))
+  const lista = props.productos || []
+
+  // 1) Si nos pasan VARIAS categorías (TENDENCIA)
+  if (Array.isArray(props.categorias) && props.categorias.length > 0) {
+    const cats = props.categorias
+      .map(c => String(c).toLowerCase().trim())
+      .filter(Boolean)
+
+    return lista.filter((p) => {
+      const linea = String(p.linea || p.categoria || '').toLowerCase()
+      // el producto entra si su línea contiene alguna de las categorías
+      return cats.some(cat => linea.includes(cat))
+    })
+  }
+
+  // 2) Si solo nos pasan UNA categoría (Monitores, Artículos, etc.)
+  if (props.categoria) {
+    const cat = String(props.categoria).toLowerCase().trim()
+
+    return lista.filter((p) => {
+      const linea = String(p.linea || p.categoria || '').toLowerCase()
+      return linea.includes(cat)
+    })
+  }
+
+  // 3) Si no hay filtros, devolvemos todo
+  return lista
 })
+
 
 const showNavigation = ref(true)
 
@@ -99,6 +149,8 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
 })
+
+const modules = [Navigation]
 </script>
 
 <style scoped>

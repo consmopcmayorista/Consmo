@@ -412,12 +412,11 @@ onMounted(() => {
 <!-- Mostrar carrusel de productos Gamer -->
 <CarruselesPorCategoria
   :productos="productos_alea"
-  categoria="DISCOS DE ESTADO SOLIDO"
-  titulo="📱 SSD "
+  :categorias="['PARLANTES', 'CABINAS', 'COMPUTADORES NUEVOS',]"
+  titulo="🔥 Tendencia"
   :buscarProducto="buscar_productos"
   :formatLine="formatLine"
 />
-
 
   
   <Destacados />
