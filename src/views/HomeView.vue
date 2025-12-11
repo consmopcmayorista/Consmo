@@ -11,6 +11,7 @@ import axios from 'axios'
 
 import popup from '@/components/PopupPromociones.vue'
 import Destacados from '@/components/Destacados.vue'
+import SeccionTodosProductos from '@/components/SeccionTodosProductos.vue' // 👈 NUEVO
 
 // =====================
 // Configuración
@@ -34,6 +35,10 @@ const imagenCargada = ref(false)
 // Cantidad solicitada en el modal + tope por stock
 const cantidades = ref(1)
 const maximo = ref(Infinity)                // tope de stock para el producto abierto
+// Todos los productos para la sección "Todos nuestros productos"
+const productos = ref([])
+
+
 
 // =====================
 // Helpers de stock
@@ -280,12 +285,37 @@ function shuffleArray(array) {
     .map(({ value }) => value)
 }
 
-async function fetchProductos() {
+async function fetchProductos () {
   try {
     const response = await axios.get(
       `https://whatsapp-nube.com/api_web/api_web_catalogo_new2.php?dominio=${dominio}&id=${id_empresa}`
     )
+
+    // Lista que ya usas para recomendados
     productos_alea.value = shuffleArray(response.data.productos || [])
+
+    // 👉 Nueva: llenar la sección "Todos nuestros productos"
+    productos.value = productos_alea.value.map((p) => ({
+      id: p.id,                // ID del producto
+      descripcion: p.titulo,   // título / nombre
+      precio: p.pt1,           // precio 1
+      imagen: p.imagen,        // imagen principal
+
+      // SKU (en tu API se llama idpro)
+      sku: p.idpro,
+
+      // Sedes donde hay existencia (en tu API se llama existencia)
+      sedes: p.existencia,
+
+      // Link al detalle de producto (igual al resto de la web)
+      link: `/producto?producto=${p.id}`
+    }))
+
+    console.log(
+      'Productos para sección "Todos nuestros productos":',
+      productos.value.length,
+      productos.value[0]
+    )
   } catch (error) {
     console.error('Error al obtener productos:', error)
   } finally {
@@ -491,7 +521,8 @@ onMounted(() => {
 </div>
  <CarouselTarjetas :tarjetas="productos_alea.slice(0, 8)" />
 
-
+<!-- Nueva sección: todos los productos -->
+<SeccionTodosProductos :productos="productos" />
 
 <!-- Sección Recomendados -->
 
