@@ -15,30 +15,15 @@
   </div>
 </template>
   
-  <script setup>
+    <script setup> 
   const promos = [
-    { title: 'VASO TERMICO CON PITILLO COLORES VARIOS: C9135', image: 'C9135.png'},
-    { title: 'UPS INTERACTIVA 6 TOMAS 600VA/360W WATTANA: 1655', image: '1655.png'},
-    { title: 'UPS INTERACTIVA 6 TOMAS 800VA/480W WATTANA: 1656', image: '1656.png'},
-    { title: 'POWER BANK PORTATIL 20000mAH ICONNEX: 1680', image: '1680.png'},
-    { title: 'MINI TECLADO INALAMBRICO RGB SMART: 2042', image: '2042.png'},
-    { title: 'IMPRESORA TERMICA POS 2en1 JALTECH: 2428', image: '2428.png'},
-    { title: 'LECTOR CODIGO DE BARRAS ALAMBRICO DIGITALPOS: 2954', image: '2954.png'},
-    { title: 'LECTOR CODIGO DE BARRAS OMNIDIRECCIONAL AUTO: 3367', image: '3367.png'},
-    { title: 'LECTOR CODIGO DE BARRAS INALAMBRICO JALTECH: 3369', image: '3369.png'},
-    { title: 'LECTOR CODIGO DE BARRAS OMNIDIRECCIONAL 2D: 3508', image: '3508.png'},
-    { title: 'MINI KARAOKE RGB BT 5.3 JALTECH: 3598', image: '3598.png'},
-    { title: 'PROYECTOR PORTABLE FHD ANDROID P30: 3627', image: '3627.png'},
-    { title: 'PARLANTE MICROFONO BLUETOOTH 5.1: 3630', image: '3630.png'},
-    { title: 'TECLADO GAMER RGB MECANICO NEGRO USB JEDEL: 4107', image: '4107.png'},
-    { title: 'PARLANTE BT CON CARGA INALAMBRICA LUZ LED: 5896', image: '5896.png'},
-    { title: 'BOLSO TIPO MILITAR CAMUFLAJEADO COLORES: 7891', image: '7891.png'},
-    { title: 'CHASIS GAMER PARA PC TRIDIMENSIONAL RGB: 8897', image: '8897.png'},
-    { title: 'TECLADO ALAMBRICO GAMER RGB GENIUS ERGONOMICO: 9202', image: '9202.png'},
-    { title: 'WATCH ONN GOOGLE TV HDMI 4K: 9800', image: '9800.png'},
-    { title: 'SET BROCHAS X3 PIEZAS DE SILICONA: C2553', image: 'C2553.png'},
-    { title: 'BROCHAS DE MAQUILLAJE SET DE 13 PIEZAS: C2558', image: 'C2558.png'},
-    { title: 'CAMARA IP WIFI ROBOTICA 1080P TENDA CP3: 1918', image: '1918.png'},
+   // { title: 'VASO TERMICO CON PITILLO COLORES VARIOS: C9135', image: 'C9135.png'},
+   // { title: 'UPS INTERACTIVA 6 TOMAS 600VA/360W WATTANA: 1655', image: '1655.png'},
+   // { title: 'UPS INTERACTIVA 6 TOMAS 800VA/480W WATTANA: 1656', image: '1656.png'},
+   // { title: 'POWER BANK PORTATIL 20000mAH ICONNEX: 1680', image: '1680.png'},
+   // { title: 'MINI TECLADO INALAMBRICO RGB SMART: 2042', image: '2042.png'},
+   // { title: 'IMPRESORA TERMICA POS 2en1 JALTECH: 2428', image: '2428.png'}, 
+
     
     
   
