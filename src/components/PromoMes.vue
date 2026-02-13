@@ -17,12 +17,19 @@
   
     <script setup> 
   const promos = [
-   // { title: 'VASO TERMICO CON PITILLO COLORES VARIOS: C9135', image: 'C9135.png'},
-   // { title: 'UPS INTERACTIVA 6 TOMAS 600VA/360W WATTANA: 1655', image: '1655.png'},
-   // { title: 'UPS INTERACTIVA 6 TOMAS 800VA/480W WATTANA: 1656', image: '1656.png'},
-   // { title: 'POWER BANK PORTATIL 20000mAH ICONNEX: 1680', image: '1680.png'},
-   // { title: 'MINI TECLADO INALAMBRICO RGB SMART: 2042', image: '2042.png'},
-   // { title: 'IMPRESORA TERMICA POS 2en1 JALTECH: 2428', image: '2428.png'}, 
+   { title: 'IMPRESORA CODIGOS DE BARRA/ETIQUETAS USB/LAN: 2859', image: '2859.png'},
+   { title: 'MONITOR 22¨FHD 100HZ VGA/HDMI DAHUA: 3365', image: '3365.png'},
+   { title: 'MONITOR TACTIL POS LCD 15¨HDMI/VGA: 3401', image: '3401.png'},
+   { title: 'CAJON MONEDERO PEQUEÑO 4 BILLE 5 MONE DIGITALPOS: 3694', image: '3694.png'},
+   { title: 'MONITOR 27¨ IPS FHD HDMI/VGA NEOTEK: 5422', image: '5422.png'},
+   { title: 'MONITOR 27¨ CURVO VA FHD HDMI/VGA NEOTEK: 5423', image: '5423.png'},
+   { title: 'SILLA ESCRITORIO AJUSTABLE NEGRA: 5812', image: '5812.png'},
+   { title: 'CHASIS GAMER PC TRIDIMENSIONAL RGB: 8897', image: '8897.png'},
+   { title: 'COOLER LED PARA CHASIS 120MM COLORES : 9707-9706-9705-9708', image: '9707-9706-9705-9708.png'},
+   { title: 'SILLA GAMER HAVIT RECLINABLE 360: 9798', image: '9798.png'},
+   { title: 'CONVERTIDOR DE DVI 24X1 A HDMI HEMBRA: C7004', image: 'C7004.png'},
+   { title: 'BATERIAS AA RECARGABLE X2 CARTON 1.2V: C9003', image: 'C9003.png'},
+
 
     
     
