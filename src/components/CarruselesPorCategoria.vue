@@ -5,7 +5,7 @@
       <!-- Encabezado del carrusel con título y botón "Ver todos" -->
       <div class="d-flex justify-content-between align-items-center mb-4 encabezado-carrusel flex-wrap gap-2">
   <h2 class="section_title_3 mb-0">
-    🧩 {{ titulo || (categoria.charAt(0).toUpperCase() + categoria.slice(1)) }}
+     {{ titulo || (categoria.charAt(0).toUpperCase() + categoria.slice(1)) }}
   </h2>
 
   <RouterLink

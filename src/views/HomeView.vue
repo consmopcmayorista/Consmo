@@ -412,7 +412,7 @@ onMounted(() => {
 <!-- Mostrar carrusel de productos Gamer -->
 <CarruselesPorCategoria
   :productos="productos_alea"
-  :categorias="['PARLANTES', 'CABINAS', 'COMPUTADORES NUEVOS',]"
+  :categorias="['IMPRESORAS', 'COMPUTADORES NUEVOS',]"
   titulo="🔥 Tendencia"
   :buscarProducto="buscar_productos"
   :formatLine="formatLine"
@@ -480,8 +480,8 @@ onMounted(() => {
   </div> -->
 <CarruselesPorCategoria
   :productos="productos_alea"
-  categoria="ARTICULOS Y ACCESORIOS"
-  titulo="🛒 Artículos y Accesorios"
+  categoria="POS PUNTOS DE VENTA"
+  titulo="🛒 POS PUNTOS DE VENTA"
   :buscarProducto="buscar_productos"
   :formatLine="formatLine"
 />
