@@ -17,29 +17,28 @@
   
     <script setup> 
   const promos = [
-  //  { title: 'IMPRESORA CODIGOS DE BARRA/ETIQUETAS USB/LAN: 2859', image: '2859.png'},
-  //  { title: 'MONITOR 22¨FHD 100HZ VGA/HDMI DAHUA: 3365', image: '3365.png'},
-  //  { title: 'MONITOR TACTIL POS LCD 15¨HDMI/VGA: 3401', image: '3401.png'},
-  //  { title: 'CAJON MONEDERO PEQUEÑO 4 BILLE 5 MONE DIGITALPOS: 3694', image: '3694.png'},
-  //  { title: 'MONITOR 27¨ IPS FHD HDMI/VGA NEOTEK: 5422', image: '5422.png'},
-  //  { title: 'MONITOR 27¨ CURVO VA FHD HDMI/VGA NEOTEK: 5423', image: '5423.png'},
-  //  { title: 'SILLA ESCRITORIO AJUSTABLE NEGRA: 5812', image: '5812.png'},
-  //  { title: 'CHASIS GAMER PC TRIDIMENSIONAL RGB: 8897', image: '8897.png'},
-  //  { title: 'COOLER LED PARA CHASIS 120MM COLORES : 9707-9706-9705-9708', image: '9707-9706-9705-9708.png'},
-  //  { title: 'SILLA GAMER HAVIT RECLINABLE 360: 9798', image: '9798.png'},
-  //  { title: 'CONVERTIDOR DE DVI 24X1 A HDMI HEMBRA: C7004', image: 'C7004.png'},
-  //  { title: 'BATERIAS AA RECARGABLE X2 CARTON 1.2V: C9003', image: 'C9003.png'},
+    { title: 'IMPRESORA MULTIFUNCIONAL WIFI EPSON L3251: 5589', image: '5589.jpg'},
+    { title: 'IMPRESORA MULTIFUNCIONAL USB EPSON L3210: 2416', image: '2416.jpg'},
+    { title: 'IMPRESORA MULTIFUNCIONAL WIFI CANON PIXMA G3170: 2412', image: '2412.jpg'},
+    { title: 'COMBO POS GRANDE CAJON + IMPRESORA 80MM + LECTOR: 3392-3981-3635', image: '3392-3981-3635.jpg'},
+    { title: 'COMBO POS PEQUEÑO CAJON + IMPRESORA 58MM + LECTOR: 3393-3635-3619', image: '3393-3635-3619.jpg'},
+    { title: 'LECTOR CODIGO DE BARRAS OMNIDIRECCIONAL 2D ALAMBRICO: 3685', image: '3685.jpg'},
+    { title: 'IMPRESORA TERMICA POS 80MM USB+LAN+RJ11 NEOTEK : 3981', image: '3981.jpg'},
+    { title: 'ROUTER NETIS INALAMBRICO N300 3 ANTENAS 5DBI: NET4004', image: 'NET4004.jpg'},
+    { title: 'EQUIPO COMPLETO USADO TINY I5 6TA 8GB RAM/256GB SSD + MONITOR 19: U2152', image: 'U2152.jpg'},
+    { title: 'TECLADO ALAMBRICO RGB COLOR NEGRO JEDEL K500+: 2236', image: '2236.jpg'},
+    { title: 'IMPRESORA TERMICA POS 80MM USB+LAN+BLUETOOTH DIGITAL POS: 2409', image: '2409.jpg'},
+    { title: 'CAJON MONEDERO PEQUEÑO 4 BILLETES 5 MONEDAS METALICO DIGITAL POS: 3694', image: '3694.jpg'},
+    { title: 'CAMARA IP WIFI6 ROBOTICA AI 5MP TENDA MOD 3K CP7: 1696', image: '1696.jpg'},
+    { title: 'ROUTER DUAL-BAND 5 ANTENAS 6DBI GIGABIT WIFI6 TENDA TX2JPRO: 2693', image: '2693.jpg'},
+    { title: 'CAJON MONEDERO GRANDE 5 BILLETES 8 MONEDAS NEOTEK: 3392', image: '3392.jpg'},
+
 
 
     
     
   
-
-
-
-    
-  
-    // Agrega más promociones según sea necesario
+     // Agrega más promociones según sea necesario
   ]
   </script>
   
