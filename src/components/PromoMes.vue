@@ -6,7 +6,7 @@
       class="promo-card"
       @click="$emit('select-promo', { ...promo, folder: 'mes' })"
     >
-      <img :src="`/images2/promos/mes/${promo.image}`" :alt="promo.title" />
+    <img :src="`/images2/promos/mes/${promo.image}`" :alt="promo.title" />
       <div class="promo-title">{{ promo.title }}</div>
     </div>
   </div>
@@ -16,14 +16,14 @@
 </template>
   
    <script setup> 
-  const promos = [[
+  const promos = [
    //{ title: 'IMPRESORA MULTIFUNCIONAL WIFI EPSON L3251: 5589', image: '5589.jpg'},
 
     
     
   
      // Agrega más promociones según sea necesario
-  ]]
+  ]
   </script>
   
   <style scoped>
