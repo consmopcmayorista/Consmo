@@ -17,16 +17,10 @@
   
    <script setup> 
   const promos = [
-   { title: 'MONITOR 23" FHD 100HZ HDMI/VGA DAHUA: 3363', image: '3363.png'},
-    { title: 'MONITOR 27" LED 100HZ HDMI/VGA DAHUA: 3398', image: '3398.png'},
-     { title: 'LECTOR CODIGO DE BARRAS ALAMBRICO SIN BASE 1D/2D/QR NEOTEK: 3635', image: '3635.png'},
-      { title: 'CARGADOR PARA CELULAR 65W TIPO CX2 PTOS USB C - USB A CARGA RAPIDA 100W: 5876', image: '5876.png'},
-       { title: 'IMPRESORA MULTIFUNCIONAL DUPLEX WIFI/RJ45 FAX EPSON L6490: 6490', image: '6490.png'},
-       { title: 'CHASIS GAMER TRIDIMENSIONAL PARA PC RGB NEGRO 6 COOLERS ORIGAMI ORI-6027: 8897', image: '8897.png'},
-        { title: 'FUENTE DE PODER REAL ATX  600W 24X1 NEGRA 80 PLUS BRONCE XPG PROBE: 1526', image: '1526.png'},
-         { title: 'COMBO TECLADO Y MOUSE INALAMBRICO NEGRO CONNECT  KB-205: 2249', image: '2249.png'},
-          { title: 'ROUTER 2 ANTENAS TENDA N300 MOD N301: 2501', image: '2501.png'},
-           { title: 'CAJON MONEDERO PEQUEÑO 4 BILLETES 5 MONEDAS RIEL PLASTICO 12V LEXA XT-3335: 3359', image: '3359.png'},
+  // { title: 'MONITOR 23" FHD 100HZ HDMI/VGA DAHUA: 3363', image: '3363.png'},
+  // { title: 'MONITOR 27" LED 100HZ HDMI/VGA DAHUA: 3398', image: '3398.png'},
+  // { title: 'LECTOR CODIGO DE BARRAS ALAMBRICO SIN BASE 1D/2D/QR NEOTEK: 3635', image: '3635.png'},
+  // { title: 'CARGADOR PARA CELULAR 65W TIPO CX2 PTOS USB C - USB A CARGA RAPIDA 100W: 5876', image: '5876.png'},
 
     
     
