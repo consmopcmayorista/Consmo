@@ -77,15 +77,27 @@
                 <input class="form-control" type="text" placeholder="Apto, interior..." v-model.trim="direccion_cliente2" />
               </div>
 
-              <div class="col-md-6 form-group">
-                <label>Ciudad</label>
-                <input class="form-control" type="text" placeholder="Medellín" v-model.trim="ciudad_cliente" />
+                            <div class="col-md-6 form-group">
+                <label>Departamento</label>
+                <select class="form-control" v-model="departamento_cliente">
+                  <option value="">Seleccione un departamento...</option>
+                  <option v-for="(ciudades, dep) in colombiaData" :key="dep" :value="dep">
+                    {{ dep }}
+                  </option>
+                </select>
               </div>
 
               <div class="col-md-6 form-group">
-                <label>Departamento</label>
-                <input class="form-control" type="text" placeholder="Antioquia" v-model.trim="departamento_cliente" />
+                <label>Ciudad</label>
+                <select class="form-control" v-model="ciudad_cliente" :disabled="!departamento_cliente">
+                  <option value="">Seleccione una ciudad...</option>
+                  <option v-for="ciudad in ciudadesDisponibles" :key="ciudad" :value="ciudad">
+                    {{ ciudad }}
+                  </option>
+                </select>
               </div>
+
+
 
               <div class="col-md-12 form-group">
                 <div class="custom-control custom-checkbox">
@@ -124,14 +136,26 @@
                 <label>Continuación de Dirección (opcional)</label>
                 <input class="form-control" type="text" placeholder="Apto, interior..." v-model.trim="e_direccion_cliente2" />
               </div>
+                            <div class="col-md-6 form-group">
+                <label>Departamento</label>
+                <select class="form-control" v-model="e_departamento_cliente">
+                  <option value="">Seleccione un departamento...</option>
+                  <option v-for="(ciudades, dep) in colombiaData" :key="dep" :value="dep">
+                    {{ dep }}
+                  </option>
+                </select>
+              </div>
+
               <div class="col-md-6 form-group">
                 <label>Ciudad</label>
-                <input class="form-control" type="text" placeholder="Medellín" v-model.trim="e_ciudad_cliente" />
+                <select class="form-control" v-model="e_ciudad_cliente" :disabled="!e_departamento_cliente">
+                  <option value="">Seleccione una ciudad...</option>
+                  <option v-for="ciudad in e_ciudadesDisponibles" :key="ciudad" :value="ciudad">
+                    {{ ciudad }}
+                  </option>
+                </select>
               </div>
-              <div class="col-md-6 form-group">
-                <label>Departamento</label>
-                <input class="form-control" type="text" placeholder="Antioquia" v-model.trim="e_departamento_cliente" />
-              </div>
+
             </div>
           </div>
         </div>
@@ -260,7 +284,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, reactive } from 'vue'
+import { ref, onMounted, reactive, watch, computed } from 'vue'
 import axios from 'axios'
 
 /* ===========================
@@ -302,6 +326,67 @@ const e_direccion_cliente = ref('')
 const e_direccion_cliente2 = ref('')
 const e_ciudad_cliente = ref('')
 const e_departamento_cliente = ref('')
+
+/* =======================================================
+   DATOS Y REACTIVIDAD DE DEPARTAMENTOS Y CIUDADES (COLOMBIA)
+   ======================================================= */
+const colombiaData = {
+  'Amazonas': ['Leticia'],
+  'Antioquia': ['Medellín', 'Bello', 'Envigado', 'Itagüí', 'Rionegro', 'Sabaneta', 'Caldas', 'Copacabana', 'La Estrella', 'Girardota', 'Apartadó', 'Turbo', 'Caucasia', 'Chigorodó', 'Marinilla', 'Guarne', 'La Ceja'],
+  'Arauca': ['Arauca', 'Tame', 'Saravena'],
+  'Atlántico': ['Barranquilla', 'Soledad', 'Malambo', 'Sabanalarga', 'Baranoa', 'Puerto Colombia', 'Galapa'],
+  'Bogotá D.C.': ['Bogotá D.C.'],
+  'Bolívar': ['Cartagena', 'Magangué', 'Turbaco', 'Arjona', 'El Carmen de Bolívar', 'María La Baja'],
+  'Boyacá': ['Tunja', 'Duitama', 'Sogamoso', 'Chiquinquirá', 'Puerto Boyacá', 'Paipa', 'Villa de Leyva'],
+  'Caldas': ['Manizales', 'La Dorada', 'Chinchiná', 'Riosucio', 'Villamaría'],
+  'Caquetá': ['Florencia', 'San Vicente del Caguán'],
+  'Casanare': ['Yopal', 'Aguazul', 'Paz de Ariporo'],
+  'Cauca': ['Popayán', 'Santander de Quilichao', 'Puerto Tejada', 'Patía', 'Miranda'],
+  'Cesar': ['Valledupar', 'Aguachica', 'Agustín Codazzi', 'Bosconia', 'El Paso'],
+  'Chocó': ['Quibdó', 'Istmina', 'Condoto'],
+  'Córdoba': ['Montería', 'Cereté', 'Sahagún', 'Lorica', 'Montelíbano', 'Planeta Rica', 'Tierralta'],
+  'Cundinamarca': ['Soacha', 'Chía', 'Zipaquirá', 'Facatativá', 'Fusagasugá', 'Mosquera', 'Funza', 'Girardot', 'Cajicá', 'Madrid', 'Tocancipá', 'Sopó', 'Cota', 'La Calera'],
+  'Guainía': ['Inírida'],
+  'Guaviare': ['San José del Guaviare'],
+  'Huila': ['Neiva', 'Pitalito', 'Garzón', 'La Plata', 'Campoalegre'],
+  'La Guajira': ['Riohacha', 'Maicao', 'Uribia', 'San Juan del Cesar', 'Fonseca'],
+  'Magdalena': ['Santa Marta', 'Ciénaga', 'Fundación', 'Plato', 'El Banco'],
+  'Meta': ['Villavicencio', 'Acacías', 'Granada', 'Puerto López', 'Restrepo'],
+  'Nariño': ['Pasto', 'Tumaco', 'Ipiales', 'Túquerres', 'La Unión'],
+  'Norte de Santander': ['Cúcuta', 'Ocaña', 'Villa del Rosario', 'Los Patios', 'Pamplona', 'El Zulia'],
+  'Putumayo': ['Mocoa', 'Puerto Asís', 'Orito', 'Sibundoy'],
+  'Quindío': ['Armenia', 'Calarcá', 'Montenegro', 'Quimbaya', 'La Tebaida'],
+  'Risaralda': ['Pereira', 'Dosquebradas', 'Santa Rosa de Cabal', 'La Virginia'],
+  'San Andrés y Providencia': ['San Andrés', 'Providencia'],
+  'Santander': ['Bucaramanga', 'Floridablanca', 'Girón', 'Piedecuesta', 'Barrancabermeja', 'San Gil', 'Lebrija', 'Socorro'],
+  'Sucre': ['Sincelejo', 'Corozal', 'San Marcos', 'Tolú'],
+  'Tolima': ['Ibagué', 'Espinal', 'Melgar', 'Mariquita', 'Líbano', 'Chaparral'],
+  'Valle del Cauca': ['Cali', 'Palmira', 'Buenaventura', 'Tuluá', 'Buga', 'Cartago', 'Jamundí', 'Yumbo', 'Florida', 'Zarzal', 'Candelaria', 'Guacarí'],
+  'Vaupés': ['Mitú'],
+  'Vichada': ['Puerto Carreño', 'La Primavera']
+}
+
+// Reactividad de Dirección Principal
+const ciudadesDisponibles = computed(() => {
+  if (!departamento_cliente.value) return []
+  return colombiaData[departamento_cliente.value] || []
+})
+
+watch(departamento_cliente, () => {
+  ciudad_cliente.value = '' // Limpia la ciudad cuando cambia el departamento
+})
+
+// Reactividad de Dirección de Envío Adicional
+const e_ciudadesDisponibles = computed(() => {
+  if (!e_departamento_cliente.value) return []
+  return colombiaData[e_departamento_cliente.value] || []
+})
+
+watch(e_departamento_cliente, () => {
+  e_ciudad_cliente.value = '' // Limpia la ciudad de envío cuando cambia el departamento de envío
+})
+
+
 
 let subtotal = ref(0)
 let iva = ref(0)
@@ -370,6 +455,7 @@ function generateRef(length = 30) {
 }
 
 /* ====== VALIDACIONES ====== */
+/* ====== VALIDACIONES ====== */
 function validateFormBasic() {
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email_cliente.value || '')
   const phoneDigits = (tel_cliente.value || '').replace(/\D/g, '')
@@ -379,8 +465,9 @@ function validateFormBasic() {
   if (!emailOk) return alert('Correo inválido'), false
   if (phoneDigits.length < 7) return alert('Celular inválido'), false
   if (!direccion_cliente.value || direccion_cliente.value.length < 4) return alert('Dirección inválida'), false
+  
   if (!ciudad_cliente.value) return alert('Ciudad requerida'), false
-  if (!departamento_cliente.value) return alert('Departamento requerido'), false
+  
   if (total.value <= 0) return alert('Tu carrito está vacío'), false
 
   if (shipToOther.value) {
@@ -391,11 +478,14 @@ function validateFormBasic() {
     if (!emailOk2) return alert('Correo de envío inválido'), false
     if (phoneDigits2.length < 7) return alert('Celular de envío inválido'), false
     if (!e_direccion_cliente.value) return alert('Dirección de envío requerida'), false
-    if (!e_ciudad_cliente.value) return alert('Ciudad de envío requerida'), false
+    
+    // CORREGIDO: Validar departamento de envío primero, luego ciudad de envío
     if (!e_departamento_cliente.value) return alert('Departamento de envío requerido'), false
+    if (!e_ciudad_cliente.value) return alert('Ciudad de envío requerida'), false
   }
   return true
 }
+
 
 /* ====== Cliente/Envio ====== */
 function buildClienteArrays() {

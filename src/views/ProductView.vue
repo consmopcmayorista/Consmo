@@ -194,7 +194,7 @@ function calcularTope(prod) {
 /* ========= Fallback: si el detalle NO trae stock usable, lo buscamos en el catálogo general ========= */
 async function fallbackTopeDesdeCatalogo(idProducto) {
   try {
-    const url = `https://whatsapp-nube.com/api_web/api_web_catalogo_new2.php?dominio=consmopcmayorista.com&id=24`
+    const url = `https://sysnube.com/api/api_web/api_web_catalogo_new2`
     const { data } = await axios.get(url)
     const lista = Array.isArray(data?.productos) ? data.productos : []
     const found = lista.find(p => String(p.id) === String(idProducto))
@@ -235,7 +235,7 @@ async function fetchProducto() {
     if (!id) return
 
     const { data } = await axios.get(
-      `https://whatsapp-nube.com/api_web/api_web_catalogo_new_producto_inv.php?id=${id}`
+      `https://sysnube.com/api/api_web/api_web_catalogo_new_producto_inv?id=${id}`
     )
 
     if (data.producto?.length > 0) {
@@ -277,7 +277,7 @@ async function fetchProducto() {
 async function fetchRelacionados(categoria, idExcluido) {
   try {
     const res = await axios.get(
-      `https://whatsapp-nube.com/api_web/api_web_catalogo_new2.php?dominio=consmopcmayorista.com&id=24`
+      `https://sysnube.com/api/api_web/api_web_catalogo_new2`
     )
     relacionados.value = (res.data.productos || [])
       .filter(p => p.linea === categoria && p.id !== idExcluido)

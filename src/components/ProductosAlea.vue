@@ -20,9 +20,9 @@ function formatLine(str, start, length) {
 // Método para obtener productos de la API
 async function fetchProductos() {
   try {
-    console.log(`URL => https://whatsapp-nube.com/api_web/api_web_catalogo_new2.php?dominio=${dominio}&id=${id_empresa}`)
+    console.log(`URL => https://sysnube.com/api/api_web/api_web_catalogo_new2`)
     const response = await axios.get(
-      `https://whatsapp-nube.com/api_web/api_web_catalogo_new2.php?dominio=${dominio}&id=${id_empresa}`
+      `https://sysnube.com/api/api_web/api_web_catalogo_new2`
     )
     // Suponemos que la API retorna un objeto con "productos"
     productos_alea.value = response.data.productos || []

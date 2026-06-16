@@ -96,7 +96,7 @@ function shuffleArray(array) {
 // Carga de productos "recomendados" desde la API
 async function fetchProductos() {
   try {
-    const url = `https://whatsapp-nube.com/api_web/api_web_catalogo_new2.php?dominio=${dominio}&id=${id_empresa}`
+    const url = `https://sysnube.com/api/api_web/api_web_catalogo_new2`
     console.log("Consultando API:", url)
     const response = await axios.get(url)
     todas_las_categorias.value =response.data.categorias
@@ -257,7 +257,7 @@ async function filtrarProductos() {
 
   try {
     cargando.value = true
-    const url = `https://whatsapp-nube.com/api_web/api_web_catalogo_new_producto_varios.php?texto=${busqueda.value}&id=${id_empresa}`
+    const url = `https://sysnube.com/api/api_web/api_web_catalogo_new_producto_varios?texto=${busqueda.value}`
     console.log("Consultando:", url)
     const response = await axios.get(url)
     const productos = response.data.productos || []

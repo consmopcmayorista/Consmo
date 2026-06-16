@@ -131,7 +131,7 @@ import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
 // ---------- Config API (tu backend real) ----------
-const API_URL = 'https://whatsapp-nube.com/api_web/api_web_catalogo_new2.php?dominio=consmopcmayorista.com&id=24'
+const API_URL = 'https://sysnube.com/api/api_web/api_web_catalogo_new2'
 
 // ---------- Estado ----------
 const ticket   = ref([])  // [{ id, descripcion, precio, cant, existencia, existencia2_raw, foto, ... }]

@@ -78,7 +78,7 @@ function extractLastDigits(s) {
 }
 async function obtenerUltimoPedido() {
   try {
-    const r = await axios.get('https://whatsapp-nube.com/api_web/api_ultimo_pedido.php?id_empresa=24')
+    const r = await axios.get('https://sysnube.com/api/api_web/api_ultimo_pedido')
     return r.data?.nrofactura || null
   } catch { return null }
 }
@@ -245,16 +245,18 @@ async function facturar_pedido(refPago) {
     const fd = new FormData()
     fd.append('factura', JSON.stringify(infoImprimir))
     fd.append('id', '24')
+    fd.append('canalVenta', 'web');
     fd.append('documento', '8')
     fd.append('referencia_pago', refPago)
     if (wompi.value?.id)     fd.append('wompi_tx', wompi.value.id)
     if (wompi.value?.status) fd.append('wompi_status', wompi.value.status)
 
     console.log('[FACTURA->BACKEND]', JSON.parse(fd.get('factura')))
-    const URL = 'https://whatsapp-nube.com/api_web/api_pos_pedido_web.php'
+    const URL = 'https://sysnube.com/api/api_web/api_pos_pedido_web'
     const res = await axios.post(URL, fd, { headers: { 'Content-Type': 'multipart/form-data' } })
 
     const id_pedido = res.data?.[1]
+    referencia_pago.value =  res.data?.[1]
     const id_cliente = res.data?.[2]
     if (id_pedido && id_cliente) await enviar_email(refPago, id_pedido, id_cliente)
   } catch (e) {
@@ -279,9 +281,9 @@ onMounted(async () => {
     }
 
     // Referencia secuencial corta
-    referencia_pago.value = await getNextOrderRef()
+   
 
-    await facturar_pedido(referencia_pago.value)
+    await facturar_pedido()
 
     // Limpia storages
     try {

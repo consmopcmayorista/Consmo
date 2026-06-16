@@ -25,7 +25,7 @@ async function fetchProducto(id) {
   try {
     cargando.value = true;
     console.log(`Consultando: https://whatsapp-nube.com/api_web/api_web_catalogo_new_producto_inv.php?id=${id}`);
-    const response = await axios.get(`https://whatsapp-nube.com/api_web/api_web_catalogo_new_producto_inv.php?id=${id}`);
+    const response = await axios.get(`https://sysnube.com/api/api_web/api_web_catalogo_new_producto_inv?id=${id}`);
     console.log(response.data.producto[0])
     if (response.data.producto && response.data.producto.length > 0) {
       producto_mostrar.value = response.data.producto[0];

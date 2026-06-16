@@ -288,7 +288,7 @@ function shuffleArray(array) {
 async function fetchProductos () {
   try {
     const response = await axios.get(
-      `https://whatsapp-nube.com/api_web/api_web_catalogo_new2.php?dominio=${dominio}&id=${id_empresa}`
+      `https://sysnube.com/api/api_web/api_web_catalogo_new2`
     )
 
     // Lista que ya usas para recomendados

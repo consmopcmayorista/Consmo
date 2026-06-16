@@ -58,7 +58,7 @@ export default {
       }
 
       try {
-        const url = `https://whatsapp-nube.com/api_web/api_web_catalogo_new_producto_varios.php?texto=${busqueda.value}&id=24`;
+        const url = `https://sysnube.com/api/api_web/api_web_catalogo_new_producto_varios?texto=${busqueda.value}`;
         const res = await axios.get(url);
         const productos = res.data.productos || [];
 
