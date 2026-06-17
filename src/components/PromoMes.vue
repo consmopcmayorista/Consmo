@@ -15,29 +15,16 @@
   </div>
 </template>
   
-   <script setup> 
+  <script setup> 
   const promos = [
-   { title: 'MONITOR 22" FHD 100HZ/10MS HDMI/VGA DAHUA: 3365', image: '3365.jpg'},
-   { title: 'MONITOR 24" LED 100HZ/10MS HDMI/VGA DAHUA: 3363', image: '3363.jpg'},
-   { title: 'CAMARA IP ROBOTICA 5 ANTENAS WIFI DUALBAND VI365: C9663', image: 'C9663.jpg'},
-   { title: 'ROUTER 5 ANTENAS DUALBAND GIGABIT WIFI 6 TX2L PRO: 2693', image: '2693.jpg' },
-   { title: 'TODO EN UNO POS INDUSTRIAL 15¨ CORE I3 7TH 8GB/256GB: 2793', image: '2793.jpg'},
-   { title: 'SOPORTE ELEVADOR MONITOR 4 PUERTOS USB 2.0 MADERA: 3214', image: '3214.jpg'},
-   { title: 'MEMORIA RAM DDR3 8GB 1600 (PC3-12800) PC-DTECHCO: 5694', image: '5694.jpg'},
-   { title: 'CHASIS GAMER PARA PC ATX NEGRO 2 COOLER XPG: 6983', image: '6983.jpg'},
-   { title: 'MOUSE INALAMBRICO VERTICAL RECARGABLE+BT ERGONOMICO: 7836', image: '7836.jpg'},
-   { title: 'IMPRESORA MULTIFUNCIONAL DUPLEX WIFI BROTHER T730DW: 8828', image: '8828.jpg'},
-   { title: 'DIADEMA PARA PC USB CON CONTROL VOLUMEN LOGITECH H390: 9133', image: '9133.jpg'},
-   { title: 'COOLER PARA CHASIS 120MM: 9705,9706,9707,9708', image: '9705, 9706, 9707, 9708.jpg'},
-   { title: 'DECODIFICADOR TDT + ANTENA + CONTROL 1080P: C9117', image: 'C9117.jpg'},
-   { title: 'BASE REFRIGERANTE 1 COOLER CONSMO: C9570', image: 'C9570.jpg'},
-   { title: 'UPS INTERACTIVA 400VA/240W WATTANA: 1654', image: '1654.jpg'},
-   { title: 'MEMORIA RAM DDR4 8GB 2666 (PC4-21300) PC-DTECHCO: 2197', image: '2197.jpg'},
-   { title: 'CAJON MONEDERO GRANDE 5 BILLETES 4 MONEDAS XT405: 2220', image: '2220.jpg'},
-   { title: 'IMPRESORA TERMICA POS 80MM USB+RED COLPOS: 2405', image: '2405.jpg'},
-   { title: 'IMPRESORA TERMICA POS 2 EN 1 RECIBOS Y ETIQUETAS: 2428', image: '2428.jpg'},
-   { title: 'ROUTER DUAL-BAND 4 ANTENAS GIGABIT AC8 TENDA: 2529', image: '2529.jpg'},
-   { title: 'MEMORIA RAM DDR4 16GB 3200 (PC4-25600) PC-DTECHCO: 2691', image: '2691.jpg'},
+   { title: 'IMPRESORA CANON MULTIFUNCIONAL USB PIXMA G2170: 2415', image: '2415.jpg'},
+   { title: 'MONITOR 22" LED 100HZ/10MS HDMI/VGA DAHUA: 3365', image: '3365.jpg'},
+   { title: 'CARGADOR PARA CELULAR TIPO C 65W + CABLE 2MT : 5876', image: '5876.jpg'},
+   { title: 'BOLSO REFLECTIVO ELEGANTE GRIS-NEGRO : 6934', image: '6934.jpg'},
+   { title: 'CHASIS GAMER PARA PC TRIDIMENSIONAL RGB 6 COOLER : 8897', image: '8897.jpg'},
+   { title: 'SILLA GAMER 360 RECLINABLE HAVIT GAMENOTE : 9798', image: '9798.jpg'},
+   
+
    
    
     
