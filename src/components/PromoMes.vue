@@ -29,7 +29,7 @@
    { title: 'CAJON MONEDERO GRANDE 5 BILLETES 5 MONEDAS XT405 : 2220', image: '2220.jpg'},
    { title: 'IMPRESORA TERMICA POS 80MM USB/BLUETOOTH/RJ11 : 9988', image: '9988.jpg'},
    { title: 'MOUSE GENIUS INALAMBRICO VERTICAL ERGONOMICO NEGRO : 9243', image: '9243.jpg'},
-   { title: 'TV BOX 4GB + 32GB 8K UHD CPU CORTEX-A53 T95MAX : 9798', image: '9798.jpg'},
+   { title: 'TV BOX 4GB + 32GB 8K UHD CPU CORTEX-A53 T95MAX : C9105', image: 'C9105.jpg'},
    
 
    
