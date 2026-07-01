@@ -571,13 +571,14 @@ filtrarProductos() {
         },
         
          actualizarProductosConIvaCero(array) {
-            // Filtrar y actualizar los productos
+            // Filtrar y actualizar los productos según el IVA
             const productosActualizados = array
                 .filter(producto => producto.existencia > 0) // Filtrar productos con existencia > 0
                 .map(producto => { // Mapear para actualizar los precios
-                    
-                        producto.pt1 = parseFloat(producto.pt1) * 1.19; // Aplicar IVA del 19%
-                    
+                    const ivaVal = String(producto.iva || '').trim();
+                    if (ivaVal === '19') {
+                        producto.pt1 = producto.pt2 || producto.pt1;
+                    }
                     return producto; // Retornar el producto actualizado
                 });
         
