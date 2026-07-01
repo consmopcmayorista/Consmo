@@ -578,6 +578,8 @@ filtrarProductos() {
                     const ivaVal = String(producto.iva || '').trim();
                     if (ivaVal === '19') {
                         producto.pt1 = producto.pt2 || producto.pt1;
+                    } else {
+                        producto.pt1 = parseFloat(producto.pt1 || 0) * 1.19;
                     }
                     return producto; // Retornar el producto actualizado
                 });

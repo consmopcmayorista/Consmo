@@ -28,6 +28,11 @@ function normalizarPrecios(data, visited = new Set()) {
             data.pt1_original = data.pt1;
           }
           data.pt1 = data.pt2 || data.pt1;
+        } else {
+          if (!('pt1_original' in data)) {
+            data.pt1_original = data.pt1;
+          }
+          data.pt1 = String((parseFloat(data.pt1 || 0) * 1.19).toFixed(2));
         }
       }
       for (const key in data) {

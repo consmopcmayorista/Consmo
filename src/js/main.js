@@ -211,13 +211,13 @@ function pickId(prod) {
   return prod.idpro ?? prod.id ?? null;
 }
 
-/** Selecciona precio de la API: por defecto pt1, o pt2 si el IVA es 19. */
+/** Selecciona precio de la API: por defecto pt1 (con IVA del 19%), o pt2 si el IVA es 19. */
 function pickPrecio(prod) {
   const ivaVal = String(prod.iva || '').trim();
   if (ivaVal === '19') {
     return Number(prod.pt2) || Number(prod.pt1) || 0;
   }
-  return Number(prod.pt1) || Number(prod.pt2) || 0;
+  return (Number(prod.pt1) || Number(prod.pt2) || 0) * 1.19;
 }
 
 // ====================================================================
