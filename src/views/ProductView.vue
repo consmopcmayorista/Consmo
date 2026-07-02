@@ -235,7 +235,7 @@ async function fetchProducto() {
     if (!id) return
 
     const { data } = await axios.get(
-      `https://sysnube.com/api/api_web/api_web_catalogo_new_producto_inv?_id=${id}`
+      `https://sysnube.com/api/api_web/api_web_catalogo_new_producto_inv?id=${id}`
     )
 
     if (data.producto?.length > 0) {
