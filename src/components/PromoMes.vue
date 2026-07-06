@@ -17,19 +17,9 @@
   
   <script setup> 
   const promos = [
-   { title: 'IMPRESORA CANON MULTIFUNCIONAL USB PIXMA G2170: 2415', image: '2415.jpg'},
-   { title: 'MONITOR 22" LED 100HZ/10MS HDMI/VGA DAHUA: 3365', image: '3365.jpg'},
-   { title: 'CARGADOR PARA CELULAR TIPO C 65W + CABLE 2MT : 5876', image: '5876.jpg'},
-   { title: 'BOLSO REFLECTIVO ELEGANTE GRIS-NEGRO : 6934', image: '6934.jpg'},
-   { title: 'CHASIS GAMER PARA PC TRIDIMENSIONAL RGB 6 COOLER : 8897', image: '8897.jpg'},
-   { title: 'SILLA GAMER 360 RECLINABLE HAVIT GAMENOTE : 9798', image: '9798.jpg'},
-   { title: 'IMPRESORA TERMICA POS 80MM USB+RED RJ11 : 2705', image: '2705.jpg'},
-   { title: 'CAJA EXTERNA SATA USB 2.0 PARA PORTATIL 2.5" : 1412', image: '1412.jpg'},
-   { title: 'UPS INTERACTIVA 6 TOMAS 750VA/360W STARVOLT : 9998', image: '9998.jpg'},
-   { title: 'CAJON MONEDERO GRANDE 5 BILLETES 5 MONEDAS XT405 : 2220', image: '2220.jpg'},
-   { title: 'IMPRESORA TERMICA POS 80MM USB/BLUETOOTH/RJ11 : 9988', image: '9988.jpg'},
-   { title: 'MOUSE GENIUS INALAMBRICO VERTICAL ERGONOMICO NEGRO : 9243', image: '9243.jpg'},
-   { title: 'TV BOX 4GB + 32GB 8K UHD CPU CORTEX-A53 T95MAX : C9105', image: 'C9105.jpg'},
+   { title: 'CAJON MONEDERO 4 BILLETES 5 MONEDAS COLPOS: 3513', image: '3513.jpg'},
+   { title: 'MEMORIA RAM DDR4 8GB 3200 PORTATIL KINGSTON: 2112', image: '2112.jpg'},
+   { title: 'MEMORIA RAM DDR4 8GB 3200 PC - KINGSTON : 2108', image: '2108.jpg'},
    
 
    
