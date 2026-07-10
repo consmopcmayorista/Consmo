@@ -15,8 +15,9 @@
   </div>
 </template>
   
+
   <script setup> 
-  const promos = [cO
+  const promos = [
    { title: 'CAJON MONEDERO 4 BILLETES 5 MONEDAS COLPOS: 3513', image: '3513.jpg'},
    { title: 'MEMORIA RAM DDR4 8GB 3200 PORTATIL KINGSTON: 2112', image: '2112.jpg'},
    { title: 'MEMORIA RAM DDR4 8GB 3200 PC - KINGSTON : 2108', image: '2108.jpg'},
