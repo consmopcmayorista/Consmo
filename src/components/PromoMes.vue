@@ -18,14 +18,27 @@
 
   <script setup> 
   const promos = [
-   { title: 'CAJON MONEDERO 4 BILLETES 5 MONEDAS COLPOS: 3513', image: '3513.jpg'},
-   { title: 'MEMORIA RAM DDR4 8GB 3200 PORTATIL KINGSTON: 2112', image: '2112.jpg'},
-   { title: 'MEMORIA RAM DDR4 8GB 3200 PC - KINGSTON : 2108', image: '2108.jpg'},
-   
-
-   
-   
-    
+   { title: 'RADIO DE COMUNICACIÓN X2 BAOFENG BF-S9 PLUS: 1064', image: '1064.jpg'},
+   { title: 'ROUTER 2 ANT GPON FIBRA OPTICA DUAL-BAND HUAWEI: 2519', image: '2519.jpg'},
+   { title: 'SWITCH DE RED 24 PTOS GIGABYTE METALICO TENDA: 2528', image: '2528.jpg'},
+   { title: 'ROUTER DUAL-BAND GIGABYTE 4 ANTEAS TENDA AC8: 2529', image: '2529.jpg'},
+   { title: 'SWITCH DE RED 5 PTOS BASE 10/100 CONSMO: 2551', image: '2551.jpg'},
+   { title: 'SWITCH DE RED 8 PTOS BASE 10/100 CONSMO: 2553', image: '2553.jpg'},
+   { title: 'SWITCH DE RED 8 PTOS GIGABYTE CONSMO: 2554', image: '2554.jpg'},
+   { title: 'MONITOR LED VA PLANO 22 PUL FHD AOC: 3396', image: '3396.jpg'},
+   { title: 'RADIO COMUNICACION X1 BAOFENG UVSR: 1051', image: '1051.jpg'},
+   { title: 'RADIO COMUNICACIÓN X2 BAOFENG UV-9RPLUS: 1060', image: '1060.jpg'},
+   { title: 'MONITOR INDUSTRIAL LED 32¨ DAHUA: 3415', image: '3415.jpg'},
+   { title: 'CARGADOR CELULAR 65W 2MTS TIPO C ADATA: 5876', image: '5876.jpg'},
+   { title: 'CHASIS GAMER PARA PC ATX 4 COOLER ARG XPG: 6982', image: '6982.jpg'},
+   { title: 'TONER IMPRESORA LASER SIN CHIP: 7715', image: '7715.jpg'},
+   { title: 'FUENTE DE PODER REAL 750W WATTANA: 8953', image: '8953.jpg'},
+   { title: 'POWER BANK 10000MAH CARGA RAPIDA ADATA: 9848', image: '9848.jpg'},
+   { title: 'IMPRESORA TERMICA MOVIL 58MM USB/BT STARPOS: 9989', image: '9989.jpg'},
+   { title: 'ROUTER INALAMBRICO XPON-ONU 2.4G FIBRA OPTICA: C2565', image: 'C2565.jpg'},
+   { title: 'TV BOX 4GB + 32GB 8K UHD T95MAX: C9105', image: 'C9105.jpg'},
+   { title: 'ROUTER NETIS AX1500 WIFI 6 4ANT GIGABIT NX10: NET4007', image: 'NET4007.jpg'},
+  
   
      // Agrega más promociones según sea necesario
   ]
