@@ -27,7 +27,7 @@
    { title: 'CPE EXTERIOR PUNTO A PUNTO 500 MTS TENDA: 9428', image: '9428.jpg'},
    { title: 'COOLER DISIPADOR PARA BOARD RGB INTEL/AMD: 9218', image: '9218.jpg'},
    { title: 'TV SMART TV DE 32" HD GOOGLE TV IFFALCON: 6655', image: '6655.jpg'},
-   { title: 'MONITOR LCD IPS DE 27" PLANO FHD 120Hz/1MS AOC: 9978', image: '9978.jpg'},
+   { title: 'MONITOR LCD IPS DE 27" PLANO FHD 120Hz/1MS AOC: 3397', image: '3397.jpg'},
    { title: 'SWITCH DE RED 24 PTOS GIGABITE METALICO TENDA: 2528', image: '2528.jpg'},
    { title: 'CHASIS GAMER PARA PC ATX NEGRO + 2 COOLER RAINBOW: 8910', image: '8910.jpg'},
    
