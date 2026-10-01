@@ -1,5 +1,5 @@
 <template>
-  <section class="futuristic-featured py-5">
+  <section class="futuristic-featured pt-0 pb-5">
     <div class="container">
 
       <!-- Banner de combos punto de venta -->

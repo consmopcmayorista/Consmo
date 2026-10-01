@@ -199,7 +199,7 @@ onBeforeUnmount(() => {
   grid-template-columns: 1.25fr 1fr;
   align-items: center;
   max-width: 1100px;
-  margin: 24px auto;
+  margin: 8px auto 24px;
   border-radius: 22px;
   overflow: hidden;
   color: #fff;
