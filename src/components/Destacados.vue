@@ -2,15 +2,8 @@
   <section class="futuristic-featured py-5">
     <div class="container">
 
-      <!-- 🎯 Banner principal (solo en escritorio) -->
-      <div class="futuristic-card mb-4 d-none d-md-block">
-        <img src="/images2/destacados/destacadoprincipal.jpg" alt="Banner ICONNEX" class="card-img" />
-        <div class="card-overlay">
-          <h3>ICONNEX: energía y conectividad</h3>
-          <p>UPS, powerbanks, auriculares, cargadores y más.</p>
-          <a href="/catalogo_cat?categoria=&busqueda=ICONNEX" class="futuristic-btn">🔍 Ver Producto</a>
-        </div>
-      </div>
+      <!-- Banner de combos punto de venta -->
+<BannerPuntoVenta />
 
       <!-- 🏷️ Título -->
       <h2 class="futuristic-title text-center mb-4">🚀 Productos Destacados</h2>
@@ -75,6 +68,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import 'swiper/css/pagination'
+import BannerPuntoVenta from './BannerPuntoVenta.vue'
 
 // 📋 Productos destacados
 const productos = [
