@@ -104,11 +104,12 @@ onBeforeUnmount(() => window.removeEventListener('resize', handleResize))
 
 /* 🎯 Título futurista */
 .futuristic-title {
-  font-family: 'Orbitron', 'Poppins', sans-serif;
-  font-size: 2.4rem;
-  font-weight: 900;
-  color: #4dfbff;
-  text-shadow: 0 2px 20px #0efcf8aa;
+  font-family: 'Inter', 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0a2a6b;
+  text-shadow: none;
 }
 
 /* 🎠 Swiper carrusel */
